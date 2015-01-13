@@ -1,0 +1,8 @@
+%section.ui-index
+  %ul
+    - Dir.glob('app/views/ui/*.html.haml').sort.each do |file|
+      - mockups = File.basename(file,'.html.haml')
+      -  unless mockups == 'index' || mockups.match(/^_/)
+        %li= link_to mockups.titleize, action: mockups unless mockups == 'index'
+    
+      

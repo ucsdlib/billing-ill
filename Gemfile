@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+
 gem 'rails', '4.2.0'
 gem 'sass-rails'
 gem 'uglifier'
@@ -10,6 +11,7 @@ gem 'jbuilder'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
+gem 'haml-rails'
 
 group :development do
   gem 'sqlite3'
