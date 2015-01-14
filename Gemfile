@@ -13,6 +13,12 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'haml-rails'
 
+# Deploy with Capistrano
+gem 'capistrano', '~> 3.3.3'
+gem 'capistrano-rails', '~> 1.1.2'
+gem 'capistrano-rbenv', '~> 2.0.2'
+gem 'capistrano-bundler', '~> 1.1.3'
+
 group :development do
   gem 'sqlite3'
   gem 'spring' 
