@@ -9,7 +9,11 @@ development:
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
-
+pontos:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
 gimili:
   adapter: postgresql
   database: <%= Rails.application.secrets[:gimili][:database][:name] %>
@@ -18,7 +22,6 @@ gimili:
   host: <%= Rails.application.secrets[:gimili][:database][:host] %>
   username: <%= Rails.application.secrets[:gimili][:database][:username] %>
   password: <%= Rails.application.secrets[:gimili][:database][:password] %>
-
 staging:
   adapter: postgresql
   database: <%= Rails.application.secrets[:staging][:database][:name] %>
