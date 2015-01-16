@@ -1,7 +1,7 @@
 set :application, 'billing-ill'
 set :repo_url, 'https://github.com/ucsdlib/billing-ill.git'
 
-set :deploy_to, '/pub/capistrano'
+set :deploy_to, '/pub/capistrano/illbilling'
 set :scm, :git
 
 # rbenv
@@ -11,8 +11,8 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
 
-set :linked_files, %w{config/database.yml config/secrets.yml}
-set :linked_dirs, %w{config/environments}
+set :linked_files, %w{config/secrets.yml}
+#set :linked_dirs, %w{config/environments}
 
 namespace :deploy do
 
