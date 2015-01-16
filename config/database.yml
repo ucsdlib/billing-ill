@@ -10,35 +10,29 @@ development:
   pool: 5
   timeout: 5000
 pontos:
-  adapter: sqlite3
-  database: db/development.sqlite3
-  pool: 5
-  timeout: 5000
-gimili:
   adapter: postgresql
-  database: <%= Rails.application.secrets[:gimili][:database][:name] %>
+  database: <%= Rails.application.secrets[:database][:name] %>
   pool: 5
   timeout: 5000
-  host: <%= Rails.application.secrets[:gimili][:database][:host] %>
-  username: <%= Rails.application.secrets[:gimili][:database][:username] %>
-  password: <%= Rails.application.secrets[:gimili][:database][:password] %>
+  host: <%= Rails.application.secrets[:database][:host] %>
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
 staging:
   adapter: postgresql
-  database: <%= Rails.application.secrets[:staging][:database][:name] %>
+  database: <%= Rails.application.secrets[:database][:name] %>
   pool: 5
   timeout: 5000
-  host: <%= Rails.application.secrets[:staging][:database][:host] %>
-  username: <%= Rails.application.secrets[:staging][:database][:username] %>
-  password: <%= Rails.application.secrets[:staging][:database][:password] %>
-  
+  host: <%= Rails.application.secrets[:database][:host] %>
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
 production:
   adapter: postgresql
-  database: <%= Rails.application.secrets[:production][:database][:name] %>
+  database: <%= Rails.application.secrets[:database][:name] %>
   pool: 5
   timeout: 5000
-  host: <%= Rails.application.secrets[:production][:database][:host] %>
-  username: <%= Rails.application.secrets[:production][:database][:username] %>
-  password: <%= Rails.application.secrets[:production][:database][:password] %>
+  host: <%= Rails.application.secrets[:database][:host] %>
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
