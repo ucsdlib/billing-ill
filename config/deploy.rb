@@ -1,7 +1,7 @@
 set :application, 'billing-ill'
 set :repo_url, 'https://github.com/ucsdlib/billing-ill.git'
 
-set :deploy_to, '/pub/capistrano/illbilling'
+set :deploy_to, '/pub/billing-ill'
 set :scm, :git
 
 # rbenv
