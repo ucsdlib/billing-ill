@@ -22,7 +22,7 @@ namespace :deploy do
       on roles(:web) do
         within release_path do
           with rails_env: fetch(:rails_env) do
-            execute :rake, 'RAILS_RELATIVE_URL_ROOT=/dc assets:precompile'
+            execute :rake, 'RAILS_RELATIVE_URL_ROOT=/billing-ill assets:precompile'
           end
         end
       end
