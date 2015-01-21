@@ -16,7 +16,7 @@ gem 'haml-rails'
 # Deploy with Capistrano
 gem 'capistrano', '~> 3.3.3'
 gem 'capistrano-rails', '~> 1.1.2'
-gem 'capistrano-rbenv', '~> 2.0.2'
+gem 'capistrano-rbenv', '~> 2.0', require: false
 gem 'capistrano-bundler', '~> 1.1.3'
 
 group :development do
