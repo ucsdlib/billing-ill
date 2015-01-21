@@ -19,6 +19,8 @@ gem 'capistrano-rails', '~> 1.1.2'
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'capistrano-bundler', '~> 1.1.3'
 
+gem 'pg'
+
 group :development do
   gem 'sqlite3'
   gem 'spring' 
