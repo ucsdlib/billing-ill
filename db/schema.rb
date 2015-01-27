@@ -11,6 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150126235658) do
+
+  create_table "funds", force: :cascade do |t|
+    t.string   "program_code"
+    t.string   "org_code"
+    t.string   "index_code"
+    t.string   "fund_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recharges", force: :cascade do |t|
+    t.decimal  "charge",        precision: 8, scale: 2
+    t.integer  "number_copies"
+    t.string   "status"
+    t.text     "notes"
+    t.datetime "submitted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
