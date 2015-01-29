@@ -35,7 +35,7 @@ end
 
 group :test do
   gem 'database_cleaner', '1.2.0'
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers', require: false, github: 'thoughtbot/shoulda-matchers', branch: 'master'
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.
