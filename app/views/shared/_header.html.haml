@@ -1,20 +1,55 @@
-%section#top-header.row
-  %h1.col-md-2
-    = link_to "ILL Billing"
-  %ul.col-md-4.clearfix
-    %li= link_to "Home"
-    %li= link_to "Recharge"
-    %li= link_to "Invoice"
-    %li= link_to "Patron"
-  %form.span5.for-search 
-    %input.form-control(name="search_term" type="text" placeholder="Default search invoice by number")
-    %button.btn.btn-default(type="submit") Search
-    #user_links.pull-right
-      %ul
+-# %section#top-header.row
+-#   %h1.col-md-2
+-#     = link_to "ILL Billing"
+-#   %ul.col-md-4.clearfix
+-#     %li= link_to "Home"
+-#     %li= link_to "Recharge"
+-#     %li= link_to "Invoice"
+-#     %li= link_to "Patron"
+-#   %form.span5.for-search
+-#     %input.form-control(name="search_term" type="text" placeholder="Default search invoice by number")
+-#     %button.btn.btn-default(type="submit") Search
+-#     #user_links.pull-right
+-#       %ul
+-#         %li.dropdown
+-#           %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
+-#             Welcome, Roger Castillo
+-#             %b.caret
+
+%section#top-header
+  %nav.navbar.navbar-inverse.navbar-inner.navbar-static-top{:role => "navigation"}
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{:href => "#"} Ill Billing
+    / Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li= link_to "Home"
+        %li= link_to "Recharge"
+        %li= link_to "Invoice"
+        %li= link_to "Patron"
+
+
+      %ul.nav.navbar-nav.navbar-right
+        %form.navbar-form.navbar-left{:role => "search"}
+          .form-group
+            %input.form-control{:placeholder => "Default search invoice by number", :type => "text"}
+          %button.btn.btn-default{:type => "submit"} Submit
         %li.dropdown
-          %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
-            Welcome, Roger Castillo 
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Welcome, Roger Castillo
             %b.caret
-           
-  
- 
+          %ul.dropdown-menu#dropdown-text
+            %li
+              %a{:href => "#"} Action
+            %li
+              %a{:href => "#"} Another action
+            %li
+              %a{:href => "#"} Something else here
+            %li.divider
+            %li
+              %a{:href => "#"} Separated link
