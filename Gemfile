@@ -27,6 +27,12 @@ group :development do
   gem 'pry'
 end  
 
+group :development, :test do
+  gem 'rspec-rails', '2.99'
+  gem 'capybara'
+  gem 'launchy'
+end
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc    
 
