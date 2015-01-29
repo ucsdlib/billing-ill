@@ -20,6 +20,8 @@ gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'capistrano-bundler', '~> 1.1.3'
 
 gem 'pg'
+gem 'fabrication'
+gem 'faker'
 
 group :development do
   gem 'sqlite3'
