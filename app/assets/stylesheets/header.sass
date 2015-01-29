@@ -1,45 +1,24 @@
 section#top-header
-  //background: #399dc8
   background: url("bg.jpg") repeat 0 0
-  margin: 0
-  margin-bottom: 20px
-  padding: 12px 0
-  border-radius: 5px
   a
     color: white
-  h1
-    font-size: 20px
-  > ul
-    padding-top: 12px
-    li
-      float: left
-      margin-right: 30px
-      text-transform: uppercase
-      &:first-of-type
-        margin-left: -15px
   form
     padding-top: 6px
     margin: 0
     input[type="text"]
-      width: 320px
-      float: left
-    input[type="submit"]
-      margin-left: 10px
-      float: left
-  #user_links
-    padding-top: 8px
-    > ul
-      > li
-        float: left
-        width: 200px
-        a
-          margin: 0 10px
-          b
-            border-top-color: white
-        > ul
-          > li
-            &.open &:hover
-              background: red
-            a
-              color: black
-              margin: 0
+      width: 300px
+
+#dropdown-text > li > a
+  color: black
+
+.navbar-inner
+  background: transparent
+.navbar-inverse
+  border-color: transparent
+  .navbar-toggle
+    border-color: white
+  .navbar-toggle:hover, .navbar-toggle:focus
+    background-color: gray
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus
+  background-color: transparent
