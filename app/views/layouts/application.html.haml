@@ -11,8 +11,10 @@
     #wrap
       %header
         = render 'shared/header'
-      %section.content.clearfix
-        -#= render 'shared/messages'
-        = yield
+      .jumbotron.vertical-center
+        .container
+          %section.content.clearfix
+            -#= render 'shared/messages'
+            = yield
     %footer
       = render 'shared/footer'
