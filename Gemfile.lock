@@ -78,6 +78,7 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colorize (0.7.5)
+    database_cleaner (1.2.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.2)
@@ -185,6 +186,8 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.4.4)
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     slop (3.6.0)
     spring (1.2.0)
     sprockets (2.12.3)
@@ -226,6 +229,7 @@ DEPENDENCIES
   capistrano-rbenv!
   capybara
   coffee-rails
+  database_cleaner (= 1.2.0)
   haml-rails
   jbuilder
   jquery-rails
@@ -236,6 +240,7 @@ DEPENDENCIES
   rspec-rails (= 2.99)
   sass-rails
   sdoc (~> 0.4.0)
+  shoulda-matchers
   spring
   sqlite3
   turbolinks

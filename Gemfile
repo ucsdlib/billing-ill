@@ -33,6 +33,11 @@ group :development, :test do
   gem 'launchy'
 end
 
+group :test do
+  gem 'database_cleaner', '1.2.0'
+  gem 'shoulda-matchers', require: false
+end
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc    
 
