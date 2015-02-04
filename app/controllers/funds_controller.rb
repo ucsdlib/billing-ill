@@ -8,7 +8,7 @@ class FundsController < ApplicationController
     @fund = Fund.new(fund_params)
 
     if @fund.save
-      redirect_to root_path, notice: 'A new fund is created!'
+      redirect_to root_path, success: 'A new fund is created!'
     else
       render :new
     end
