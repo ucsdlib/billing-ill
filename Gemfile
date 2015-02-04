@@ -22,6 +22,7 @@ gem 'capistrano-bundler', '~> 1.1.3'
 gem 'pg'
 gem 'fabrication'
 gem 'faker'
+gem 'bootstrap_form'
 
 group :development do
   gem 'sqlite3'
@@ -30,7 +31,7 @@ group :development do
 end  
 
 group :development, :test do
-  gem 'rspec-rails', '2.99'
+  gem 'rspec-rails', '3.1'
   gem 'capybara'
   gem 'launchy'
 end
