@@ -22,6 +22,7 @@ gem 'capistrano-bundler', '~> 1.1.3'
 gem 'pg'
 gem 'fabrication'
 gem 'faker'
+gem 'bootstrap_form'
 
 group :development do
   gem 'sqlite3'
