@@ -9,12 +9,13 @@
     = javascript_include_tag "application"
   %body
     #wrap
-      %header
-        = render 'shared/header'
-      .jumbotron.vertical-center
-        .container
-          %section.content.clearfix
-            -#= render 'shared/messages'
-            = yield
+      #inner
+        %header
+          = render 'shared/header'
+        .jumbotron.vertical-center
+          .container
+            %section.content.clearfix
+              -#= render 'shared/messages'
+              = yield
     %footer
       = render 'shared/footer'
