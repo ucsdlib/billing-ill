@@ -5,6 +5,32 @@
 #   gem 'sqlite3'
 #
 
+pontos:
+  adapter: postgresql
+  database: <%= Rails.application.secrets[:database][:name] %>
+  pool: 5
+  timeout: 5000
+  host: <%= Rails.application.secrets[:database][:host] %>
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
+
+staging:
+  adapter: postgresql
+  database: <%= Rails.application.secrets[:database][:name] %>
+  pool: 5
+  timeout: 5000
+  host: <%= Rails.application.secrets[:database][:host] %>
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
+
+production:
+  adapter: postgresql
+  database: <%= Rails.application.secrets[:database][:name] %>
+  pool: 5
+  timeout: 5000
+  host: <%= Rails.application.secrets[:database][:host] %>
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
 
 development:
   adapter: sqlite3
@@ -17,6 +43,8 @@ test:
   database: db/test.sqlite3
   pool: 5
   timeout: 5000
+
+
 
 
 # Warning: The database defined as "test" will be erased and
