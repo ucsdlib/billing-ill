@@ -1,14 +1,17 @@
 html, body
   height: 100%
+  background: #f7f7f7
   /* The html and body elements cannot have any padding or margin. */
 
 /* Wrapper for page content to push down footer */
 #wrap
   height: 100%
-  /* Negative indent footer by its height */
-  margin: 0 auto -100px
-  /* Pad bottom by footer height */
-  padding: 0 0 100px
+  position: relative
+
+#inner
+  min-height: 100%
+  width: 100%
+  position: relative
 
 body
   margin: 20px
@@ -38,15 +41,10 @@ fieldset.actions
 //   align-items: center
 
 .jumbotron
-  padding: 0
+  padding: 0 0 100px
   margin: 0
   background: #f7f7f7
-  height: 100%
 
-#inner
-  height: 100%
-  width: 100%
-  padding: 0 0 80px
 .top10
   margin-top: 10px
 .left3
