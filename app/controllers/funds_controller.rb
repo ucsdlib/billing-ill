@@ -1,3 +1,7 @@
+#---
+# by hweng@ucsd.edu
+#---
+
 class FundsController < ApplicationController
   before_action :set_fund, only: [:edit, :update]
 
