@@ -1,0 +1,30 @@
+%section.my_queue.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2 Showing results of 1 -10 of 50 invoices
+        %table.table
+          %thead
+            %tr
+              %th(width="15%") Invoice Number
+              %th(width="15%") Patron Name
+              %th(width="15%") Invoice Type
+              %th(width="20%") ILL Numbers
+              %th(width="15%") Charge
+              %th(width="15%") Creation Date
+              %th(width="15%") Status
+              %th(width="15%") Link
+          %tbody
+            - 10.times do
+              %tr
+                %td 223966
+                %td John Connell
+                %td Book Loan
+                %td 1234, 3456, 6789
+                %td $100
+                %td Nov. 21, 2014
+                %td Pending
+                %td
+                  = link_to "edit"
+        = button_to "Create customer reports", nil, class: "btn btn-default"
