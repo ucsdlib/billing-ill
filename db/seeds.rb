@@ -11,5 +11,5 @@
 end
 
 10.times do
-  Recharge.create(charge: "23.5", number_copies: "2", status: "Pending", notes: "recharge notes.", submitted_at: Time.now)
+  Recharge.create(charge: "23.5", number_copies: "2", status: "Pending", notes: "recharge notes.", submitted_at: Time.now, fund_id: 1)
 end

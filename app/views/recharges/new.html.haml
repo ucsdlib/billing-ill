@@ -7,9 +7,9 @@
         %fieldset
           = f.text_field :number_copies, label: "Number of Copies"
           = f.text_field :charge, label: "Charge"
-          = f.select :status, label: "Status", options_for_select(["Active", "Pending"], selected)
-          = f.text_area :note, rows: 6, label: "Note"
-          = f.text_field :index_code, label: "Index Code", options_for_select(["index code 1", "index code 2"], selected)
+          = f.select :status, options_for_select(["Active", "Pending"],nil)
+          = f.text_area :notes, label: "Notes", rows: 6
+          = f.select :fund_id, options_for_select([["index code 1","1" ],["index code 2","2"]],nil), { label: "Index ID" }
         %fieldset.actions.control-group.col-sm-offset-2
           .controls
             %input(type="submit" value="Create" class="btn btn-primary")
