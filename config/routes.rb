@@ -7,4 +7,5 @@ Rails.application.routes.draw do
  get '/ruby-version' => 'application#ruby_version'
 
  resources :funds, except: [:destroy]
+ resources :recharges, except: [:destroy]
 end
