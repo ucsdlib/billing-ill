@@ -10,51 +10,38 @@
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li.dropdown
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-            Home
-            %b.caret
-          %ul.dropdown-menu#dropdown-text
-            %li
-              %a{:href => "#"} Action
-            %li
-              %a{:href => "#"} Another action
-            %li
-              %a{:href => "#"} Something else here
+        %li= link_to "Home"
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             Recharge
             %b.caret
           %ul.dropdown-menu#dropdown-text
             %li
-              %a{:href => "#"} Action
+              %a{:href => "#"} Create new Recharge
             %li
-              %a{:href => "#"} Another action
+              %a{:href => "#"} View or process current batch
             %li
-              %a{:href => "#"} Something else here
+              %a{:href => "#"} View all Recharges
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             Invoice
             %b.caret
           %ul.dropdown-menu#dropdown-text
             %li
-              %a{:href => "#"} Action
+              %a{:href => "#"} Create new Invoice
             %li
-              %a{:href => "#"} Another action
+              %a{:href => "#"} View or process current batch
             %li
-              %a{:href => "#"} Something else here
+              %a{:href => "#"} View all Invoices
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             Patron
             %b.caret
           %ul.dropdown-menu#dropdown-text
             %li
-              %a{:href => "#"} Action
+              %a{:href => "#"} Create new Patrons
             %li
-              %a{:href => "#"} Another action
-            %li
-              %a{:href => "#"} Something else here
-
+              %a{:href => "#"} View all Patrons
 
       %ul.nav.navbar-nav.navbar-right
         %form.navbar-form.navbar-left{:role => "search"}
