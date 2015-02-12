@@ -1,0 +1,19 @@
+%section.create.container
+  .row
+    .col-sm-8.col-sm-offset-1
+      = bootstrap_form_for @recharge do |f|
+        %header
+          %h1 Create a New Recharge
+        %fieldset
+          = f.text_field :number_copies, label: "Number of Copies"
+          = f.text_field :charge, label: "Charge"
+          = f.select :status, label: "Status", options_for_select(["Active", "Pending"], selected)
+          = f.text_area :Note, rows: 6, label: "Note"
+          = f.text_field :index_code, label: "Index Code", options_for_select(["index code 1", "index code 2"], selected)
+        %fieldset.actions.control-group.col-sm-offset-2
+          .controls
+            %input(type="submit" value="Create" class="btn btn-primary")
+            %input(type="reset" value="Cancel" class="btn btn-default")
+
+
+            
