@@ -57,13 +57,13 @@ describe RechargesController do
   describe "PUT update" do
     context "with valid input" do
       before(:each) do
-        @recharge = Fabricate(:recharge, charge: "5.0")
-        put :update, id: @recharge, recharge: Fabricate.attributes_for(:recharge, charge: "5.5")
+        @recharge = Fabricate(:recharge, charge: 5.0)
+        put :update, id: @recharge, recharge: Fabricate.attributes_for(:recharge, charge: 5.5)
         @recharge.reload
       end
      
       it "updates the recharge" do
-        expect(@recharge.charge).to eq('5.5')
+        expect(@recharge.charge).to eq(5.5)
       end
 
       it "redirects to the front page" do
@@ -73,8 +73,8 @@ describe RechargesController do
 
     context "with invalid input" do
       before(:each) do
-        @recharge = Fabricate(:recharge, charge: "5.0")
-        put :update, id: @recharge, recharge: Fabricate.attributes_for(:recharge, charge: "-5.5")
+        @recharge = Fabricate(:recharge, charge: 5.0)
+        put :update, id: @recharge, recharge: Fabricate.attributes_for(:recharge, charge: -5.5)
         @recharge.reload
       end
 
@@ -83,7 +83,7 @@ describe RechargesController do
       end
 
       it "does not update the recharge" do
-        expect(@recharge.charge).to eq('5.0')
+        expect(@recharge.charge).to eq(5.0)
       end
 
       it "render the :edit template" do
