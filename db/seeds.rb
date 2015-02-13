@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 10.times do
-  Fund.create(program_code: "400000", org_code: "414909", index_code: "ANSVAMC000", fund_code: "60200A")
+  Fund.create(program_code: "400000", org_code: "414909", index_code: "ANSVAMC", fund_code: "60200A")
 end
 
 10.times do

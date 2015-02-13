@@ -35,7 +35,7 @@ class RechargesController < ApplicationController
   private
 
   def recharge_params
-    params.require(:fund).permit(:number_copies, :charge, :status, :notes, :fund_id)
+    params.require(:recharge).permit(:number_copies, :charge, :status, :notes, :fund_id)
   end
 
   def set_recharge

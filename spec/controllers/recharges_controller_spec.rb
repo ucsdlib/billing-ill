@@ -15,7 +15,7 @@ describe RechargesController do
   describe "POST create" do
     context "with valid input" do
       before do
-        post :create, Recharge: Fabricate.attributes_for(:recharge)
+        post :create, recharge: Fabricate.attributes_for(:recharge)
       end
 
       it "creates the recharge" do
