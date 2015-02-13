@@ -1,5 +1,5 @@
 set :application, 'billing-ill'
-set :repo_url, 'https://github.com/ucsdlib/billing-ill.git'
+set :repo_url, 'git@github.com:ucsdlib/billing-ill.git'
 
 set :deploy_to, '/pub/billing-ill'
 set :scm, :git
@@ -22,7 +22,7 @@ namespace :deploy do
       on roles(:web) do
         within release_path do
           with rails_env: fetch(:rails_env) do
-            execute :rake, 'RAILS_RELATIVE_URL_ROOT=/dc assets:precompile'
+            execute :rake, 'RAILS_RELATIVE_URL_ROOT=/billing-ill assets:precompile'
           end
         end
       end
@@ -50,5 +50,6 @@ namespace :deploy do
   after :finishing, 'deploy:write_version'
   after :finishing, 'deploy:assets:precompile'
   after :finishing, 'deploy:cleanup'
+  after :finishing, 'deploy:restart'
 
 end

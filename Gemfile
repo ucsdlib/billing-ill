@@ -16,14 +16,29 @@ gem 'haml-rails'
 # Deploy with Capistrano
 gem 'capistrano', '~> 3.3.3'
 gem 'capistrano-rails', '~> 1.1.2'
-gem 'capistrano-rbenv', '~> 2.0.2'
+gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'capistrano-bundler', '~> 1.1.3'
+
+gem 'pg'
+gem 'fabrication'
+gem 'faker'
 
 group :development do
   gem 'sqlite3'
   gem 'spring' 
   gem 'pry'
 end  
+
+group :development, :test do
+  gem 'rspec-rails', '2.99'
+  gem 'capybara'
+  gem 'launchy'
+end
+
+group :test do
+  gem 'database_cleaner', '1.2.0'
+  gem 'shoulda-matchers', require: false, github: 'thoughtbot/shoulda-matchers', branch: 'master'
+end
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc    
