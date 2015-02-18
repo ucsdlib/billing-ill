@@ -4,6 +4,7 @@
 
 class RechargesController < ApplicationController
   before_action :set_recharge, only: [:edit, :update]
+  before_action :set_index_list, only: [:new, :edit]
 
   def new
     @recharge = Recharge.new
@@ -20,7 +21,8 @@ class RechargesController < ApplicationController
   end
 
   def edit
-    
+    @selected_index = @recharge.fund_id
+    @selected_status = @recharge.status
   end
 
   def update
@@ -39,6 +41,10 @@ class RechargesController < ApplicationController
   end
 
   def set_recharge
-    @recharge = Recharge.find_by params[:id]
+    @recharge = Recharge.find params[:id]
+  end
+
+  def set_index_list
+    @index_list = Fund.all.map{|fund|[fund.index_code,fund.id]}
   end
 end
