@@ -10,6 +10,12 @@ describe RechargesController do
       get :new
       expect(assigns(:recharge)).to be_instance_of(Recharge)
     end
+
+    it "sets @index_list" do
+      fund = Fabricate(:fund, id: 1, index_code: "ABCDEFG")
+      get :new
+      expect(assigns(:index_list)).to eq([["ABCDEFG", 1]])
+    end
   end
 
   describe "POST create" do
@@ -47,10 +53,29 @@ describe RechargesController do
   end
 
   describe "GET edit" do
+    before(:each) do
+      @recharge = Fabricate(:recharge, fund_id: 1, status: "active")
+    end
+
     it "sets @recharge" do
-      @recharge = Fabricate(:recharge)
       get :edit, id: @recharge
       expect(assigns(:recharge)).to eq(@recharge)
+    end
+
+    it "sets @index_list" do
+      fund = Fabricate(:fund, id: 1, index_code: "ABCDEFG")
+      get :edit, id: @recharge
+      expect(assigns(:index_list)).to eq([["ABCDEFG", 1]])
+    end
+
+    it "sets @selected_index" do
+      get :edit, id: @recharge
+      expect(assigns(:selected_index)).to eq(1)
+    end
+
+    it "sets @selected_status" do
+      get :edit, id: @recharge
+      expect(assigns(:selected_status)).to eq("active")
     end
   end
 
