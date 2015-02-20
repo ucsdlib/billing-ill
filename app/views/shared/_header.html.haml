@@ -17,7 +17,7 @@
             %b.caret
           %ul.dropdown-menu#dropdown-text
             %li
-              %a{:href => "#"} Create new Recharge
+              %a{:href => "/recharges/new"} Create new Recharge
             %li
               %a{:href => "#"} View or process current batch
             %li
@@ -42,7 +42,15 @@
               %a{:href => "#"} Create new Patrons
             %li
               %a{:href => "#"} View all Patrons
-
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Funds
+            %b.caret
+          %ul.dropdown-menu#dropdown-text
+            %li
+              %a{:href => "/funds/new"} Create new Fund
+            %li
+              %a{:href => "#"} View all Funds
       %ul.nav.navbar-nav.navbar-right
         %form.navbar-form.navbar-left{:role => "search"}
           .form-group
