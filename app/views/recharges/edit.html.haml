@@ -2,8 +2,7 @@
   .row
     .col-sm-8.col-sm-offset-1
       = bootstrap_form_for @recharge do |f|
-        %header
-          %h1 Edit a Recharge
+        = render 'shared/content_title', title: "Edit a Recharge" 
         %fieldset
           = f.text_field :number_copies, label: "Number of Copies"
           = f.text_field :charge, label: "Charge"
@@ -12,5 +11,5 @@
           = f.select :fund_id, options_for_select(@index_list, selected: @selected_index), { label: "Index ID" }
         %fieldset.actions.control-group.col-sm-offset-2
           .controls
-            %input(type="submit" value="Edit" class="btn btn-primary")
+            %input(type="submit" value="Save" class="btn btn-primary")
             %input(type="reset" value="Cancel" class="btn btn-default")

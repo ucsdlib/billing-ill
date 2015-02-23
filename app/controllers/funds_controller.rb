@@ -25,8 +25,7 @@ class FundsController < ApplicationController
 
   def update
     if @fund.update(fund_params)
-      flash[:notice] = "Your fund was updated"
-      redirect_to root_path
+      redirect_to root_path, notice: 'Your fund was updated!'
     else
       render :edit
     end
@@ -39,6 +38,6 @@ class FundsController < ApplicationController
   end
 
   def set_fund
-    @fund = Fund.find_by params[:id]
+    @fund = Fund.find params[:id]
   end
 end
