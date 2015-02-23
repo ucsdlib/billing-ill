@@ -3,19 +3,20 @@
     .col-sm-10.col-sm-offset-1
       %article
         %header
-          %h2 Showing results of 1 -10 of 50 invoices
+          %h2 
+            Showing results of 1 -10 of #{@total_count} recharges
         %table.table
           %thead
             %tr
               %th(width="15%") Recharge ID
               %th(width="15%") Charge
-              %th(width="20%") Status
+              %th(width="15%") Status
               %th(width="15%") Number of Copies
               %th(width="15%") Fund_ID
               %th(width="15%") Creation Date
               %th(width="15%") Link
           %tbody
-            - - @search_result.each do |recharge|
+            - @search_result.each do |recharge|
               %tr
                 %td 
                   = recharge.id
@@ -31,4 +32,4 @@
                   = recharge.created_at
                 %td
                   = link_to "edit", edit_recharge_path(recharge.id)
-        = button_to "Create customer reports", nil, class: "btn btn-default"
+        
