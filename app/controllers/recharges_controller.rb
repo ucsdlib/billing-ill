@@ -34,6 +34,10 @@ class RechargesController < ApplicationController
     end
   end
 
+  def search
+    @search_result = Recharge.search_by_ID(params[:search_term])
+  end
+
   private
 
   def recharge_params
