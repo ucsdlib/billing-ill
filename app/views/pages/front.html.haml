@@ -9,7 +9,7 @@
         .input-group
           .input-group-btn
             %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
-              Invoice
+              %span.filter-text Invoice
               %span.caret
               %span.sr-only Toggle Dropdown
             %ul.dropdown-menu{:role => "menu"}
@@ -17,11 +17,11 @@
                 %a{:href => "#"} Invoice
               %li
                 %a{:href => "#"} Recharge
-          %input.form-control(name="search_term" type="text" placeholder="Search Patron name or Invoice #")
+          %input.form-control.search-input(name="search_term" type="text" placeholder="Search Patron name or Invoice #")
             .input-group-btn
               %button.btn.btn-default(type="submit")
                 %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
-    .row.text-center
+    .row.text-center.search-options
       .span12.top15
         %span
           Search By:
