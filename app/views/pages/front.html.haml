@@ -3,20 +3,31 @@
     Welcome to Billing ILL.
     %span
       (Some description goes here.)
-  .row
-    .span12.text-center
-      %form.span12.for-search
-        %input.form-control(name="search_term" type="text" placeholder="Search Patron name or Invoice #")
-        %button.btn.btn-default.left3(type="submit") 
-          %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
-      %br
-      .row
-        .span12.top10
-          %span
-            Search By:
-          %label.checkbox-inline
-            %input{:type => "checkbox", :value => ""}
-              Patron Name
-          %label.checkbox-inline
-            %input{:type => "checkbox", :value => ""}
-              Invoice Number
+  %form
+    .row
+      .col-md-offset-2.col-md-8
+        .input-group
+          .input-group-btn
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+              Invoice
+              %span.caret
+              %span.sr-only Toggle Dropdown
+            %ul.dropdown-menu{:role => "menu"}
+              %li
+                %a{:href => "#"} Invoice
+              %li
+                %a{:href => "#"} Recharge
+          %input.form-control(name="search_term" type="text" placeholder="Search Patron name or Invoice #")
+            .input-group-btn
+              %button.btn.btn-default(type="submit")
+                %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+    .row.text-center
+      .span12.top15
+        %span
+          Search By:
+        %label.checkbox-inline
+          %input{:type => "checkbox", :value => ""}
+            Patron Name
+        %label.checkbox-inline
+          %input{:type => "checkbox", :value => ""}
+            Invoice Number
