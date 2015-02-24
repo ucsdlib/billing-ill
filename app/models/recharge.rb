@@ -11,6 +11,17 @@ class Recharge < ActiveRecord::Base
     where("fund_id = ? ", search_term).order("created_at DESC")
   end
 
+  def self.search_by_index_code(search_term)
+    return [] if search_term.blank?
+
+    if Fund.where(index_code: search_term).first != nil
+      fund_id = Fund.where(index_code: search_term).first
+      result = where("fund_id = ? ", fund_id).order("created_at DESC") 
+    else
+      result = []
+    end
+  end
+
   def self.page_count
 
   end

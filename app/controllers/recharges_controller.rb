@@ -36,7 +36,7 @@ class RechargesController < ApplicationController
 
   def search
     @total_count = Recharge.count
-    @search_result = Recharge.search_by_ID(params[:search_term])
+    @search_result = Recharge.search_by_index_code(params[:search_term])
   end
 
   private
