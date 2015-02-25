@@ -10,18 +10,18 @@
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li= link_to "Home"
+        %li= link_to "Home", root_path
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             Recharge
             %b.caret
           %ul.dropdown-menu#dropdown-text
             %li
-              %a{:href => "/recharges/new"} Create new Recharge
+              =link_to "Create new Recharge", new_recharge_path
             %li
               %a{:href => "#"} View or process current batch
             %li
-              %a{:href => "#"} View all Recharges
+              =link_to "View all Recharges", recharges_path
         %li.dropdown
           %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
             Invoice
@@ -48,7 +48,7 @@
             %b.caret
           %ul.dropdown-menu#dropdown-text
             %li
-              %a{:href => "/funds/new"} Create new Fund
+              =link_to "Create new Fund", new_fund_path
             %li
               %a{:href => "#"} View all Funds
       %ul.nav.navbar-nav.navbar-right
