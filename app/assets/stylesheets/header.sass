@@ -11,6 +11,9 @@ section#top-header
 
 #dropdown-text > li > a
   color: black
+  line-height: 40px
+  height: 40px
+  padding-top: 0
 
 .navbar-inner
   background: transparent
@@ -43,3 +46,101 @@ section#top-header
 
 .navbar-toggle
   margin-top: 24px
+
+.navbar
+  margin-bottom: 0px
+
+.search-bar
+  border-radius: 50px
+  border-bottom-right-radius: 0
+  border-top-right-radius: 0
+
+.search-bar-btn
+  border-radius: 50px
+  border-bottom-left-radius: 0
+  border-top-left-radius: 0
+
+.search-bar-input-group
+  display: block
+
+
+@media (min-width: 1150px)
+  .dropdown-menu:before
+    position: absolute
+    top: -7px
+    left: 9px
+    display: inline-block
+    border-right: 7px solid transparent
+    border-bottom: 7px solid #ccc
+    border-left: 7px solid transparent
+    border-bottom-color: rgba(0, 0, 0, 0.2)
+    content: ''
+
+  .dropdown-menu:after
+    position: absolute
+    top: -6px
+    left: 10px
+    display: inline-block
+    border-right: 6px solid transparent
+    border-bottom: 6px solid #ffffff
+    border-left: 6px solid transparent
+    content: ''
+
+  .navbar-nav > li > .dropdown-menu
+    margin-top: -10px
+    margin-left: 10px
+
+@media (max-width: 1150px) and (min-width: 769px)
+  .dropdown-menu:before
+    position: absolute
+    top: -7px
+    left: 9px
+    display: inline-block
+    border-right: 7px solid transparent
+    border-bottom: 7px solid #ccc
+    border-left: 7px solid transparent
+    border-bottom-color: rgba(0, 0, 0, 0.2)
+    content: ''
+
+  .dropdown-menu:after
+    position: absolute
+    top: -6px
+    left: 10px
+    display: inline-block
+    border-right: 6px solid transparent
+    border-bottom: 6px solid #ffffff
+    border-left: 6px solid transparent
+    content: ''
+
+  .navbar-brand,
+  .navbar-nav li a
+    line-height: 50px
+    height: 50px
+    padding-top: 0
+
+  .navbar-nav.navbar-right:last-child
+    margin-right: 5px
+
+  .navbar-form > .form-group
+    line-height: 40px
+    height: 40px
+    padding-top: 0
+
+  .navbar-nav > li > .dropdown-menu
+    margin-left: 10px
+
+@media (max-width: 769px)
+  #dropdown-text > li > a
+    color: #CFD760
+  .navbar-nav li a
+    line-height: 50px
+    height: 50px
+    padding-top: 0
+
+  .navbar-nav.navbar-right:last-child
+    margin-right: 5px
+
+  .navbar-form > .form-group
+    line-height: 0px
+    height: 0px
+    padding-top: 0

@@ -5,9 +5,10 @@
       (Some description goes here.)
   .row
     .span12.text-center
-      %form.span12.for-search
-        %input.form-control(name="search_term" type="text" placeholder="Search Patron name or Invoice #")
-        %button.btn.btn-default.left3(type="submit") Search
+      = form_tag search_recharges_path, method: "GET", class: "span12.for-search" do
+        %input.form-control(name="search_term" type="text" placeholder="Enter search term here")
+        %button.btn.btn-default.left3(type="submit") 
+          %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
       %br
       .row
         .span12.top10
