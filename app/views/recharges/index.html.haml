@@ -4,7 +4,7 @@
       %article
         %header
           %h2 
-            Showing results of 1 -10 of #{@total_count} recharges
+            There is total #{@total_count} recharges
         %table.table
           %thead
             %tr
@@ -16,7 +16,7 @@
               %th(width="15%") Creation Date
               %th(width="15%") Link
           %tbody
-            - @search_result.each do |recharge|
+            - @recharges.each do |recharge|
               %tr
                 %td 
                   = recharge.id
@@ -32,5 +32,4 @@
                   = recharge.created_at
                 %td
                   = link_to "edit", edit_recharge_path(recharge.id)
-          = paginate @search_result 
-        
+          = paginate @recharges
