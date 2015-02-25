@@ -1,3 +1,7 @@
+#---
+# by hweng@ucsd.edu
+#---
+
 class Recharge < ActiveRecord::Base
   belongs_to :fund
 
