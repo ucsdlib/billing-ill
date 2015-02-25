@@ -7,5 +7,10 @@ Rails.application.routes.draw do
  get '/ruby-version' => 'application#ruby_version'
 
  resources :funds, except: [:destroy]
- resources :recharges, except: [:destroy]
+ 
+ resources :recharges, except: [:destroy] do
+   collection do
+     get 'search', to: 'recharges#search'
+   end 
+ end
 end
