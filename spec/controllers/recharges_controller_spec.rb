@@ -146,7 +146,7 @@ describe RechargesController do
       expect(assigns(:search_result)).to eq([@recharge])
     end
     
-    it "sets @search_result to be nil if returned an empty array" do
+    it "sets @search_result to be nil if no match" do
       get :search, search_term: "AA"
       expect(assigns(:search_result)).to eq(nil)
     end
