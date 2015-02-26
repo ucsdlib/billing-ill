@@ -3,7 +3,7 @@
     Welcome to Billing ILL.
     %span
       (Some description goes here.)
-  %form
+  = form_tag search_recharges_path, method: "GET", id: "myForm" do
     .row
       .col-md-offset-2.col-md-8
         .input-group
@@ -23,11 +23,11 @@
                 %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
     .row.text-center.search-options
       .span12.top15
-        %span
+        %span.radio-label
           Search By:
-        %label.checkbox-inline
-          %input{:type => "checkbox", :value => ""}
+        %label.radio-inline
+          %input{:type => "radio", :name => "optionsRadios", :value => ""}
             Patron Name
-        %label.checkbox-inline
-          %input{:type => "checkbox", :value => ""}
+        %label.radio-inline
+          %input{:type => "radio", :name => "optionsRadios", :value => ""}
             Invoice Number

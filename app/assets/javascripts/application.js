@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require jquery.infinitescroll
 //= require_tree .
 
 $(function(){
@@ -27,11 +28,13 @@ $(function(){
     if (selectedOption == "Invoice") {
       $('.search-options').show();
       $('.search-input').attr("placeholder", "Search Invoice by Patron Name or #");
+      $('#myForm').attr("action", "/recharges/dummy");
     }
 
     if (selectedOption == "Recharge") {
       $('.search-input').attr("placeholder", "Search by Fund Code");
       $('.search-options').hide();
+      $('#myForm').attr("action", "/recharges/search");
     }
   });
 
