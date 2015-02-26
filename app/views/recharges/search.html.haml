@@ -16,21 +16,22 @@
               %th(width="15%") Creation Date
               %th(width="15%") Link
           %tbody
-            - @search_result.each do |recharge|
-              %tr
-                %td 
-                  = recharge.id
-                %td 
-                  = recharge.charge
-                %td 
-                  = recharge.status
-                %td 
-                  = recharge.number_copies
-                %td 
-                  = recharge.fund_id
-                %td 
-                  = recharge.created_at
-                %td
-                  = link_to "edit", edit_recharge_path(recharge.id)
-          = paginate @search_result 
+            - if @search_result
+              - @search_result.each do |recharge|
+                %tr
+                  %td 
+                    = recharge.id
+                  %td 
+                    = recharge.charge
+                  %td 
+                    = recharge.status
+                  %td 
+                    = recharge.number_copies
+                  %td 
+                    = recharge.fund_id
+                  %td 
+                    = recharge.created_at
+                  %td
+                    = link_to "edit", edit_recharge_path(recharge.id)
+          = paginate @search_result if @search_result
         
