@@ -6,6 +6,12 @@ class RechargesController < ApplicationController
   before_action :set_recharge, only: [:edit, :update]
   before_action :set_index_list, only: [:new, :edit]
 
+  def index
+    @total_count = Recharge.count
+    result_arr = Recharge.order(:created_at)
+    @recharges = result_arr.page(params[:page]) if !result_arr.blank?
+  end
+
   def new
     @recharge = Recharge.new
   end
@@ -36,7 +42,8 @@ class RechargesController < ApplicationController
 
   def search
     @total_count = Recharge.count
-    @search_result = Recharge.search_by_index_code(params[:search_term])
+    result_arr = Recharge.search_by_index_code(params[:search_term])
+    @search_result = result_arr.page(params[:page]) if !result_arr.blank?
   end
 
   private

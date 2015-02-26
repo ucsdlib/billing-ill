@@ -5,6 +5,19 @@
 require 'spec_helper'
 
 describe RechargesController do 
+  describe "GET index" do
+    it "sets @total_count" do
+      @recharge = Fabricate(:recharge)
+      get :index 
+      expect(assigns(:total_count)).to eq(1)
+    end
+    
+    it "sets @recharges to be nil if result_arr is blank" do
+      get :index 
+      expect(assigns(:recharges)).to eq(nil)
+    end
+  end
+
   describe "GET new" do
     it "sets @recharge" do
       get :new
@@ -114,6 +127,28 @@ describe RechargesController do
       it "render the :edit template" do
         expect(response).to render_template :edit
       end
+    end
+  end
+
+  describe "GET search" do
+    before do
+      fund = Fabricate(:fund, id: 1, index_code: "ANSVAMC")
+      @recharge = Fabricate(:recharge, fund_id: 1 )
+    end
+
+    it "sets @total_count" do
+      get :search, search_term: "ANSVAMC"
+      expect(assigns(:total_count)).to eq(1)
+    end
+    
+    it "sets @search_result an array if there is a match" do
+      get :search, search_term: "ANSVAMC"
+      expect(assigns(:search_result)).to eq([@recharge])
+    end
+    
+    it "sets @search_result to be nil if no match" do
+      get :search, search_term: "AA"
+      expect(assigns(:search_result)).to eq(nil)
     end
   end
 end
