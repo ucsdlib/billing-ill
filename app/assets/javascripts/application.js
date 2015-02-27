@@ -28,7 +28,7 @@ $(function(){
     if (selectedOption == "Invoice") {
       $('.search-options').show();
       $('.search-input').attr("placeholder", "Search Invoice by Patron Name or #");
-      $('#myForm').attr("action", "/recharges/dummy");
+      $('#myForm').attr("action", "#");
     }
 
     if (selectedOption == "Recharge") {
