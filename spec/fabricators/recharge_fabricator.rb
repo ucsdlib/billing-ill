@@ -1,5 +1,5 @@
 Fabricator(:recharge) do 
-  charge { Faker::Number.number(2)}
+  charge 4.5
   number_copies { Faker::Number.number(1)}
   status 'active'
   fund_id 1
