@@ -14,5 +14,28 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require_tree .
 //= require jquery.infinitescroll
+//= require_tree .
+
+$(function(){
+  $(".dropdown-menu li a").click(function(){
+
+    var selectedOption = $(this).text();
+
+    $(".filter-text").text(selectedOption);
+    $(".filter-text").val(selectedOption);
+
+    if (selectedOption == "Invoice") {
+      $('.search-options').show();
+      $('.search-input').attr("placeholder", "Search Invoice by Patron Name or #");
+      $('#myForm').attr("action", "#");
+    }
+
+    if (selectedOption == "Recharge") {
+      $('.search-input').attr("placeholder", "Search by Fund Code");
+      $('.search-options').hide();
+      $('#myForm').attr("action", "/recharges/search");
+    }
+  });
+
+});
