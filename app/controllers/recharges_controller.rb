@@ -4,7 +4,7 @@
 
 class RechargesController < ApplicationController
   before_action :set_recharge, only: [:edit, :update]
-  before_action :set_index_list, only: [:new, :edit]
+  before_action :set_index_list, only: [:new, :create, :edit, :update]
 
   def index
     @total_count = Recharge.count
@@ -32,6 +32,7 @@ class RechargesController < ApplicationController
   end
 
   def update
+
     if @recharge.update(recharge_params)
       flash[:notice] = "Your recharge was updated"
       redirect_to root_path
