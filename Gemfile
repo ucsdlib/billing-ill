@@ -23,6 +23,7 @@ gem 'pg'
 gem 'fabrication'
 gem 'faker'
 gem 'bootstrap_form'
+gem 'kaminari'
 
 group :development do
   gem 'sqlite3'

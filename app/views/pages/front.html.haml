@@ -3,20 +3,31 @@
     Welcome to Billing ILL.
     %span
       (Some description goes here.)
-  .row
-    .span12.text-center
-      = form_tag search_recharges_path, method: "GET", class: "span12.for-search" do
-        %input.form-control(name="search_term" type="text" placeholder="Enter search term here")
-        %button.btn.btn-default.left3(type="submit") 
-          %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
-      %br
-      .row
-        .span12.top10
-          %span
-            Search By:
-          %label.checkbox-inline
-            %input{:type => "checkbox", :value => ""}
-              Patron Name
-          %label.checkbox-inline
-            %input{:type => "checkbox", :value => ""}
-              Invoice Number
+  = form_tag search_recharges_path, method: "GET", id: "myForm" do
+    .row
+      .col-md-offset-2.col-md-8
+        .input-group
+          .input-group-btn
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+              %span.filter-text Invoice
+              %span.caret
+              %span.sr-only Toggle Dropdown
+            %ul.dropdown-menu{:role => "menu"}
+              %li
+                %a{:href => "#"} Invoice
+              %li
+                %a{:href => "#"} Recharge
+          %input.form-control.search-input(name="search_term" type="text" placeholder="Search Patron name or Invoice #")
+            .input-group-btn
+              %button.btn.btn-default(type="submit")
+                %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+    .row.text-center.search-options
+      .span12.top15
+        %span.radio-label
+          Search By:
+        %label.radio-inline
+          %input{:type => "radio", :name => "optionsRadios", :value => ""}
+            Patron Name
+        %label.radio-inline
+          %input{:type => "radio", :name => "optionsRadios", :value => ""}
+            Invoice Number
