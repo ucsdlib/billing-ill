@@ -10,6 +10,7 @@ describe Recharge do
   it {should validate_presence_of(:charge)}
   it {should validate_presence_of(:number_copies)}
   it {should validate_presence_of(:status)}
+  it {should validate_presence_of(:fund_id)}
   it {should validate_numericality_of(:charge)}
 
   it do
