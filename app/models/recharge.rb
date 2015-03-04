@@ -27,6 +27,14 @@ class Recharge < ActiveRecord::Base
     end
   end
 
+  def self.search_all_pending_status
+    result = where(status: "pending").order("created_at DESC")
+  end
+
+  def self.pending_status_count
+    search_all_pending_status.count
+  end
+
   def self.page_count
 
   end

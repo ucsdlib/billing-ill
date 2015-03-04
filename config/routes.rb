@@ -12,5 +12,8 @@ Rails.application.routes.draw do
    collection do
      get 'search', to: 'recharges#search'
    end 
+   collection do
+     get 'process_batch', to: 'recharges#process_batch'
+   end 
  end
 end

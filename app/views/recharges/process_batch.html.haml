@@ -1,0 +1,36 @@
+%section.my_queue.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2 
+            Showing results of 1 -10 of #{@current_batch_count} recharges
+        %table.table
+          %thead
+            %tr
+              %th(width="15%") Recharge ID
+              %th(width="15%") Charge
+              %th(width="15%") Status
+              %th(width="15%") Number of Copies
+              %th(width="15%") Fund_ID
+              %th(width="15%") Creation Date
+              %th(width="15%") Link
+          %tbody
+            - if @current_batch_result
+              - @current_batch_result.each do |recharge|
+                %tr
+                  %td 
+                    = recharge.id
+                  %td 
+                    = recharge.charge
+                  %td 
+                    = recharge.status
+                  %td 
+                    = recharge.number_copies
+                  %td 
+                    = recharge.fund_id
+                  %td 
+                    = recharge.created_at
+                  %td
+                    = link_to "edit", edit_recharge_path(recharge.id)
+          = paginate @current_batch_result if @current_batch_result
