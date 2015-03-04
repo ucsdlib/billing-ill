@@ -3,7 +3,7 @@
     .col-sm-10.col-sm-offset-1
       %article
         %header
-          %h2 
+          %h2
             There is total #{@total_count} recharges
         %table.table
           %thead
@@ -19,18 +19,19 @@
             - if @recharges
               - @recharges.each do |recharge|
                 %tr
-                  %td 
+                  %td
                     = recharge.id
-                  %td 
+                  %td
                     = recharge.charge
-                  %td 
+                  %td
                     = recharge.status
-                  %td 
+                  %td
                     = recharge.number_copies
-                  %td 
+                  %td
                     = recharge.fund_id
-                  %td 
+                  %td
                     = recharge.created_at
                   %td
                     = link_to "edit", edit_recharge_path(recharge.id)
-          = paginate @recharges if @recharges
+          .pagination-wrapper
+            = paginate @recharges if @recharges
