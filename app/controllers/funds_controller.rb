@@ -34,7 +34,7 @@ class FundsController < ApplicationController
   private
 
   def fund_params
-    params.require(:fund).permit(:program_code, :org_code, :index_code, :fund_code)
+    params.require(:fund).permit(:program_code, :org_code, :index_code, :fund_code, :description)
   end
 
   def set_fund
