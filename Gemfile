@@ -6,6 +6,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 gem 'turbolinks'
 gem 'jbuilder'
 
@@ -27,9 +28,9 @@ gem 'kaminari'
 
 group :development do
   gem 'sqlite3'
-  gem 'spring' 
+  gem 'spring'
   gem 'pry'
-end  
+end
 
 group :development, :test do
   gem 'rspec-rails', '3.1'
@@ -43,7 +44,7 @@ group :test do
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc    
+gem 'sdoc', '~> 0.4.0',          group: :doc
 
 
 # Use ActiveModel has_secure_password
@@ -57,4 +58,3 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-

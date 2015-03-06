@@ -5,8 +5,8 @@
       (Some description goes here.)
   = form_tag search_recharges_path, method: "GET", id: "myForm" do
     .row
-      .col-md-offset-2.col-md-8
-        .input-group
+      .col-xs-12.text-center
+        .input-group.front-input
           .input-group-btn
             %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
               %span.filter-text Invoice
@@ -17,7 +17,7 @@
                 %a{:href => "#"} Invoice
               %li
                 %a{:href => "#"} Recharge
-          %input.form-control.search-input(name="search_term" type="text" placeholder="Search Patron name or Invoice #")
+          %input.form-control.search-input(name="search_term" type="text" placeholder="Search Invoice by Patron Name or #")
             .input-group-btn
               %button.btn.btn-default(type="submit")
                 %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
