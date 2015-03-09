@@ -78,10 +78,10 @@ class RechargesController < ApplicationController
       sequence_num = convert_seq_num(index)
       charge = recharge.charge
       transaction_amount = convert_charge(charge)
-      fund_code = recharge.fund_code
-      org_code = recharge.org_code
-      program_code = recharge.program_code
-      index_code = recharge.index_code
+      fund_code = recharge.fund_fund_code
+      org_code = recharge.fund_org_code
+      program_code = recharge.fund_program_code
+      index_code = recharge.fund_index_code
       filler_var = recharge.created_at.strftime("%Y%m%d") + " " * 2
       total_amount += charge
 

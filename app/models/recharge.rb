@@ -10,6 +10,11 @@ class Recharge < ActiveRecord::Base
   validates :status, presence: true 
   validates :fund_id, presence: true
 
+  delegate :org_code, to: :fund, prefix: :fund
+  delegate :index_code, to: :fund, prefix: :fund
+  delegate :fund_code, to: :fund, prefix: :fund
+  delegate :program_code, to: :fund, prefix: :fund
+
   def self.search_by_ID(search_term)
     return [] if search_term.blank?
 
