@@ -36,7 +36,33 @@ class Recharge < ActiveRecord::Base
   end
 
   def self.page_count
-
   end
-  
+
+  # def get_header_row
+  #   result_arr = search_all_pending_status
+
+  #   #@current_batch_count = Recharge.pending_status_count
+  #   @current_batch_count = pending_status_count
+  #   # header part
+    
+  #   document_Amount = 0
+  #   result_arr.each_with_index do |recharge, index|
+  #     document_Amount += recharge.charge
+  #   end
+
+  #   header_row = "#{SUBSYSTEM_ID}#{UNIVERSITY_ID}#{DOCUMENT_NUM}#{RECORD_TYPE}#{DESCRIPTION}#{TRANSACTION_DATE}#{document_Amount}\n"
+  # end
+
+  # def get_detail_rows 
+  #   detail_rows = ""
+  #   result_arr.each_with_index do |recharge, index|
+  #     sequence_num = index
+  #     detail_rows += "#{SUBSYSTEM_ID}#{UNIVERSITY_ID}#{DOCUMENT_NUM}#{RECORD_TYPE}"
+  #     detail_rows += "#{sequence_num}\n"
+  #   end
+  # end
+
+  # def process_output
+    
+  # end
 end

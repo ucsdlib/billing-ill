@@ -53,6 +53,8 @@ class RechargesController < ApplicationController
     @current_batch_result = result_arr.page(params[:page]) if !result_arr.blank?
   end
 
+  
+
   private
 
   def recharge_params
