@@ -53,9 +53,87 @@ class RechargesController < ApplicationController
     @current_batch_result = result_arr.page(params[:page]) if !result_arr.blank?
   end
 
-  
+  def process_output
+    result_arr = Recharge.search_all_pending_status
+    @current_batch_count = Recharge.pending_status_count
+    
+    # header rows
+    h_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "1"
+    h_column20_54 = "LIBRARY RECHARGES"+ " " * 18
+    transaction_date = Time.now.strftime("%Y%m%d")
+    h_column75_250 = "N" + " " * 175
+
+    # detail_rows
+    d_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "2"
+    d_column24_27 = "F510"
+    d_column40_76 = "LIBRARY-PHOTOCOPY SERVICE" + "D" + "A"
+    d_column89_94 = "636064"
+    d_column101_112 = " " * 6 + " " * 6
+    d_column123_209 = " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 9
+    d_column220 = " "
+
+    detail_rows = ""
+    total_amount = 0
+    result_arr.each_with_index do |recharge, index|
+      sequence_num = convert_seq_num(index)
+      charge = recharge.charge
+      transaction_amount = convert_charge(charge)
+      fund_code = recharge.fund_code
+      org_code = recharge.org_code
+      program_code = recharge.program_code
+      index_code = recharge.index_code
+      filler_var = recharge.created_at.strftime("%Y%m%d") + " " * 2
+      total_amount += charge
+
+      detail_rows += "#{column1_19}#{sequence_num}#{d_column24_27}#{transaction_amount}#{d_column40_76}#{fund_code}#{org_code}"
+      detail_rows += "#{d_column89_94}#{program_code}#{d_column101_112}#{index_code}#{d_column123_209}#{filler_var}#{d_column220}\n"
+    end
+
+    #final credit row
+    f_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "2"
+    f_sequence_num = convert_seq_num(result_arr.size + 1)
+    f_column24_27 = "F510"
+    total_amount = total_amount.convert_charge(total_amount)
+    f_column40_76 = "LIBRARY-PHOTOCOPY SERVICE" + "C" + "A"
+    f_column77_112 = " " * 12 + "693900" + " " * 18
+    f_column113_122 = "LIBIL05" + " " * 3
+    f_column123_154 = " " * 32
+    f_column155_209 = "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 8
+    f_filler_var = " " * 10 #to fix
+    f_column220 = " "
+
+    document_amount = convert_charge(total_amount * 2)
+
+    header_row = "#{h_column1_19}#{h_column20_54}#{transaction_date}#{document_amount}#{h_column75_250}\n"
+    
+    final_rows = "#{f_column1_19}#{f_sequence_num}#{f_column24_27}#{total_amount}#{f_column40_76}"
+    final_rows += "#{f_column77_112}#{f_column113_122}#{f_column123_154}#{f_column155_209}#{f_filler_var}#{f_column220}"
+
+
+    render plain: "#{header_row}#{detail_rows}#{final_rows}"
+  end
 
   private
+
+   def convert_seq_num (seq_num)
+    n = 0
+    if seq_num < 10
+      n = 3
+    elsif seq_num >=10 && seq_num < 100  
+      n = 2
+    elsif seq_num >=100 && seq_num < 1000
+      n = 1
+    else
+      n = 0
+    end
+      
+    str = seq_num.to_s.rjust(n, "0")
+  end
+
+  def convert_charge(amount)
+    s_amount = (100* amount).round.to_s  # 0.50 --> "50"
+    output_amount = "0" *(12 - s_amount.length) + s_amount
+  end
 
   def recharge_params
     params.require(:recharge).permit(:number_copies, :charge, :status, :notes, :fund_id)
