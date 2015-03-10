@@ -60,7 +60,8 @@ class RechargesController < ApplicationController
     # header rows
     h_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "1"
     h_column20_54 = "LIBRARY RECHARGES"+ " " * 18
-    transaction_date = Time.now.strftime("%Y%m%d")
+    # transaction_date = Time.now.strftime("%Y%m%d")
+    transaction_date = convert_date(Time.now)
     h_column75_250 = "N" + " " * 175
 
     # detail_rows
@@ -82,7 +83,8 @@ class RechargesController < ApplicationController
       org_code = recharge.fund_org_code
       program_code = recharge.fund_program_code
       index_code = recharge.fund_index_code
-      filler_var = recharge.created_at.strftime("%Y%m%d") + " " * 2
+      # filler_var = recharge.created_at.strftime("%Y%m%d") + " " * 2
+      filler_var = convert_date(recharge.created_at) + " " * 2
       total_charge += charge
 
       detail_rows += "#{d_column1_19}#{sequence_num}#{d_column24_27}#{transaction_amount}#{d_column40_76}#{fund_code}#{org_code}"
@@ -114,16 +116,7 @@ class RechargesController < ApplicationController
   end
 
   private
-
-  def convert_seq_num (seq_num)
-    str = seq_num.to_s.rjust(4, "0") # 1 --> 0001, 10 --> 0010
-  end
-
-  def convert_charge(amount)
-    s_amount = (100* amount).round.to_s  # 0.50 --> "50"
-    output_amount = "0" *(12 - s_amount.length) + s_amount
-  end
-
+  
   def recharge_params
     params.require(:recharge).permit(:number_copies, :charge, :status, :notes, :fund_id)
   end
