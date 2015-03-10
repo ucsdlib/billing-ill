@@ -13,6 +13,11 @@ describe Recharge do
   it {should validate_presence_of(:fund_id)}
   it {should validate_numericality_of(:charge)}
 
+  it {should delegate_method(:fund_org_code).to(:fund).as(:org_code)}
+  it {should delegate_method(:fund_index_code).to(:fund).as(:index_code)}
+  it {should delegate_method(:fund_fund_code).to(:fund).as(:fund_code)}
+  it {should delegate_method(:fund_program_code).to(:fund).as(:program_code)}
+
   it do
     should allow_value('5', '5.00', '5.0', '0.5').
       for(:charge)
