@@ -42,4 +42,24 @@ describe Recharge do
       expect(Recharge.search_by_index_code("")).to eq([])
     end
   end
+
+  describe "search_all_pending_status" do
+    it "returns an array of all matches ordered by created_at" do
+      @recharge1 = Fabricate(:recharge, status: "pending")
+      @recharge2 = Fabricate(:recharge, status: "pending")
+      expect(Recharge.search_all_pending_status).to eq([@recharge2,@recharge1])
+    end
+
+    it "returns an empty array if there is no match" do
+      expect(Recharge.search_all_pending_status).to eq([])
+    end
+  end
+
+  describe "pending_status_count" do
+    it "returns an count of total pending status" do
+      @recharge1 = Fabricate(:recharge, status: "pending")
+      @recharge2 = Fabricate(:recharge, status: "pending")
+      expect(Recharge.pending_status_count).to eq(2)
+    end
+  end
 end
