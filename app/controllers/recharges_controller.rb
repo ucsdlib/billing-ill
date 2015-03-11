@@ -98,7 +98,7 @@ class RechargesController < ApplicationController
     f_column77_112 = " " * 12 + "693900" + " " * 18
     f_column113_122 = "LIBIL05" + " " * 3
     f_column123_154 = " " * 29
-    f_column155_209 = "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 8
+    f_column155_209 = "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 9
     f_filler_var = convert_date(Time.now) + " " * 2 
     f_column220 = " "
 
