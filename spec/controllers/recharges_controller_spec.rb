@@ -164,8 +164,4 @@ describe RechargesController do
       expect(assigns(:current_batch_result)).to eq(nil)
     end
   end
-
-  describe "GET process_output" do
-    
-  end
 end

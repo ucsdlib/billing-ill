@@ -55,12 +55,11 @@ class RechargesController < ApplicationController
 
   def process_output
     result_arr = Recharge.search_all_pending_status
-    @current_batch_count = Recharge.pending_status_count
     
     # header rows
     h_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "1"
     h_column20_54 = "LIBRARY RECHARGES"+ " " * 18
-    # transaction_date = Time.now.strftime("%Y%m%d")
+    
     transaction_date = convert_date(Time.now)
     h_column75_250 = "N" + " " * 175
 
@@ -83,7 +82,6 @@ class RechargesController < ApplicationController
       org_code = recharge.fund_org_code
       program_code = recharge.fund_program_code
       index_code = recharge.fund_index_code
-      # filler_var = recharge.created_at.strftime("%Y%m%d") + " " * 2
       filler_var = convert_date(recharge.created_at) + " " * 2
       total_charge += charge
 
@@ -99,9 +97,9 @@ class RechargesController < ApplicationController
     f_column40_76 = "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "C" + "A"
     f_column77_112 = " " * 12 + "693900" + " " * 18
     f_column113_122 = "LIBIL05" + " " * 3
-    f_column123_154 = " " * 32
+    f_column123_154 = " " * 29
     f_column155_209 = "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 8
-    f_filler_var = " " * 10 #to fix
+    f_filler_var = convert_date(Time.now) + " " * 2 
     f_column220 = " "
 
     document_amount = convert_charge(total_charge * 2)
