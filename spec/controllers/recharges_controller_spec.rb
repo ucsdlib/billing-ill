@@ -151,4 +151,17 @@ describe RechargesController do
       expect(assigns(:search_result)).to eq(nil)
     end
   end
+
+  describe "GET process_batch" do
+    it "sets @current_batch_result an array if there is a match" do
+      @recharge = Fabricate(:recharge, status: "pending")
+      get :process_batch
+      expect(assigns(:current_batch_result)).to eq([@recharge])
+    end
+    
+    it "sets @current_batch_result to be nil if no match" do
+      get :process_batch
+      expect(assigns(:current_batch_result)).to eq(nil)
+    end
+  end
 end

@@ -12,5 +12,11 @@ Rails.application.routes.draw do
    collection do
      get 'search', to: 'recharges#search'
    end 
+   collection do
+     get 'process_batch', to: 'recharges#process_batch'
+   end 
+   collection do
+     get 'process_output', to: 'recharges#process_output'
+   end
  end
 end

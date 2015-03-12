@@ -16,7 +16,7 @@
   Fund.create(program_code: "400006", org_code: "414915", index_code: "GNSVAMC", fund_code: "60200D")
 
 
-50.times do
+10.times do
   Recharge.create(charge: "23.5", number_copies: "2", status: "pending", notes: "recharge notes.", fund_id: 1)
 end
 
