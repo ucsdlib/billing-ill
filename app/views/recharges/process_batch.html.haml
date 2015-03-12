@@ -36,5 +36,5 @@
           = paginate @current_batch_result if @current_batch_result
         %fieldset.actions.control-group.col-sm-offset-2
         .controls
-          %a.btn.btn-primary(href="") FTP to ACT
-          = link_to "Preview Output File", process_output_recharges_path, method: :get, class: 'btn btn-default'
+          -#%a.btn.btn-primary(href="") FTP to ACT
+          = link_to "Preview Output File", process_output_recharges_path, method: :get, class: 'btn btn-primary'
