@@ -5,6 +5,12 @@
 class FundsController < ApplicationController
   before_action :set_fund, only: [:edit, :update]
 
+  def index
+    @total_count = Fund.count
+    result_arr = Fund.order(:created_at)
+    @funds = result_arr.page(params[:page]) if !result_arr.blank?
+  end
+
   def new
     @fund = Fund.new
   end
