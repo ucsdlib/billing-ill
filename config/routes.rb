@@ -16,7 +16,7 @@ Rails.application.routes.draw do
      get 'process_batch', to: 'recharges#process_batch'
    end 
    collection do
-     get 'process_output', to: 'recharges#process_output'
+     get 'create_output', to: 'recharges#create_output'
    end
  end
 end

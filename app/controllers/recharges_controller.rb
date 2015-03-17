@@ -109,9 +109,22 @@ class RechargesController < ApplicationController
     final_rows = "#{f_column1_19}#{f_sequence_num}#{f_column24_27}#{total_amount}#{f_column40_76}"
     final_rows += "#{f_column77_112}#{f_column113_122}#{f_column123_154}#{f_column155_209}#{f_filler_var}#{f_column220}"
 
-
-    render plain: "#{header_row}#{detail_rows}#{final_rows}"
+    content = "#{header_row}#{detail_rows}#{final_rows}"
   end
+
+  def create_output
+    content = process_output
+    render plain: content
+  end
+
+  def create_file
+    path = "/tmp/ftp/IFISDATA.TXT"
+    content = process_output
+    File.open(path, "w+") do |f|
+      f.write(content)
+    end
+  end
+
 
   private
   
