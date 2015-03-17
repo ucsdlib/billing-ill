@@ -25,6 +25,7 @@ gem 'fabrication'
 gem 'faker'
 gem 'bootstrap_form'
 gem 'kaminari'
+gem 'omniauth-shibboleth'
 
 group :development do
   gem 'sqlite3'
