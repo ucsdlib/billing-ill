@@ -118,13 +118,21 @@ class RechargesController < ApplicationController
   end
 
   def create_file
-    path = "/tmp/ftp/IFISDATA.TXT"
+    path = "tmp/ftp/IFISDATA.TXT"
     content = process_output
-    File.open(path, "w+") do |f|
+    #puts Dir.pwd
+    
+    File.open(path, "w") do |f|
       f.write(content)
     end
   end
 
+  def ftp_file
+    create_file
+    flash[:notice] = "Your recharge file is FTP to the campus"
+
+    redirect_to process_batch_recharges_path
+  end
 
   private
   

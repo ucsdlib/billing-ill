@@ -18,5 +18,8 @@ Rails.application.routes.draw do
    collection do
      get 'create_output', to: 'recharges#create_output'
    end
+   collection do
+     get 'ftp_file', to: 'recharges#ftp_file'
+   end
  end
 end
