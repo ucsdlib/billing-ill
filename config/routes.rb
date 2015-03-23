@@ -25,6 +25,6 @@ Rails.application.routes.draw do
 
 
  get "/auth/shibboleth", :as => :signin
- post "/auth/:provider/callback" => "sessions#create", :as => :callback
+ post "/auth/shibboleth/callback" => "sessions#create", :as => :callback
  get "/signout" => "sessions#destroy", :as => :signout
 end
