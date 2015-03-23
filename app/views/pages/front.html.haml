@@ -3,31 +3,36 @@
     Welcome to Billing ILL.
     %span
       (Some description goes here.)
-  = form_tag search_recharges_path, method: "GET", id: "myForm" do
-    .row
-      .col-xs-12.text-center
-        .input-group.front-input
-          .input-group-btn
-            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
-              %span.filter-text Invoice
-              %span.caret
-              %span.sr-only Toggle Dropdown
-            %ul.dropdown-menu{:role => "menu"}
-              %li
-                %a{:href => "#"} Invoice
-              %li
-                %a{:href => "#"} Recharge
-          %input.form-control.search-input(name="search_term" type="text" placeholder="Search Invoice by Patron Name or #")
+  - if current_user
+    = form_tag search_recharges_path, method: "GET", id: "myForm" do
+      .row
+        .col-xs-12.text-center
+          .input-group.front-input
             .input-group-btn
-              %button.btn.btn-default(type="submit")
-                %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
-    .row.text-center.search-options
-      .span12.top15
-        %span.radio-label
-          Search By:
-        %label.radio-inline
-          %input{:type => "radio", :name => "optionsRadios", :value => ""}
-            Patron Name
-        %label.radio-inline
-          %input{:type => "radio", :name => "optionsRadios", :value => ""}
-            Invoice Number
+              %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button"}
+                %span.filter-text Invoice
+                %span.caret
+                %span.sr-only Toggle Dropdown
+              %ul.dropdown-menu{:role => "menu"}
+                %li
+                  %a{:href => "#"} Invoice
+                %li
+                  %a{:href => "#"} Recharge
+            %input.form-control.search-input(name="search_term" type="text" placeholder="Search Invoice by Patron Name or #")
+              .input-group-btn
+                %button.btn.btn-default(type="submit")
+                  %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+      .row.text-center.search-options
+        .span12.top15
+          %span.radio-label
+            Search By:
+          %label.radio-inline
+            %input{:type => "radio", :name => "optionsRadios", :value => ""}
+              Patron Name
+          %label.radio-inline
+            %input{:type => "radio", :name => "optionsRadios", :value => ""}
+              Invoice Number
+  - else
+    %h2.text-center
+      = link_to "Sign in with Shibbloth", "/auth/shibbloth"
+

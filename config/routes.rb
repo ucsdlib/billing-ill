@@ -22,4 +22,7 @@ Rails.application.routes.draw do
      get 'ftp_file', to: 'recharges#ftp_file'
    end
  end
+
+ post "/auth/:provider/callback" => "sessions#create", :as => :signin
+ get "/signout" => "sessions#destroy", :as => :signout
 end
