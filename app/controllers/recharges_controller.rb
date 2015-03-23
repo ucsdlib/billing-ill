@@ -1,6 +1,8 @@
 #---
 # by hweng@ucsd.edu
 #---
+require 'net/ftp'
+require 'open-uri'
 
 class RechargesController < ApplicationController
   before_action :set_recharge, only: [:edit, :update]
@@ -118,13 +120,34 @@ class RechargesController < ApplicationController
   end
 
   def create_file
-    path = "/tmp/ftp/IFISDATA.TXT"
+    path = "tmp/ftp/IFISDATA.TXT"
     content = process_output
-    File.open(path, "w+") do |f|
+    #puts Dir.pwd
+    
+    File.open(path, "w") do |f|
       f.write(content)
     end
   end
 
+  def ftp_file
+    create_file
+    local_file_path = "tmp/ftp/IFISDATA.TXT"
+    
+    if Rails.env.production?
+      server_name = Rails.application.secrets.ftp_server_name
+      user = Rails.application.secrets.ftp_user
+      password = Rails.application.secrets.ftp_password
+
+      Net::FTP.open('server_name', 'user', 'password') do |ftp|
+        ftp.passive = true
+        ftp.putbinaryfile(local_file_path)
+      end
+    end
+    
+    flash[:notice] = "Your recharge file is FTP to the campus"
+
+    redirect_to process_batch_recharges_path
+  end
 
   private
   

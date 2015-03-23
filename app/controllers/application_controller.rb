@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  helper_method :current_user
 
   def convert_seq_num (seq_num)
     str = seq_num.to_s.rjust(4, "0") # 1 --> 0001, 10 --> 0010
@@ -14,5 +15,10 @@ class ApplicationController < ActionController::Base
 
   def convert_date(cdate)
     cdate.strftime("%Y%m%d")
+  end
+
+  private
+  def current_user
+    @current_user ||= User.find_by uid: session[:user_id] if session[:user_id]
   end
 end
