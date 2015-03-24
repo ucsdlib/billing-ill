@@ -3,7 +3,7 @@
     Welcome to Billing ILL.
     %span
       (Some description goes here.)
-  - if current_user
+  - if logged_in?
     = form_tag search_recharges_path, method: "GET", id: "myForm" do
       .row
         .col-xs-12.text-center

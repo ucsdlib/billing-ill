@@ -9,7 +9,7 @@
       %a.navbar-brand{:href => "#"} Ill Billing
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      - if current_user
+      - if logged_in?
         %ul.nav.navbar-nav
           %li= link_to "Home", root_path
           %li.dropdown
