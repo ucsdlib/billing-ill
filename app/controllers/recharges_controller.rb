@@ -1,7 +1,7 @@
 #---
 # by hweng@ucsd.edu
 #---
-require 'net/ftp'
+require 'net/sftp'
 require 'open-uri'
 
 class RechargesController < ApplicationController
@@ -120,7 +120,7 @@ class RechargesController < ApplicationController
   end
 
   def create_file
-    path = "tmp/ftp/IFISDATA.TXT"
+    path = "tmp/ftp/IFISDATA6.TXT"
     content = process_output
     #puts Dir.pwd
     
@@ -131,18 +131,19 @@ class RechargesController < ApplicationController
 
   def ftp_file
     create_file
-    local_file_path = "tmp/ftp/IFISDATA.TXT"
-    
-    if Rails.env.production?
-      server_name = Rails.application.secrets.ftp_server_name
-      user = Rails.application.secrets.ftp_user
-      password = Rails.application.secrets.ftp_password
 
-      Net::FTP.open('server_name', 'user', 'password') do |ftp|
-        ftp.passive = true
-        ftp.putbinaryfile(local_file_path)
-      end
-    end
+    local_file_path = "tmp/ftp/IFISDATA6.TXT"
+    remote_file_path = Rails.application.secrets.sftp_folder + "/IFISDATA6.TXT"
+    server_name = Rails.application.secrets.sftp_server_name
+    user = Rails.application.secrets.sftp_user
+    password = Rails.application.secrets.sftp_password
+
+    Rails.logger.info("Creating SFTP connection")
+    session=Net::SSH.start(server_name, user, :password=> password)
+    sftp=Net::SFTP::Session.new(session).connect!
+    Rails.logger.info("SFTP Connection created, uploading files.")
+    sftp.upload!(local_file_path, remote_file_path)
+    Rails.logger.info("File uploaded, Connection terminated.")
     
     flash[:notice] = "Your recharge file is FTP to the campus"
 
