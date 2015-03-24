@@ -147,13 +147,34 @@ class RechargesController < ApplicationController
     Rails.logger.info("SFTP Connection created, uploading files.")
     sftp.upload!(local_file_path, remote_file_path)
     Rails.logger.info("File uploaded, Connection terminated.")
+
+    batch_update_status
     
     flash[:notice] = "Your recharge file is FTP to the campus"
 
-    redirect_to process_batch_recharges_path
+    redirect_to recharges_path
+  end
+
+  def batch_update_status
+    begin
+      batch_update_status_item
+    rescue ActiveRecord::RecordInvalid
+      flash[:error] = "Invalid record"
+    end
   end
 
   private
+
+  def batch_update_status_item
+    result_arr = Recharge.search_all_pending_status
+
+    ActiveRecord::Base.transaction do
+      result_arr.each do |recharge|
+        # add bang after update_attributes so that if it is not saved, it will raise error and roll back whole transaction.
+        recharge.update_attributes!(status: "submitted") 
+      end
+    end
+  end
   
   def recharge_params
     params.require(:recharge).permit(:number_copies, :charge, :status, :notes, :fund_id)
