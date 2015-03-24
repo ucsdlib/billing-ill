@@ -1,7 +1,7 @@
 #---
 # by hweng@ucsd.edu
 #---
-require 'net/ftp'
+require 'net/sftp'
 require 'open-uri'
 
 class RechargesController < ApplicationController
@@ -62,7 +62,7 @@ class RechargesController < ApplicationController
     h_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "1"
     h_column20_54 = "LIBRARY RECHARGES"+ " " * 18
     
-    transaction_date = convert_date(Time.now)
+    transaction_date = convert_date_yyyymmdd(Time.now)
     h_column75_250 = "N" + " " * 175
 
     # detail_rows
@@ -84,7 +84,7 @@ class RechargesController < ApplicationController
       org_code = recharge.fund_org_code
       program_code = recharge.fund_program_code
       index_code = recharge.fund_index_code
-      filler_var = convert_date(recharge.created_at) + " " * 2
+      filler_var = convert_date_yyyymmdd(recharge.created_at) + " " * 2
       total_charge += charge
 
       detail_rows += "#{d_column1_19}#{sequence_num}#{d_column24_27}#{transaction_amount}#{d_column40_76}#{fund_code}#{org_code}"
@@ -101,7 +101,7 @@ class RechargesController < ApplicationController
     f_column113_122 = "LIBIL05" + " " * 3
     f_column123_154 = " " * 29
     f_column155_209 = "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 9
-    f_filler_var = convert_date(Time.now) + " " * 2 
+    f_filler_var = convert_date_yyyymmdd(Time.now) + " " * 2 
     f_column220 = " "
 
     document_amount = convert_charge(total_charge * 2)
@@ -120,29 +120,33 @@ class RechargesController < ApplicationController
   end
 
   def create_file
-    path = "tmp/ftp/IFISDATA.TXT"
+    file_name = "FISP.JVDATA.D" + convert_date_yymmdd(Time.now) + ".LIB"
+    path = "tmp/ftp/" + file_name
     content = process_output
     #puts Dir.pwd
     
     File.open(path, "w") do |f|
       f.write(content)
     end
+
+    return file_name
   end
 
   def ftp_file
-    create_file
-    local_file_path = "tmp/ftp/IFISDATA.TXT"
+    file_name = create_file
     
-    if Rails.env.production?
-      server_name = Rails.application.secrets.ftp_server_name
-      user = Rails.application.secrets.ftp_user
-      password = Rails.application.secrets.ftp_password
+    local_file_path = "tmp/ftp/" + file_name
+    remote_file_path = Rails.application.secrets.sftp_folder + "/" + file_name
+    server_name = Rails.application.secrets.sftp_server_name
+    user = Rails.application.secrets.sftp_user
+    password = Rails.application.secrets.sftp_password
 
-      Net::FTP.open('server_name', 'user', 'password') do |ftp|
-        ftp.passive = true
-        ftp.putbinaryfile(local_file_path)
-      end
-    end
+    Rails.logger.info("Creating SFTP connection")
+    session=Net::SSH.start(server_name, user, :password=> password)
+    sftp=Net::SFTP::Session.new(session).connect!
+    Rails.logger.info("SFTP Connection created, uploading files.")
+    sftp.upload!(local_file_path, remote_file_path)
+    Rails.logger.info("File uploaded, Connection terminated.")
     
     flash[:notice] = "Your recharge file is FTP to the campus"
 

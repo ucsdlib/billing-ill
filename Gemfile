@@ -27,6 +27,7 @@ gem 'bootstrap_form'
 gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-shibboleth'
+gem 'net-sftp'
 
 group :development do
   gem 'sqlite3'

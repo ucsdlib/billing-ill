@@ -17,8 +17,12 @@ class ApplicationController < ActionController::Base
     output_amount = "0" *(12 - s_amount.length) + s_amount
   end
 
-  def convert_date(cdate)
+  def convert_date_yyyymmdd(cdate)
     cdate.strftime("%Y%m%d")
+  end
+
+  def convert_date_yymmdd(cdate)
+    cdate.strftime("%y%m%d")
   end
   
   def current_user
