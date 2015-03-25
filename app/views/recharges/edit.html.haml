@@ -6,7 +6,7 @@
         %fieldset
           = f.select :fund_id, options_for_select(@index_list, selected: @selected_index), { label: "Index ID" }
           = f.text_field :number_copies, label: "Number of Copies"
-          = f.text_field :charge, label: "Charge (Only allowed .00 or .50)"
+          = f.text_field :charge, label: "Charge (Only accept integer and decimal after dot .0/.00/.5/.50)"
           = f.select :status, options_for_select(["active", "pending"], selected: @selected_status)
           = f.text_area :notes, label: "Notes", rows: 6
         %fieldset.actions.control-group.col-sm-offset-2

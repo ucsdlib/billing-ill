@@ -15,6 +15,7 @@
 /log/*.log
 # /tmp
 /tmp/cache
+/tmp/pids
 
 config/secrets.yml
 config/database.yml

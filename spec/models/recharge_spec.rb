@@ -19,7 +19,7 @@ describe Recharge do
   it {should delegate_method(:fund_program_code).to(:fund).as(:program_code)}
 
   it do
-    should allow_value('5', '5.00', '5.0', '0.5').
+    should allow_value('5', '5.0', '5.00', '0.5', '0.50').
       for(:charge)
   end
 
