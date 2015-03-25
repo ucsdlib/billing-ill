@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     session[:user_name] = nil
-    flash[:alert] = ('You have been logged out of ILL BILLING. To logout of all Single Sign-On applications, close your browser or <a href="/Shibboleth.sso/Logout?return=https://a4.ucsd.edu/tritON/logout?target='+root_url+'">terminate your Shibboleth session</a>.').html_safe 
+    #flash[:alert] = ('You have been logged out of ILL BILLING. To logout of all Single Sign-On applications, close your browser or <a href="/Shibboleth.sso/Logout?return=https://a4.ucsd.edu/tritON/logout?target='+root_url+'">terminate your Shibboleth session</a>.').html_safe 
+    flash[:alert] = "You have been logged out of ILL BILLING. To logout of all Single Sign-On applications, close your browser to terminate your Shibboleth session." 
 
     redirect_to root_url
   end
