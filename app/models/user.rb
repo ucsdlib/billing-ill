@@ -13,4 +13,14 @@ class User < ActiveRecord::Base
     
     u = User.where(:uid => uid,:provider => provider).first || User.create(:uid => uid,:provider => provider, :email => email, :full_name => name)
   end
+
+  # dummy auth for developer environment
+  def self.find_or_create_for_developer
+     uid = 1
+     email = "developer@ucsd.edu"
+     provider = "developer"
+     name = "DEVELOPER"
+    
+    u = User.where(:uid => uid,:provider => provider).first || User.create(:uid => uid,:provider => provider, :email => email, :full_name => name)
+  end
 end

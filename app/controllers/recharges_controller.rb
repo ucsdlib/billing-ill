@@ -5,6 +5,7 @@ require 'net/sftp'
 require 'open-uri'
 
 class RechargesController < ApplicationController
+  before_filter :require_user
   before_action :set_recharge, only: [:edit, :update]
   before_action :set_index_list, only: [:new, :create, :edit, :update]
 

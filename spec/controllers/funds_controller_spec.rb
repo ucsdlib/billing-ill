@@ -5,7 +5,16 @@
 require 'spec_helper'
 
 describe FundsController do 
+
   describe "GET index" do
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
+    end
+
+    before(:each) do
+      set_current_user
+    end
+
     it "sets @total_count" do
       @fund = Fabricate(:fund)
       get :index 
@@ -19,6 +28,14 @@ describe FundsController do
   end
 
   describe "GET new" do
+    it_behaves_like "requires sign in" do
+      let(:action) {get :new}
+    end
+
+    before(:each) do
+      set_current_user
+    end
+
     it "sets @fund" do
       get :new
       expect(assigns(:fund)).to be_instance_of(Fund)
@@ -26,8 +43,13 @@ describe FundsController do
   end
 
   describe "POST create" do
+    it_behaves_like "requires sign in" do
+      let(:action) {post :create}
+    end
+
     context "with valid input" do
       before do
+        set_current_user
         post :create, fund: Fabricate.attributes_for(:fund)
       end
 
@@ -42,6 +64,7 @@ describe FundsController do
 
     context "with invalid input" do
       before do
+        set_current_user
         post :create, fund: {program_code: "abcdf", org_code: "abcde"}
       end
 
@@ -60,6 +83,10 @@ describe FundsController do
   end
 
   describe "GET edit" do
+    before(:each) do
+      set_current_user
+    end
+
     it "sets @fund" do
       @fund = Fabricate(:fund)
       get :edit, id: @fund
@@ -70,6 +97,7 @@ describe FundsController do
   describe "PUT update" do
     context "with valid input" do
       before(:each) do
+        set_current_user
         @fund = Fabricate(:fund, program_code: 'abcdef')
         put :update, id: @fund, fund: Fabricate.attributes_for(:fund, program_code: '123456')
         @fund.reload
@@ -86,6 +114,7 @@ describe FundsController do
 
     context "with invalid input" do
       before(:each) do
+        set_current_user
         @fund = Fabricate(:fund, program_code: 'abcdef')
         put :update, id: @fund, fund: Fabricate.attributes_for(:fund, program_code: '123')
         @fund.reload
