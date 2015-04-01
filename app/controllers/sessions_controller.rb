@@ -1,7 +1,20 @@
+#---
+# by hweng@ucsd.edu
+#---
+
 class SessionsController < ApplicationController
+  def new
+    if Rails.configuration.shibboleth
+      redirect_to shibboleth_path
+    else
+      redirect_to developer_path
+    end
+  end
+
   def developer
     find_or_create_user('developer')
   end
+  
   def shibboleth
     find_or_create_user('shibboleth')
   end
