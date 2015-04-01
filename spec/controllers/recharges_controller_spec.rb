@@ -6,6 +6,14 @@ require 'spec_helper'
 
 describe RechargesController do 
   describe "GET index" do
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
+    end
+
+    before(:each) do
+      set_current_user
+    end
+
     it "sets @total_count" do
       @recharge = Fabricate(:recharge)
       get :index 
@@ -19,6 +27,14 @@ describe RechargesController do
   end
 
   describe "GET new" do
+    it_behaves_like "requires sign in" do
+      let(:action) {get :new}
+    end
+
+    before(:each) do
+      set_current_user
+    end
+
     it "sets @recharge" do
       get :new
       expect(assigns(:recharge)).to be_instance_of(Recharge)
@@ -32,6 +48,14 @@ describe RechargesController do
   end
 
   describe "POST create" do
+    it_behaves_like "requires sign in" do
+      let(:action) {post :create}
+    end
+
+    before(:each) do
+      set_current_user
+    end
+
     context "with valid input" do
       before do
         post :create, recharge: Fabricate.attributes_for(:recharge)
@@ -67,6 +91,7 @@ describe RechargesController do
 
   describe "GET edit" do
     before(:each) do
+      set_current_user
       @recharge = Fabricate(:recharge, fund_id: 1, status: "active")
     end
 
@@ -95,6 +120,7 @@ describe RechargesController do
   describe "PUT update" do
     context "with valid input" do
       before(:each) do
+        set_current_user
         @recharge = Fabricate(:recharge, charge: 5.0)
         put :update, id: @recharge, recharge: Fabricate.attributes_for(:recharge, charge: 5.5)
         @recharge.reload
@@ -111,6 +137,7 @@ describe RechargesController do
 
     context "with invalid input" do
       before(:each) do
+        set_current_user
         @recharge = Fabricate(:recharge, charge: 5.0)
         put :update, id: @recharge, recharge: Fabricate.attributes_for(:recharge, charge: -5.5)
         @recharge.reload
@@ -132,6 +159,7 @@ describe RechargesController do
 
   describe "GET search" do
     before do
+      set_current_user
       fund = Fabricate(:fund, id: 1, index_code: "ANSVAMC")
       @recharge = Fabricate(:recharge, fund_id: 1 )
     end
@@ -153,6 +181,10 @@ describe RechargesController do
   end
 
   describe "GET process_batch" do
+    before do
+      set_current_user
+    end
+   
     it "sets @current_batch_result an array if there is a match" do
       @recharge = Fabricate(:recharge, status: "pending")
       get :process_batch
