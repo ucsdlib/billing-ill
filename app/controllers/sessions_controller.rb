@@ -20,17 +20,27 @@ class SessionsController < ApplicationController
   end
 
   def find_or_create_user(auth_type)
-    #raise request.env["omniauth.auth"].to_yaml
-    if auth_type == 'shibboleth'
+    if auth_type == 'shibboleth' 
       auth = request.env["omniauth.auth"]
-      user = User.find_or_create_for_shibboleth(auth)
+      #raise request.env["omniauth.auth"].to_yaml
+
+      if User.in_supergroup?(auth['info']['email'])
+        user = User.find_or_create_for_shibboleth(auth)
+        create_user_session(user, auth_type)
+      else
+        render file: "#{Rails.root}/public/403", formats: [:html], status: 403, layout: false
+      end 
     elsif auth_type == 'developer'
       user = User.find_or_create_for_developer
+      create_user_session(user, auth_type)
     end
-    session[:user_name] = user.full_name
-    session[:user_id] = user.uid
-   
-    redirect_to root_url, notice: "You have successfully authenticated from #{auth_type} account!" if user
+  end
+
+  def create_user_session(user, auth_type)
+     session[:user_name] = user.full_name
+     session[:user_id] = user.uid
+      
+     redirect_to root_url, notice: "You have successfully authenticated from #{auth_type} account!" if user
   end
 
   def destroy

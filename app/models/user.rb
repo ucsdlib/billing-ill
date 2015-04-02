@@ -23,4 +23,9 @@ class User < ActiveRecord::Base
     
     u = User.where(:uid => uid,:provider => provider).first || User.create(:uid => uid,:provider => provider, :email => email, :full_name => name)
   end
+
+  def self.in_supergroup?(token)
+    super_group = Rails.application.secrets.super_group
+    s = super_group.include?(token)
+  end
 end
