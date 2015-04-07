@@ -150,10 +150,16 @@ class RechargesController < ApplicationController
     Rails.logger.info("File uploaded, Connection terminated.")
 
     batch_update_status
+
+    send_email
     
     flash[:notice] = "Your recharge file is FTP to the campus"
 
     redirect_to recharges_path
+  end
+
+  def send_email
+    AppMailer.send_recharge_email(current_user).deliver
   end
 
   def batch_update_status
