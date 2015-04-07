@@ -33,6 +33,7 @@ group :development do
   gem 'sqlite3'
   gem 'spring'
   gem 'pry'
+  gem "letter_opener"
 end
 
 group :development, :test do
