@@ -196,4 +196,18 @@ describe RechargesController do
       expect(assigns(:current_batch_result)).to eq(nil)
     end
   end
+
+  describe "send_email" do
+    it "sends an email to the recipient" do
+      ActionMailer::Base.deliveries.clear
+      @user = Fabricate(:user, email: "joe@example.com")
+      set_current_user(@user)
+      email_date = Time.now
+      file_name = "test_file"
+      record_count = 10
+      AppMailer.send_recharge_email(@user, email_date, file_name, record_count).deliver
+
+      expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
+    end
+  end
 end
