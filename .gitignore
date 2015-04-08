@@ -16,6 +16,8 @@
 # /tmp
 /tmp/cache
 /tmp/pids
+/tmp/letter_opener
+
 
 config/secrets.yml
 config/database.yml
