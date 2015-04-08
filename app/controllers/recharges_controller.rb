@@ -163,7 +163,7 @@ class RechargesController < ApplicationController
   def send_email(file_name)
     record_count = Recharge.search_all_pending_status.size
     email_date = convert_date_mmddyy(Time.now)
-    AppMailer.send_recharge_email(current_user, email_date, file_name, record_count).deliver
+    AppMailer.send_recharge_email(current_user, email_date, file_name, record_count).deliver_now
   end
 
   def batch_update_status

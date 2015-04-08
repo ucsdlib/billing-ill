@@ -205,7 +205,7 @@ describe RechargesController do
       email_date = Time.now
       file_name = "test_file"
       record_count = 10
-      AppMailer.send_recharge_email(@user, email_date, file_name, record_count).deliver
+      AppMailer.send_recharge_email(@user, email_date, file_name, record_count).deliver_now
 
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
     end
