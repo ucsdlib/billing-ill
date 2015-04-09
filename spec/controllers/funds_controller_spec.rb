@@ -57,8 +57,8 @@ describe FundsController do
         expect(Fund.count).to eq(1)
       end
 
-      it "redirects to the front page" do
-        expect(response).to redirect_to root_path
+      it "redirects to the create a new fund page" do
+        expect(response).to redirect_to new_fund_path
       end
     end
 
@@ -108,7 +108,7 @@ describe FundsController do
       end
 
       it "redirects to the front page" do
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to new_fund_path
       end
     end
 

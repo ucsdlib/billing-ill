@@ -66,7 +66,7 @@ describe RechargesController do
       end
 
       it "redirects to the front page" do
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to new_recharge_path
       end
     end
 
@@ -131,7 +131,7 @@ describe RechargesController do
       end
 
       it "redirects to the front page" do
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to new_recharge_path
       end
     end
 

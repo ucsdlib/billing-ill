@@ -20,7 +20,7 @@ class FundsController < ApplicationController
     @fund = Fund.new(fund_params)
 
     if @fund.save
-      redirect_to root_path, notice: 'A new fund is created!'
+      redirect_to new_fund_path, notice: 'A new fund is created!'
     else
       render :new
     end
@@ -32,7 +32,7 @@ class FundsController < ApplicationController
 
   def update
     if @fund.update(fund_params)
-      redirect_to root_path, notice: 'Your fund was updated!'
+      redirect_to new_fund_path, notice: 'Your fund was updated!'
     else
       render :edit
     end

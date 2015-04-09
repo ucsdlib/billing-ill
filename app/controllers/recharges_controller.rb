@@ -23,7 +23,7 @@ class RechargesController < ApplicationController
     @recharge = Recharge.new(recharge_params)
 
     if @recharge.save
-      redirect_to root_path, notice: 'A new recharge is created!'
+      redirect_to new_recharge_path, notice: 'A new recharge is created!'
     else
       render :new
     end
@@ -38,7 +38,7 @@ class RechargesController < ApplicationController
 
     if @recharge.update(recharge_params)
       flash[:notice] = "Your recharge was updated"
-      redirect_to root_path
+      redirect_to new_recharge_path
     else
       render :edit
     end
