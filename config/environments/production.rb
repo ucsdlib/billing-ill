@@ -44,6 +44,11 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.default_options = {from: 'xxx@ucsd.edu'}
+  
   # Set to :debug to see everything in the log.
   config.log_level = :info
 

@@ -39,6 +39,10 @@ Rails.application.configure do
   #   arguments: '-i -t'
   # }
   
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.default_options = {from: 'xxx@ucsd.edu'}
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
