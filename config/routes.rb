@@ -12,5 +12,19 @@ Rails.application.routes.draw do
    collection do
      get 'search', to: 'recharges#search'
    end 
+   collection do
+     get 'process_batch', to: 'recharges#process_batch'
+   end 
+   collection do
+     get 'create_output', to: 'recharges#create_output'
+   end
+   collection do
+     get 'ftp_file', to: 'recharges#ftp_file'
+   end
  end
+
+
+ get "/auth/shibboleth", as: :signin
+ match "/auth/shibboleth/callback" => "sessions#create", as: :callback, via: [:get, :post]
+ match "/signout" => "sessions#destroy", as: :signout, via: [:get, :post]
 end

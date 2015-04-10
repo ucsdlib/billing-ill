@@ -11,15 +11,16 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery.infinitescroll
 //= require_tree .
 
+
 $(function(){
   $(".dropdown-menu li a").click(function(){
-
     var selectedOption = $(this).text();
 
     $(".filter-text").text(selectedOption);

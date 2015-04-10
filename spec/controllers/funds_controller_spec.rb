@@ -5,6 +5,19 @@
 require 'spec_helper'
 
 describe FundsController do 
+  describe "GET index" do
+    it "sets @total_count" do
+      @fund = Fabricate(:fund)
+      get :index 
+      expect(assigns(:total_count)).to eq(1)
+    end
+    
+    it "sets @funds to be nil if result_arr is blank" do
+      get :index 
+      expect(assigns(:funds)).to eq(nil)
+    end
+  end
+
   describe "GET new" do
     it "sets @fund" do
       get :new

@@ -3,8 +3,8 @@
     .col-sm-10.col-sm-offset-1
       %article
         %header
-          %h2
-            There is total #{@total_count} recharges
+          %h2 
+            Showing results of 1 -10 of #{@current_batch_count} recharges
         %table.table
           %thead
             %tr
@@ -16,22 +16,27 @@
               %th(width="15%") Creation Date
               %th(width="15%") Link
           %tbody
-            - if @recharges
-              - @recharges.each do |recharge|
+            - if @current_batch_result
+              - @current_batch_result.each do |recharge|
                 %tr
-                  %td
+                  %td 
                     = recharge.id
-                  %td
+                  %td 
                     = recharge.charge
-                  %td
+                  %td 
                     = recharge.status
-                  %td
+                  %td 
                     = recharge.number_copies
-                  %td
+                  %td 
                     = recharge.fund_id
-                  %td
+                  %td 
                     = recharge.created_at
                   %td
                     = link_to "edit", edit_recharge_path(recharge.id)
-          .pagination-wrapper
-            = paginate @recharges if @recharges
+          = paginate @current_batch_result if @current_batch_result
+        %fieldset.actions.control-group.col-sm-offset-2
+        .controls
+          -#%a.btn.btn-primary(href="") FTP to ACT
+          = link_to "Preview Output File", create_output_recharges_path, method: :get, class: 'btn btn-default'
+          = link_to "FTP to ACT", ftp_file_recharges_path, method: :get, class: 'btn btn-primary'
+          

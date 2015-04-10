@@ -10,10 +10,16 @@ describe Recharge do
   it {should validate_presence_of(:charge)}
   it {should validate_presence_of(:number_copies)}
   it {should validate_presence_of(:status)}
+  it {should validate_presence_of(:fund_id)}
   it {should validate_numericality_of(:charge)}
 
+  it {should delegate_method(:fund_org_code).to(:fund).as(:org_code)}
+  it {should delegate_method(:fund_index_code).to(:fund).as(:index_code)}
+  it {should delegate_method(:fund_fund_code).to(:fund).as(:fund_code)}
+  it {should delegate_method(:fund_program_code).to(:fund).as(:program_code)}
+
   it do
-    should allow_value('5', '5.00', '5.0', '0.5').
+    should allow_value('5', '5.0', '5.00', '0.5', '0.50').
       for(:charge)
   end
 
@@ -34,6 +40,26 @@ describe Recharge do
 
     it "returns an empty array for a search with an empty string" do
       expect(Recharge.search_by_index_code("")).to eq([])
+    end
+  end
+
+  describe "search_all_pending_status" do
+    it "returns an array of all matches ordered by created_at" do
+      @recharge1 = Fabricate(:recharge, status: "pending")
+      @recharge2 = Fabricate(:recharge, status: "pending")
+      expect(Recharge.search_all_pending_status).to eq([@recharge2,@recharge1])
+    end
+
+    it "returns an empty array if there is no match" do
+      expect(Recharge.search_all_pending_status).to eq([])
+    end
+  end
+
+  describe "pending_status_count" do
+    it "returns an count of total pending status" do
+      @recharge1 = Fabricate(:recharge, status: "pending")
+      @recharge2 = Fabricate(:recharge, status: "pending")
+      expect(Recharge.pending_status_count).to eq(2)
     end
   end
 end
