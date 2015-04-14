@@ -17,13 +17,13 @@
 
 
 10.times do
-  Recharge.create(charge: "23.5", number_copies: "2", status: "pending", notes: "recharge notes.", fund_id: 1)
+  Recharge.create(charge: "2.35", number_copies: "2", status: "pending", notes: "recharge notes.", fund_id: 1)
 end
 
-50.times do
-  Recharge.create(charge: "10.0", number_copies: "2", status: "active", notes: "recharge notes.", fund_id: 2)
+5.times do
+  Recharge.create(charge: "1.00", number_copies: "2", status: "active", notes: "recharge notes.", fund_id: 2)
 end
 
-50.times do
-  Recharge.create(charge: "100", number_copies: "2", status: "submitted", notes: "recharge notes.", submitted_at: Time.now, fund_id: 3)
+5.times do
+  Recharge.create(charge: "100.00", number_copies: "2", status: "submitted", notes: "recharge notes.", submitted_at: Time.now, fund_id: 3)
 end

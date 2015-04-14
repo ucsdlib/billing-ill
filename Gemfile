@@ -28,6 +28,7 @@ gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-shibboleth'
 gem 'net-sftp'
+gem 'money-rails'
 
 group :development do
   gem 'sqlite3'
