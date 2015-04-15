@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
     result_attrs = ["sAMAccountName"]
     
-    search_param = "hweng"  # to change "hweng" to parsing param
+    #search_param = "hweng"  # to change "hweng" to parsing param
     search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
     category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
     composite_filter = Net::LDAP::Filter.join(search_filter, category_filter)
@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
     return result
   end
 
-  def get_ldap_response(ldap)
+  def self.get_ldap_response(ldap)
     msg = "Response Code: #{ ldap.get_operation_result.code }, Message: #{ ldap.get_operation_result.message }"
    
     raise msg unless ldap.get_operation_result.code == 0
