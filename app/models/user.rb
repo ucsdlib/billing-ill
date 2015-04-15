@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
     result_attrs = ["sAMAccountName"]
     
-    #search_param = "hweng"  # to change "hweng" to parsing param
+    search_param = "weng"  # to change "hweng" to parsing param
     search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
     category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
     composite_filter = Net::LDAP::Filter.join(search_filter, category_filter)
