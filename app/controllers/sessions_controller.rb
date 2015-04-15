@@ -1,5 +1,5 @@
 #---
-# by hweng@ucsd.edu
+# @author hweng@ucsd.edu
 #---
 
 class SessionsController < ApplicationController
@@ -18,13 +18,13 @@ class SessionsController < ApplicationController
   def shibboleth
     find_or_create_user('shibboleth')
   end
-
+s
   def find_or_create_user(auth_type)
     if auth_type == 'shibboleth' 
       auth = request.env["omniauth.auth"]
       #raise request.env["omniauth.auth"].to_yaml
 
-      if User.in_supergroup?(auth['info']['email'])
+      if User.in_supergroup?(auth.uid)
         user = User.find_or_create_for_shibboleth(auth)
         create_user_session(user, auth_type)
       else

@@ -9,7 +9,7 @@ class Recharge < ActiveRecord::Base
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 1000000
   }
-
+  
   #validates :charge, presence: true, format: { :with => /\A\d+(?:\.\d{0,2})?\z/ }, numericality: {greater_than: 0, less_than: 1000000}
  
   validates :number_copies, presence: true
