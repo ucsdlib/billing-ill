@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
     #s = super_group.include?(token)
     lookup_group(uid) == "hweng" ? true : false
   end
-
-  def lookup_group(search_param)
+  
+  def self.lookup_group(search_param)
     result = ""
     ldap = Net::LDAP.new  :host => "ldap.ad.ucsd.edu", 
                           :port => "636", 
