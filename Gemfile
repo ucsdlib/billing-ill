@@ -29,6 +29,7 @@ gem 'omniauth'
 gem 'omniauth-shibboleth'
 gem 'net-sftp'
 gem 'money-rails'
+gem 'net-ldap'
 
 group :development do
   gem 'sqlite3'
