@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   def shibboleth
     find_or_create_user('shibboleth')
   end
-s
+
   def find_or_create_user(auth_type)
     if auth_type == 'shibboleth' 
       auth = request.env["omniauth.auth"]
