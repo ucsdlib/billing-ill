@@ -37,19 +37,18 @@ class User < ActiveRecord::Base
   
   def self.lookup_group(search_param)
     result = ""
-    ldap = Net::LDAP.new  :host => "ldap.ad.ucsd.edu", 
-                          :port => "636", 
+
+    ldap = Net::LDAP.new  :host => Rails.application.secrets.ldap_host, 
+                          :port => Rails.application.secrets.ldap_port, 
                           :encryption => :simple_tls,
-                          :base => "OU=University Library,DC=AD,DC=UCSD,DC=EDU", 
+                          :base => Rails.application.secrets.ldap_base, 
                           :auth => {
                             :method => :simple,
-                            :username => "lib-LDAP@ad.ucsd.edu", 
-                            :password => "Roow1pee" #replace with the var from scerets.yml
+                            :username => Rails.application.secrets.ldap_username, 
+                            :password => Rails.application.secrets.ldap_password 
                       }
 
     result_attrs = ["sAMAccountName"]
-    
-    search_param = "weng"  # to change "hweng" to parsing param
     search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
     category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
     composite_filter = Net::LDAP::Filter.join(search_filter, category_filter)
