@@ -33,7 +33,7 @@ $(function(){
     }
 
     if (selectedOption == "Recharge") {
-      $('.search-input').attr("placeholder", "Search by Fund Code");
+      $('.search-input').attr("placeholder", "Search by Index Code");
       $('.search-options').hide();
       $('#myForm').attr("action", "/recharges/search");
     }
