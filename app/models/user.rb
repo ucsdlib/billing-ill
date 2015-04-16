@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   def self.in_supergroup?(uid)
     #super_group = Rails.application.secrets.super_group
     #s = super_group.include?(token)
-    lookup_group(uid) == "hweng" ? true : false
+    lookup_group(uid) == uid ? true : false
   end
   
   def self.lookup_group(search_param)
