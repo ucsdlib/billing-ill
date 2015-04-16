@@ -196,6 +196,6 @@ class RechargesController < ApplicationController
   end
 
   def set_index_list
-    @index_list = Fund.all.map{|fund|[fund.index_code,fund.id]}
+    @index_list = Fund.order("index_code").map{|fund|[fund.index_code,fund.id]}
   end
 end
