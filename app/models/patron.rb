@@ -1,4 +1,4 @@
-class Fund < ActiveRecord::Base
+class Patron < ActiveRecord::Base
 
   validates :email, presence: true
   validates :name, presence: true, length: { maximum: 35 }
