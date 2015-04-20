@@ -1,6 +1,6 @@
 class Patron < ActiveRecord::Base
 
-  validates :email, presence: true
+  validates :email_address, presence: true
   validates :name, presence: true, length: { maximum: 35 }
   validates :ar_code, presence: true, uniqueness: true, length: { is: 9 }
   validates :address1, presence: true, length: { maximum: 35 }
