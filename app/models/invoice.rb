@@ -10,4 +10,5 @@ class Invoice < ActiveRecord::Base
   validates :type, presence: true
   validates :status, presence: true
   validates :ill_numbers, presence: true
+  validates :patron_id, presence: true
 end
