@@ -31,7 +31,7 @@ class PatronsController < ApplicationController
   private
 
   def patron_params
-    params.require(:patron).permit(:email_address, :name, :ar_code, :address1, :city, :state, :zip1)
+    params.require(:patron).permit(:email_address, :name, :ar_code, :address1, :address2, :address3, :address4, :city, :state, :zip1, :zip2, :country_code)
   end
 
   def set_patron
