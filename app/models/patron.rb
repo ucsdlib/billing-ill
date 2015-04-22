@@ -1,4 +1,5 @@
 class Patron < ActiveRecord::Base
+  has_many :invoices
 
   validates :email_address, presence: true
   validates :name, presence: true, length: { maximum: 35 }

@@ -5,5 +5,5 @@ Fabricator(:patron) do
   address1 { Faker::Lorem.characters(10)}
   city { Faker::Address.city}
   state { Faker::Lorem.characters(2)}
-  zip1 { Faker::Address.zip_code}
+  zip1 '12345'
 end
