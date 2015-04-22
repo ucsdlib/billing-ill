@@ -30,13 +30,14 @@ class User < ActiveRecord::Base
   end
 
   def self.in_supergroup?(uid)
+    uid = "lib-tldap"
     #super_group = Rails.application.secrets.super_group
     #s = super_group.include?(token)
     lookup_group(uid) == uid ? true : false
   end
   
   def self.lookup_group(search_param)
-    search_param = "lib-tldap"
+    
     result = ""
 
     ldap = Net::LDAP.new  :host => Rails.application.secrets.ldap_host, 
