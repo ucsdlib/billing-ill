@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def self.in_supergroup?(uid)
-    uid = "lib-tldap"
+    # uid = "lib-tldap"
     #super_group = Rails.application.secrets.super_group
     #s = super_group.include?(token)
     lookup_group(uid) == uid ? true : false
