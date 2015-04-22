@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
     search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
     category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
     member_filter = Net::LDAP::Filter.eq("memberof", "CN=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU")
-    composite_filter = Net::LDAP::Filter.join(search_filter, category_filter)
+    composite_filter = Net::LDAP::Filter.join(search_filter, category_filter, member_filter)
 
     ldap.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
        result = item.sAMAccountName.first}
