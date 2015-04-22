@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   end
   
   def self.lookup_group(search_param)
+    search_param = "lib-tldap"
     result = ""
 
     ldap = Net::LDAP.new  :host => Rails.application.secrets.ldap_host, 
