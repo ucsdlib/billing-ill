@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323180055) do
+ActiveRecord::Schema.define(version: 20150421193217) do
 
   create_table "funds", force: :cascade do |t|
     t.string   "program_code"
@@ -23,8 +23,36 @@ ActiveRecord::Schema.define(version: 20150323180055) do
     t.text     "description"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "charge_cents"
+    t.integer  "number_prints"
+    t.string   "type"
+    t.string   "status"
+    t.text     "ill_numbers"
+    t.datetime "submitted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "patron_id"
+  end
+
+  create_table "patrons", force: :cascade do |t|
+    t.string   "email_address"
+    t.string   "name"
+    t.string   "ar_code"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "address3"
+    t.string   "address4"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip1"
+    t.string   "zip2"
+    t.string   "country_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "recharges", force: :cascade do |t|
-    t.decimal  "charge",        precision: 8, scale: 2
     t.integer  "number_copies"
     t.string   "status"
     t.text     "notes"
@@ -32,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150323180055) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "fund_id"
+    t.integer  "charge_cents"
   end
 
   create_table "users", force: :cascade do |t|

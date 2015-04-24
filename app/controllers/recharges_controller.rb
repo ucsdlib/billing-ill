@@ -5,6 +5,7 @@ require 'net/sftp'
 require 'open-uri'
 
 class RechargesController < ApplicationController
+  before_filter :require_user
   before_action :set_recharge, only: [:edit, :update]
   before_action :set_index_list, only: [:new, :create, :edit, :update]
 
@@ -22,7 +23,7 @@ class RechargesController < ApplicationController
     @recharge = Recharge.new(recharge_params)
 
     if @recharge.save
-      redirect_to root_path, notice: 'A new recharge is created!'
+      redirect_to new_recharge_path, notice: 'A new recharge is created!'
     else
       render :new
     end
@@ -37,7 +38,7 @@ class RechargesController < ApplicationController
 
     if @recharge.update(recharge_params)
       flash[:notice] = "Your recharge was updated"
-      redirect_to root_path
+      redirect_to new_recharge_path
     else
       render :edit
     end
@@ -135,6 +136,16 @@ class RechargesController < ApplicationController
   def ftp_file
     file_name = create_file
     
+    send_file(file_name)
+    send_email(file_name)
+    batch_update_status
+    
+    flash[:notice] = "Your recharge file is uploaded to the campus server, and the email has been sent to ACT."
+
+    redirect_to recharges_path
+  end
+
+  def send_file(file_name)
     local_file_path = "tmp/ftp/" + file_name
     remote_file_path = Rails.application.secrets.sftp_folder + "/" + file_name
     server_name = Rails.application.secrets.sftp_server_name
@@ -147,12 +158,12 @@ class RechargesController < ApplicationController
     Rails.logger.info("SFTP Connection created, uploading files.")
     sftp.upload!(local_file_path, remote_file_path)
     Rails.logger.info("File uploaded, Connection terminated.")
+  end
 
-    batch_update_status
-    
-    flash[:notice] = "Your recharge file is FTP to the campus"
-
-    redirect_to recharges_path
+  def send_email(file_name)
+    record_count = Recharge.search_all_pending_status.size
+    email_date = convert_date_mmddyy(Time.now)
+    AppMailer.send_recharge_email(current_user, email_date, file_name, record_count).deliver_now
   end
 
   def batch_update_status
@@ -185,6 +196,6 @@ class RechargesController < ApplicationController
   end
 
   def set_index_list
-    @index_list = Fund.all.map{|fund|[fund.index_code,fund.id]}
+    @index_list = Fund.order("index_code").map{|fund|[fund.index_code,fund.id]}
   end
 end

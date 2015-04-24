@@ -7,6 +7,7 @@ Rails.application.routes.draw do
  get '/ruby-version' => 'application#ruby_version'
 
  resources :funds, except: [:destroy]
+ resources :patrons, except: [:destroy]
  
  resources :recharges, except: [:destroy] do
    collection do
@@ -23,8 +24,9 @@ Rails.application.routes.draw do
    end
  end
 
-
- get "/auth/shibboleth", as: :signin
- match "/auth/shibboleth/callback" => "sessions#create", as: :callback, via: [:get, :post]
+ get "/signin", to: 'sessions#new', as: :signin
+ get "/auth/shibboleth", as: :shibboleth
+ get "/auth/developer", to: 'sessions#developer', as: :developer
+ match "/auth/shibboleth/callback" => "sessions#shibboleth", as: :callback, via: [:get, :post]
  match "/signout" => "sessions#destroy", as: :signout, via: [:get, :post]
 end

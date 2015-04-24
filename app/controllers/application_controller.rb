@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
   def convert_date_yymmdd(cdate)
     cdate.strftime("%y%m%d")
   end
+
+  def convert_date_mmddyy(cdate)
+    cdate.strftime("%m/%d/%y")
+  end
   
   def current_user
     @current_user ||= User.find_by uid: session[:user_id] if session[:user_id]
