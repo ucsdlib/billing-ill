@@ -13,8 +13,8 @@
               %th(width="15%") Charge
               %th(width="15%") Status
               %th(width="15%") Number of Prints
-              %th(width="15%") Patron_ID
-              %th(width="15%") Creation Date
+              %th(width="15%") Patron Name
+              %th(width="25%") Creation Date
               %th(width="15%") Link
           %tbody
             - if @invoices
@@ -32,9 +32,9 @@
                   %td
                     = invoice.number_prints
                   %td
-                    = invoice.patron_id
+                    = invoice.patron_name
                   %td
-                    = invoice.created_at
+                    = convert_date_mmddyy(invoice.created_at)
                   %td
                     = link_to "edit", edit_invoice_path(invoice.id)
           .pagination-wrapper

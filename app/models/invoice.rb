@@ -1,3 +1,7 @@
+#---
+# by hweng@ucsd.edu
+#---
+
 class Invoice < ActiveRecord::Base
   belongs_to :patron
 
@@ -11,4 +15,6 @@ class Invoice < ActiveRecord::Base
   validates :status, presence: true
   validates :ill_numbers, presence: true
   validates :patron_id, presence: true
+
+  delegate :name, to: :patron, prefix: :patron
 end
