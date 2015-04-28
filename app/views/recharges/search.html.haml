@@ -30,7 +30,7 @@
                   %td 
                     = recharge.fund_id
                   %td 
-                    = recharge.created_at
+                    = convert_date_mmddyy(recharge.created_at)
                   %td
                     = link_to "edit", edit_recharge_path(recharge.id)
           = paginate @search_result if @search_result
