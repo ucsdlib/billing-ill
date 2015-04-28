@@ -12,4 +12,6 @@ describe Invoice do
   it {should validate_presence_of(:ill_numbers)}
   it {should validate_presence_of(:patron_id)}
   it {should validate_numericality_of(:charge)}
+
+  it {should delegate_method(:patron_name).to(:patron).as(:name)}
 end

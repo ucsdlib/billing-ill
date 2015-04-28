@@ -5,6 +5,7 @@
 class InvoicesController < ApplicationController
   before_filter :require_user
   before_action :set_invoice, only: [:edit, :update]
+  before_action :set_patron_list, only: [:new, :create, :edit, :update]
  
   def index
     @total_count = Invoice.count
@@ -52,5 +53,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find params[:id]
   end
 
-  
+  def set_patron_list
+    @patron_list = Patron.order("name").map{|patron|[patron.name,patron.id]}
+  end
 end
