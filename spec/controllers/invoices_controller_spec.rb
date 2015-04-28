@@ -5,6 +5,27 @@
 require 'spec_helper'
 
 describe InvoicesController do 
+   describe "GET index" do
+    it_behaves_like "requires sign in" do
+      let(:action) {get :index}
+    end
+
+    before(:each) do
+      set_current_user
+    end
+
+    it "sets @total_count" do
+      @invoice = Fabricate(:invoice)
+      get :index 
+      expect(assigns(:total_count)).to eq(1)
+    end
+    
+    it "sets @invoices to be nil if result_arr is blank" do
+      get :index 
+      expect(assigns(:invoices)).to eq(nil)
+    end
+  end
+
   describe "GET new" do
     it_behaves_like "requires sign in" do
       let(:action) {get :new}

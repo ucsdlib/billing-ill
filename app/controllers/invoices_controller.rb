@@ -1,9 +1,18 @@
+#---
+# by hweng@ucsd.edu
+#---
+
 class InvoicesController < ApplicationController
   before_filter :require_user
   before_action :set_invoice, only: [:edit, :update]
-  before_action :set_patron_list, only: [:new, :create, :edit, :update]
+ 
+  def index
+    @total_count = Invoice.count
+    result_arr = Invoice.order(:created_at)
+    @invoices = result_arr.page(params[:page]) if !result_arr.blank?
+  end
 
-   def new
+  def new
     @invoice = Invoice.new
   end
 
@@ -43,7 +52,5 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.find params[:id]
   end
 
-  def set_patron_list
-    @patron_list = Patron.order("name").map{|patron|[patron.name,patron.id]}
-  end
+  
 end
