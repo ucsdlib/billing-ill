@@ -1,0 +1,37 @@
+%section.my_queue.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2
+            There is total #{@total_count} patrons
+        %table.table
+          %thead
+            %tr
+              %th(width="15%") Patron Name
+              %th(width="15%") AR Code
+              %th(width="15%") Email Address
+              %th(width="15%") City
+              %th(width="15%") State
+              %th(width="15%") Creation Date
+              %th(width="15%") Link
+          %tbody
+            - if @patrons
+              - @patrons.each do |patron|
+                %tr
+                  %td
+                    = patron.name
+                  %td
+                    = patron.ar_code
+                  %td
+                    = patron.email_address
+                  %td
+                    = patron.city
+                  %td
+                    = patron.state
+                  %td
+                    = convert_date_mmddyy(patron.created_at)
+                  %td
+                    = link_to "edit", edit_patron_path(patron.id)
+          .pagination-wrapper
+            = paginate @patrons if @patrons

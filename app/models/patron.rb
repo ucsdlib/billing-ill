@@ -1,3 +1,7 @@
+#---
+# by hweng@ucsd.edu
+#---
+
 class Patron < ActiveRecord::Base
   has_many :invoices
 
