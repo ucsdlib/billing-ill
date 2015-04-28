@@ -20,7 +20,7 @@ class InvoicesController < ApplicationController
   def edit
     @selected_patron = @invoice.patron_id
     @selected_status = @invoice.status
-    @selected_type = @invoice.type
+    @selected_type = @invoice.invoice_type
   end
 
   def update
