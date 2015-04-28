@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421193217) do
+ActiveRecord::Schema.define(version: 20150428212808) do
 
   create_table "funds", force: :cascade do |t|
     t.string   "program_code"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20150421193217) do
   create_table "invoices", force: :cascade do |t|
     t.integer  "charge_cents"
     t.integer  "number_prints"
-    t.string   "type"
+    t.string   "invoice_type"
     t.string   "status"
     t.text     "ill_numbers"
     t.datetime "submitted_at"

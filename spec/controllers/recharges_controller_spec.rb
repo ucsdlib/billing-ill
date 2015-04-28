@@ -79,7 +79,7 @@ describe RechargesController do
         expect(assigns(:recharge)).to be_instance_of(Recharge)
       end
 
-      it "does not create the fund" do
+      it "does not create the recharge" do
         expect(Recharge.count).to eq(0)
       end
 

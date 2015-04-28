@@ -24,7 +24,7 @@ Rails.application.routes.draw do
    end
  end
 
- resources :recharges, except: [:destroy]
+ resources :invoices, except: [:destroy]
 
  get "/signin", to: 'sessions#new', as: :signin
  get "/auth/shibboleth", as: :shibboleth

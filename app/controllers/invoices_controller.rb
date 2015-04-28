@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
   before_filter :require_user
   before_action :set_invoice, only: [:edit, :update]
-  before_action :set_index_list, only: [:new, :create, :edit, :update]
+  before_action :set_patron_list, only: [:new, :create, :edit, :update]
 
    def new
     @invoice = Invoice.new
@@ -18,7 +18,7 @@ class InvoicesController < ApplicationController
   end
 
   def edit
-    @selected_index = @invoice.patron_id
+    @selected_patron = @invoice.patron_id
     @selected_status = @invoice.status
     @selected_type = @invoice.type
   end
@@ -36,14 +36,14 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.require(:invoice).permit(:number_prints, :ill_numbers, :charge, :status, :type, :patron_id)
+    params.require(:invoice).permit(:number_prints, :ill_numbers, :charge, :status, :invoice_type, :patron_id)
   end
 
   def set_invoice
     @invoice = Invoice.find params[:id]
   end
 
-  def set_index_list
-    @index_list = patron.order("name").map{|patron|[patron.name,patron.id]}
+  def set_patron_list
+    @patron_list = Patron.order("name").map{|patron|[patron.name,patron.id]}
   end
 end
