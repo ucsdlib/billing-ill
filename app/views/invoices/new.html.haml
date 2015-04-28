@@ -1,0 +1,17 @@
+%section.create.container
+  .row
+    .col-sm-8.col-sm-offset-1
+      = bootstrap_form_for @invoice do |f|
+        = render 'shared/content_title', title: "Create a New Invoice" 
+        %fieldset
+          = f.select :invoice_type, options_for_select(["e-copy", "book loan"], nil)
+          = f.text_field :number_prints, label: "Number of Prints"
+          = f.text_field :charge, label: "Charge"
+          = f.select :status, options_for_select(["active", "pending"], nil)
+          = f.text_area :ill_numbers, label: "ILL Number(s)", rows: 6
+          = f.select :patron_id, @patron_list, {include_blank: 'Choose Patron Name'}, { label: "Patron Name" }
+        %fieldset.actions.control-group.col-sm-offset-2
+          .controls
+            %input(type="submit" value="Save" class="btn btn-primary")
+            %input(type="reset" value="Cancel" class="btn btn-default")
+            = link_to "Go to index page", invoices_path, method: :get, class: 'btn btn-default'
