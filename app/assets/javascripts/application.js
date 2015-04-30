@@ -20,10 +20,19 @@
 
 
 $(function(){
-  $('.front-search-form').hide();
-  $('ol.front-search-parent').children().click(function(){
-    event.preventDefault();
-    $(this).children('.front-search-form').slideToggle('slow');     
-});
-  
+  $('.front-search-form-recharge').hide();
+  $('.front-search-form-invoice').hide();
+  // $('ol.front-search-parent').children().click(function(){
+    
+  //   $(this).children('.front-search-form').slideToggle('slow');
+  //   event.preventDefault();     
+  // });
+ $('li.front-search-recharge').click(function(){
+        event.preventDefault();
+        $('.front-search-form-recharge').slideToggle('slow');
+ });
+ $('li.front-search-invoice').click(function(){
+        event.preventDefault();
+        $('.front-search-form-invoice').slideToggle('slow');
+ });
 });

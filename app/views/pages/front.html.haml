@@ -5,35 +5,35 @@
       (Some description goes here.)
   - if logged_in?
     .col-xs-12.text-center
-      %ol.front-search-parent 
-        %li 
+      %ol.front-search-parent
+        %li.front-search-recharge
           %a{:href => "#"} Search Recharge Scope
-          .front-search-form
-            = form_tag "#", method: "GET", id: "myForm" do
-              .input-group.front-input
-                %input.form-control.search-input(name="search_term" type="text" placeholder="Search by Index Code")
-                  .input-group-btn
-                    %button.btn.btn-default(type="submit")
-                      %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
-        %li 
+        .front-search-form-recharge
+          = form_tag search_recharges_path, method: "GET", id: "myForm" do
+            .input-group.front-input
+              %input.form-control.search-input(name="search_term" type="text" placeholder="Search by Index Code")
+                .input-group-btn
+                  %button.btn.btn-default(type="submit")
+                    %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+        %li.front-search-invoice
           %a{:href => "#"} Search Invoice Scope
-          .front-search-form
-            = form_tag "#", method: "GET", id: "myForm" do
-              .input-group.front-input
-                %input.form-control.search-input(name="search_term" type="text" placeholder="Search Invoice by Patron Name or #")
-                  .input-group-btn
-                    %button.btn.btn-default(type="submit")
-                      %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
-              .row.text-center.search-options
-                .span12.top15
-                  %span.radio-label
-                    Search By:
-                  %label.radio-inline
-                    %input{:type => "radio", :name => "optionsRadios", :value => ""}
-                      Patron Name
-                  %label.radio-inline
-                    %input{:type => "radio", :name => "optionsRadios", :value => ""}
-                      Invoice Number
+        .front-search-form-invoice
+          = form_tag "#", method: "GET", id: "myForm" do
+            .input-group.front-input
+              %input.form-control.search-input(name="search_term" type="text" placeholder="Search Invoice by Patron Name or #")
+              .input-group-btn
+                %button.btn.btn-default(type="submit")
+                  %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+            .row.text-center.search-options
+              .span12.top15
+                %span.radio-label
+                  Search By:
+                %label.radio-inline
+                  %input{:type => "radio", :name => "optionsRadios", :value => ""}
+                    Patron Name
+                %label.radio-inline
+                  %input{:type => "radio", :name => "optionsRadios", :value => ""}
+                    Invoice Number   
   - else
     %h2.text-center
       = link_to "Please Sign In", signin_path
