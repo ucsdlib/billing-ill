@@ -2,9 +2,14 @@
   .row
     .col-sm-10.col-sm-offset-1
       %article
+      - if @search_count < 1
+        %header
+          %h2
+            There is no result found from database.
+      - else
         %header
           %h2 
-            Showing results of 1 -10 of #{@total_count} recharges
+            #{@search_count} recharges found from database.
         %table.table
           %thead
             %tr

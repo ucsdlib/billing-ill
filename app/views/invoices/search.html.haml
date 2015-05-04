@@ -9,7 +9,7 @@
       - else
         %header
           %h2
-            There is #{@search_count} invoices found from database.
+            #{@search_count} invoices found from database.
         %table.table
           %thead
             %tr
@@ -44,4 +44,3 @@
                     = link_to "edit", edit_invoice_path(invoice.id)
           .pagination-wrapper
             = paginate @search_result if @search_result
-s

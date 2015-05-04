@@ -163,11 +163,6 @@ describe RechargesController do
       fund = Fabricate(:fund, id: 1, index_code: "ANSVAMC")
       @recharge = Fabricate(:recharge, fund_id: 1 )
     end
-
-    it "sets @total_count" do
-      get :search, search_term: "ANSVAMC"
-      expect(assigns(:total_count)).to eq(1)
-    end
     
     it "sets @search_result an array if there is a match" do
       get :search, search_term: "ANSVAMC"
@@ -177,6 +172,11 @@ describe RechargesController do
     it "sets @search_result to be nil if no match" do
       get :search, search_term: "AA"
       expect(assigns(:search_result)).to eq(nil)
+    end
+
+    it "sets @search_count" do
+      get :search, search_term: "ANSVAMC"
+      expect(assigns(:search_count)).to eq(1)
     end
   end
 
