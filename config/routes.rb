@@ -24,7 +24,11 @@ Rails.application.routes.draw do
    end
  end
 
- resources :invoices, except: [:destroy]
+ resources :invoices, except: [:destroy] do
+  collection do
+     get 'search', to: 'invoices#search'
+   end 
+ end
 
  get "/signin", to: 'sessions#new', as: :signin
  get "/auth/shibboleth", as: :shibboleth

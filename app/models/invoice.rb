@@ -17,4 +17,26 @@ class Invoice < ActiveRecord::Base
   validates :patron_id, presence: true
 
   delegate :name, to: :patron, prefix: :patron
+
+  def self.search_by_patron_name(search_term)
+    return [] if search_term.blank?
+
+    if Patron.where(name: search_term).first != nil
+      patron_id = Patron.where(name: search_term).first
+      result = where("patron_id = ? ", patron_id).order("created_at DESC") 
+    else
+      result = []
+    end
+  end
+
+  def self.search_by_invoice_num(search_term)
+    return [] if search_term.blank?
+
+    if where("id = ?", search_term).first != nil
+      
+      result = where("id = ?", search_term) 
+    else
+      result = []
+    end
+  end
 end

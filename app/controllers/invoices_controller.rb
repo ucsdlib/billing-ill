@@ -43,6 +43,11 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def search
+    @total_count = Invoice.count
+    
+  end
+
   private
 
   def invoice_params
