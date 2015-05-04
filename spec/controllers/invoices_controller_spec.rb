@@ -161,4 +161,37 @@ describe InvoicesController do
       end
     end
   end
+
+  describe "GET search" do
+    before do
+      set_current_user
+      patron = Fabricate(:patron, id: 1, name: "Joe Doe")
+      @invoice = Fabricate(:invoice, id: 5, patron_id: 1 )
+    end
+    
+    it "sets @search_result an array if there is a match for search option of patron_name" do
+      get :search, search_term: "Joe Doe", search_option: "patron_name"
+      expect(assigns(:search_result)).to eq([@invoice])
+    end
+    
+    it "sets @search_result to be nil if no match for search option of patron_name" do
+      get :search, search_term: "Alice", search_option: "patron_name"
+      expect(assigns(:search_result)).to eq(nil)
+    end
+
+    it "sets @search_result an array if there is a match for search option of invoice_num" do
+      get :search, search_term: 5, search_option: "invoice_num"
+      expect(assigns(:search_result)).to eq([@invoice])
+    end
+    
+    it "sets @search_result to be nil if no match for search option of invoice_num" do
+      get :search, search_term: 1, search_option: "invoice_num"
+      expect(assigns(:search_result)).to eq(nil)
+    end
+
+    it "sets @search_count" do
+      get :search, search_term: "Joe Doe", search_option: "patron_name"
+      expect(assigns(:search_count)).to eq(1)
+    end
+  end
 end

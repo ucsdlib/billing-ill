@@ -18,7 +18,7 @@
         %li.front-search-invoice
           %a{:href => "#"} Search Invoice Scope
         .front-search-form-invoice
-          = form_tag "#", method: "GET", id: "myForm" do
+          = form_tag search_invoices_path, method: "GET", id: "myForm" do
             .input-group.front-input
               %input.form-control.search-input(name="search_term" type="text" placeholder="Search Invoice by Patron Name or #")
               .input-group-btn
@@ -29,10 +29,10 @@
                 %span.radio-label
                   Search By:
                 %label.radio-inline
-                  %input{:type => "radio", :name => "search_option", :value => ""}
+                  %input{:type => "radio", :name => "search_option", :value => "patron_name"}
                     Patron Name
                 %label.radio-inline
-                  %input{:type => "radio", :name => "search_option", :value => ""}
+                  %input{:type => "radio", :name => "search_option", :value => "invoice_num"}
                     Invoice Number   
   - else
     %h2.text-center
