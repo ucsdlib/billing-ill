@@ -32,7 +32,7 @@ Rails.application.routes.draw do
      get 'process_batch', to: 'invoices#process_batch'
    end 
    collection do
-     get 'create_output', to: 'invoices#create_output'
+     get 'create_charge_output', to: 'invoices#create_charge_output'
    end
    collection do
      get 'ftp_file', to: 'invoices#ftp_file'

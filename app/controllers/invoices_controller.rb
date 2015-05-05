@@ -62,12 +62,12 @@ class InvoicesController < ApplicationController
     @current_batch_result = result_arr.page(params[:page]) if !result_arr.blank?
   end
 
-  def process_output
-    result_arr = Recharge.search_all_pending_status
+  def process_charge_output
+    result_arr = Invoice.search_all_pending_status
 
     # header rows
     h_column1_21 = "CHDR" + " " * 1 + "CLIBRARY.CHARGE" + " " * 1
-    transaction_date = convert_date_yyyymmdd(Time.now)
+    transaction_date = Time.now.strftime("%m%d%y")
     h_column28 = " " * 1
     h_column35_320 = " " * 1 + "000001" + " " * 279
     
@@ -103,18 +103,23 @@ class InvoicesController < ApplicationController
     content = "#{header_row}#{detail_rows}#{final_rows}"
   end
 
+  def create_charge_output
+    content = process_charge_output
+    render plain: content
+  end
+
   private
   def convert_invoice_charge(amount)
-    s_amount = (10* amount).round.to_s  # 0.50 --> "50"
+    s_amount = (10* amount).to_f.round.to_s  # 0.50 --> "50"
     output_amount = "0" *(10 - s_amount.length) + s_amount + "{"
   end
 
   def convert_invoice_num(invoice_num)
-    output_num = " " *(10 - invoice_num.length) + invoice_num 
+    str = invoice_num.to_s.rjust(10, " ") 
   end
 
   def convert_record_count(record_count)
-    output_num = "0" *(6 - invoice_num.length) + record_count 
+    str = record_count.to_s.rjust(6, "0")
   end
 
   def invoice_params

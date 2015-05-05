@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def convert_charge(amount)
-    s_amount = (100* amount).round.to_s  # 0.50 --> "50"
+    s_amount = (100* amount).to_f.round.to_s  # 0.50 --> "50"
     output_amount = "0" *(12 - s_amount.length) + s_amount
   end
 
