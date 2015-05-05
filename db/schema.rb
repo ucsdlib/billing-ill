@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428212808) do
+ActiveRecord::Schema.define(version: 20150505214029) do
 
   create_table "funds", force: :cascade do |t|
     t.string   "program_code"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150428212808) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "patron_id"
+    t.integer  "invoice_num"
   end
 
   create_table "patrons", force: :cascade do |t|
