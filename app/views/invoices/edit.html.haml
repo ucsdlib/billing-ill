@@ -4,6 +4,7 @@
       = bootstrap_form_for @invoice do |f|
         = render 'shared/content_title', title: "Edit a Invoice" 
         %fieldset
+          = f.hidden_field :invoice_num, value: @invoice.invoice_num
           = f.select :invoice_type, options_for_select(["e-copy", "book loan"], selected: @selected_type)
           = f.text_field :number_prints, label: "Number of Prints"
           = f.text_field :charge, label: "Charge"

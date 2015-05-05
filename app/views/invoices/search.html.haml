@@ -26,7 +26,7 @@
         %table.table
           %thead
             %tr
-              %th(width="15%") Invoice ID
+              %th(width="15%") Invoice Number
               %th(width="15%") Invoice type
               %th(width="15%") Charge
               %th(width="15%") Status
@@ -39,7 +39,7 @@
               - @search_result.each do |invoice|
                 %tr
                   %td
-                    = invoice.id
+                    = invoice.invoice_num
                   %td
                     = invoice.invoice_type
                   %td

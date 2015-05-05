@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150505214029) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "patron_id"
-    t.integer  "invoice_num"
+    t.string   "invoice_num"
   end
 
   create_table "patrons", force: :cascade do |t|

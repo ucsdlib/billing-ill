@@ -34,7 +34,7 @@ class InvoicesController < ApplicationController
   end
 
   def update
-
+    
     if @invoice.update(invoice_params)
       flash[:notice] = "Your invoice was updated"
       redirect_to new_invoice_path
@@ -123,7 +123,7 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_params
-    params.require(:invoice).permit(:number_prints, :ill_numbers, :charge, :status, :invoice_type, :patron_id)
+    params.require(:invoice).permit(:invoice_num, :number_prints, :ill_numbers, :charge, :status, :invoice_type, :patron_id)
   end
 
   def set_invoice

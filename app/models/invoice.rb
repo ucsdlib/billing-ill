@@ -9,7 +9,8 @@ class Invoice < ActiveRecord::Base
     :greater_than_or_equal_to => 0,
     :less_than_or_equal_to => 1000000
   }
-
+  
+  validates :invoice_num, presence: true
   validates :number_prints, presence: true
   validates :invoice_type, presence: true
   validates :status, presence: true
