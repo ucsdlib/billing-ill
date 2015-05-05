@@ -17,6 +17,7 @@ class Invoice < ActiveRecord::Base
   validates :patron_id, presence: true
 
   delegate :name, to: :patron, prefix: :patron
+  delegate :ar_code, to: :patron, prefix: :patron
 
   def self.search_by_patron_name(search_term)
     return [] if search_term.blank?
@@ -38,5 +39,13 @@ class Invoice < ActiveRecord::Base
     else
       result = []
     end
+  end
+
+  def self.search_all_pending_status
+    result = where(status: "pending").order("created_at DESC")
+  end
+
+  def self.pending_status_count
+    search_all_pending_status.count
   end
 end
