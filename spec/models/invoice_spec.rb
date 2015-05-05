@@ -6,6 +6,7 @@ describe Invoice do
   it {expect(monetize(:charge_cents)).to be_truthy}
   
   it {should belong_to(:patron)}
+  it {should validate_presence_of(:invoice_num)}
   it {should validate_presence_of(:number_prints)}
   it {should validate_presence_of(:invoice_type)}
   it {should validate_presence_of(:status)}
@@ -13,7 +14,10 @@ describe Invoice do
   it {should validate_presence_of(:patron_id)}
   it {should validate_numericality_of(:charge)}
 
+  it {should validate_uniqueness_of(:invoice_num)}
+
   it {should delegate_method(:patron_name).to(:patron).as(:name)}
+  it {should delegate_method(:patron_ar_code).to(:patron).as(:ar_code)}
 
 end
 
