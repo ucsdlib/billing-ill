@@ -34,9 +34,9 @@ class Invoice < ActiveRecord::Base
   def self.search_by_invoice_num(search_term)
     return [] if search_term.blank?
 
-    if where("id = ?", search_term).first != nil
+    if where("invoice_num = ?", search_term).first != nil
       
-      result = where("id = ?", search_term) 
+      result = where("invoice_num = ?", search_term) 
     else
       result = []
     end

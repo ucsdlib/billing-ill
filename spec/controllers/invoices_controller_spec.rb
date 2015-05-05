@@ -166,7 +166,7 @@ describe InvoicesController do
     before do
       set_current_user
       patron = Fabricate(:patron, id: 1, name: "Joe Doe")
-      @invoice = Fabricate(:invoice, id: 5, patron_id: 1 )
+      @invoice = Fabricate(:invoice, invoice_num: "50002", patron_id: 1 )
     end
     
     it "sets @search_result an array if there is a match for search option of patron_name" do
@@ -180,12 +180,12 @@ describe InvoicesController do
     end
 
     it "sets @search_result an array if there is a match for search option of invoice_num" do
-      get :search, search_term: 5, search_option: "invoice_num"
+      get :search, search_term: "50002", search_option: "invoice_num"
       expect(assigns(:search_result)).to eq([@invoice])
     end
     
     it "sets @search_result to be nil if no match for search option of invoice_num" do
-      get :search, search_term: 1, search_option: "invoice_num"
+      get :search, search_term: "50000", search_option: "invoice_num"
       expect(assigns(:search_result)).to eq(nil)
     end
 
