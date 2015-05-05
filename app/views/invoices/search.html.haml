@@ -2,14 +2,27 @@
   .row
     .col-sm-10.col-sm-offset-1
       %article
-      - if @search_count < 1
-        %header
-          %h2
-            There is no result found from database.
-      - else
         %header
           %h2
             #{@search_count} invoices found from database.
+        = form_tag search_invoices_path, method: "GET", id: "myForm" do
+          .input-group.front-input
+            %input.form-control.search-input(name="search_term" type="text" placeholder="Search Invoice by Patron Name or #")
+            .input-group-btn
+              %button.btn.btn-default(type="submit")
+                %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+          .row.text-center.search-options
+            .span12.top15
+              %span.radio-label
+                Search By:
+              %label.radio-inline
+                %input{:type => "radio", :name => "search_option", :value => "patron_name"}
+                  Patron Name
+              %label.radio-inline
+                %input{:type => "radio", :name => "search_option", :value => "invoice_num"}
+                  Invoice Number
+      %br 
+      - if @search_count > 0  
         %table.table
           %thead
             %tr

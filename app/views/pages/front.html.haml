@@ -7,7 +7,7 @@
     .col-xs-12.text-center
       %ol.front-search-parent
         %li.front-search-recharge
-          %a{:href => "#"} Search Recharge Scope
+          %a{:href => "#"} Find Recharges 
         .front-search-form-recharge
           = form_tag search_recharges_path, method: "GET", id: "myForm" do
             .input-group.front-input
@@ -16,7 +16,7 @@
                   %button.btn.btn-default(type="submit")
                     %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
         %li.front-search-invoice
-          %a{:href => "#"} Search Invoice Scope
+          %a{:href => "#"} Find Invoices 
         .front-search-form-invoice
           = form_tag search_invoices_path, method: "GET", id: "myForm" do
             .input-group.front-input
