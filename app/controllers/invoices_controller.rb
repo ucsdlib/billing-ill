@@ -82,7 +82,7 @@ class InvoicesController < ApplicationController
     result_arr.each_with_index do |invoice, index|
       charge = invoice.charge
       charge_amount = convert_invoice_charge(charge)
-      document_num = convert_invoice_num(invoice.id)
+      document_num = convert_invoice_num(invoice.invoice_num)
       account_id = invoice.patron_ar_code
 
       total_charge += charge
