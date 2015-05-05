@@ -56,6 +56,12 @@ class InvoicesController < ApplicationController
     @search_count = result_arr.count
   end
 
+  def process_batch
+    @current_batch_count = Invoice.pending_status_count
+    result_arr = Invoice.search_all_pending_status
+    @current_batch_result = result_arr.page(params[:page]) if !result_arr.blank?
+  end
+
   private
 
   def invoice_params
