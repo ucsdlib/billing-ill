@@ -108,7 +108,51 @@ class InvoicesController < ApplicationController
     render plain: content
   end
 
+  def ftp_file
+    file_name = create_charge_file
+
+    flash[:notice] = "Your recharge file is uploaded to the campus server, and the email has been sent to ACT."
+
+    redirect_to invoices_path
+  end
+
   private
+  def create_entity_file
+    file_name = "ENTITY.D14289"
+    path = "tmp/ftp/" + file_name
+    content = process_entity_output
+    
+    write_file(path,content )
+
+    return file_name
+  end
+
+  def create_person_file
+    file_name = "PERSON.D14289"
+    path = "tmp/ftp/" + file_name
+    content = process_person_output
+
+    write_file(path,content )
+
+    return file_name
+  end
+
+  def create_charge_file
+    file_name = "CHARGE.D14289"
+    path = "tmp/ftp/" + file_name
+    content = process_charge_output
+
+    write_file(path,content )
+
+    return file_name
+  end
+
+  def write_file(path,content )
+    File.open(path, "w") do |f|
+      f.write(content)
+    end
+  end
+
   def convert_invoice_charge(amount)
     s_amount = (10* amount).to_f.round.to_s  # 0.50 --> "50"
     output_amount = "0" *(10 - s_amount.length) + s_amount + "{"
