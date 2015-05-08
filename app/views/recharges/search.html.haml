@@ -4,34 +4,42 @@
       %article
         %header
           %h2 
-            Showing results of 1 -10 of #{@total_count} recharges
-        %table.table
-          %thead
-            %tr
-              %th(width="15%") Recharge ID
-              %th(width="15%") Charge
-              %th(width="15%") Status
-              %th(width="15%") Number of Copies
-              %th(width="15%") Fund_ID
-              %th(width="15%") Creation Date
-              %th(width="15%") Link
-          %tbody
-            - if @search_result
-              - @search_result.each do |recharge|
-                %tr
-                  %td 
-                    = recharge.id
-                  %td 
-                    = recharge.charge
-                  %td 
-                    = recharge.status
-                  %td 
-                    = recharge.number_copies
-                  %td 
-                    = recharge.fund_id
-                  %td 
-                    = recharge.created_at
-                  %td
-                    = link_to "edit", edit_recharge_path(recharge.id)
-          = paginate @search_result if @search_result
+            #{@search_count} recharges found from database.
+        = form_tag search_recharges_path, method: "GET", id: "myForm" do
+          .input-group.front-input
+            %input.form-control.search-input(name="search_term" type="text" placeholder="Search by Index Code")
+              .input-group-btn
+                %button.btn.btn-default(type="submit")
+                  %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+        %br
+        - if @search_count > 0
+          %table.table
+            %thead
+              %tr
+                %th(width="15%") Recharge ID
+                %th(width="15%") Charge
+                %th(width="15%") Status
+                %th(width="15%") Number of Copies
+                %th(width="15%") Fund_ID
+                %th(width="15%") Creation Date
+                %th(width="15%") Link
+            %tbody
+              - if @search_result
+                - @search_result.each do |recharge|
+                  %tr
+                    %td 
+                      = recharge.id
+                    %td 
+                      = recharge.charge
+                    %td 
+                      = recharge.status
+                    %td 
+                      = recharge.number_copies
+                    %td 
+                      = recharge.fund_id
+                    %td 
+                      = convert_date_mmddyy(recharge.created_at)
+                    %td
+                      = link_to "edit", edit_recharge_path(recharge.id)
+            = paginate @search_result if @search_result
         

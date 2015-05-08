@@ -4,7 +4,7 @@
       %article
         %header
           %h2 
-            Showing results of 1 -10 of #{@current_batch_count} recharges
+            There is #{@current_batch_count} recharge for current batch
         %table.table
           %thead
             %tr
@@ -30,7 +30,7 @@
                   %td 
                     = recharge.fund_id
                   %td 
-                    = recharge.created_at
+                    = convert_date_mmddyy(recharge.created_at)
                   %td
                     = link_to "edit", edit_recharge_path(recharge.id)
           = paginate @current_batch_result if @current_batch_result

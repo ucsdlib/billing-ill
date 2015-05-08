@@ -1,6 +1,7 @@
 #---
 # by hweng@ucsd.edu
 #---
+
 require 'net/sftp'
 require 'open-uri'
 
@@ -45,9 +46,9 @@ class RechargesController < ApplicationController
   end
 
   def search
-      @total_count = Recharge.count
       result_arr = Recharge.search_by_index_code(params[:search_term])
       @search_result = result_arr.page(params[:page]) if !result_arr.blank?
+      @search_count = result_arr.count
   end
 
   def process_batch

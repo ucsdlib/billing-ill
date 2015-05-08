@@ -24,6 +24,21 @@ Rails.application.routes.draw do
    end
  end
 
+ resources :invoices, except: [:destroy] do
+   collection do
+     get 'search', to: 'invoices#search'
+   end 
+   collection do
+     get 'process_batch', to: 'invoices#process_batch'
+   end 
+   collection do
+     get 'create_charge_output', to: 'invoices#create_charge_output'
+   end
+   collection do
+     get 'ftp_file', to: 'invoices#ftp_file'
+   end
+ end
+
  get "/signin", to: 'sessions#new', as: :signin
  get "/auth/shibboleth", as: :shibboleth
  get "/auth/developer", to: 'sessions#developer', as: :developer

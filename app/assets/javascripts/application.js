@@ -20,23 +20,19 @@
 
 
 $(function(){
-  $(".dropdown-menu li a").click(function(){
-    var selectedOption = $(this).text();
-
-    $(".filter-text").text(selectedOption);
-    $(".filter-text").val(selectedOption);
-
-    if (selectedOption == "Invoice") {
-      $('.search-options').show();
-      $('.search-input').attr("placeholder", "Search Invoice by Patron Name or #");
-      $('#myForm').attr("action", "#");
-    }
-
-    if (selectedOption == "Recharge") {
-      $('.search-input').attr("placeholder", "Search by Index Code");
-      $('.search-options').hide();
-      $('#myForm').attr("action", "/recharges/search");
-    }
-  });
-
+  $('.front-search-form-recharge').hide();
+  $('.front-search-form-invoice').hide();
+  // $('ol.front-search-parent').children().click(function(){
+    
+  //   $(this).children('.front-search-form').slideToggle('slow');
+  //   event.preventDefault();     
+  // });
+ $('li.front-search-recharge').click(function(){
+        event.preventDefault();
+        $('.front-search-form-recharge').slideToggle('slow');
+ });
+ $('li.front-search-invoice').click(function(){
+        event.preventDefault();
+        $('.front-search-form-invoice').slideToggle('slow');
+ });
 });

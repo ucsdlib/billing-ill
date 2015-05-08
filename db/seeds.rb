@@ -14,8 +14,7 @@
   Fund.create(program_code: "400004", org_code: "414913", index_code: "ENSVAMC", fund_code: "60200B")
   Fund.create(program_code: "400005", org_code: "414914", index_code: "FNSVAMC", fund_code: "60200C")
   Fund.create(program_code: "400006", org_code: "414915", index_code: "GNSVAMC", fund_code: "60200D")
-
-
+  
 10.times do
   Recharge.create(charge: "2.35", number_copies: "2", status: "pending", notes: "recharge notes.", fund_id: 1)
 end
@@ -27,3 +26,8 @@ end
 5.times do
   Recharge.create(charge: "100.00", number_copies: "2", status: "submitted", notes: "recharge notes.", submitted_at: Time.now, fund_id: 3)
 end
+
+Patron.create(email_address: "doe@xxx.com", name: "Joe Doe", ar_code: "123456789", address1: "12345 abc street", city: "sun city",  state: "CA", zip1: "12345")
+
+Invoice.create(invoice_num: "5001", invoice_type: "e-copy", charge: "5.88", number_prints: "2", status: "pending", ill_numbers: "12345,34567", patron_id: 1)
+

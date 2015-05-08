@@ -1,0 +1,41 @@
+%section.my_queue.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2
+            There is total #{@total_count} invoices
+        %table.table
+          %thead
+            %tr
+              %th(width="15%") Invoice Number
+              %th(width="15%") Invoice type
+              %th(width="15%") Charge
+              %th(width="15%") Status
+              %th(width="15%") Number of Prints
+              %th(width="15%") Patron Name
+              %th(width="25%") Creation Date
+              %th(width="15%") Link
+          %tbody
+            - if @invoices
+              - @invoices.each do |invoice|
+                %tr
+                  %td
+                    = invoice.invoice_num
+                  %td
+                    = invoice.invoice_type
+                  %td
+                    $
+                    = invoice.charge
+                  %td
+                    = invoice.status
+                  %td
+                    = invoice.number_prints
+                  %td
+                    = invoice.patron_name
+                  %td
+                    = convert_date_mmddyy(invoice.created_at)
+                  %td
+                    = link_to "edit", edit_invoice_path(invoice.id)
+          .pagination-wrapper
+            = paginate @invoices if @invoices

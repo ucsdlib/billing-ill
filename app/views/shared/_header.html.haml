@@ -29,11 +29,11 @@
               %b.caret
             %ul.dropdown-menu#dropdown-text
               %li
-                %a{:href => "#"} Create new Invoice
+                =link_to "Create new Invoice", new_invoice_path
               %li
-                %a{:href => "#"} View or process current batch
+                =link_to "View or process current batch", process_batch_invoices_path
               %li
-                %a{:href => "#"} View all Invoices
+                =link_to "View all Invoices", invoices_path
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               Patron
@@ -42,7 +42,7 @@
               %li
                 =link_to "Create new Patron", new_patron_path
               %li
-                %a{:href => "#"} View all Patrons
+                =link_to "View all Patrons", patrons_path
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               Funds

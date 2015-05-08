@@ -1,0 +1,59 @@
+%section.my_queue.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          %h2
+            #{@search_count} invoices found from database.
+        = form_tag search_invoices_path, method: "GET", id: "myForm" do
+          .input-group.front-input
+            %input.form-control.search-input(name="search_term" type="text" placeholder="Search Invoice by Patron Name or #")
+            .input-group-btn
+              %button.btn.btn-default(type="submit")
+                %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+          .row.text-center.search-options
+            .span12.top15
+              %span.radio-label
+                Search By:
+              %label.radio-inline
+                %input{:type => "radio", :name => "search_option", :value => "patron_name"}
+                  Patron Name
+              %label.radio-inline
+                %input{:type => "radio", :name => "search_option", :value => "invoice_num"}
+                  Invoice Number
+      %br 
+      - if @search_count > 0  
+        %table.table
+          %thead
+            %tr
+              %th(width="15%") Invoice Number
+              %th(width="15%") Invoice type
+              %th(width="15%") Charge
+              %th(width="15%") Status
+              %th(width="15%") Number of Prints
+              %th(width="15%") Patron Name
+              %th(width="25%") Creation Date
+              %th(width="15%") Link
+          %tbody
+            - if @search_result
+              - @search_result.each do |invoice|
+                %tr
+                  %td
+                    = invoice.invoice_num
+                  %td
+                    = invoice.invoice_type
+                  %td
+                    $
+                    = invoice.charge
+                  %td
+                    = invoice.status
+                  %td
+                    = invoice.number_prints
+                  %td
+                    = invoice.patron_name
+                  %td
+                    = convert_date_mmddyy(invoice.created_at)
+                  %td
+                    = link_to "edit", edit_invoice_path(invoice.id)
+          .pagination-wrapper
+            = paginate @search_result if @search_result

@@ -27,7 +27,7 @@
                   %td
                     = fund.fund_code
                   %td
-                    = fund.created_at
+                    = convert_date_mmddyy(fund.created_at)
                   %td
                     = link_to "edit", edit_fund_path(fund.id)
           .pagination-wrapper

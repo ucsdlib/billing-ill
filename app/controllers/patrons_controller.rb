@@ -1,6 +1,16 @@
+#---
+# by hweng@ucsd.edu
+#---
+
 class PatronsController < ApplicationController
   before_filter :require_user
   before_action :set_patron, only: [:edit, :update]
+  
+   def index
+    @total_count = Patron.count
+    result_arr = Patron.order(:created_at)
+    @patrons = result_arr.page(params[:page]) if !result_arr.blank?
+  end
 
   def new
     @patron = Patron.new
