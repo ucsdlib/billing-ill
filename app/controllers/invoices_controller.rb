@@ -83,7 +83,7 @@ class InvoicesController < ApplicationController
       charge = invoice.charge
       charge_amount = convert_invoice_charge(charge)
       document_num = convert_invoice_num(invoice.invoice_num)
-      account_id = invoice.patron_ar_code
+      account_id = process_person_id(invoice)
 
       total_charge += charge
 
@@ -94,7 +94,7 @@ class InvoicesController < ApplicationController
     t_column1_5 = "CTRL" + " " * 1
     t_column12 = " "
     t_column24_320 = " " * 297
-    record_count = convert_record_count(result_arr.size + 2)
+    record_count = process_record_count(result_arr)
     total_amount = convert_invoice_charge(total_charge)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
@@ -116,31 +116,21 @@ class InvoicesController < ApplicationController
     d_column1_10 = "C" + " " * 9
     d_column20_23 = " " * 4
     d_column114_119 = " " * 6
-    d_column291_320 = " " * 29
 
     detail_rows = ""
     result_arr.each_with_index do |invoice, index|
-      person_id = invoice.patron_ar_code
-      name_key = convert_name_key(invoice.patron_name)
-      full_name = convert_full_name(invoice.patron_name)
-      address1 = convert_address(invoice.patron_address1)
-      address2 = convert_address(invoice.patron_address2)
-      address3 = convert_address(invoice.patron_address3)
-      address4 = convert_address(invoice.patron_address4)
-      city = convert_city(invoice.patron_city)
-      state = invoice.patron_state
-      zip1 = invoice.patron_zip1
-      zip2 = convert_zip2(invoice.patron_zip2)
-      country_code = convert_country(invoice.patron_country_code)
+      person_id = process_person_id(invoice)
+      name_key = process_name_key(invoice)
+      full_name = process_full_name(invoice)
 
       detail_rows += "#{d_column1_10}#{person_id}#{d_column20_23}#{name_key}#{full_name}#{d_column114_119}"
-      detail_rows += "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
+      detail_rows += process_address(invoice)
     end
 
     # trailer row
     t_column1_5 = "PTRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = convert_record_count(result_arr.size + 2)
+    record_count = process_record_count(result_arr)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
 
@@ -156,44 +146,32 @@ class InvoicesController < ApplicationController
     transaction_date = Time.now.strftime("%m%d%y")
     h_column28 = " " * 1
     h_column35_320 = " " * 286
-
+    
     # detail_rows
     d_column1 = "C" 
     d_column2_9 = "PUBLPUBL " 
     d_column10_18 = " " * 9
     d_column118_119 = " " * 2
-    d_column291_320 = " " * 30
 
     detail_rows = ""
     result_arr.each_with_index do |invoice, index|
-      person_id = invoice.patron_ar_code
-      name_key = convert_name_key(invoice.patron_name)
-      full_name = convert_full_name(invoice.patron_name)
-      address1 = convert_address(invoice.patron_address1)
-      address2 = convert_address(invoice.patron_address2)
-      address3 = convert_address(invoice.patron_address3)
-      address4 = convert_address(invoice.patron_address4)
-      city = convert_city(invoice.patron_city)
-      state = invoice.patron_state
-      zip1 = invoice.patron_zip1
-      zip2 = convert_zip2(invoice.patron_zip2)
-      country_code = convert_country(invoice.patron_country_code)
-
+      person_id = process_person_id(invoice)
+      name_key = process_name_key(invoice)
+      full_name = process_full_name(invoice)
       detail_rows += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
-      detail_rows += "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
+      detail_rows += process_address(invoice)
     end
 
     # trailer row
     t_column1_5 = "ETRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = convert_record_count(result_arr.size + 2)
+    record_count = process_record_count(result_arr)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
 
     final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
     content = "#{header_row}#{detail_rows}#{final_rows}"
   end
-
 
   def create_charge_output
     content = process_charge_output
@@ -264,16 +242,37 @@ class InvoicesController < ApplicationController
     str = invoice_num.to_s.rjust(10, " ") 
   end
 
-  def convert_record_count(record_count)
-    str = record_count.to_s.rjust(6, "0")
+  def process_address(invoice)
+      d_column291_320 = " " * 30
+      address1 = convert_address(invoice.patron_address1)
+      address2 = convert_address(invoice.patron_address2)
+      address3 = convert_address(invoice.patron_address3)
+      address4 = convert_address(invoice.patron_address4)
+      city = convert_city(invoice.patron_city)
+      state = invoice.patron_state
+      zip1 = invoice.patron_zip1
+      zip2 = convert_zip2(invoice.patron_zip2)
+      country_code = convert_country(invoice.patron_country_code)
+
+      detail_rows = "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
   end
 
-  def convert_name_key(input)
+  def process_full_name(invoice)
+    input = invoice.patron_name
+    output = input + " " *(55 - input.length)
+  end
+
+  def process_name_key(invoice)
+    input = invoice.patron_name
     output = input + " " *(35 - input.length)
   end
+  
+  def process_person_id(invoice)
+    person_id = invoice.patron_ar_code
+  end
 
-  def convert_full_name(input)
-    output = input + " " *(55 - input.length) 
+  def process_record_count(result_arr)
+    str = (result_arr.size + 2).to_s.rjust(6, "0")
   end
 
   def convert_address(input)

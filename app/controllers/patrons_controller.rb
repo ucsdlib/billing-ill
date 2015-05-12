@@ -1,5 +1,5 @@
 #---
-# by hweng@ucsd.edu
+# @author hweng@ucsd.edu
 #---
 
 class PatronsController < ApplicationController
