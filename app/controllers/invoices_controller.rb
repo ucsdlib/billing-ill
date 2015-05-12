@@ -134,7 +134,7 @@ class InvoicesController < ApplicationController
       country_code = convert_country(invoice.patron_country_code)
 
       detail_rows += "#{d_column1_10}#{person_id}#{d_column20_23}#{name_key}#{full_name}#{d_column114_119}"
-      detail_rows += "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}\n"
+      detail_rows += "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
     end
 
     # trailer row
@@ -148,6 +148,53 @@ class InvoicesController < ApplicationController
     content = "#{header_row}#{detail_rows}#{final_rows}"
   end
 
+  def process_entity_output
+    result_arr = Invoice.search_all_pending_status
+
+    # header rows
+    h_column1_21 = "EHDR" + " " * 1 + "CLIBRARY.ENTITY" + " " * 1
+    transaction_date = Time.now.strftime("%m%d%y")
+    h_column28 = " " * 1
+    h_column35_320 = " " * 286
+
+    # detail_rows
+    d_column1 = "C" 
+    d_column2_9 = "PUBLPUBL " 
+    d_column10_18 = " " * 9
+    d_column118_119 = " " * 2
+    d_column291_320 = " " * 30
+
+    detail_rows = ""
+    result_arr.each_with_index do |invoice, index|
+      person_id = invoice.patron_ar_code
+      name_key = convert_name_key(invoice.patron_name)
+      full_name = convert_full_name(invoice.patron_name)
+      address1 = convert_address(invoice.patron_address1)
+      address2 = convert_address(invoice.patron_address2)
+      address3 = convert_address(invoice.patron_address3)
+      address4 = convert_address(invoice.patron_address4)
+      city = convert_city(invoice.patron_city)
+      state = invoice.patron_state
+      zip1 = invoice.patron_zip1
+      zip2 = convert_zip2(invoice.patron_zip2)
+      country_code = convert_country(invoice.patron_country_code)
+
+      detail_rows += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
+      detail_rows += "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
+    end
+
+    # trailer row
+    t_column1_5 = "ETRL" + " " * 1
+    t_column12_320 = " " * 309
+    record_count = convert_record_count(result_arr.size + 2)
+
+    header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
+
+    final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
+    content = "#{header_row}#{detail_rows}#{final_rows}"
+  end
+
+
   def create_charge_output
     content = process_charge_output
     render plain: content
@@ -155,6 +202,11 @@ class InvoicesController < ApplicationController
 
   def create_person_output
     content = process_person_output
+    render plain: content
+  end
+
+  def create_entity_output
+    content = process_entity_output
     render plain: content
   end
 
