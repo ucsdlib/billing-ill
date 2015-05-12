@@ -119,12 +119,13 @@ class InvoicesController < ApplicationController
 
     detail_rows = ""
     result_arr.each_with_index do |invoice, index|
-      person_id = process_person_id(invoice)
-      name_key = process_name_key(invoice)
-      full_name = process_full_name(invoice)
-
-      detail_rows += "#{d_column1_10}#{person_id}#{d_column20_23}#{name_key}#{full_name}#{d_column114_119}"
-      detail_rows += process_address(invoice)
+      if !is_entity?(invoice.patron_ar_code)
+        person_id = process_person_id(invoice)
+        name_key = process_name_key(invoice)
+        full_name = process_full_name(invoice)
+        detail_rows += "#{d_column1_10}#{person_id}#{d_column20_23}#{name_key}#{full_name}#{d_column114_119}"
+        detail_rows += process_address(invoice)
+      end
     end
 
     # trailer row
@@ -155,11 +156,13 @@ class InvoicesController < ApplicationController
 
     detail_rows = ""
     result_arr.each_with_index do |invoice, index|
-      person_id = process_person_id(invoice)
-      name_key = process_name_key(invoice)
-      full_name = process_full_name(invoice)
-      detail_rows += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
-      detail_rows += process_address(invoice)
+      if is_entity?(invoice.patron_ar_code)
+        person_id = process_person_id(invoice)
+        name_key = process_name_key(invoice)
+        full_name = process_full_name(invoice)
+        detail_rows += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
+        detail_rows += process_address(invoice)
+      end
     end
 
     # trailer row
@@ -231,6 +234,10 @@ class InvoicesController < ApplicationController
     File.open(path, "w") do |f|
       f.write(content)
     end
+  end
+
+  def is_entity?(input)
+    input[0,2] == "aa" ? true : false
   end
 
   def convert_invoice_charge(amount)
