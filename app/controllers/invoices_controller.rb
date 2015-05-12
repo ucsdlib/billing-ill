@@ -123,10 +123,10 @@ class InvoicesController < ApplicationController
       person_id = invoice.patron_ar_code
       name_key = convert_name_key(invoice.patron_name)
       full_name = convert_full_name(invoice.patron_name)
-      address1 = convert_address1(invoice.patron_address1)
-      address2 = convert_address2(invoice.patron_address2)
-      address3 = convert_address2(invoice.patron_address3)
-      address4 = convert_address2(invoice.patron_address4)
+      address1 = convert_address(invoice.patron_address1)
+      address2 = convert_address(invoice.patron_address2)
+      address3 = convert_address(invoice.patron_address3)
+      address4 = convert_address(invoice.patron_address4)
       city = convert_city(invoice.patron_city)
       state = invoice.patron_state
       zip1 = invoice.patron_zip1
@@ -217,31 +217,27 @@ class InvoicesController < ApplicationController
   end
 
   def convert_name_key(input)
-    output = " " *(35 - input.length) + input
+    output = input + " " *(35 - input.length)
   end
 
   def convert_full_name(input)
-    output = " " *(55 - input.length) + input
+    output = input + " " *(55 - input.length) 
   end
 
-  def convert_address1(input)
-    output = " " *(35 - input.length) + input
-  end
-
-  def convert_address2(input)
-    output = " " *(35 - input.length) + input
+  def convert_address(input)
+    output = input.blank? ? (" " * 35) : (input + " " *(35 - input.length) )
   end
 
   def convert_city(input)
-    output = " " *(18 - input.length) + input
+    output = input + " " *(18 - input.length) 
   end
 
   def convert_zip2(input)
-    output = " " *(4 - input.length) + input
+    output = input.blank? ? (" " * 4) : (input + " " *(4 - input.length))
   end
 
   def convert_country(input)
-    output = " " *(2 - input.length) + input
+    output = input.blank? ? (" " * 2) : (input + " " *(2 - input.length))
   end
 
   def invoice_params
