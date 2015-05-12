@@ -1,3 +1,7 @@
+#---
+# By hweng@ucsd.edu
+#---
+
 require 'spec_helper'
 
 describe Invoice do 
@@ -18,7 +22,15 @@ describe Invoice do
 
   it {should delegate_method(:patron_name).to(:patron).as(:name)}
   it {should delegate_method(:patron_ar_code).to(:patron).as(:ar_code)}
-
+  it {should delegate_method(:patron_address1).to(:patron).as(:address1)}
+  it {should delegate_method(:patron_address2).to(:patron).as(:address2)}
+  it {should delegate_method(:patron_address3).to(:patron).as(:address3)}
+  it {should delegate_method(:patron_address4).to(:patron).as(:address4)}
+  it {should delegate_method(:patron_city).to(:patron).as(:city)}
+  it {should delegate_method(:patron_state).to(:patron).as(:state)}
+  it {should delegate_method(:patron_zip1).to(:patron).as(:zip1)}
+  it {should delegate_method(:patron_zip2).to(:patron).as(:zip2)}
+  it {should delegate_method(:patron_country_code).to(:patron).as(:country_code)}
 end
 
   describe "search_by_patron_name" do
