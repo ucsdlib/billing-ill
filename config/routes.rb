@@ -12,31 +12,19 @@ Rails.application.routes.draw do
  resources :recharges, except: [:destroy] do
    collection do
      get 'search', to: 'recharges#search'
-   end 
-   collection do
      get 'process_batch', to: 'recharges#process_batch'
-   end 
-   collection do
      get 'create_output', to: 'recharges#create_output'
-   end
-   collection do
      get 'ftp_file', to: 'recharges#ftp_file'
-   end
+   end 
  end
 
  resources :invoices, except: [:destroy] do
    collection do
      get 'search', to: 'invoices#search'
-   end 
-   collection do
      get 'process_batch', to: 'invoices#process_batch'
-   end 
-   collection do
      get 'create_charge_output', to: 'invoices#create_charge_output'
      get 'create_person_output', to: 'invoices#create_person_output'
      get 'create_entity_output', to: 'invoices#create_entity_output'
-   end
-   collection do
      get 'ftp_file', to: 'invoices#ftp_file'
    end
  end
