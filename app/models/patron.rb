@@ -17,8 +17,4 @@ class Patron < ActiveRecord::Base
   validates :zip1, presence: true, length: { is: 5 }
   validates :zip2, length: { maximum: 4 }
   validates :country_code, length: { maximum: 2 }
-
-  # def self.entity_pending_status
-  #   Patron.joins(:invoices)where(invoices.status: "pending", ar_code: 'aa%')
-  # end
 end

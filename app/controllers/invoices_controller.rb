@@ -94,7 +94,7 @@ class InvoicesController < ApplicationController
     t_column1_5 = "CTRL" + " " * 1
     t_column12 = " "
     t_column24_320 = " " * 297
-    record_count = process_record_count(result_arr)
+    record_count = convert_record_count(result_arr.size)
     total_amount = convert_invoice_charge(total_charge)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
@@ -135,7 +135,7 @@ class InvoicesController < ApplicationController
     # trailer row
     t_column1_5 = "PTRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = process_record_count(count)
+    record_count = convert_record_count(count)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
 
@@ -175,7 +175,7 @@ class InvoicesController < ApplicationController
     # trailer row
     t_column1_5 = "ETRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = process_record_count(count)
+    record_count = convert_record_count(count)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
 
@@ -202,8 +202,7 @@ class InvoicesController < ApplicationController
     charge_file = create_charge_file
     entity_file = create_entity_file
     person_file = create_person_file
-    file_name = {charge: charge_file, entity: entity_file, person: person_file }
-
+    file_name = {charge: charge_file, entity: entity_file, person: person_file}
 
     send_file(file_name)
     send_email(file_name)
@@ -212,7 +211,6 @@ class InvoicesController < ApplicationController
 
     redirect_to invoices_path
   end
-  
   
 
   private
@@ -351,8 +349,8 @@ class InvoicesController < ApplicationController
     person_id = invoice.patron_ar_code
   end
 
-  def process_record_count(result_arr)
-    str = (result_arr.size + 2).to_s.rjust(6, "0")
+  def convert_record_count(input)
+    output = input.to_s.rjust(6, "0")
   end
 
   def convert_address(input)
