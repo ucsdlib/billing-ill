@@ -119,12 +119,14 @@ class InvoicesController < ApplicationController
 
     detail_rows = ""
     count = 0
+    
     result_arr.each_with_index do |invoice, index|
       if !is_entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
-        count++
+        count+=1
+
         detail_rows += "#{d_column1_10}#{person_id}#{d_column20_23}#{name_key}#{full_name}#{d_column114_119}"
         detail_rows += process_address(invoice)
       end
@@ -158,12 +160,13 @@ class InvoicesController < ApplicationController
 
     detail_rows = ""
     count = 0
+
     result_arr.each_with_index do |invoice, index|
       if is_entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
-        count++
+        count+=1
         detail_rows += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
         detail_rows += process_address(invoice)
       end
@@ -214,9 +217,13 @@ class InvoicesController < ApplicationController
 
   private
   def send_email(file_name)
-    entity_count = get_entity_count
-    person_count = get_person_count
-    #record_count = {charge: Invoice.search_all_pending_status.size, entity: entity_count, person: person_count}
+    
+    record_count = {
+                    charge: Invoice.search_all_pending_status.size, 
+                    entity: get_entity_count, 
+                    person: get_person_count
+                   }
+    
     email_date = convert_date_mmddyy(Time.now)
     AppMailer.send_invoice_email(current_user, email_date, file_name, record_count).deliver_now
   end
@@ -278,8 +285,6 @@ class InvoicesController < ApplicationController
       f.write(content)
     end
   end
-  
-  
 
   def is_entity?(input)
     input[0,2] == "aa" ? true : false
@@ -287,10 +292,11 @@ class InvoicesController < ApplicationController
 
   def get_entity_count
     result_arr = Invoice.search_all_pending_status
-    count = 0 
-    result_arr.each_with_index do |invoice, index|
+    count = 0
+
+    result_arr.each do |invoice|
       if is_entity?(invoice.patron_ar_code)
-        count++
+        count+=1
       end
     end
     return count
@@ -298,7 +304,14 @@ class InvoicesController < ApplicationController
 
   def get_person_count
     result_arr = Invoice.search_all_pending_status
-    count = result_arr.size - get_entity_count
+    count = 0
+
+    result_arr.each do |invoice|
+      if !is_entity?(invoice.patron_ar_code)
+        count+=1
+      end
+    end
+    return count
   end
 
   def convert_invoice_charge(amount)

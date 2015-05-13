@@ -28,6 +28,7 @@ class Invoice < ActiveRecord::Base
   delegate :zip1, to: :patron, prefix: :patron
   delegate :zip2, to: :patron, prefix: :patron
   delegate :country_code, to: :patron, prefix: :patron
+  #delegate :entity_pending_status, to: :patron, prefix: :patron
 
   def self.search_by_patron_name(search_term)
     return [] if search_term.blank?
@@ -58,4 +59,19 @@ class Invoice < ActiveRecord::Base
   def self.pending_status_count
     search_all_pending_status.count
   end
+
+  #  def self.search_entity_pending_status
+  #   #result = where(status: "pending", patron.ar_code: 'aa%').order("created_at DESC")
+
+  #   Patron.joins(:invoices)where(invoices.status: "pending", ar_code: 'aa%')
+  # end
+
+  # def self.entity_pending_status_count
+  #   search_entity_pending_status.count
+  # end
+
+  # def self.person_pending_status_count
+  #   binding.pry
+  #   count = pending_status_count - entity_pending_status_count
+  # end
 end
