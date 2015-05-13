@@ -118,11 +118,13 @@ class InvoicesController < ApplicationController
     d_column114_119 = " " * 6
 
     detail_rows = ""
+    count = 0
     result_arr.each_with_index do |invoice, index|
       if !is_entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
+        count++
         detail_rows += "#{d_column1_10}#{person_id}#{d_column20_23}#{name_key}#{full_name}#{d_column114_119}"
         detail_rows += process_address(invoice)
       end
@@ -131,7 +133,7 @@ class InvoicesController < ApplicationController
     # trailer row
     t_column1_5 = "PTRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = process_record_count(result_arr)
+    record_count = process_record_count(count)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
 
@@ -155,11 +157,13 @@ class InvoicesController < ApplicationController
     d_column118_119 = " " * 2
 
     detail_rows = ""
+    count = 0
     result_arr.each_with_index do |invoice, index|
       if is_entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
+        count++
         detail_rows += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
         detail_rows += process_address(invoice)
       end
@@ -168,7 +172,7 @@ class InvoicesController < ApplicationController
     # trailer row
     t_column1_5 = "ETRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = process_record_count(result_arr)
+    record_count = process_record_count(count)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
 
@@ -195,23 +199,35 @@ class InvoicesController < ApplicationController
     charge_file = create_charge_file
     entity_file = create_entity_file
     person_file = create_person_file
+    file_name = {charge: charge_file, entity: entity_file, person: person_file }
 
-    send_file(charge_file, entity_file, person_file)
-    #send_email(file_name)
+
+    send_file(file_name)
+    send_email(file_name)
 
     flash[:notice] = "Your CHARGE, ENTITY and PERSON files are uploaded to the campus server, and the email has been sent to ACT."
 
     redirect_to invoices_path
   end
+  
+  
 
   private
-  def send_file(charge_file, entity_file, person_file)
-    local_charge_file_path = "tmp/ftp/" + charge_file
-    remote_charge_file_path = Rails.application.secrets.sftp_folder + "/" + charge_file
-    local_entity_file_path = "tmp/ftp/" + entity_file
-    remote_entity_file_path = Rails.application.secrets.sftp_folder + "/" + entity_file
-    local_person_file_path = "tmp/ftp/" + person_file
-    remote_person_file_path = Rails.application.secrets.sftp_folder + "/" + person_file
+  def send_email(file_name)
+    entity_count = get_entity_count
+    person_count = get_person_count
+    #record_count = {charge: Invoice.search_all_pending_status.size, entity: entity_count, person: person_count}
+    email_date = convert_date_mmddyy(Time.now)
+    AppMailer.send_invoice_email(current_user, email_date, file_name, record_count).deliver_now
+  end
+
+  def send_file(file_name)
+    local_charge_file_path = "tmp/ftp/" + file_name[:charge]
+    remote_charge_file_path = Rails.application.secrets.sftp_folder + "/" + file_name[:charge]
+    local_entity_file_path = "tmp/ftp/" + file_name[:entity]
+    remote_entity_file_path = Rails.application.secrets.sftp_folder + "/" + file_name[:entity]
+    local_person_file_path = "tmp/ftp/" + file_name[:person]
+    remote_person_file_path = Rails.application.secrets.sftp_folder + "/" + file_name[:person]
 
     server_name = Rails.application.secrets.sftp_server_name
     user = Rails.application.secrets.sftp_user
@@ -262,9 +278,27 @@ class InvoicesController < ApplicationController
       f.write(content)
     end
   end
+  
+  
 
   def is_entity?(input)
     input[0,2] == "aa" ? true : false
+  end
+
+  def get_entity_count
+    result_arr = Invoice.search_all_pending_status
+    count = 0 
+    result_arr.each_with_index do |invoice, index|
+      if is_entity?(invoice.patron_ar_code)
+        count++
+      end
+    end
+    return count
+  end
+
+  def get_person_count
+    result_arr = Invoice.search_all_pending_status
+    count = result_arr.size - get_entity_count
   end
 
   def convert_invoice_charge(amount)
