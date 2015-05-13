@@ -217,7 +217,6 @@ class InvoicesController < ApplicationController
 
   private
   def send_email(file_name)
-    
     record_count = {
                     charge: Invoice.search_all_pending_status.size, 
                     entity: get_entity_count, 

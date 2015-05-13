@@ -8,8 +8,8 @@
       %br/
       \================
       %br/
-      Date: 
-      = @email_date 
+      Date:
+      = @email_date
     %table{:style => "width:50%"}
       %tr
         %td Department:
@@ -64,12 +64,14 @@
             %td 
               = @person_count
       %p
-      Production Control Information
-      %br
-      \================
-      %br
-      (For Production Control Use Only )
-      %br 
+        Date when input file is to be processed:
+        = @email_date
+      %p
+        Production Control Information
+        %br/
+        \================
+        %br/
+        (For Production Control Use Only )
       %table{:style => "width:50%"}
         %thead
           %tr
