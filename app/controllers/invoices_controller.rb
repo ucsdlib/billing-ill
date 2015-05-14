@@ -192,14 +192,41 @@ class InvoicesController < ApplicationController
   end
 
   def ftp_file
-    file_name = create_charge_file
+    charge_file = create_charge_file
+    entity_file = create_entity_file
+    person_file = create_person_file
 
-    flash[:notice] = "Your recharge file is uploaded to the campus server, and the email has been sent to ACT."
+    send_file(charge_file, entity_file, person_file)
+    #send_email(file_name)
+
+    flash[:notice] = "Your CHARGE, ENTITY and PERSON files are uploaded to the campus server, and the email has been sent to ACT."
 
     redirect_to invoices_path
   end
 
   private
+  def send_file(charge_file, entity_file, person_file)
+    local_charge_file_path = "tmp/ftp/" + charge_file
+    remote_charge_file_path = Rails.application.secrets.sftp_folder + "/" + charge_file
+    local_entity_file_path = "tmp/ftp/" + entity_file
+    remote_entity_file_path = Rails.application.secrets.sftp_folder + "/" + entity_file
+    local_person_file_path = "tmp/ftp/" + person_file
+    remote_person_file_path = Rails.application.secrets.sftp_folder + "/" + person_file
+
+    server_name = Rails.application.secrets.sftp_server_name
+    user = Rails.application.secrets.sftp_user
+    password = Rails.application.secrets.sftp_password
+
+    Rails.logger.info("Creating SFTP connection")
+    session=Net::SSH.start(server_name, user, :password=> password)
+    sftp=Net::SFTP::Session.new(session).connect!
+    Rails.logger.info("SFTP Connection created, uploading files.")
+    sftp.upload!(local_charge_file_path, remote_charge_file_path)
+    sftp.upload!(local_entity_file_path, remote_entity_file_path)
+    sftp.upload!(local_person_file_path, remote_person_file_path)
+    Rails.logger.info("File uploaded, Connection terminated.")
+  end
+
   def create_entity_file
     file_name = "ENTITY.D14289"
     path = "tmp/ftp/" + file_name
