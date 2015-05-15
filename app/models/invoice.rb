@@ -28,6 +28,7 @@ class Invoice < ActiveRecord::Base
   delegate :zip1, to: :patron, prefix: :patron
   delegate :zip2, to: :patron, prefix: :patron
   delegate :country_code, to: :patron, prefix: :patron
+  #delegate :entity_pending_status, to: :patron, prefix: :patron
 
   def self.search_by_patron_name(search_term)
     return [] if search_term.blank?
