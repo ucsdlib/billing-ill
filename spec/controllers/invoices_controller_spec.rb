@@ -194,4 +194,52 @@ describe InvoicesController do
       expect(assigns(:search_count)).to eq(1)
     end
   end
+
+  describe "GET process_batch" do
+    before do
+      set_current_user
+      @invoice = Fabricate(:invoice, status: "pending")
+    end
+
+    it "sets @current_batch_count" do
+      get :process_batch
+      expect(assigns(:current_batch_count)).to eq(1)
+    end
+
+    it "sets @current_batch_result" do
+      get :process_batch
+      expect(assigns(:current_batch_result)).to eq([@invoice])
+    end
+  end
+
+  describe "GET create_report" do
+    before do
+      set_current_user
+      @invoice = Fabricate(:invoice, status: "pending")
+    end
+
+    it "sets @current_batch_count" do
+      get :create_report
+      expect(assigns(:current_batch_count)).to eq(1)
+    end
+    
+    it "sets @current_batch_result" do
+      get :create_report
+      expect(assigns(:current_batch_result)).to eq([@invoice])
+    end
+  end
+
+  describe "send_email" do
+    it "sends an email to the recipient" do
+      ActionMailer::Base.deliveries.clear
+      @user = Fabricate(:user, email: "joe@example.com")
+      set_current_user(@user)
+      email_date = Time.now
+      file_name = {charge: "file1", entity: "file2", person:"file3" }
+      record_count = {charge: 1, entity: 2, person: 3}
+      AppMailer.send_invoice_email(@user, email_date, file_name, record_count).deliver_now
+
+      expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
+    end
+  end
 end
