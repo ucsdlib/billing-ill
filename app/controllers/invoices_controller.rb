@@ -6,6 +6,7 @@ class InvoicesController < ApplicationController
   before_filter :require_user
   before_action :set_invoice, only: [:edit, :update]
   before_action :set_patron_list, only: [:new, :create, :edit, :update]
+  before_action :set_current_batch, only: [:process_batch, :create_report]
  
   def index
     @total_count = Invoice.count
@@ -56,10 +57,10 @@ class InvoicesController < ApplicationController
     @search_count = result_arr.count
   end
 
+  def create_report
+  end
+
   def process_batch
-    @current_batch_count = Invoice.pending_status_count
-    result_arr = Invoice.search_all_pending_status
-    @current_batch_result = result_arr.page(params[:page]) if !result_arr.blank?
   end
 
   def process_charge_output
@@ -379,5 +380,11 @@ class InvoicesController < ApplicationController
 
   def set_patron_list
     @patron_list = Patron.order("name").map{|patron|[patron.name,patron.id]}
+  end
+
+  def set_current_batch
+    @current_batch_count = Invoice.pending_status_count
+    result_arr = Invoice.search_all_pending_status
+    @current_batch_result = result_arr.page(params[:page]) if !result_arr.blank?
   end
 end
