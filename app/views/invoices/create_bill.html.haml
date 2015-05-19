@@ -1,2 +1,128 @@
-Just a test pdf.
+- if request.format.html?
+  %P
+    = link_to  url_for(request.params.merge(:format => :pdf)) do
+      Download as PDF
+%section.ui-invoice
+  .container-fluid
+    .row
+      .col-xs-12
+        .invoice-title
+          .col-xs-4 Library Invoice Number LB45669
+          .col-xs-4.text-center
+            %span.invoice-header Invoice
+            %br
+              %span.invoice-org UCSD
+              %br
+                University of Calfiornia, San Diego Libraries
+          .col-xs-4
+            %img.logo.pull-right{:alt => "logo", :src => "https://igpp.ucsd.edu/sites/default/files/images/UCSD-logos-horizontal.png"}/
+        .row
+          .col-xs-offset-1.col-xs-5
+            %address
+              %strong AA0014629
+              %br
+                Cannell, John Dr.
+                %br
+                  Vitmain D Council
+                  %br
+                    1241 Johnson Ave. #134
+                    %br
+                      San Luis Obispo, CA 93401
+          .col-xs-offset-1.col-xs-5
+            %address
+              %strong
+              %br
+                %br
+                  %br
+                    %br
+                      10/16/2014
+        .row
+          .col-xs-offset-7.col-xs-5
+            858 534-2528
+        %hr
+          .row
+            .col-xs-6
+              %span.small-indent UCSD FEIN: 95-6006144
+            .col-xs-offset-1.col-xs-4.col-xs-offset-2
+              %table.table.table-condensed
+                %thead.thead1
+                  %tr
+                    %th Det Code
+                    %th Total
+                    %th Det Code
+                    %th Total
+                %tbody
+                  %tr
+                    %td LIBLPS
+                    %td 599.00
+                    %td
+                    %td
+    %br
+      %br
+        / put the macks check payable box here
+        .row
+          .col-xs-8
+            .box
+              Make checks payable to:  The Regents of the University of Calfifornia
+              %br/
+              Mail payment and a copy of this Invoice to:
+              .invoice-address.pull-right
+                .invoice-address-inner
+                  Central Cashier's Office 0009
+                  %br
+                    9500 Gilman Drive
+                    %br
+                      La Jolla, CA 92093-0009
+              .box-bottom Please include your account number and the invoice number on your remittance.
+          .col-xs-2 Total
+          .col-xs-2 599.00
+        / **************************DESCRIPTION OF CHARGES********************************
+        .row
+          .col-xs-12.text-center
+            .descriptionOfCharges Description of Charges
+        %hr.hr-margin
+          .row
+            .col-xs-offset-1.col-xs-2
+              %div Job #
+            .col-xs-1
+              Pages
+            .col-xs-8
+          .row
+            .col-xs-2.text-right
+              %strong Detail Code
+            .col-xs-2
+              %strong LIBLPS
+            .col-xs-7
+          / **************************TABLE OF CHARGES********************************
+          .row
+            .col-xs-1
+              779
+            .col-xs-2
+              Various
+            .col-xs-1
+              52
+            .col-xs-2
+              Various
+            .col-xs-offset-2.col-xs-2
+            .col-xs-2
+              599.00
+          .row
+            .items.col-xs-offset-4.col-xs-6
+              Interlibrary Loan Electronic PhotoCopy ----- 52 Requests total
+              %br/
+              ILL# 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525,36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321
+          / **************************TOTAL********************************
+          %hr.hr-margin
+            .row
+              .col-xs-2.text-center
+                %div **Final Counts:
+              .col-xs-2
+                Articles=
+              .col-xs-2
+                1
+              .col-xs-offset-2.col-xs-2
+                Total
+              .col-xs-2
+                599.00
+
 

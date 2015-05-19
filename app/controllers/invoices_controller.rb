@@ -69,7 +69,7 @@ class InvoicesController < ApplicationController
       format.pdf do
         render pdf: "test",
                template: "invoices/create_bill.html.haml",
-               layout: 'pdf'
+               layout: 'pdf',
                show_as_html: params[:debug].present? # renders html version if you set debug=true in URL
                #:save_to_file => Rails.root.join('pdfs', 'invoice.pdf')
       end
