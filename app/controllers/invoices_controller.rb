@@ -63,6 +63,19 @@ class InvoicesController < ApplicationController
   def process_batch
   end
 
+  def create_bill
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "test",
+               template: "invoices/create_bill.html.haml",
+               layout: 'pdf'
+               show_as_html: params[:debug].present? # renders html version if you set debug=true in URL
+               #:save_to_file => Rails.root.join('pdfs', 'invoice.pdf')
+      end
+    end
+  end
+
   def process_charge_output
     result_arr = Invoice.search_all_pending_status
 

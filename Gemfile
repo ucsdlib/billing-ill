@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 gem 'rails', '4.2.0'
-gem 'sass-rails'
+gem 'sass-rails', '4.0.5'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -31,7 +31,7 @@ gem 'net-sftp'
 gem 'money-rails'
 gem 'net-ldap'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', '0.9.9'
 
 group :development do
   gem 'sqlite3'
