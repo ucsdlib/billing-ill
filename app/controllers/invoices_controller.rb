@@ -4,7 +4,7 @@
 
 class InvoicesController < ApplicationController
   before_filter :require_user
-  before_action :set_invoice, only: [:edit, :update]
+  before_action :set_invoice, only: [:edit, :update, :create_bill]
   before_action :set_patron_list, only: [:new, :create, :edit, :update]
   before_action :set_current_batch, only: [:process_batch, :create_report]
  
@@ -64,6 +64,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_bill
+    
     respond_to do |format|
       format.html
       format.pdf do

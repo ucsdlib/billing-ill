@@ -27,9 +27,10 @@ Rails.application.routes.draw do
      get 'create_entity_output', to: 'invoices#create_entity_output'
      get 'ftp_file', to: 'invoices#ftp_file'
      get 'create_report', to: 'invoices#create_report'
-     get 'create_bill', to: 'invoices#create_bill'
    end
  end
+
+ get '/invoices/:id/create_bill', to: 'invoices#create_bill', as: :create_bill_invoice
 
  get "/signin", to: 'sessions#new', as: :signin
  get "/auth/shibboleth", as: :shibboleth

@@ -21,7 +21,7 @@
                     $
                     = invoice.charge
                   %td
-                    = link_to "View and Download Bill Detail", create_bill_invoices_path, method: :get
+                    = link_to "View and Download Bill Detail", create_bill_invoice_path(invoice.id), method: :get
                   %td
                     = link_to "Send an Email"
           .pagination-wrapper
