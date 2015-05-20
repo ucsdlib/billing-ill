@@ -19,15 +19,26 @@
         .row
           .col-xs-offset-1.col-xs-5
             %address
-              %strong AA0014629
+              %strong 
+              = @invoice.patron_ar_code
               %br
-                = invoice.patron_name
+              = @invoice.patron_name
+              %br
+              = @invoice.patron_address1
+              %br
+              - if !@invoice.patron_address2.blank?
+                = @invoice.patron_address2
                 %br
-                  Vitmain D Council
-                  %br
-                    1241 Johnson Ave. #134
-                    %br
-                      San Luis Obispo, CA 93401
+              - if !@invoice.patron_address3
+                = @invoice.patron_address3
+                %br
+              - if !@invoice.patron_address4
+                = @invoice.patron_address4
+                %br
+              = @invoice.patron_city
+              , 
+              = @invoice.patron_state
+              = @invoice.patron_zip1 
           .col-xs-offset-1.col-xs-5
             %address
               %strong
@@ -35,7 +46,7 @@
                 %br
                   %br
                     %br
-                      10/16/2014
+                    = convert_date_mmddyy(Time.now)
         .row
           .col-xs-offset-7.col-xs-5
             858 534-2528
@@ -54,7 +65,8 @@
                 %tbody
                   %tr
                     %td LIBLPS
-                    %td 599.00
+                    %td 
+                      = @invoice.charge
                     %td
                     %td
     %br
@@ -75,7 +87,8 @@
                       La Jolla, CA 92093-0009
               .box-bottom Please include your account number and the invoice number on your remittance.
           .col-xs-2 Total
-          .col-xs-2 599.00
+          .col-xs-2 
+            = @invoice.charge
         / **************************DESCRIPTION OF CHARGES********************************
         .row
           .col-xs-12.text-center
@@ -96,21 +109,24 @@
           / **************************TABLE OF CHARGES********************************
           .row
             .col-xs-1
-              779
+              = @invoice.invoice_num
             .col-xs-2
               Various
             .col-xs-1
-              52
+              = @invoice.number_prints
             .col-xs-2
               Various
             .col-xs-offset-2.col-xs-2
             .col-xs-2
-              599.00
+              = @invoice.charge
           .row
             .items.col-xs-offset-4.col-xs-6
-              Interlibrary Loan Electronic PhotoCopy ----- 52 Requests total
+              Interlibrary Loan Electronic PhotoCopy ----- 
+              = @invoice.number_prints
+              Requests total
               %br/
-              ILL# 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525,36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321, 356535322, 3653525, 36535319, 36535320, 36535321
+              ILL# 
+              = @invoice.ill_numbers
           / **************************TOTAL********************************
           %hr.hr-margin
             .row
@@ -123,6 +139,6 @@
               .col-xs-offset-2.col-xs-2
                 Total
               .col-xs-2
-                599.00
+                = @invoice.charge
 
 

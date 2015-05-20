@@ -64,11 +64,10 @@ class InvoicesController < ApplicationController
   end
 
   def create_bill
-    
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "test",
+        render pdf: "invoice",
                template: "invoices/create_bill.html.haml",
                layout: 'pdf',
                show_as_html: params[:debug].present? # renders html version if you set debug=true in URL
