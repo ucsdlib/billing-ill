@@ -4,7 +4,7 @@
 
 class InvoicesController < ApplicationController
   before_filter :require_user
-  before_action :set_invoice, only: [:edit, :update]
+  before_action :set_invoice, only: [:edit, :update, :create_bill]
   before_action :set_patron_list, only: [:new, :create, :edit, :update]
   before_action :set_current_batch, only: [:process_batch, :create_report]
  
@@ -67,9 +67,9 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "test",
+        render pdf: "invoice",
                template: "invoices/create_bill.html.haml",
-               layout: 'pdf'
+               layout: 'pdf',
                show_as_html: params[:debug].present? # renders html version if you set debug=true in URL
                #:save_to_file => Rails.root.join('pdfs', 'invoice.pdf')
       end
