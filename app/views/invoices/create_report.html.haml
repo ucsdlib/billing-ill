@@ -10,7 +10,7 @@
             %tr
               %th(width="15%") Patron Name
               %th(width="15%") Charge
-              %th(width="15%") Links
+              %th(width="30%") Links
           %tbody
             - if @current_batch_result
               - @current_batch_result.each do |invoice|
@@ -21,12 +21,12 @@
                     $
                     = invoice.charge
                   %td
-                    = link_to "View Bill Detail"
-                  %td
-                    = link_to "Download Bill(PDF)"
+                    = link_to "View and Download Bill Detail", create_bill_invoices_path, method: :get
                   %td
                     = link_to "Send an Email"
           .pagination-wrapper
             = paginate @current_batch_result if @current_batch_result
+           
+  
         
          

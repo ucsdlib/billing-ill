@@ -27,6 +27,7 @@ Rails.application.routes.draw do
      get 'create_entity_output', to: 'invoices#create_entity_output'
      get 'ftp_file', to: 'invoices#ftp_file'
      get 'create_report', to: 'invoices#create_report'
+     get 'create_bill', to: 'invoices#create_bill'
    end
  end
 
