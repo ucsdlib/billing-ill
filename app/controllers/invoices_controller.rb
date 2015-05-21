@@ -232,6 +232,9 @@ class InvoicesController < ApplicationController
     rescue ActiveRecord::RecordInvalid
       flash[:error] = "Invalid record"
     end
+    
+    flash[:notice] = "The current batch records have been merged."
+    redirect_to invoices_path
   end
   
 

@@ -229,6 +229,18 @@ describe InvoicesController do
     end
   end
 
+  describe "GET create_bill" do
+   before(:each) do
+      set_current_user
+      @invoice = Fabricate(:invoice)
+    end
+
+    it "sets @invoice" do
+      get :create_bill, id: @invoice
+      expect(assigns(:invoice)).to eq(@invoice)
+    end
+  end
+
   describe "send_email" do
     it "sends an email to the recipient" do
       ActionMailer::Base.deliveries.clear
@@ -240,6 +252,23 @@ describe InvoicesController do
       AppMailer.send_invoice_email(@user, email_date, file_name, record_count).deliver_now
 
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
+    end
+  end
+
+  describe "merge_records" do
+    before(:each) do
+      set_current_user
+    end
+
+    it "redirects to the invoice index page" do
+      get :merge_records
+      expect(response).to redirect_to invoices_path
+    end
+
+    it "updates the status to submitted" do
+      invoice = Fabricate(:invoice, status: "pending")
+      get :merge_records
+      expect(invoice.reload.status).to eq("submitted")
     end
   end
 end
