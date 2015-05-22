@@ -23,7 +23,7 @@
                   %td
                     = link_to "View and Download Bill", create_bill_invoice_path(invoice.id), method: :get
                   %td
-                    %a{:href => "mailto:no-one@snai1mai1.com?subject=free chocolate"} Send an Email
+                    %a{:href => "mailto:#{invoice.patron_email_address}?subject=Invoice from UCSD Library"} Send an Email
           .pagination-wrapper
             = paginate @current_batch_result if @current_batch_result
            

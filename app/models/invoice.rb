@@ -18,6 +18,7 @@ class Invoice < ActiveRecord::Base
   validates :patron_id, presence: true
 
   delegate :name, to: :patron, prefix: :patron
+  delegate :email_address, to: :patron, prefix: :patron
   delegate :ar_code, to: :patron, prefix: :patron
   delegate :address1, to: :patron, prefix: :patron
   delegate :address2, to: :patron, prefix: :patron
