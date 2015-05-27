@@ -30,6 +30,8 @@ gem 'omniauth-shibboleth'
 gem 'net-sftp'
 gem 'money-rails'
 gem 'net-ldap'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary', '0.9.9'
 
 group :development do
   gem 'sqlite3'

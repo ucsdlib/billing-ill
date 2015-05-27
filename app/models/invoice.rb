@@ -1,5 +1,5 @@
 #---
-# by hweng@ucsd.edu
+# @author hweng@ucsd.edu
 #---
 
 class Invoice < ActiveRecord::Base
@@ -18,7 +18,18 @@ class Invoice < ActiveRecord::Base
   validates :patron_id, presence: true
 
   delegate :name, to: :patron, prefix: :patron
+  delegate :email_address, to: :patron, prefix: :patron
   delegate :ar_code, to: :patron, prefix: :patron
+  delegate :address1, to: :patron, prefix: :patron
+  delegate :address2, to: :patron, prefix: :patron
+  delegate :address3, to: :patron, prefix: :patron
+  delegate :address4, to: :patron, prefix: :patron
+  delegate :city, to: :patron, prefix: :patron
+  delegate :state, to: :patron, prefix: :patron
+  delegate :zip1, to: :patron, prefix: :patron
+  delegate :zip2, to: :patron, prefix: :patron
+  delegate :country_code, to: :patron, prefix: :patron
+  #delegate :entity_pending_status, to: :patron, prefix: :patron
 
   def self.search_by_patron_name(search_term)
     return [] if search_term.blank?

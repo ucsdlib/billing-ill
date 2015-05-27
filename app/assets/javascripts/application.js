@@ -28,11 +28,9 @@ $(function(){
   //   event.preventDefault();     
   // });
  $('li.front-search-recharge').click(function(){
-        event.preventDefault();
         $('.front-search-form-recharge').slideToggle('slow');
  });
  $('li.front-search-invoice').click(function(){
-        event.preventDefault();
         $('.front-search-form-invoice').slideToggle('slow');
  });
 });

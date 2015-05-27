@@ -1,0 +1,102 @@
+!!! 5
+%html(lang="en-US")
+  %body
+    %p
+      Adcom Production Control
+      %br/
+      User Information
+      %br/
+      \================
+      %br/
+      Date:
+      = @email_date
+    %table{:style => "width:50%"}
+      %tr
+        %td Department:
+        %td Library - Interlibrary Loan Billing
+      %tr
+        %td Contact Name:
+        %td Roger Castillo
+      %tr
+        %td E-mail address:
+        %td rccastillo@ucsd.edu
+      %tr
+        %td Phone:
+        %td 858-534-5902
+      %tr
+        %td Mailcode:
+        %td 0175-A
+    %br
+      %table{:style => "width:50%"}
+        %tr
+          %td File Description:
+          %td Accounts Receivable Batch Input Files
+        %tr
+          %td From:
+          %td UCSD Libraries Interlibrary Loan Services
+        %tr
+          %td Record Length:
+          %td 320 Characters
+      %p Process File Goes To:  ARD2501 (AR Batchload job for Library, ILL)  Files have been loaded to/NET/u/libzzz/in
+      %table{:style => "width:50%"}
+        %thead
+          %tr
+            %td File
+            %td Dataset Name (yydd=Julian Date)
+            %td Record Count
+        %tbody
+          %tr
+            %td Charges:
+            %td 
+              = @charge_file
+            %td 
+              = @charge_count
+          %tr
+            %td Entity:
+            %td 
+              = @entity_file
+            %td 
+              = @entity_count
+          %tr
+            %td Person:
+            %td 
+              = @person_file
+            %td 
+              = @person_count
+      %p
+        Date when input file is to be processed:
+        = @email_date
+      %p
+        Production Control Information
+        %br/
+        \================
+        %br/
+        (For Production Control Use Only )
+      %table{:style => "width:50%"}
+        %thead
+          %tr
+            %td File
+            %td Dataset Name (yydd=Julian Date)
+            %td Record Count
+        %tbody
+          %tr
+            %td Charges:
+            %td 
+              = @charge_file
+            %td 
+              = @charge_count
+          %tr
+            %td Entity:
+            %td 
+              = @entity_file
+            %td 
+              = @entity_count
+          %tr
+            %td Person:
+            %td 
+              = @person_file
+            %td 
+              = @person_count
+      %p
+      *** Please note that these files are not directly transferred into the allocated file. They need to be moved. Please run the allocation job. Edit and run the retrieve job with the Julian date provided from the client. ***
+       
