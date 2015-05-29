@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:charset => "utf-8"}/
-    = wicked_pdf_stylesheet_link_tag "bootstrap"
+    %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css", :rel => "stylesheet"}/
     = wicked_pdf_stylesheet_link_tag "invoice"
   %body
     = yield
