@@ -49,5 +49,21 @@
         %br/
         = link_to "FTP to ACT", ftp_file_invoices_path, method: :get, class: 'btn btn-primary'
         = link_to "Create Customer Report", create_report_invoices_path, method: :get, class: 'btn btn-primary'
-        = link_to "Merge Records", merge_records_invoices_path, method: :get, class: 'btn btn-primary'
-         
+        / Button trigger modal
+        %button.btn.btn-primary{"data-target" => "#invoice-merge-notes", "data-toggle" => "modal"}
+          Merge Records
+        / Modal
+        .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "invoice-merge-label", :id => "invoice-merge-notes", :role => "dialog", :tabindex => "-1"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %h4.modal-title{:id => "invoice-merge-label"} UCSD ILL BILLING
+              .modal-body
+                After you click "Merge Records", You will not be able to perform the actions of Preview Output, FTP to ACT and Create Customer Report for the current batch records.
+                %br/ 
+                %br/ 
+                Are you sure you want to merge the records?
+              .modal-footer
+                %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} No
+                = link_to "Yes", merge_records_invoices_path, method: :get, class: 'btn btn-primary'
+                 
