@@ -39,5 +39,8 @@
         .controls
           -#%a.btn.btn-primary(href="") FTP to ACT
           = link_to "Preview Output File", create_output_recharges_path, method: :get, class: 'btn btn-default'
-          = link_to "FTP to ACT", ftp_file_recharges_path, method: :get, class: 'btn btn-primary'
+          / Button trigger modal
+          %button.btn.btn-primary{"data-target" => "#ftp-notes", "data-toggle" => "modal"}
+            FTP to ACT
+          = render 'shared/modal', target_url: ftp_file_recharges_path, msg_body: "Are you sure you want to upload the current batch to ACT server?"
           
