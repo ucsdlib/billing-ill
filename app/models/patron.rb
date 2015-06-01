@@ -7,7 +7,7 @@ class Patron < ActiveRecord::Base
 
   validates :email_address, presence: true
   validates :name, presence: true, length: { maximum: 35 }
-  validates :ar_code, presence: true, uniqueness: true, length: { is: 9 }
+  validates :ar_code, presence: true, uniqueness: true, format: { :with => /\Aa[a\d]\d{7}\z/ }, length: { is: 9 }
   validates :address1, presence: true, length: { maximum: 35 }
   validates :address2, length: { maximum: 35 }
   validates :address3, length: { maximum: 35 }
