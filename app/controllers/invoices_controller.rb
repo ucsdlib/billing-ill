@@ -286,7 +286,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_entity_file
-    file_name = "ENTITY.D14289"
+    file_name = "ENTITY.D14289.txt"
     path = "tmp/ftp/" + file_name
     content = process_entity_output
     
@@ -296,7 +296,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_person_file
-    file_name = "PERSON.D14289"
+    file_name = "PERSON.D14289.txt"
     path = "tmp/ftp/" + file_name
     content = process_person_output
 
@@ -306,7 +306,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_charge_file
-    file_name = "CHARGE.D14289"
+    file_name = "CHARGE.D14289.txt"
     path = "tmp/ftp/" + file_name
     content = process_charge_output
 

@@ -122,7 +122,7 @@ class RechargesController < ApplicationController
   end
 
   def create_file
-    file_name = "FISP.JVDATA.D" + convert_date_yymmdd(Time.now) + ".LIB"
+    file_name = "FISP.JVDATA.D" + convert_date_yymmdd(Time.now) + ".LIB.txt"
     path = "tmp/ftp/" + file_name
     content = process_output
     #puts Dir.pwd
