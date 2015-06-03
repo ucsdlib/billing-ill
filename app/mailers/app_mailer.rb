@@ -10,7 +10,7 @@ class AppMailer < ActionMailer::Base
     @record_count = record_count
     
     if Rails.env.production?
-     mail to: "act-prodcontrol@ucsd.edu", from: user.email, subject: "ILL Billing Recharge File"
+     mail to: "act-prodcontrol@ucsd.edu", from: user.email, subject: "ILL Billing Recharge File Uploaded."
     else
      mail to: user.email, from: user.email, subject: "ILL Billing Recharge File" 
     end
@@ -29,7 +29,7 @@ class AppMailer < ActionMailer::Base
     if Rails.env.production?
      mail to: "act-prodcontrol@ucsd.edu", from: user.email, subject: "ILL Billing Invoice File"
     else
-     mail to: user.email, from: user.email, subject: "ILL Billing Invoice File" 
+     mail to: user.email, from: user.email, subject: "ILL Billing Invoice File Uploaded." 
     end
   end
 end
