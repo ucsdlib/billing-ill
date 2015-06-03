@@ -32,6 +32,7 @@ gem 'money-rails'
 gem 'net-ldap'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '0.9.9'
+gem 'coveralls', require: false
 
 group :development do
   gem 'sqlite3'
