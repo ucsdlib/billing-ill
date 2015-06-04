@@ -1,0 +1,12 @@
+/ Modal
+.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "ftp-label", :id => "ftp-notes", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title{:id => "ftp-label"} UCSD ILL BILLING
+      .modal-body
+        = sanitize(msg_body)
+      .modal-footer
+        %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} No
+        = link_to "Yes", target_url, method: :get, class: 'btn btn-primary'
+         
