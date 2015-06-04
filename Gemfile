@@ -19,6 +19,7 @@ gem 'capistrano', '~> 3.3.3'
 gem 'capistrano-rails', '~> 1.1.2'
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'capistrano-bundler', '~> 1.1.3'
+gem 'equivalent-xml', '~> 0.5.1'
 
 gem 'pg'
 gem 'fabrication'
@@ -32,18 +33,21 @@ gem 'money-rails'
 gem 'net-ldap'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '0.9.9'
+gem 'coveralls', require: false
 
 group :development do
   gem 'sqlite3'
   gem 'spring'
-  gem 'pry'
   gem "letter_opener"
 end
 
 group :development, :test do
   gem 'rspec-rails', '3.1'
+  gem 'pry'
   gem 'capybara'
   gem 'launchy'
+  gem 'simplecov'
+ # gem 'rspec_junit_formatter', '~> 0.2.0'
 end
 
 group :test do
