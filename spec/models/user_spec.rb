@@ -23,6 +23,7 @@ describe User do
     it "should create a User when a user is first authenticated" do
       token = { 'info' => { 'email' => nil, 'full_name' => nil} }
       token.stub(:uid => "test_user", :provider => "shibboleth")
+
       user = User.find_or_create_for_shibboleth(token)
 
       user.should be_persisted
