@@ -98,6 +98,8 @@ GEM
     docile (1.1.5)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
+    equivalent-xml (0.5.1)
+      nokogiri (>= 1.4.3)
     erubis (2.7.0)
     execjs (2.2.2)
     fabrication (2.12.2)
@@ -299,6 +301,7 @@ DEPENDENCIES
   coffee-rails
   coveralls
   database_cleaner (= 1.2.0)
+  equivalent-xml (~> 0.5.1)
   fabrication
   faker
   haml-rails
@@ -320,6 +323,7 @@ DEPENDENCIES
   sass-rails
   sdoc (~> 0.4.0)
   shoulda-matchers!
+  simplecov
   spring
   sqlite3
   turbolinks
