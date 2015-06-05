@@ -25,4 +25,9 @@ describe Patron do
   it {should validate_length_of(:country_code)}
 
   it {should validate_uniqueness_of(:ar_code)}
+
+  it do
+    should allow_value('a12345678', 'aa2345678').
+      for(:ar_code)
+  end
 end
