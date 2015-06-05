@@ -51,6 +51,8 @@ class InvoicesController < ApplicationController
       result_arr = Invoice.search_by_patron_name(params[:search_term])
     elsif params[:search_option]== "invoice_num"
       result_arr = Invoice.search_by_invoice_num(params[:search_term])
+    else
+      result_arr = Invoice.search_by_invoice_num(params[:search_term])
     end
 
     @search_result = result_arr.page(params[:page]) if !result_arr.blank?
@@ -284,7 +286,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_entity_file
-    file_name = "ENTITY.D14289"
+    file_name = "ENTITY.D14289.txt"
     path = "tmp/ftp/" + file_name
     content = process_entity_output
     
@@ -294,7 +296,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_person_file
-    file_name = "PERSON.D14289"
+    file_name = "PERSON.D14289.txt"
     path = "tmp/ftp/" + file_name
     content = process_person_output
 
@@ -304,7 +306,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_charge_file
-    file_name = "CHARGE.D14289"
+    file_name = "CHARGE.D14289.txt"
     path = "tmp/ftp/" + file_name
     content = process_charge_output
 

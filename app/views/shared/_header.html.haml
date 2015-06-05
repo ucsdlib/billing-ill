@@ -53,13 +53,14 @@
               %li
                 =link_to "View all Funds", funds_path
         %ul.nav.navbar-nav.navbar-right
-          %form.navbar-form.navbar-left{:role => "search"}
-            .form-group
-            .input-group.search-bar-input-group
-              %input.form-control.search-bar{:placeholder => "Default search invoice by number", :type => "text"}
-                %span.input-group-btn
-                  %button.btn.btn-default.search-bar-btn{:type => "submit"}
-                    %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
+          .navbar-form.navbar-left{:role => "search"}
+            = form_tag search_invoices_path, method: "GET", id: "myForm", role: "search" do
+              .form-group
+              .input-group.search-bar-input-group
+                %input.form-control.search-bar{:name => "search_term", :placeholder => "Default search invoice by number", :type => "text"}
+                  %span.input-group-btn
+                    %button.btn.btn-default.search-bar-btn{:type => "submit"}
+                      %span.glyphicon.glyphicon-search.right2{"aria-hidden" => "true"}
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               Welcome, #{current_user.full_name}
@@ -67,5 +68,6 @@
             %ul.dropdown-menu#dropdown-text
               %li
                 =link_to "Sign out", signout_path
+            
           
       

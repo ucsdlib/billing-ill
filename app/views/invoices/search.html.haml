@@ -53,7 +53,8 @@
                     = invoice.patron_name
                   %td
                     = convert_date_mmddyy(invoice.created_at)
-                  %td
-                    = link_to "edit", edit_invoice_path(invoice.id)
+                  - if invoice.status != "submitted"
+                    %td
+                      = link_to "edit", edit_invoice_path(invoice.id)
           .pagination-wrapper
             = paginate @search_result if @search_result
