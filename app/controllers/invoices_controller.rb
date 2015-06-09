@@ -110,7 +110,7 @@ class InvoicesController < ApplicationController
     t_column1_5 = "CTRL" + " " * 1
     t_column12 = " "
     t_column24_320 = " " * 297
-    record_count = convert_record_count(result_arr.size)
+    record_count = convert_record_count(result_arr.size + 2)
     total_amount = convert_invoice_charge(total_charge)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
@@ -151,7 +151,7 @@ class InvoicesController < ApplicationController
     # trailer row
     t_column1_5 = "PTRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = convert_record_count(count)
+    record_count = convert_record_count(count + 2)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
 
@@ -170,7 +170,7 @@ class InvoicesController < ApplicationController
     
     # detail_rows
     d_column1 = "C" 
-    d_column2_9 = "PUBLPUBL " 
+    d_column2_9 = "PUBLPUBL" 
     d_column10_18 = " " * 9
     d_column118_119 = " " * 2
 
@@ -191,7 +191,7 @@ class InvoicesController < ApplicationController
     # trailer row
     t_column1_5 = "ETRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = convert_record_count(count)
+    record_count = convert_record_count(count + 2)
 
     header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
 
