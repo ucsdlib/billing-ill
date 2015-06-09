@@ -70,3 +70,52 @@ end
       expect(Invoice.search_by_invoice_num("")).to eq([])
     end
   end
+
+  describe "convert_to_julian_date" do
+    it "returns a julian day format for today's date" do
+      j_today = Date.today.strftime("%y") + Date.today.yday.to_s
+      expect(Invoice.convert_to_julian_date).to eq(j_today)
+    end
+  end
+
+  describe "get_charge_file_name" do
+    it "returns required charge file name convention" do
+      file_name = "SISP.ARD2501.LIBBUS.CHARGE.D" + Invoice.convert_to_julian_date
+      expect(Invoice.get_charge_file_name).to eq(file_name)
+    end
+  end
+
+  describe "get_entity_file_name" do
+    it "returns required entity file name convention" do
+      file_name = "SISP.ARD2501.LIBBUS.ENTITY.D" + Invoice.convert_to_julian_date
+      expect(Invoice.get_entity_file_name).to eq(file_name)
+    end
+  end
+
+  describe "get_person_file_name" do
+    it "returns required person file name convention" do
+      file_name = "SISP.ARD2501.LIBBUS.PERSON.D" + Invoice.convert_to_julian_date
+      expect(Invoice.get_person_file_name).to eq(file_name)
+    end
+  end
+
+  describe "get_charge_lfile_name" do
+    it "returns required local charge file name convention" do
+      file_name = "CHARGE.D" + Invoice.convert_to_julian_date + ".TXT"
+      expect(Invoice.get_charge_lfile_name).to eq(file_name)
+    end
+  end
+
+  describe "get_entity_lfile_name" do
+    it "returns required local entity file name convention" do
+      file_name = "ENTITY.D" + Invoice.convert_to_julian_date + ".TXT"
+      expect(Invoice.get_entity_lfile_name).to eq(file_name)
+    end
+  end
+
+  describe "get_person_lfile_name" do
+    it "returns required local person file name convention" do
+      file_name = "PERSON.D" + Invoice.convert_to_julian_date + ".TXT"
+      expect(Invoice.get_person_lfile_name).to eq(file_name)
+    end
+  end
