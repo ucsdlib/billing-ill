@@ -219,9 +219,10 @@ class InvoicesController < ApplicationController
     entity_file = create_entity_file
     person_file = create_person_file
     file_name = {charge: charge_file, entity: entity_file, person: person_file}
+    lfile_name = {charge: get_charge_lfile_name, entity: get_entity_lfile_name, person: get_person_lfile_name}
 
     send_file(file_name)
-    send_email(file_name)
+    send_email(file_name,lfile_name)
 
     flash[:notice] = "Your CHARGE, ENTITY and PERSON files are uploaded to the campus server, and the email has been sent to ACT."
 
@@ -252,7 +253,7 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def send_email(file_name)
+  def send_email(file_name,lfile_name)
     record_count = {
                     charge: Invoice.search_all_pending_status.size, 
                     entity: get_entity_count, 
@@ -260,10 +261,11 @@ class InvoicesController < ApplicationController
                    }
     
     email_date = convert_date_mmddyy(Time.now)
-    AppMailer.send_invoice_email(current_user, email_date, file_name, record_count).deliver_now
+    AppMailer.send_invoice_email(current_user, email_date, file_name, lfile_name, record_count).deliver_now
   end
 
   def send_file(file_name)
+    
     local_charge_file_path = "tmp/ftp/" + file_name[:charge]
     remote_charge_file_path = Rails.application.secrets.sftp_folder + "/" + file_name[:charge]
     local_entity_file_path = "tmp/ftp/" + file_name[:entity]
@@ -286,7 +288,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_entity_file
-    file_name = "ENTITY.D14289.txt"
+    file_name = "SISP.ARD2501.LIBBUS.ENTITY.D" + convert_to_julian_date
     path = "tmp/ftp/" + file_name
     content = process_entity_output
     
@@ -296,7 +298,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_person_file
-    file_name = "PERSON.D14289.txt"
+    file_name = "SISP.ARD2501.LIBBUS.PERSON.D" + convert_to_julian_date
     path = "tmp/ftp/" + file_name
     content = process_person_output
 
@@ -306,13 +308,29 @@ class InvoicesController < ApplicationController
   end
 
   def create_charge_file
-    file_name = "CHARGE.D14289.txt"
+    file_name = "SISP.ARD2501.LIBBUS.CHARGE.D" + convert_to_julian_date
     path = "tmp/ftp/" + file_name
     content = process_charge_output
 
     write_file(path,content )
 
     return file_name
+  end
+
+  def get_entity_lfile_name
+    file_name = "ENTITY.D" + convert_to_julian_date + ".TXT"
+  end
+
+  def get_person_lfile_name
+    file_name = "PERSON.D" + convert_to_julian_date + ".TXT"
+  end
+
+  def get_charge_lfile_name
+    file_name = "CHARGE.D" + convert_to_julian_date + ".TXT"
+  end
+
+  def convert_to_julian_date
+    output = Date.today.strftime("%y") + Date.today.yday.to_s
   end
 
   def write_file(path,content )

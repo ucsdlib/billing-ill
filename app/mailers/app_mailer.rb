@@ -16,12 +16,15 @@ class AppMailer < ActionMailer::Base
     end
   end
 
-  def send_invoice_email(user, email_date, file_name, record_count)
+  def send_invoice_email(user, email_date, file_name, lfile_name, record_count)
     @user = user
     @email_date = email_date
     @charge_file = file_name[:charge]
     @entity_file = file_name[:entity]
     @person_file = file_name[:person]
+    @lcharge_file = lfile_name[:charge]
+    @lentity_file = lfile_name[:entity]
+    @lperson_file = lfile_name[:person]
     @charge_count = record_count[:charge]
     @entity_count = record_count[:entity]
     @person_count = record_count[:person]
