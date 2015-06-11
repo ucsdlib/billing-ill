@@ -7,7 +7,9 @@
     .row
       .col-xs-12
         .invoice-title
-          .col-xs-4 Library Invoice Number LB45669
+          .col-xs-4 
+            Library Invoice Number
+            = "LB" + @invoice.invoice_num
           .col-xs-4.text-center
             %span.invoice-header Invoice
             %br
@@ -47,7 +49,7 @@
                     = convert_date_mmddyy(Time.now)
         .row
           .col-xs-offset-7.col-xs-5
-            858 534-2528
+            ILL Phone # 858 534-2528
         %hr
           .row
             .col-xs-6
@@ -56,17 +58,13 @@
               %table.table.table-condensed
                 %thead.thead1
                   %tr
-                    %th Det Code
-                    %th Total
-                    %th Det Code
+                    %th Detail Code
                     %th Total
                 %tbody
                   %tr
                     %td LIBLPS
-                    %td 
+                    %td
                       = @invoice.charge
-                    %td
-                    %td
     %br
       %br
         / put the macks check payable box here
@@ -84,52 +82,44 @@
                     %br
                       La Jolla, CA 92093-0009
               .box-bottom Please include your account number and the invoice number on your remittance.
-          .col-xs-2 Total
-          .col-xs-2 
-            = @invoice.charge
         / **************************DESCRIPTION OF CHARGES********************************
         .row
           .col-xs-12.text-center
             .descriptionOfCharges Description of Charges
         %hr.hr-margin
           .row
-            .col-xs-offset-1.col-xs-2
-              %div Job #
+            .col-xs-1
+              %div Invoice #
+            .col-xs-2
+              ILL Number
             .col-xs-1
               Pages
             .col-xs-8
-          .row
-            .col-xs-2.text-right
-              %strong Detail Code
-            .col-xs-2
-              %strong LIBLPS
-            .col-xs-7
           / **************************TABLE OF CHARGES********************************
           .row
             .col-xs-1
-              = @invoice.invoice_num
+              = "LB" + @invoice.invoice_num
             .col-xs-2
+            - if @invoice.ill_number
+              = @invoice.ill_number
+            - else
               Various
             .col-xs-1
               = @invoice.number_prints
-            .col-xs-2
-              Various
-            .col-xs-offset-2.col-xs-2
-            .col-xs-2
-              = @invoice.charge
-          .row
-            .items.col-xs-offset-4.col-xs-6
+            .col-xs-6
               Interlibrary Loan Electronic PhotoCopy ----- 
               = @invoice.number_prints
               Requests total
               %br/
               ILL# 
               = @invoice.comments
+            .col-xs-2
+              = @invoice.charge
           / **************************TOTAL********************************
           %hr.hr-margin
             .row
               .col-xs-2.text-center
-                %div **Final Counts:
+                **Final Counts:
               .col-xs-2
                 Articles=
               .col-xs-2
