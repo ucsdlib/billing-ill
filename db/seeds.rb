@@ -29,5 +29,5 @@ end
 
 Patron.create(email_address: "doe@xxx.com", name: "Joe Doe", ar_code: "123456789", address1: "12345 abc street", city: "sun city",  state: "CA", zip1: "12345")
 
-Invoice.create(invoice_num: "5001", invoice_type: "e-copy", charge: "5.88", number_prints: "2", status: "pending", ill_numbers: "12345,34567", patron_id: 1)
+Invoice.create(invoice_num: "5001", invoice_type: "e-copy", charge: "5.88", number_prints: "2", status: "pending", comments: "12345,34567", ill_number: "various", patron_id: 1)
 
