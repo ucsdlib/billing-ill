@@ -410,7 +410,7 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_params
-    params.require(:invoice).permit(:invoice_num, :number_prints, :comments, :charge, :status, :invoice_type, :patron_id)
+    params.require(:invoice).permit(:invoice_num, :number_prints, :comments, :ill_number, :charge, :status, :invoice_type, :patron_id)
   end
 
   def set_invoice

@@ -11,9 +11,7 @@
           .col-xs-4.text-center
             %span.invoice-header Invoice
             %br
-              %span.invoice-org UCSD
-              %br
-                University of Calfiornia, San Diego Libraries
+              %span.invoice-org UC San Diego Library
           .col-xs-4
             %img.logo.pull-right{:alt => "logo", :src => "https://igpp.ucsd.edu/sites/default/files/images/UCSD-logos-horizontal.png"}/
         .row
@@ -126,7 +124,7 @@
               Requests total
               %br/
               ILL# 
-              = @invoice.ill_numbers
+              = @invoice.comments
           / **************************TOTAL********************************
           %hr.hr-margin
             .row

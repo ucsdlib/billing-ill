@@ -9,6 +9,7 @@
           = f.text_field :number_prints, label: "Number of Prints"
           = f.text_field :charge, label: "Charge"
           = f.select :status, options_for_select(["active", "pending"], nil)
+          = f.text_field :ill_number, label: "ILL Number"
           = f.text_area :comments, label: "Comments", rows: 6
           = f.select :patron_id, @patron_list, {include_blank: 'Choose Patron Name'}, { label: "Patron Name" }
         %fieldset.actions.control-group.col-sm-offset-2
