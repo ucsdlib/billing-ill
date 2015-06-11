@@ -47,7 +47,12 @@
           .btn-group{:role => "group"}
             = link_to "Preview Entity Output", create_entity_output_invoices_path, method: :get, class: 'btn btn-default'
         %br/
-        = link_to "FTP to ACT", ftp_file_invoices_path, method: :get, class: 'btn btn-primary'
+        / Button trigger modal
+        %button.btn.btn-primary{"data-target" => "#ftp-notes", "data-toggle" => "modal"}
+          FTP to ACT
+        = render 'shared/modal', target_url: ftp_file_invoices_path, msg_body: "Are you sure you want to upload the current batch to ACT server?"
         = link_to "Create Customer Report", create_report_invoices_path, method: :get, class: 'btn btn-primary'
-        = link_to "Merge Records", merge_records_invoices_path, method: :get, class: 'btn btn-primary'
-         
+        %button.btn.btn-primary{"data-target" => "#merge-notes", "data-toggle" => "modal"}
+          Merge Records
+        = render 'shared/modal_merge', target_url: merge_records_invoices_path, msg_body: "After you click Merge Records, You will not be able to perform the actions of Preview Output, FTP to ACT and Create Customer Report for the current batch records. <br><br>Are you sure you want to merge records?" 
+        
