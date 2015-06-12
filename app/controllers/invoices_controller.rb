@@ -219,7 +219,7 @@ class InvoicesController < ApplicationController
     entity_file = create_entity_file
     person_file = create_person_file
     file_name = {charge: charge_file, entity: entity_file, person: person_file}
-    lfile_name = {charge: get_charge_lfile_name, entity: get_entity_lfile_name, person: get_person_lfile_name}
+    lfile_name = {charge: Invoice.get_charge_lfile_name, entity: Invoice.get_entity_lfile_name, person: Invoice.get_person_lfile_name}
 
     send_file(file_name)
     send_email(file_name,lfile_name)
@@ -288,7 +288,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_entity_file
-    file_name = "SISP.ARD2501.LIBBUS.ENTITY.D" + convert_to_julian_date
+    file_name = Invoice.get_entity_file_name
     path = "tmp/ftp/" + file_name
     content = process_entity_output
     
@@ -298,7 +298,7 @@ class InvoicesController < ApplicationController
   end
 
   def create_person_file
-    file_name = "SISP.ARD2501.LIBBUS.PERSON.D" + convert_to_julian_date
+    file_name = Invoice.get_person_file_name
     path = "tmp/ftp/" + file_name
     content = process_person_output
 
@@ -308,29 +308,13 @@ class InvoicesController < ApplicationController
   end
 
   def create_charge_file
-    file_name = "SISP.ARD2501.LIBBUS.CHARGE.D" + convert_to_julian_date
+    file_name = Invoice.get_charge_file_name
     path = "tmp/ftp/" + file_name
     content = process_charge_output
 
     write_file(path,content )
 
     return file_name
-  end
-
-  def get_entity_lfile_name
-    file_name = "ENTITY.D" + convert_to_julian_date + ".TXT"
-  end
-
-  def get_person_lfile_name
-    file_name = "PERSON.D" + convert_to_julian_date + ".TXT"
-  end
-
-  def get_charge_lfile_name
-    file_name = "CHARGE.D" + convert_to_julian_date + ".TXT"
-  end
-
-  def convert_to_julian_date
-    output = Date.today.strftime("%y") + Date.today.yday.to_s
   end
 
   def write_file(path,content )

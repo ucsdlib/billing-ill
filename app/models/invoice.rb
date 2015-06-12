@@ -60,4 +60,32 @@ class Invoice < ActiveRecord::Base
   def self.pending_status_count
     search_all_pending_status.count
   end
+
+  def self.get_entity_lfile_name
+    file_name = "ENTITY.D" + convert_to_julian_date + ".TXT"
+  end
+
+  def self.get_person_lfile_name
+    file_name = "PERSON.D" + convert_to_julian_date + ".TXT"
+  end
+
+  def self.get_charge_lfile_name
+    file_name = "CHARGE.D" + convert_to_julian_date + ".TXT"
+  end
+
+  def self.get_entity_file_name
+    file_name = "SISP.ARD2501.LIBBUS.ENTITY.D" + convert_to_julian_date
+  end
+
+  def self.get_person_file_name
+    file_name = "SISP.ARD2501.LIBBUS.PERSON.D" + convert_to_julian_date
+  end
+
+  def self.get_charge_file_name
+    file_name = "SISP.ARD2501.LIBBUS.CHARGE.D" + convert_to_julian_date
+  end
+
+  def self.convert_to_julian_date
+    output = Date.today.strftime("%y") + Date.today.yday.to_s
+  end
 end
