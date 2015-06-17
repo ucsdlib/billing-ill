@@ -5,7 +5,8 @@
         = render 'shared/content_title', title: "Edit a Invoice" 
         %fieldset
           = f.hidden_field :invoice_num, value: @invoice.invoice_num
-          = f.select :invoice_type, options_for_select(["e-copy", "book loan"], selected: @selected_type)
+          = f.select :invoice_type, options_for_select(["Electronic PhotoCopy", "Book Loan"], nil)
+          = f.text_field , selected: @selected_type)
           = f.text_field :number_prints, label: "Number of Prints"
           = f.text_field :charge, label: "Charge"
           = f.select :status, options_for_select(["active", "pending"], selected: @selected_status)

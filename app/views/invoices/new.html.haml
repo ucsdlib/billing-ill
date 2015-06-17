@@ -5,7 +5,7 @@
         = render 'shared/content_title', title: "Create a New Invoice" 
         %fieldset
           = f.hidden_field :invoice_num, value: Invoice.count + 50001
-          = f.select :invoice_type, options_for_select(["e-copy", "book loan"], nil)
+          = f.select :invoice_type, options_for_select(["Electronic PhotoCopy", "Book Loan"], nil)
           = f.text_field :number_prints, label: "Number of Prints"
           = f.text_field :charge, label: "Charge"
           = f.select :status, options_for_select(["active", "pending"], nil)

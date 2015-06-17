@@ -54,7 +54,7 @@
           .row
             .col-xs-6
               %span.small-indent UCSD FEIN: 95-6006144
-            .col-xs-offset-1.col-xs-4.col-xs-offset-2
+            .col-xs-offset-1.col-xs-3.col-xs-offset-2
               %table.table.table-condensed
                 %thead.thead1
                   %tr
@@ -88,7 +88,7 @@
             .descriptionOfCharges Description of Charges
         %hr.hr-margin
           .row
-            .col-xs-1
+            .col-xs-2
               %div Invoice #
             .col-xs-2
               ILL Number
@@ -97,18 +97,20 @@
             .col-xs-8
           / **************************TABLE OF CHARGES********************************
           .row
-            .col-xs-1
-              = "LB" + @invoice.invoice_num
             .col-xs-2
-            - if @invoice.ill_number
-              = @invoice.ill_number
+              = "LB" + @invoice.invoice_num
+            - if @invoice.ill_number.blank?
+              .col-xs-2
+                Various
             - else
-              Various
+              .col-xs-2
+                = @invoice.ill_number
             .col-xs-1
               = @invoice.number_prints
-            .col-xs-6
-              Interlibrary Loan Electronic PhotoCopy ----- 
-              = @invoice.number_prints
+            .col-xs-5
+              Interlibrary Loan
+              = @invoice.invoice_type + " -----" 
+              = @invoice.number_prints 
               Requests total
               %br/
               ILL# 
@@ -118,7 +120,7 @@
           / **************************TOTAL********************************
           %hr.hr-margin
             .row
-              .col-xs-2.text-center
+              .col-xs-2
                 **Final Counts:
               .col-xs-2
                 Articles=
