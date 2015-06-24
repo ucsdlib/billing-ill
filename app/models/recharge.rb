@@ -107,7 +107,23 @@ class Recharge < ActiveRecord::Base
 
     content = "#{header_row}#{detail_rows}#{final_rows}"
   end
+  
+  def self.create_file
+    file_name = "FISP.JVDATA.D" + convert_date_yymmdd(Time.now) + ".LIB.txt"
+    path = "tmp/ftp/" + file_name
+    content = process_output
+    #puts Dir.pwd
+    
+    File.open(path, "w") do |f|
+      f.write(content)
+    end
 
+    return file_name
+  end
+
+  def self.convert_date_yymmdd(cdate)
+    cdate.strftime("%y%m%d")
+  end
 
   def self.convert_seq_num (seq_num)
     str = seq_num.to_s.rjust(4, "0") # 1 --> 0001, 10 --> 0010
