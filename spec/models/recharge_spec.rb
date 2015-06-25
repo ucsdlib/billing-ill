@@ -84,6 +84,13 @@ end
     end
   end
 
+  describe "create_file" do
+    it "returns file name" do
+      file_name = "FISP.JVDATA.D" + Recharge.convert_date_yymmdd(Time.now) + ".LIB.txt"
+      expect(Recharge.create_file).to eq(file_name)
+    end
+  end
+
   describe "convert_seq_num" do
     it "returns seq_num in required format" do
       expect(Recharge.convert_seq_num("1")).to eq("0001")
@@ -93,11 +100,5 @@ end
   describe "convert_charge" do
     it "returns charge in required format" do
       expect(Recharge.convert_charge(0.50)).to eq("000000000050")
-    end
-  end
-
-  describe "create_file" do
-    it "returns file name" do
-      expect(Recharge.create_file).to eq("FISP.JVDATA.D"+Time.now.strftime("%y%m%d")+ ".LIB.txt")
     end
   end
