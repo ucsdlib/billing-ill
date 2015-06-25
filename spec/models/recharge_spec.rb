@@ -72,7 +72,7 @@ end
       recharge = Fabricate(:recharge, status: "pending", charge: 3.50, fund: fund)
       
       header_row = "LIBRARY101FRLBG5511LIBRARY RECHARGES"+ " " * 18 + Time.now.strftime("%Y%m%d")+"000000000700" + "N" + " " * 175
-      detail_rows = "LIBRARY101FRLBG5512" + "0000F510" + "000000000350"+"LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "DA"+"60200A414909"
+      detail_rows = "LIBRARY101FRLBG5512" + "0001F510" + "000000000350"+"LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "DA"+"60200A414909"
       detail_rows += "636064" + "400000" + " " * 12 + "ANSVAMCCCC" + " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "00000000" + " " * 9
       detail_rows += Time.now.strftime("%Y%m%d") + " " * 3 
       final_rows = "LIBRARY101FRLBG5512" + "0002F510" +"000000000350" + "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "CA"

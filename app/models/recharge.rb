@@ -71,7 +71,7 @@ class Recharge < ActiveRecord::Base
     detail_rows = ""
     total_charge = 0
     result_arr.each_with_index do |recharge, index|
-      sequence_num = convert_seq_num(index)
+      sequence_num = convert_seq_num(index + 1)
       charge = recharge.charge
       transaction_amount = convert_charge(charge)
       fund_code = recharge.fund_fund_code
