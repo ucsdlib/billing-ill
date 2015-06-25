@@ -66,24 +66,6 @@ end
     end
   end
 
-  describe "process_output" do
-    it "process the output file according to the rules" do
-      fund = Fabricate(:fund, program_code: "400000", org_code: "414909", index_code: "ANSVAMCCCC", fund_code: "60200A")
-      recharge = Fabricate(:recharge, status: "pending", charge: 3.50, fund: fund)
-      
-      header_row = "LIBRARY101FRLBG5511LIBRARY RECHARGES"+ " " * 18 + Time.now.strftime("%Y%m%d")+"000000000700" + "N" + " " * 175
-      detail_rows = "LIBRARY101FRLBG5512" + "0000F510" + "000000000350"+"LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "DA"+"60200A414909"
-      detail_rows += "636064" + "400000" + " " * 12 + "ANSVAMCCCC" + " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "00000000" + " " * 9
-      detail_rows += Time.now.strftime("%Y%m%d") + " " * 3 
-      final_rows = "LIBRARY101FRLBG5512" + "0002F510" +"000000000350" + "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "CA"
-      final_rows += " " * 12 + "693900" + " " * 18 + "LIBIL05" + " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "00000000" + " " * 9
-      final_rows += Time.now.strftime("%Y%m%d") + " " * 2 + " "
-      content = "#{header_row}\n#{detail_rows}\n#{final_rows}"
-
-      expect(Recharge.process_output).to eq(content)
-    end
-  end
-
   describe "convert_seq_num" do
     it "returns seq_num in required format" do
       expect(Recharge.convert_seq_num("1")).to eq("0001")
@@ -95,9 +77,4 @@ end
       expect(Recharge.convert_charge(0.50)).to eq("000000000050")
     end
   end
-
-  describe "create_file" do
-    it "returns file name" do
-      expect(Recharge.create_file).to eq("FISP.JVDATA.D"+Time.now.strftime("%y%m%d")+ ".LIB.txt")
-    end
-  end
+  
