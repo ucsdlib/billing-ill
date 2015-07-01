@@ -1,3 +1,7 @@
+#---
+# @author hweng@ucsd.edu
+#---
+
 class Fund < ActiveRecord::Base
   has_many :recharges
 
