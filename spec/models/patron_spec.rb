@@ -4,7 +4,7 @@ describe Patron do
 
   #it {should have_many(:invoices)}
   
-  it {should validate_presence_of(:email_address)}
+  #it {should validate_presence_of(:email_address)}
   it {should validate_presence_of(:name)}
   it {should validate_presence_of(:ar_code)}
   it {should validate_presence_of(:address1)}
