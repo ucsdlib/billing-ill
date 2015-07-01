@@ -1,3 +1,7 @@
+#---
+# @author hweng@ucsd.edu
+#---
+
 require 'spec_helper'
 
 describe Patron do 

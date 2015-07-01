@@ -1,6 +1,7 @@
 #---
-# by hweng@ucsd.edu
+# @author hweng@ucsd.edu
 #---
+
 require 'spec_helper'
 
 describe Recharge do 

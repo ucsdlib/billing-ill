@@ -1,5 +1,5 @@
 #---
-# By hweng@ucsd.edu
+# @author hweng@ucsd.edu
 #---
 
 require 'spec_helper'
