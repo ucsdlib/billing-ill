@@ -277,7 +277,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.is_entity?(input)
-    input[0,2] == "aa" ? true : false
+    input[0,2] == "AA" ? true : false
   end
 
   def self.get_entity_count

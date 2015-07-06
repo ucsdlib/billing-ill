@@ -121,7 +121,7 @@ end
 
   describe "get_charge_output" do
     it "gets charge output" do
-      patron = Fabricate(:patron, ar_code: "a23456789")
+      patron = Fabricate(:patron, ar_code: "A23456789")
       invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
       t_date = Time.now.strftime("%m%d%y")
 
@@ -138,13 +138,13 @@ end
 
   describe "get_person_output" do
     it "gets person output" do
-      patron = Fabricate(:patron, ar_code: "a23456789", name: "john", address1: "ABC Street", city:"Dream", state: "CA", zip1: "12345" )
+      patron = Fabricate(:patron, ar_code: "A23456789", name: "john", address1: "ABC Street", city:"Dream", state: "CA", zip1: "12345" )
       invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
       t_date = Time.now.strftime("%m%d%y")
       address = "ABC Street" + " " * 25 +  " " * 105 + "Dream" + " " * 13 + "CA" + "12345" + " " * 4 + " " * 2 + " " * 30
 
       header_row = "PHDR CLIBRARY.PERSON "+ t_date + " " + t_date + " 000001" + " " * 279
-      detail_rows = "C" + " " * 9 + "a23456789" + " " * 4 + "john" + " " * 31 + "john" + " " * 51 + " " * 6
+      detail_rows = "C" + " " * 9 + patron.ar_code + " " * 4 + "john" + " " * 31 + "john" + " " * 51 + " " * 6
       detail_rows += address
       final_rows = "PTRL " + "000003" + " " * 309
       
@@ -156,13 +156,13 @@ end
 
   describe "get_entity_output" do
     it "gets entity output" do
-      patron = Fabricate(:patron, ar_code: "aa3456789", name: "Excl", address1: "ABC Street", city:"Dream", state: "CA", zip1: "12345" )
+      patron = Fabricate(:patron, ar_code: "AA3456789", name: "Excl", address1: "ABC Street", city:"Dream", state: "CA", zip1: "12345" )
       invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
       t_date = Time.now.strftime("%m%d%y")
       address = "ABC Street" + " " * 25 +  " " * 105 + "Dream" + " " * 13 + "CA" + "12345" + " " * 4 + " " * 2 + " " * 30
 
       header_row = "EHDR CLIBRARY.ENTITY " + t_date + " " + t_date + " " * 286
-      detail_rows = "C" + "PUBLPUBL" + " " * 9 + "aa3456789" + "Excl" + " " * 31 + "Excl" + " " * 51 + " " * 2
+      detail_rows = "C" + "PUBLPUBL" + " " * 9 + patron.ar_code + "Excl" + " " * 31 + "Excl" + " " * 51 + " " * 2
       detail_rows += address
       final_rows = "ETRL " + "000003" + " " * 309
       

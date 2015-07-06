@@ -31,7 +31,7 @@ describe Patron do
   it {should validate_uniqueness_of(:ar_code)}
 
   it do
-    should allow_value('a12345678', 'aa2345678').
+    should allow_value('A12345678', 'AA2345678').
       for(:ar_code)
   end
 end
