@@ -6,7 +6,7 @@
       %br/
       User Information
       %br/
-      \================
+      \==================================
       %br/
       Date:
       = @email_date
@@ -48,28 +48,29 @@
           %tr
             %td Charges:
             %td 
-              = @charge_file
+              = @lcharge_file
             %td 
               = @charge_count
           %tr
             %td Entity:
             %td 
-              = @entity_file
+              = @lentity_file
             %td 
               = @entity_count
           %tr
             %td Person:
             %td 
-              = @person_file
+              = @lperson_file
             %td 
               = @person_count
       %p
         Date when input file is to be processed:
         = @email_date
+      %br/
       %p
         Production Control Information
         %br/
-        \================
+        \==================================
         %br/
         (For Production Control Use Only )
       %table{:style => "width:50%"}

@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '4.2.0'
-gem 'sass-rails'
+gem 'rails', '4.2.2'
+gem 'sass-rails', '5.0.3'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -19,7 +19,7 @@ gem 'capistrano', '~> 3.3.3'
 gem 'capistrano-rails', '~> 1.1.2'
 gem 'capistrano-rbenv', github: "capistrano/rbenv"
 gem 'capistrano-bundler', '~> 1.1.3'
-gem 'equivalent-xml', '~> 0.5.1'
+#gem 'equivalent-xml', '~> 0.5.1'
 
 gem 'pg'
 gem 'fabrication'

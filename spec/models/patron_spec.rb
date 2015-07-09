@@ -1,10 +1,14 @@
+#---
+# @author hweng@ucsd.edu
+#---
+
 require 'spec_helper'
 
 describe Patron do 
 
   #it {should have_many(:invoices)}
   
-  it {should validate_presence_of(:email_address)}
+  #it {should validate_presence_of(:email_address)}
   it {should validate_presence_of(:name)}
   it {should validate_presence_of(:ar_code)}
   it {should validate_presence_of(:address1)}
@@ -27,7 +31,7 @@ describe Patron do
   it {should validate_uniqueness_of(:ar_code)}
 
   it do
-    should allow_value('a12345678', 'aa2345678').
+    should allow_value('A12345678', 'AA2345678').
       for(:ar_code)
   end
 end

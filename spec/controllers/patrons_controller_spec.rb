@@ -1,5 +1,5 @@
 #---
-# by hweng@ucsd.edu
+# @author hweng@ucsd.edu
 #---
 
 require 'spec_helper'
@@ -98,13 +98,13 @@ describe PatronsController do
     context "with valid input" do
       before(:each) do
         set_current_user
-        @patron = Fabricate(:patron, ar_code: 'a23456789')
-        put :update, id: @patron, patron: Fabricate.attributes_for(:patron, ar_code: 'a98765432')
+        @patron = Fabricate(:patron, ar_code: 'A23456789')
+        put :update, id: @patron, patron: Fabricate.attributes_for(:patron, ar_code: 'A98765432')
         @patron.reload
       end
      
       it "updates the patron" do
-        expect(@patron.ar_code).to eq('a98765432')
+        expect(@patron.ar_code).to eq('A98765432')
       end
 
       it "redirects to the front page" do
@@ -115,7 +115,7 @@ describe PatronsController do
     context "with invalid input" do
       before(:each) do
         set_current_user
-        @patron = Fabricate(:patron, ar_code: 'a23456789')
+        @patron = Fabricate(:patron, ar_code: 'A23456789')
         put :update, id: @patron, patron: Fabricate.attributes_for(:patron, ar_code: '123')
         @patron.reload
       end
@@ -125,7 +125,7 @@ describe PatronsController do
       end
 
       it "does not update the patron" do
-        expect(@patron.ar_code).to eq('a23456789')
+        expect(@patron.ar_code).to eq('A23456789')
       end
 
       it "render the :edit template" do

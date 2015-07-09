@@ -4,7 +4,7 @@ Coveralls::Output.no_color = true
 Coveralls.wear!
 require 'simplecov'
 require 'rspec/matchers'
-require 'equivalent-xml'
+#require 'equivalent-xml'
 SimpleCov.start 'rails'
 
 ENV["RAILS_ENV"] ||= 'test'

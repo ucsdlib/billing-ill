@@ -8,23 +8,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?, :convert_date_mmddyy
 
-  def convert_seq_num (seq_num)
-    str = seq_num.to_s.rjust(4, "0") # 1 --> 0001, 10 --> 0010
-  end
-
-  def convert_charge(amount)
-    s_amount = (100* amount).to_f.round.to_s  # 0.50 --> "50"
-    output_amount = "0" *(12 - s_amount.length) + s_amount
-  end
-
-  def convert_date_yyyymmdd(cdate)
-    cdate.strftime("%Y%m%d")
-  end
-
-  def convert_date_yymmdd(cdate)
-    cdate.strftime("%y%m%d")
-  end
-
   def convert_date_mmddyy(cdate)
     cdate.strftime("%m/%d/%y")
   end

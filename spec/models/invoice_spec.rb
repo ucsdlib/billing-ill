@@ -1,5 +1,5 @@
 #---
-# By hweng@ucsd.edu
+# @author hweng@ucsd.edu
 #---
 
 require 'spec_helper'
@@ -10,11 +10,10 @@ describe Invoice do
   it {expect(monetize(:charge_cents)).to be_truthy}
   
   it {should belong_to(:patron)}
-  it {should validate_presence_of(:invoice_num)}
+  it {should validate_presence_of(:comments)}
   it {should validate_presence_of(:number_prints)}
   it {should validate_presence_of(:invoice_type)}
   it {should validate_presence_of(:status)}
-  it {should validate_presence_of(:ill_numbers)}
   it {should validate_presence_of(:patron_id)}
   it {should validate_numericality_of(:charge)}
 
@@ -70,3 +69,128 @@ end
       expect(Invoice.search_by_invoice_num("")).to eq([])
     end
   end
+
+  describe "convert_to_julian_date" do
+    it "returns a julian day format for today's date" do
+      j_today = Date.today.strftime("%y") + Date.today.yday.to_s
+      expect(Invoice.convert_to_julian_date).to eq(j_today)
+    end
+  end
+
+  describe "get_charge_file_name" do
+    it "returns required charge file name convention" do
+      file_name = "SISP.ARD2501.LIBBUS.CHARGE.D" + Invoice.convert_to_julian_date
+      expect(Invoice.get_charge_file_name).to eq(file_name)
+    end
+  end
+
+  describe "get_entity_file_name" do
+    it "returns required entity file name convention" do
+      file_name = "SISP.ARD2501.LIBBUS.ENTITY.D" + Invoice.convert_to_julian_date
+      expect(Invoice.get_entity_file_name).to eq(file_name)
+    end
+  end
+
+  describe "get_person_file_name" do
+    it "returns required person file name convention" do
+      file_name = "SISP.ARD2501.LIBBUS.PERSON.D" + Invoice.convert_to_julian_date
+      expect(Invoice.get_person_file_name).to eq(file_name)
+    end
+  end
+
+  describe "get_charge_lfile_name" do
+    it "returns required local charge file name convention" do
+      file_name = "CHARGE.D" + Invoice.convert_to_julian_date + ".TXT"
+      expect(Invoice.get_charge_lfile_name).to eq(file_name)
+    end
+  end
+
+  describe "get_entity_lfile_name" do
+    it "returns required local entity file name convention" do
+      file_name = "ENTITY.D" + Invoice.convert_to_julian_date + ".TXT"
+      expect(Invoice.get_entity_lfile_name).to eq(file_name)
+    end
+  end
+
+  describe "get_person_lfile_name" do
+    it "returns required local person file name convention" do
+      file_name = "PERSON.D" + Invoice.convert_to_julian_date + ".TXT"
+      expect(Invoice.get_person_lfile_name).to eq(file_name)
+    end
+  end
+
+  describe "get_charge_output" do
+    it "gets charge output" do
+      patron = Fabricate(:patron, ar_code: "A23456789")
+      invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
+      t_date = Time.now.strftime("%m%d%y")
+
+      header_row = "CHDR CLIBRARY.CHARGE " + t_date + " " + t_date + " 000001" + " " * 279
+      detail_rows = "A" + patron.ar_code + " " * 35 + "LIBLPS" + "0000000040{" + " " * 6
+      detail_rows += "     50001" + " " * 240
+      final_rows = "CTRL " + "000003" + " " + "0000000040{" + " " * 297
+      
+      content = "#{header_row}\n#{detail_rows}\n#{final_rows}"
+
+      expect(Invoice.get_charge_output).to eq(content)
+    end
+  end
+
+  describe "get_person_output" do
+    it "gets person output" do
+      patron = Fabricate(:patron, ar_code: "A23456789", name: "john", address1: "ABC Street", city:"Dream", state: "CA", zip1: "12345" )
+      invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
+      t_date = Time.now.strftime("%m%d%y")
+      address = "ABC Street" + " " * 25 +  " " * 105 + "Dream" + " " * 13 + "CA" + "12345" + " " * 4 + " " * 2 + " " * 30
+
+      header_row = "PHDR CLIBRARY.PERSON "+ t_date + " " + t_date + " 000001" + " " * 279
+      detail_rows = "C" + " " * 9 + patron.ar_code + " " * 4 + "john" + " " * 31 + "john" + " " * 51 + " " * 6
+      detail_rows += address
+      final_rows = "PTRL " + "000003" + " " * 309
+      
+      content = "#{header_row}\n#{detail_rows}\n#{final_rows}"
+
+      expect(Invoice.get_person_output).to eq(content)
+    end
+  end
+
+  describe "get_entity_output" do
+    it "gets entity output" do
+      patron = Fabricate(:patron, ar_code: "AA3456789", name: "Excl", address1: "ABC Street", city:"Dream", state: "CA", zip1: "12345" )
+      invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
+      t_date = Time.now.strftime("%m%d%y")
+      address = "ABC Street" + " " * 25 +  " " * 105 + "Dream" + " " * 13 + "CA" + "12345" + " " * 4 + " " * 2 + " " * 30
+
+      header_row = "EHDR CLIBRARY.ENTITY " + t_date + " " + t_date + " " * 286
+      detail_rows = "C" + "PUBLPUBL" + " " * 9 + patron.ar_code + "Excl" + " " * 31 + "Excl" + " " * 51 + " " * 2
+      detail_rows += address
+      final_rows = "ETRL " + "000003" + " " * 309
+      
+      content = "#{header_row}\n#{detail_rows}\n#{final_rows}"
+
+      expect(Invoice.get_entity_output).to eq(content)
+    end
+  end
+
+  describe "create_entity_file" do
+     it "returns entity file name" do
+      file_name = "SISP.ARD2501.LIBBUS.ENTITY.D" + Invoice.convert_to_julian_date
+      expect(Invoice.create_entity_file).to eq(file_name)
+    end
+  end
+
+  describe "create_person_file" do
+     it "returns person file name" do
+      file_name = "SISP.ARD2501.LIBBUS.PERSON.D" + Invoice.convert_to_julian_date
+      expect(Invoice.create_person_file).to eq(file_name)
+    end
+  end
+
+  describe "create_charge_file" do
+     it "returns charge file name" do
+      file_name = "SISP.ARD2501.LIBBUS.CHARGE.D" + Invoice.convert_to_julian_date
+      expect(Invoice.create_charge_file).to eq(file_name)
+    end
+  end
+
+  
