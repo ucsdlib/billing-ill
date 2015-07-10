@@ -65,7 +65,7 @@ class Recharge < ActiveRecord::Base
     d_column40_76 = "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "D" + "A"
     d_column89_94 = "636064"
     d_column101_112 = " " * 6 + " " * 6
-    d_column123_209 = " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 9
+    d_column123_209 = " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 8
     d_column220 = " "
 
     detail_rows = ""
@@ -77,10 +77,10 @@ class Recharge < ActiveRecord::Base
       fund_code = recharge.fund_fund_code
       org_code = recharge.fund_org_code
       program_code = recharge.fund_program_code
-      index_code = recharge.fund_index_code
+      index_code = convert_index_code(recharge.fund_index_code)
       filler_var = convert_date_yyyymmdd(recharge.created_at) + " " * 2
       total_charge += charge
-
+       
       detail_rows += "#{d_column1_19}#{sequence_num}#{d_column24_27}#{transaction_amount}#{d_column40_76}#{fund_code}#{org_code}"
       detail_rows += "#{d_column89_94}#{program_code}#{d_column101_112}#{index_code}#{d_column123_209}#{filler_var}#{d_column220}\n"
     end
@@ -92,9 +92,9 @@ class Recharge < ActiveRecord::Base
     total_amount = convert_charge(total_charge)
     f_column40_76 = "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "C" + "A"
     f_column77_112 = " " * 12 + "693900" + " " * 18
-    f_column113_122 = "LIBIL05" + " " * 3
+    f_column113_122 = " " * 3 + "LIBIL05"  
     f_column123_154 = " " * 29
-    f_column155_209 = "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 9
+    f_column155_209 = "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 8
     f_filler_var = convert_date_yyyymmdd(Time.now) + " " * 2 
     f_column220 = " "
 
@@ -127,6 +127,10 @@ class Recharge < ActiveRecord::Base
 
   def self.convert_seq_num (seq_num)
     str = seq_num.to_s.rjust(4, "0") # 1 --> 0001, 10 --> 0010
+  end
+
+  def self.convert_index_code (input)
+    str = input.to_s.rjust(10, " ") # 1 --> 0001, 10 --> 0010
   end
 
   def self.convert_charge(amount)
