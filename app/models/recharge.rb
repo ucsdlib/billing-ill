@@ -93,7 +93,7 @@ class Recharge < ActiveRecord::Base
     f_column40_76 = "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "C" + "A"
     f_column77_112 = " " * 12 + "693900" + " " * 18
     f_column113_122 = " " * 3 + "LIBIL05"  
-    f_column123_154 = " " * 29
+    f_column123_154 = " " * 32
     f_column155_209 = "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 8
     f_filler_var = convert_date_yyyymmdd(Time.now) + " " * 2 
     f_column220 = " "
