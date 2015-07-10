@@ -3,6 +3,7 @@ Rails.application.routes.draw do
  root :to => 'pages#front'
   
  get 'ui(/:action)', controller: 'ui'
+ #get '/ui', to: 'ui#index'
 
  get '/ruby-version' => 'application#ruby_version'
 
