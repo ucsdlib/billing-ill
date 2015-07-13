@@ -162,6 +162,22 @@ describe InvoicesController do
     end
   end
 
+  describe "DELETE destroy" do
+    before(:each) do
+        set_current_user
+        @invoice = Fabricate(:invoice)
+        delete :destroy, id: @invoice
+      end
+
+    it "redirects to the invoice index page" do
+      expect(response).to redirect_to invoices_path
+    end
+
+    it "deletes the invoice" do
+      expect(Invoice.count).to eq(0)
+    end
+  end
+
   describe "GET search" do
     before do
       set_current_user
