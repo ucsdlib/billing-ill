@@ -45,6 +45,12 @@ class RechargesController < ApplicationController
     end
   end
 
+  def destroy
+    recharge = Recharge.find(params[:id])
+    recharge.destroy 
+    redirect_to recharges_path
+  end
+
   def search
       result_arr = Recharge.search_by_index_code(params[:search_term])
       @search_result = result_arr.page(params[:page]) if !result_arr.blank?
