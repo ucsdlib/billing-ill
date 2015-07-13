@@ -3,14 +3,13 @@ Rails.application.routes.draw do
  root :to => 'pages#front'
   
  get 'ui(/:action)', controller: 'ui'
- #get '/ui', to: 'ui#index'
-
+ 
  get '/ruby-version' => 'application#ruby_version'
 
  resources :funds, except: [:destroy]
  resources :patrons, except: [:destroy]
  
- resources :recharges, except: [:destroy] do
+ resources :recharges do
    collection do
      get 'search', to: 'recharges#search'
      get 'process_batch', to: 'recharges#process_batch'
@@ -19,7 +18,7 @@ Rails.application.routes.draw do
    end 
  end
 
- resources :invoices, except: [:destroy] do
+ resources :invoices do
    collection do
      get 'search', to: 'invoices#search'
      get 'process_batch', to: 'invoices#process_batch'
