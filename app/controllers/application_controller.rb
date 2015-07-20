@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     ActiveRecord::Base.transaction do
       result_arr.each do |ref_row|
         # add bang after update_attributes so that if it is not saved, it will raise error and roll back whole transaction.
-        ref_row.update_attributes!(status: "submitted") 
+        ref_row.update_attributes!(status: "submitted", submitted_at: Time.now ) 
       end
     end
   end
