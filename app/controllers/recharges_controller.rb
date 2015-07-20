@@ -105,22 +105,7 @@ class RechargesController < ApplicationController
   end
 
   def batch_update_status
-    begin
-      batch_update_status_item
-    rescue ActiveRecord::RecordInvalid
-      flash[:error] = "Invalid record"
-    end
-  end
-
-  def batch_update_status_item
-    result_arr = Recharge.search_all_pending_status
-
-    ActiveRecord::Base.transaction do
-      result_arr.each do |recharge|
-        # add bang after update_attributes so that if it is not saved, it will raise error and roll back whole transaction.
-        recharge.update_attributes!(status: "submitted") 
-      end
-    end
+    batch_update_status_field(Recharge)
   end
   
   def recharge_params
