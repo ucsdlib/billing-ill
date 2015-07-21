@@ -29,6 +29,9 @@
                   %td
                     = convert_date_mmddyy(patron.created_at)
                   %td
+                    = link_to patron, method: :delete do
+                      %i.glyphicon.glyphicon-remove
+                  %td
                     = link_to "edit", edit_patron_path(patron.id)
           .pagination-wrapper
             = paginate @patrons if @patrons
