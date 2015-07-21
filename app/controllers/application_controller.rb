@@ -25,14 +25,11 @@ class ApplicationController < ActionController::Base
   end
 
   def batch_update_status_field(ref_model)
-
     begin
       batch_update_status_item(ref_model)
     rescue ActiveRecord::RecordInvalid
       flash[:error] = "Invalid record"
     end
-
-    
   end
 
   def batch_update_status_item(ref_model)
