@@ -157,6 +157,22 @@ describe RechargesController do
     end
   end
 
+  describe "DELETE destroy" do
+    before(:each) do
+        set_current_user
+        @recharge = Fabricate(:recharge)
+        delete :destroy, id: @recharge
+      end
+
+    it "redirects to the recharge index page" do
+      expect(response).to redirect_to recharges_path
+    end
+
+    it "deletes the recharge" do
+      expect(Recharge.count).to eq(0)
+    end
+  end
+
   describe "GET search" do
     before do
       set_current_user
