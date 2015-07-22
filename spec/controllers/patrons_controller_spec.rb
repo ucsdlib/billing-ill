@@ -40,6 +40,16 @@ describe PatronsController do
       get :new
       expect(assigns(:patron)).to be_instance_of(Patron)
     end
+
+    it "sets @country_list" do
+      @list = []
+      COUNTRIES.each do |country|
+        @list << [country[:term], country[:id]]
+      end
+      
+      get :new
+      expect(assigns(:country_list)).to eq(@list)
+    end
   end
 
   describe "POST create" do
@@ -85,18 +95,29 @@ describe PatronsController do
   describe "GET edit" do
     before(:each) do
       set_current_user
+      @patron = Fabricate(:patron, country_code: 'US')
     end
 
     it "sets @patron" do
-      @patron = Fabricate(:patron)
+      #@patron = Fabricate(:patron)
       get :edit, id: @patron
       expect(assigns(:patron)).to eq(@patron)
     end
 
     it "sets @selected_country" do
-      @patron = Fabricate(:patron, country_code: 'US')
+      #@patron = Fabricate(:patron, country_code: 'US')
       get :edit, id: @patron
       expect(assigns(:selected_country)).to eq('US')
+    end
+
+    it "sets @country_list" do
+      @list = []
+      COUNTRIES.each do |country|
+        @list << [country[:term], country[:id]]
+      end
+      
+      get :edit, id: @patron
+      expect(assigns(:country_list)).to eq(@list)
     end
   end
 
