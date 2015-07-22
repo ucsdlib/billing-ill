@@ -27,7 +27,7 @@ class PatronsController < ApplicationController
   end
 
   def edit
-    
+    @selected_country = @patron.country_code
   end
 
   def update

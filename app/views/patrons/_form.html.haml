@@ -1,3 +1,5 @@
+= render :partial => 'country_list'
+
 %section.create.container
   .row
     .col-sm-8.col-sm-offset-1
@@ -15,7 +17,10 @@
           = f.text_field :state, label: "State"
           = f.text_field :zip1, label: "Zip 1"
           = f.text_field :zip2, label: "Zip 2"
-          = f.text_field :country_code, label: "Country Code"
+          - if @patron.new_record?
+            = f.select :country_code, @country_list, {include_blank: 'Choose Country'}, { label: "Country" }
+          - else
+            = f.select :country_code, options_for_select(@country_list, selected: @selected_country), { label: "Country" }
         %fieldset.actions.control-group.col-sm-offset-2
           .controls
             %input(type="submit" value="Save" class="btn btn-primary")

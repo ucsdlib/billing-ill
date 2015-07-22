@@ -92,6 +92,12 @@ describe PatronsController do
       get :edit, id: @patron
       expect(assigns(:patron)).to eq(@patron)
     end
+
+    it "sets @selected_country" do
+      @patron = Fabricate(:patron, country_code: 'US')
+      get :edit, id: @patron
+      expect(assigns(:selected_country)).to eq('US')
+    end
   end
 
   describe "PUT update" do
