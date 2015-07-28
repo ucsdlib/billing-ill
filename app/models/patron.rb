@@ -14,7 +14,7 @@ class Patron < ActiveRecord::Base
   validates :address4, length: { maximum: 35 }
   validates :city, presence: true, length: { maximum: 18 }
   validates :state, presence: true, length: { is: 2 }
-  validates :zip1, presence: true, length: { is: 5 }
+  validates :zip1, presence: true, length: { maximum: 5 }
   validates :zip2, length: { maximum: 4 }
   validates :country_code, length: { maximum: 2 }
 end

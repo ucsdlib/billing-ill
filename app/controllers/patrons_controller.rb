@@ -5,7 +5,7 @@
 class PatronsController < ApplicationController
   before_filter :require_user
   before_action :set_patron, only: [:edit, :update]
-  before_action :set_country_list, only: [:new, :edit]
+  before_action :set_country_list, only: [:new, :create, :edit, :update]
   
    def index
     @total_count = Patron.count
