@@ -115,27 +115,13 @@ class InvoicesController < ApplicationController
   end
 
   def merge_records
-    begin
-      batch_update_status_item
-    rescue ActiveRecord::RecordInvalid
-      flash[:error] = "Invalid record"
-    end
-    
-    flash[:notice] = "The current batch records have been merged."
-    redirect_to invoices_path
+     batch_update_status_field(Invoice)
+
+     flash[:notice] = "The current batch records have been merged."
+     redirect_to invoices_path
   end
   
   private
-  def batch_update_status_item
-    result_arr = Invoice.search_all_pending_status
-
-    ActiveRecord::Base.transaction do
-      result_arr.each do |invoice|
-        # add bang after update_attributes so that if it is not saved, it will raise error and roll back whole transaction.
-        invoice.update_attributes!(status: "submitted") 
-      end
-    end
-  end
 
   def send_email(file_name,lfile_name)
     record_count = {
