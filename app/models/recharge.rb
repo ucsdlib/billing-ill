@@ -78,7 +78,7 @@ class Recharge < ActiveRecord::Base
       org_code = recharge.fund_org_code
       program_code = recharge.fund_program_code
       index_code = convert_index_code(recharge.fund_index_code)
-      filler_var = convert_date_yyyymmdd(recharge.created_at) + " " * 2
+      filler_var = convert_date_yyyymmdd(Time.now) + " " * 2
       total_charge += charge
        
       detail_rows += "#{d_column1_19}#{sequence_num}#{d_column24_27}#{transaction_amount}#{d_column40_76}#{fund_code}#{org_code}"

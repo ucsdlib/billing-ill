@@ -291,7 +291,7 @@ describe InvoicesController do
     it "updates the submitted_at to current date" do
       invoice = Fabricate(:invoice, status: "pending")
       get :merge_records
-      expect(invoice.reload.submitted_at.strftime("%m%d%y")).to eq(Time.now.strftime("%m%d%y"))
+      expect(invoice.reload.submitted_at.strftime("%m%y")).to eq(Time.now.strftime("%m%y"))
     end
   end
 end
