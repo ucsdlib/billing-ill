@@ -10,8 +10,7 @@ class InvoicesController < ApplicationController
  
   def index
     @total_count = Invoice.count
-    result_arr = Invoice.order(:created_at)
-    @invoices = result_arr.page(params[:page]) if !result_arr.blank?
+    @invoices = get_all_items(Invoice)
   end
 
   def new
