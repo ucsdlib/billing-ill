@@ -12,8 +12,7 @@ class RechargesController < ApplicationController
 
   def index
     @total_count = Recharge.count
-    result_arr = Recharge.order(:created_at)
-    @recharges = result_arr.page(params[:page]) if !result_arr.blank?
+    @recharges = get_all_items(Recharge)
   end
 
   def new

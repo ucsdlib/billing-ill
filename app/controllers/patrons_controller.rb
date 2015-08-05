@@ -9,8 +9,7 @@ class PatronsController < ApplicationController
   
    def index
     @total_count = Patron.count
-    result_arr = Patron.order(:created_at)
-    @patrons = result_arr.page(params[:page]) if !result_arr.blank?
+    @patrons = get_all_items(Patron)
   end
 
   def new
