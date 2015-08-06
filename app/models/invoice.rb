@@ -103,43 +103,45 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.get_person_output
-    result_arr = search_all_pending_status
+    content = "#{get_person_header_rows}#{get_person_detail_rows}#{get_person_trailer_row}"
+  end
 
-    # header rows
+  def self.get_person_header_rows
     h_column1_21 = "PHDR" + " " * 1 + "CLIBRARY.PERSON" + " " * 1
     transaction_date = Time.now.strftime("%m%d%y")
     h_column28 = " " * 1
     h_column35_320 = " " * 1 + "000001" + " " * 279
 
-    # detail_rows
+    header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
+  end
+  
+  def self.get_person_detail_rows
+    result_arr = search_all_pending_status
+    detail_rows = ""
+
     d_column1_10 = "C" + " " * 9
     d_column20_23 = " " * 4
     d_column114_119 = " " * 6
-
-    detail_rows = ""
-    count = 0
     
     result_arr.each_with_index do |invoice, index|
       if !is_entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
-        count+=1
 
         detail_rows += "#{d_column1_10}#{person_id}#{d_column20_23}#{name_key}#{full_name}#{d_column114_119}"
         detail_rows += process_address(invoice)
       end
     end
+    return detail_rows
+  end
 
-    # trailer row
+  def self.get_person_trailer_row
     t_column1_5 = "PTRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = convert_record_count(count + 2)
-
-    header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
+    record_count = convert_record_count(get_person_count + 2)
 
     final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
-    content = "#{header_row}#{detail_rows}#{final_rows}"
   end
   
   def self.get_entity_output
@@ -181,10 +183,14 @@ class Invoice < ActiveRecord::Base
     final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
     content = "#{header_row}#{detail_rows}#{final_rows}"
   end
+
+  def self.get_path(file_name)
+    path = "tmp/ftp/" + file_name
+  end
   
   def self.create_entity_file
     file_name = Invoice.get_entity_file_name
-    path = "tmp/ftp/" + file_name
+    path = get_path(file_name)
     content = Invoice.get_entity_output
     
     write_file(path,content )
@@ -194,7 +200,7 @@ class Invoice < ActiveRecord::Base
 
   def self.create_person_file
     file_name = Invoice.get_person_file_name
-    path = "tmp/ftp/" + file_name
+    path = get_path(file_name)
     content = Invoice.get_person_output
 
     write_file(path,content )
@@ -204,7 +210,7 @@ class Invoice < ActiveRecord::Base
 
   def self.create_charge_file
     file_name = Invoice.get_charge_file_name
-    path = "tmp/ftp/" + file_name
+    path = get_path(file_name)
     content = Invoice.get_charge_output
 
     write_file(path,content )
