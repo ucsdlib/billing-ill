@@ -183,10 +183,14 @@ class Invoice < ActiveRecord::Base
     final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
     content = "#{header_row}#{detail_rows}#{final_rows}"
   end
+
+  def self.get_path(file_name)
+    path = "tmp/ftp/" + file_name
+  end
   
   def self.create_entity_file
     file_name = Invoice.get_entity_file_name
-    path = "tmp/ftp/" + file_name
+    path = get_path(file_name)
     content = Invoice.get_entity_output
     
     write_file(path,content )
@@ -196,7 +200,7 @@ class Invoice < ActiveRecord::Base
 
   def self.create_person_file
     file_name = Invoice.get_person_file_name
-    path = "tmp/ftp/" + file_name
+    path = get_path(file_name)
     content = Invoice.get_person_output
 
     write_file(path,content )
@@ -206,7 +210,7 @@ class Invoice < ActiveRecord::Base
 
   def self.create_charge_file
     file_name = Invoice.get_charge_file_name
-    path = "tmp/ftp/" + file_name
+    path = get_path(file_name)
     content = Invoice.get_charge_output
 
     write_file(path,content )
