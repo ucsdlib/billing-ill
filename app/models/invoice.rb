@@ -102,10 +102,7 @@ class Invoice < ActiveRecord::Base
     content = "#{header_row}#{detail_rows}#{final_rows}"
   end
 
-  def self.get_person_output
-    content = "#{get_person_header_row}#{get_person_detail_rows}#{get_person_trailer_row}"
-  end
-
+  
   def self.get_person_header_row
     h_column1_21 = "PHDR" + " " * 1 + "CLIBRARY.PERSON" + " " * 1
     transaction_date = Time.now.strftime("%m%d%y")
@@ -134,18 +131,6 @@ class Invoice < ActiveRecord::Base
       end
     end
     return detail_rows
-  end
-
-  def self.get_person_trailer_row
-    t_column1_5 = "PTRL" + " " * 1
-    t_column12_320 = " " * 309
-    record_count = convert_record_count(get_person_count + 2)
-
-    final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
-  end
-  
-  def self.get_entity_output
-   entity_content = "#{get_entity_header_row}#{get_entity_detail_rows}#{get_entity_trailer_row}"
   end
 
   def self.get_entity_header_row
@@ -180,10 +165,18 @@ class Invoice < ActiveRecord::Base
     return detail_rows
   end
 
-  def self.get_entity_trailer_row
-    t_column1_5 = "ETRL" + " " * 1
+  def self.get_person_output
+    content = "#{get_person_header_row}#{get_person_detail_rows}#{get_trailer_row("PTRL", get_person_count)}"
+  end
+
+  def self.get_entity_output
+   entity_content = "#{get_entity_header_row}#{get_entity_detail_rows}#{get_trailer_row("ETRL", get_entity_count)}"
+  end
+
+  def self.get_trailer_row(col1,count)
+    t_column1_5 = col1 + " " * 1
     t_column12_320 = " " * 309
-    record_count = convert_record_count(get_entity_count + 2)
+    record_count = convert_record_count(count + 2)
 
     final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
   end
