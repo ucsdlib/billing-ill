@@ -103,10 +103,10 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.get_person_output
-    content = "#{get_person_header_rows}#{get_person_detail_rows}#{get_person_trailer_row}"
+    content = "#{get_person_header_row}#{get_person_detail_rows}#{get_person_trailer_row}"
   end
 
-  def self.get_person_header_rows
+  def self.get_person_header_row
     h_column1_21 = "PHDR" + " " * 1 + "CLIBRARY.PERSON" + " " * 1
     transaction_date = Time.now.strftime("%m%d%y")
     h_column28 = " " * 1
@@ -145,43 +145,47 @@ class Invoice < ActiveRecord::Base
   end
   
   def self.get_entity_output
-    result_arr = search_all_pending_status
+   entity_content = "#{get_entity_header_row}#{get_entity_detail_rows}#{get_entity_trailer_row}"
+  end
 
-    # header rows
+  def self.get_entity_header_row
     h_column1_21 = "EHDR" + " " * 1 + "CLIBRARY.ENTITY" + " " * 1
     transaction_date = Time.now.strftime("%m%d%y")
     h_column28 = " " * 1
     h_column35_320 = " " * 286
-    
-    # detail_rows
+
+    header_rows = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
+  end
+
+  def self.get_entity_detail_rows
+    result_arr = search_all_pending_status
+
     d_column1 = "C" 
     d_column2_9 = "PUBLPUBL" 
     d_column10_18 = " " * 9
     d_column118_119 = " " * 2
 
     detail_rows = ""
-    count = 0
 
     result_arr.each_with_index do |invoice, index|
       if is_entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
-        count+=1
+       
         detail_rows += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
         detail_rows += process_address(invoice)
       end
     end
+    return detail_rows
+  end
 
-    # trailer row
+  def self.get_entity_trailer_row
     t_column1_5 = "ETRL" + " " * 1
     t_column12_320 = " " * 309
-    record_count = convert_record_count(count + 2)
-
-    header_row = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
+    record_count = convert_record_count(get_entity_count + 2)
 
     final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
-    content = "#{header_row}#{detail_rows}#{final_rows}"
   end
 
   def self.get_path(file_name)
