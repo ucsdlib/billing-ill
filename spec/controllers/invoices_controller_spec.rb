@@ -205,6 +205,11 @@ describe InvoicesController do
       expect(assigns(:search_result)).to eq(nil)
     end
 
+    it "default sets @search_result an invoice array if no option selected" do
+      get :search, search_term: "50002", search_option: ""
+      expect(assigns(:search_result)).to eq([@invoice])
+    end
+
     it "sets @search_count" do
       get :search, search_term: "Joe Doe", search_option: "patron_name"
       expect(assigns(:search_count)).to eq(1)
@@ -254,6 +259,37 @@ describe InvoicesController do
     it "sets @invoice" do
       get :create_bill, id: @invoice
       expect(assigns(:invoice)).to eq(@invoice)
+    end
+  end
+
+  describe "GET create_person_output" do
+    before(:each) do
+      set_current_user
+    end
+
+    it "render the :plain content template" do
+        get :create_person_output
+        expect(response.body).to include("CLIBRARY.PERSON")
+    end
+  end
+
+  describe "GET create_entity_output" do
+    before(:each) do
+      set_current_user
+    end
+
+    it "render the :plain content template" do
+        get :create_entity_output
+        expect(response.body).to include("CLIBRARY.ENTITY")
+    end
+  end
+
+  describe "GET create_person_output" do
+    it "render the :plain content template" do
+      # patron = Fabricate(:patron, ar_code: "A23456789")
+      # @invoice = Fabricate(:invoice, patron_id: 1 )
+        
+        expect(response.body).to eq("")
     end
   end
 
