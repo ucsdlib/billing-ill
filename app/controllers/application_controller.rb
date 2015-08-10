@@ -7,7 +7,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?, :convert_date_mmddyy
-
+  
+  def get_country_list
+  end
+  
   def convert_date_mmddyy(cdate)
     cdate.strftime("%m/%d/%y")
   end
@@ -22,5 +25,24 @@ class ApplicationController < ActionController::Base
 
   def require_user
     redirect_to signin_path, notice: 'You need to sign in!' unless logged_in?
+  end
+
+  def batch_update_status_field(ref_model)
+    begin
+      batch_update_status_item(ref_model)
+    rescue ActiveRecord::RecordInvalid
+      flash[:error] = "Invalid record"
+    end
+  end
+
+  def batch_update_status_item(ref_model)
+    result_arr = ref_model.search_all_pending_status
+
+    ActiveRecord::Base.transaction do
+      result_arr.each do |ref_row|
+        # add bang after update_attributes so that if it is not saved, it will raise error and roll back whole transaction.
+        ref_row.update_attributes!(status: "submitted", submitted_at: Time.now ) 
+      end
+    end
   end
 end

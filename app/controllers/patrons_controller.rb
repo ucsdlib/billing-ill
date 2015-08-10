@@ -5,6 +5,7 @@
 class PatronsController < ApplicationController
   before_filter :require_user
   before_action :set_patron, only: [:edit, :update]
+  before_action :set_country_list, only: [:new, :create, :edit, :update]
   
    def index
     @total_count = Patron.count
@@ -27,7 +28,7 @@ class PatronsController < ApplicationController
   end
 
   def edit
-    
+    @selected_country = @patron.country_code
   end
 
   def update
@@ -36,6 +37,12 @@ class PatronsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    patron = Patron.find(params[:id])
+    patron.destroy 
+    redirect_to patrons_path
   end
 
   private
@@ -47,4 +54,12 @@ class PatronsController < ApplicationController
   def set_patron
     @patron = Patron.find params[:id]
   end
+
+  def set_country_list
+    @country_list = []
+    COUNTRIES.each do |country|
+      @country_list << [country[:term], country[:id]]
+    end
+  end
+
 end

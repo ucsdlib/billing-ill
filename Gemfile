@@ -33,15 +33,14 @@ gem 'money-rails'
 gem 'net-ldap'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '0.9.9'
-gem 'coveralls', require: false
 
 group :development do
-  gem 'sqlite3'
   gem 'spring'
   gem "letter_opener"
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'rspec-rails', '3.1'
   gem 'pry'
   gem 'capybara'
@@ -53,6 +52,12 @@ end
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers', require: false, github: 'thoughtbot/shoulda-matchers', branch: 'master'
+  gem "codeclimate-test-reporter", require: nil
+end
+
+group :staging do
+  gem 'activerecord-postgresql-adapter'
+  gem 'rake', '~> 10.4.0'
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.

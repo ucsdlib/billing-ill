@@ -162,6 +162,22 @@ describe InvoicesController do
     end
   end
 
+  describe "DELETE destroy" do
+    before(:each) do
+        set_current_user
+        @invoice = Fabricate(:invoice)
+        delete :destroy, id: @invoice
+      end
+
+    it "redirects to the invoice index page" do
+      expect(response).to redirect_to invoices_path
+    end
+
+    it "deletes the invoice" do
+      expect(Invoice.count).to eq(0)
+    end
+  end
+
   describe "GET search" do
     before do
       set_current_user
@@ -270,6 +286,12 @@ describe InvoicesController do
       invoice = Fabricate(:invoice, status: "pending")
       get :merge_records
       expect(invoice.reload.status).to eq("submitted")
+    end
+
+    it "updates the submitted_at to current date" do
+      invoice = Fabricate(:invoice, status: "pending")
+      get :merge_records
+      expect(invoice.reload.submitted_at.strftime("%m%y")).to eq(Time.now.strftime("%m%y"))
     end
   end
 end

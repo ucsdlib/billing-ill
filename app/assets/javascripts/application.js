@@ -20,6 +20,15 @@
 
 
 $(function(){
+  // JIRA issue collector
+  jQuery.ajax({
+            url: "https://lib-jira.ucsd.edu:8443/s/570923a7ebac454f838812ae4e331542-T/en_USfs3qxk/64016/6/1.4.25/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?locale=en-US&collectorId=fe10b84c",
+        type: "get",
+    cache: true,
+    dataType: "script"
+  });
+  
+  // homepage search form
   $('.front-search-form-recharge').hide();
   $('.front-search-form-invoice').hide();
   // $('ol.front-search-parent').children().click(function(){
