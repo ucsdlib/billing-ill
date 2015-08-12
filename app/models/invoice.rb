@@ -119,16 +119,16 @@ class Invoice < ActiveRecord::Base
     d_column63_68 = " " * 6
     d_column79_320 = " " * 240
 
-    charge_detail_rows = ""
+    charge_detail = ""
     
     result_arr.each_with_index do |invoice, index|
       charge_amount = convert_invoice_charge(invoice.charge)
       document_num = convert_invoice_num(invoice.invoice_num)
       account_id = process_person_id(invoice)
 
-      charge_detail_rows += "#{d_column1}#{account_id}#{d_column11_51}#{charge_amount}#{d_column63_68}#{document_num}#{d_column79_320}\n"
+      charge_detail += "#{d_column1}#{account_id}#{d_column11_51}#{charge_amount}#{d_column63_68}#{document_num}#{d_column79_320}\n"
     end
-    return charge_detail_rows
+    return charge_detail
   end
   
   def self.get_person_detail_rows
@@ -160,7 +160,7 @@ class Invoice < ActiveRecord::Base
     d_column10_18 = " " * 9
     d_column118_119 = " " * 2
 
-    entity_detail_rows = ""
+    entity_detail = ""
 
     result_arr.each_with_index do |invoice, index|
       if is_entity?(invoice.patron_ar_code)
@@ -168,11 +168,11 @@ class Invoice < ActiveRecord::Base
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
        
-        entity_detail_rows += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
-        entity_detail_rows += process_address(invoice)
+        entity_detail += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
+        entity_detail += process_address(invoice)
       end
     end
-    return entity_detail_rows
+    return entity_detail
   end
 
   def self.convert_invoice_charge(amount)
