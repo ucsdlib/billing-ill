@@ -32,7 +32,7 @@ class Invoice < ActiveRecord::Base
   #delegate :entity_pending_status, to: :patron, prefix: :patron
 
   def self.search_by_patron_name(search_term)
-    return [] if search_term.blank?
+    blank_term(search_term)
 
     if Patron.where(name: search_term).first != nil
       patron_id = Patron.where(name: search_term).first
@@ -43,7 +43,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.search_by_invoice_num(search_term)
-    return [] if search_term.blank?
+    blank_term(search_term)
 
     if where("invoice_num = ?", search_term).first != nil
       
@@ -51,6 +51,10 @@ class Invoice < ActiveRecord::Base
     else
       result = []
     end
+  end
+
+  def self.blank_term(search_term)
+    return [] if search_term.blank?
   end
 
   def self.search_all_pending_status
