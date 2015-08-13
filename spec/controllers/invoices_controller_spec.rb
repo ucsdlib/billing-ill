@@ -313,7 +313,7 @@ describe InvoicesController do
       email_date = Time.now
       file_name = {charge: "file1", entity: "file2", person:"file3" }
       lfile_name = {charge: "lfile1", entity: "lfile2", person:"lfile3" }
-      record_count = {charge: 1, entity: 2, person: 3}
+      record_count = {charge: 5, entity: 3, person: 4}
       AppMailer.send_invoice_email(@user, email_date, file_name, lfile_name, record_count).deliver_now
 
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
