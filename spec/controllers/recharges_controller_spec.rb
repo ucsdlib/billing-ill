@@ -227,6 +227,22 @@ describe RechargesController do
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
     end
 
+    # it "updates the status to submitted" do
+    #   set_current_user
+      
+    #   recharge = Fabricate(:recharge, status: "pending")
+    #   get :ftp_file
+    #   expect(recharge.reload.status).to eq("submitted")
+    # end
+
+    # it "updates the submitted_at to current date" do
+    #   set_current_user
+     
+    #   recharge = Fabricate(:recharge, status: "pending")
+    #   get :ftp_file
+    #   expect(recharge.reload.submitted_at.strftime("%m%y")).to eq(Time.now.strftime("%m%y"))
+    # end
+
     # it "redirects to the recharges index page" do
     #     expect(response).to redirect_to recharges_path
     #   end

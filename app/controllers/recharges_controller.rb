@@ -81,6 +81,10 @@ class RechargesController < ApplicationController
   end
 
   private
+  
+  def batch_update_status
+    batch_update_status_field(Recharge)
+  end
 
   def send_file(file_name)
     local_file_path = "tmp/ftp/" + file_name
@@ -103,9 +107,7 @@ class RechargesController < ApplicationController
     AppMailer.send_recharge_email(current_user, email_date, file_name, record_count).deliver_now
   end
 
-  def batch_update_status
-    batch_update_status_field(Recharge)
-  end
+  
   
   def recharge_params
     params.require(:recharge).permit(:number_copies, :charge, :status, :notes, :fund_id)
