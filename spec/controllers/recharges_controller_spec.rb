@@ -226,4 +226,15 @@ describe RechargesController do
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
     end
   end
+
+  describe "GET create_output" do
+    before(:each) do
+      set_current_user
+    end
+
+    it "render the :plain content template" do
+        get :create_output
+        expect(response.body).to include("LIBRARY RECHARGES")
+    end
+  end
 end
