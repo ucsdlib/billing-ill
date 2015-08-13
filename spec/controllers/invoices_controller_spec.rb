@@ -304,8 +304,9 @@ describe InvoicesController do
     end
   end
 
-  describe "send_email" do
+  describe "GET ftp_file" do
     it "sends an email to the recipient" do
+      get :ftp_file
       ActionMailer::Base.deliveries.clear
       @user = Fabricate(:user, email: "joe@example.com")
       set_current_user(@user)
@@ -319,7 +320,7 @@ describe InvoicesController do
     end
   end
 
-  describe "merge_records" do
+  describe "GET merge_records" do
     before(:each) do
       set_current_user
     end
