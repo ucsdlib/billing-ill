@@ -262,6 +262,17 @@ describe InvoicesController do
     end
   end
 
+  describe "GET create_charge_output" do
+    before(:each) do
+      set_current_user
+    end
+
+    it "render the :plain content template" do
+        get :create_charge_output
+        expect(response.body).to include("CLIBRARY.CHARGE")
+    end
+  end
+
   describe "GET create_person_output" do
     before(:each) do
       set_current_user
