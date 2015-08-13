@@ -32,7 +32,7 @@ class Invoice < ActiveRecord::Base
   #delegate :entity_pending_status, to: :patron, prefix: :patron
 
   def self.search_by_patron_name(search_term)
-    return [] if search_term.blank?
+    blank_term(search_term)
 
     if Patron.where(name: search_term).first != nil
       patron_id = Patron.where(name: search_term).first
@@ -43,7 +43,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.search_by_invoice_num(search_term)
-    return [] if search_term.blank?
+    blank_term(search_term)
 
     if where("invoice_num = ?", search_term).first != nil
       
@@ -51,6 +51,10 @@ class Invoice < ActiveRecord::Base
     else
       result = []
     end
+  end
+
+  def self.blank_term(search_term)
+    return [] if search_term.blank?
   end
 
   def self.search_all_pending_status
@@ -218,19 +222,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.convert_address(input)
-    output = input.blank? ? (" " * 35) : (input + " " *(35 - input.length) )
+    output = convert_format(35, input)
+  end
+
+  def self.convert_zip2(input)
+    output = convert_format(4, input)
+  end
+
+  def self.convert_country(input)
+    output = convert_format(2, input)
   end
 
   def self.convert_city(input)
     output = input + " " *(18 - input.length) 
   end
 
-  def self.convert_zip2(input)
-    output = input.blank? ? (" " * 4) : (input + " " *(4 - input.length))
-  end
-
-  def self.convert_country(input)
-    output = input.blank? ? (" " * 2) : (input + " " *(2 - input.length))
+  def self.convert_format(num, input)
+    output = input.blank? ? (" " * num) : (input + " " *(num - input.length))
   end
 
   def self.is_entity?(input)
