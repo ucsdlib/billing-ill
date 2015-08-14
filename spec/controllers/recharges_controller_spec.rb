@@ -213,8 +213,9 @@ describe RechargesController do
     end
   end
 
-  describe "send_email" do
+  describe "GET ftp_file" do
     it "sends an email to the recipient" do
+      get :ftp_file
       ActionMailer::Base.deliveries.clear
       @user = Fabricate(:user, email: "joe@example.com")
       set_current_user(@user)
@@ -225,6 +226,26 @@ describe RechargesController do
 
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
     end
+
+    # it "updates the status to submitted" do
+    #   set_current_user
+      
+    #   recharge = Fabricate(:recharge, status: "pending")
+    #   get :ftp_file
+    #   expect(recharge.reload.status).to eq("submitted")
+    # end
+
+    # it "updates the submitted_at to current date" do
+    #   set_current_user
+     
+    #   recharge = Fabricate(:recharge, status: "pending")
+    #   get :ftp_file
+    #   expect(recharge.reload.submitted_at.strftime("%m%y")).to eq(Time.now.strftime("%m%y"))
+    # end
+
+    # it "redirects to the recharges index page" do
+    #     expect(response).to redirect_to recharges_path
+    #   end
   end
 
   describe "GET create_output" do

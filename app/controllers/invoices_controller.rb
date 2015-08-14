@@ -124,9 +124,9 @@ class InvoicesController < ApplicationController
 
   def send_email(file_name,lfile_name)
     record_count = {
-                    charge: Invoice.search_all_pending_status.size, 
-                    entity: Invoice.get_entity_count, 
-                    person: Invoice.get_person_count
+                    charge: Invoice.search_all_pending_status.size + 2, 
+                    entity: Invoice.get_entity_count + 2, 
+                    person: Invoice.get_person_count + 2
                    }
     
     email_date = convert_date_mmddyy(Time.now)
