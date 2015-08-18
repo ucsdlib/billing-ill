@@ -8,12 +8,8 @@ class AppMailer < ActionMailer::Base
     @email_date = email_date
     @file_name = file_name
     @record_count = record_count
-    
-    if Rails.env.production?
-     mail to: "act-prodcontrol@ucsd.edu", from: user.email, subject: "ILL Billing Recharge File"
-    else
-     mail to: user.email, from: user.email, subject: "ILL Billing Recharge File" 
-    end
+
+    send_mail_to(user.email, "ILL Billing Recharge File")
   end
 
   def send_invoice_email(user, email_date, file_name, lfile_name, record_count)
@@ -28,11 +24,15 @@ class AppMailer < ActionMailer::Base
     @charge_count = record_count[:charge]
     @entity_count = record_count[:entity]
     @person_count = record_count[:person]
-    
+
+    send_mail_to(user.email, "ILL Billing Invoice File")
+  end
+
+  def send_mail_to(mail_address,subject)
     if Rails.env.production?
-     mail to: "act-prodcontrol@ucsd.edu", from: user.email, subject: "ILL Billing Invoice File"
+     mail to: "act-prodcontrol@ucsd.edu", from: mail_address, subject: subject
     else
-     mail to: user.email, from: user.email, subject: "ILL Billing Invoice File" 
+     mail to: mail_address, from: mail_address, subject: subject 
     end
   end
 end

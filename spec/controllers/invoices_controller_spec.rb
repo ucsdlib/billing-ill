@@ -205,6 +205,11 @@ describe InvoicesController do
       expect(assigns(:search_result)).to eq(nil)
     end
 
+    it "default sets @search_result an invoice array if no option selected" do
+      get :search, search_term: "50002", search_option: ""
+      expect(assigns(:search_result)).to eq([@invoice])
+    end
+
     it "sets @search_count" do
       get :search, search_term: "Joe Doe", search_option: "patron_name"
       expect(assigns(:search_count)).to eq(1)
@@ -257,22 +262,65 @@ describe InvoicesController do
     end
   end
 
-  describe "send_email" do
+  describe "GET create_charge_output" do
+    before(:each) do
+      set_current_user
+    end
+
+    it "render the :plain content template" do
+        get :create_charge_output
+        expect(response.body).to include("CLIBRARY.CHARGE")
+    end
+  end
+
+  describe "GET create_person_output" do
+    before(:each) do
+      set_current_user
+    end
+
+    it "render the :plain content template" do
+        get :create_person_output
+        expect(response.body).to include("CLIBRARY.PERSON")
+    end
+  end
+
+  describe "GET create_entity_output" do
+    before(:each) do
+      set_current_user
+    end
+
+    it "render the :plain content template" do
+        get :create_entity_output
+        expect(response.body).to include("CLIBRARY.ENTITY")
+    end
+  end
+
+  describe "GET create_person_output" do
+    it "render the :plain content template" do
+      # patron = Fabricate(:patron, ar_code: "A23456789")
+      # @invoice = Fabricate(:invoice, patron_id: 1 )
+        
+        expect(response.body).to eq("")
+    end
+  end
+
+  describe "GET ftp_file" do
     it "sends an email to the recipient" do
+      get :ftp_file
       ActionMailer::Base.deliveries.clear
       @user = Fabricate(:user, email: "joe@example.com")
       set_current_user(@user)
       email_date = Time.now
       file_name = {charge: "file1", entity: "file2", person:"file3" }
       lfile_name = {charge: "lfile1", entity: "lfile2", person:"lfile3" }
-      record_count = {charge: 1, entity: 2, person: 3}
+      record_count = {charge: 5, entity: 3, person: 4}
       AppMailer.send_invoice_email(@user, email_date, file_name, lfile_name, record_count).deliver_now
 
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
     end
   end
 
-  describe "merge_records" do
+  describe "GET merge_records" do
     before(:each) do
       set_current_user
     end

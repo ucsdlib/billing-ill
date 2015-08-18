@@ -8,8 +8,7 @@ class FundsController < ApplicationController
 
   def index
     @total_count = Fund.count
-    result_arr = Fund.order(:created_at)
-    @funds = result_arr.page(params[:page]) if !result_arr.blank?
+    @funds = get_all_items(Fund)
   end
 
   def new

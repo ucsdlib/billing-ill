@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?, :convert_date_mmddyy
   
+  def get_all_items(ref_model)
+    result_arr = ref_model.order(:created_at)
+    result = result_arr.page(params[:page]) if !result_arr.blank?
+  end
+
   def get_country_list
   end
   
