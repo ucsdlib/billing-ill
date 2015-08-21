@@ -135,6 +135,29 @@ class Recharge < ActiveRecord::Base
     return file_name
   end
 
+  def self.send_file
+    file_name = create_file
+    local_file_path = "tmp/ftp/" + file_name
+    remote_file_path = Rails.application.secrets.sftp_folder + "/" + file_name
+    server_name = Rails.application.secrets.sftp_server_name
+    user = Rails.application.secrets.sftp_user
+    password = Rails.application.secrets.sftp_password
+
+    Rails.logger.info("Creating SFTP connection")
+    session = Net::SSH.start(server_name, user, :password=> password)
+    sftp=Net::SFTP::Session.new(session).connect!
+    Rails.logger.info("SFTP Connection created, uploading files.")
+    sftp.upload!(local_file_path, remote_file_path)
+    Rails.logger.info("File uploaded, Connection terminated.")
+  end
+
+  def self.send_email(current_user, email_date)
+    file_name = create_file
+    record_count = search_all_pending_status.size + 2
+    
+    AppMailer.send_recharge_email(current_user, email_date, file_name, record_count).deliver_now
+  end
+
   def self.convert_date_yymmdd(cdate)
     cdate.strftime("%y%m%d")
   end
