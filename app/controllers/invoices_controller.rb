@@ -98,15 +98,26 @@ class InvoicesController < ApplicationController
     render plain: content
   end
 
-  def ftp_file
-    charge_file = Invoice.create_charge_file
-    entity_file = Invoice.create_entity_file
-    person_file = Invoice.create_person_file
-    file_name = {charge: charge_file, entity: entity_file, person: person_file}
-    lfile_name = {charge: Invoice.get_charge_lfile_name, entity: Invoice.get_entity_lfile_name, person: Invoice.get_person_lfile_name}
+  # def ftp_file
+  #   charge_file = Invoice.create_charge_file
+  #   entity_file = Invoice.create_entity_file
+  #   person_file = Invoice.create_person_file
+  #   file_name = {charge: charge_file, entity: entity_file, person: person_file}
+  #   lfile_name = {charge: Invoice.get_charge_lfile_name, entity: Invoice.get_entity_lfile_name, person: Invoice.get_person_lfile_name}
 
-    send_file(file_name)
-    send_email(file_name,lfile_name)
+  #   send_file(file_name)
+  #   send_email(file_name,lfile_name)
+
+  #   flash[:notice] = "Your CHARGE, ENTITY and PERSON files are uploaded to the campus server, and the email has been sent to ACT."
+
+  #   redirect_to invoices_path
+  # end
+  
+  def ftp_file
+    email_date = convert_date_mmddyy(Time.now)
+    
+    Invoice.send_file
+    AppMailer.send_invoice_email(current_user, email_date).deliver_now
 
     flash[:notice] = "Your CHARGE, ENTITY and PERSON files are uploaded to the campus server, and the email has been sent to ACT."
 

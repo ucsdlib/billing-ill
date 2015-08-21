@@ -151,13 +151,6 @@ class Recharge < ActiveRecord::Base
     Rails.logger.info("File uploaded, Connection terminated.")
   end
 
-  def self.send_email(current_user, email_date)
-    file_name = create_file
-    record_count = search_all_pending_status.size + 2
-    
-    AppMailer.send_recharge_email(current_user, email_date, file_name, record_count).deliver_now
-  end
-
   def self.convert_date_yymmdd(cdate)
     cdate.strftime("%y%m%d")
   end

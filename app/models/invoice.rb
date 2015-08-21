@@ -355,4 +355,29 @@ class Invoice < ActiveRecord::Base
   def self.convert_to_julian_date
     output = Date.today.strftime("%y") + Date.today.yday.to_s
   end
+
+  def self.send_file
+    tmp_dir = "tmp/ftp/"
+    remote_dir = Rails.application.secrets.sftp_folder + "/"
+
+    local_charge_file_path = tmp_dir + create_charge_file
+    remote_charge_file_path = remote_dir + create_charge_file
+    local_entity_file_path = tmp_dir + create_entity_file
+    remote_entity_file_path = remote_dir + create_entity_file
+    local_person_file_path = tmp_dir + create_person_file
+    remote_person_file_path = remote_dir + create_person_file
+
+    server_name = Rails.application.secrets.sftp_server_name
+    user = Rails.application.secrets.sftp_user
+    password = Rails.application.secrets.sftp_password
+
+    Rails.logger.info("Creating SFTP connection")
+    session=Net::SSH.start(server_name, user, :password=> password)
+    sftp=Net::SFTP::Session.new(session).connect!
+    Rails.logger.info("SFTP Connection created, uploading files.")
+    sftp.upload!(local_charge_file_path, remote_charge_file_path)
+    sftp.upload!(local_entity_file_path, remote_entity_file_path)
+    sftp.upload!(local_person_file_path, remote_person_file_path)
+    Rails.logger.info("File uploaded, Connection terminated.")
+  end
 end

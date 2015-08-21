@@ -71,7 +71,7 @@ class RechargesController < ApplicationController
   def ftp_file
     email_date = convert_date_mmddyy(Time.now)
     Recharge.send_file
-    Recharge.send_email(current_user, email_date)
+    AppMailer.send_recharge_email(current_user, email_date).deliver_now
     batch_update_status
     
     flash[:notice] = "Your recharge file is uploaded to the campus server, and the email has been sent to ACT."
