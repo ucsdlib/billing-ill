@@ -235,9 +235,8 @@ describe RechargesController do
       get :ftp_file
       ActionMailer::Base.deliveries.clear
       email_date = Time.now
-      file_name = "test_file"
-      record_count = 10
-      AppMailer.send_recharge_email(@user, email_date, file_name, record_count).deliver_now
+      
+      AppMailer.send_recharge_email(@user, email_date).deliver_now
 
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
     end
