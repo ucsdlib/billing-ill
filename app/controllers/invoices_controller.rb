@@ -97,21 +97,6 @@ class InvoicesController < ApplicationController
     content = Invoice.get_entity_output
     render plain: content
   end
-
-  # def ftp_file
-  #   charge_file = Invoice.create_charge_file
-  #   entity_file = Invoice.create_entity_file
-  #   person_file = Invoice.create_person_file
-  #   file_name = {charge: charge_file, entity: entity_file, person: person_file}
-  #   lfile_name = {charge: Invoice.get_charge_lfile_name, entity: Invoice.get_entity_lfile_name, person: Invoice.get_person_lfile_name}
-
-  #   send_file(file_name)
-  #   send_email(file_name,lfile_name)
-
-  #   flash[:notice] = "Your CHARGE, ENTITY and PERSON files are uploaded to the campus server, and the email has been sent to ACT."
-
-  #   redirect_to invoices_path
-  # end
   
   def ftp_file
     email_date = convert_date_mmddyy(Time.now)
@@ -132,40 +117,6 @@ class InvoicesController < ApplicationController
   end
   
   private
-
-  def send_email(file_name,lfile_name)
-    record_count = {
-                    charge: Invoice.search_all_pending_status.size + 2, 
-                    entity: Invoice.get_entity_count + 2, 
-                    person: Invoice.get_person_count + 2
-                   }
-    
-    email_date = convert_date_mmddyy(Time.now)
-    AppMailer.send_invoice_email(current_user, email_date, file_name, lfile_name, record_count).deliver_now
-  end
-
-  def send_file(file_name)
-    
-    local_charge_file_path = "tmp/ftp/" + file_name[:charge]
-    remote_charge_file_path = Rails.application.secrets.sftp_folder + "/" + file_name[:charge]
-    local_entity_file_path = "tmp/ftp/" + file_name[:entity]
-    remote_entity_file_path = Rails.application.secrets.sftp_folder + "/" + file_name[:entity]
-    local_person_file_path = "tmp/ftp/" + file_name[:person]
-    remote_person_file_path = Rails.application.secrets.sftp_folder + "/" + file_name[:person]
-
-    server_name = Rails.application.secrets.sftp_server_name
-    user = Rails.application.secrets.sftp_user
-    password = Rails.application.secrets.sftp_password
-
-    Rails.logger.info("Creating SFTP connection")
-    session=Net::SSH.start(server_name, user, :password=> password)
-    sftp=Net::SFTP::Session.new(session).connect!
-    Rails.logger.info("SFTP Connection created, uploading files.")
-    sftp.upload!(local_charge_file_path, remote_charge_file_path)
-    sftp.upload!(local_entity_file_path, remote_entity_file_path)
-    sftp.upload!(local_person_file_path, remote_person_file_path)
-    Rails.logger.info("File uploaded, Connection terminated.")
-  end
 
   def invoice_params
     params.require(:invoice).permit(:invoice_num, :number_prints, :comments, :ill_number, :charge, :status, :invoice_type, :patron_id)
