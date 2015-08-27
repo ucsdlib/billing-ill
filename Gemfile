@@ -33,7 +33,6 @@ gem 'money-rails'
 gem 'net-ldap'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '0.9.9'
-gem 'coveralls', require: false
 
 group :development do
   gem 'spring'
@@ -53,6 +52,7 @@ end
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers', require: false, github: 'thoughtbot/shoulda-matchers', branch: 'master'
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :staging do

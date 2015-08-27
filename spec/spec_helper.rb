@@ -1,11 +1,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'coveralls'
-Coveralls::Output.no_color = true
-Coveralls.wear!
-require 'simplecov'
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+
 require 'rspec/matchers'
 #require 'equivalent-xml'
-SimpleCov.start 'rails'
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)

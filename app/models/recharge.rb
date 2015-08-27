@@ -48,18 +48,39 @@ class Recharge < ActiveRecord::Base
 
   def self.page_count
   end
-  
-  def self.process_output
+
+  ##
+  # Handles mapping for RECHARGE output file
+  #
+
+  def self.get_total_charge
     result_arr = search_all_pending_status
-    
-    # header rows
+    total_charge = 0
+
+    result_arr.each_with_index do |v,i|
+      charge = v.charge
+      total_charge += charge
+    end
+    total_charge
+  end
+
+  def self.process_output
+    content = "#{get_header}#{get_detail}#{get_trailer}"
+  end
+
+  def self.get_header
     h_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "1"
     h_column20_54 = "LIBRARY RECHARGES"+ " " * 18
-    
     transaction_date = convert_date_yyyymmdd(Time.now)
+    document_amount = convert_charge(get_total_charge * 2)
     h_column75_250 = "N" + " " * 175
 
-    # detail_rows
+    header_row = "#{h_column1_19}#{h_column20_54}#{transaction_date}#{document_amount}#{h_column75_250}\n"
+  end
+
+  def self.get_detail
+    result_arr = search_all_pending_status
+    
     d_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "2"
     d_column24_27 = "F510"
     d_column40_76 = "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "D" + "A"
@@ -67,29 +88,28 @@ class Recharge < ActiveRecord::Base
     d_column101_112 = " " * 6 + " " * 6
     d_column123_209 = " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "0000" + "0000" + " " * 8
     d_column220 = " "
-
     detail_rows = ""
-    total_charge = 0
+    
     result_arr.each_with_index do |recharge, index|
       sequence_num = convert_seq_num(index + 1)
-      charge = recharge.charge
-      transaction_amount = convert_charge(charge)
+      transaction_amount = convert_charge(recharge.charge)
       fund_code = recharge.fund_fund_code
       org_code = recharge.fund_org_code
       program_code = recharge.fund_program_code
       index_code = convert_index_code(recharge.fund_index_code)
-      filler_var = convert_date_yyyymmdd(recharge.created_at) + " " * 2
-      total_charge += charge
+      filler_var = convert_date_yyyymmdd(Time.now) + " " * 2
        
       detail_rows += "#{d_column1_19}#{sequence_num}#{d_column24_27}#{transaction_amount}#{d_column40_76}#{fund_code}#{org_code}"
       detail_rows += "#{d_column89_94}#{program_code}#{d_column101_112}#{index_code}#{d_column123_209}#{filler_var}#{d_column220}\n"
     end
-    
-    #final credit row
+    return detail_rows
+  end
+
+  def self.get_trailer
     f_column1_19 = "LIBRARY1" + "01" + "FRLBG551" + "2"
-    f_sequence_num = convert_seq_num(result_arr.size + 1)
+    f_sequence_num = convert_seq_num(pending_status_count + 1)
     f_column24_27 = "F510"
-    total_amount = convert_charge(total_charge)
+    total_amount = convert_charge(get_total_charge)
     f_column40_76 = "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "C" + "A"
     f_column77_112 = " " * 12 + "693900" + " " * 18
     f_column113_122 = " " * 3 + "LIBIL05"  
@@ -98,14 +118,8 @@ class Recharge < ActiveRecord::Base
     f_filler_var = convert_date_yyyymmdd(Time.now) + " " * 2 
     f_column220 = " "
 
-    document_amount = convert_charge(total_charge * 2)
-
-    header_row = "#{h_column1_19}#{h_column20_54}#{transaction_date}#{document_amount}#{h_column75_250}\n"
-    
     final_rows = "#{f_column1_19}#{f_sequence_num}#{f_column24_27}#{total_amount}#{f_column40_76}"
     final_rows += "#{f_column77_112}#{f_column113_122}#{f_column123_154}#{f_column155_209}#{f_filler_var}#{f_column220}"
-
-    content = "#{header_row}#{detail_rows}#{final_rows}"
   end
   
   def self.create_file
@@ -119,6 +133,22 @@ class Recharge < ActiveRecord::Base
     end
 
     return file_name
+  end
+
+  def self.send_file
+    file_name = create_file
+    local_file_path = "tmp/ftp/" + file_name
+    remote_file_path = Rails.application.secrets.sftp_folder + "/" + file_name
+    server_name = Rails.application.secrets.sftp_server_name
+    user = Rails.application.secrets.sftp_user
+    password = Rails.application.secrets.sftp_password
+
+    Rails.logger.info("Creating SFTP connection")
+    session = Net::SSH.start(server_name, user, :password=> password)
+    sftp=Net::SFTP::Session.new(session).connect!
+    Rails.logger.info("SFTP Connection created, uploading files.")
+    sftp.upload!(local_file_path, remote_file_path)
+    Rails.logger.info("File uploaded, Connection terminated.")
   end
 
   def self.convert_date_yymmdd(cdate)

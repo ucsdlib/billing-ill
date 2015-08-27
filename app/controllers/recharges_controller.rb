@@ -12,8 +12,7 @@ class RechargesController < ApplicationController
 
   def index
     @total_count = Recharge.count
-    result_arr = Recharge.order(:created_at)
-    @recharges = result_arr.page(params[:page]) if !result_arr.blank?
+    @recharges = get_all_items(Recharge)
   end
 
   def new
@@ -70,10 +69,9 @@ class RechargesController < ApplicationController
   end
 
   def ftp_file
-    file_name = Recharge.create_file
-    
-    send_file(file_name)
-    send_email(file_name)
+    email_date = convert_date_mmddyy(Time.now)
+    Recharge.send_file
+    AppMailer.send_recharge_email(current_user, email_date).deliver_now
     batch_update_status
     
     flash[:notice] = "Your recharge file is uploaded to the campus server, and the email has been sent to ACT."
@@ -82,28 +80,7 @@ class RechargesController < ApplicationController
   end
 
   private
-
-  def send_file(file_name)
-    local_file_path = "tmp/ftp/" + file_name
-    remote_file_path = Rails.application.secrets.sftp_folder + "/" + file_name
-    server_name = Rails.application.secrets.sftp_server_name
-    user = Rails.application.secrets.sftp_user
-    password = Rails.application.secrets.sftp_password
-
-    Rails.logger.info("Creating SFTP connection")
-    session=Net::SSH.start(server_name, user, :password=> password)
-    sftp=Net::SFTP::Session.new(session).connect!
-    Rails.logger.info("SFTP Connection created, uploading files.")
-    sftp.upload!(local_file_path, remote_file_path)
-    Rails.logger.info("File uploaded, Connection terminated.")
-  end
-
-  def send_email(file_name)
-    record_count = Recharge.search_all_pending_status.size
-    email_date = convert_date_mmddyy(Time.now)
-    AppMailer.send_recharge_email(current_user, email_date, file_name, record_count).deliver_now
-  end
-
+  
   def batch_update_status
     batch_update_status_field(Recharge)
   end
