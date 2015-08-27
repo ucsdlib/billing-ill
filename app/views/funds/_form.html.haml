@@ -4,10 +4,14 @@
       = bootstrap_form_for @fund do |f|
         = render 'shared/content_title', title: title
         %fieldset
-          = f.text_field :index_code, label: "Index Code"
-          = f.text_field :program_code, label: "Program Code"
-          = f.text_field :org_code, label: "Organization Code"
-          = f.text_field :fund_code, label: "Fund code"
+          .required
+            = f.text_field :index_code, label: "Index Code"
+          .required
+            = f.text_field :program_code, label: "Program Code"
+          .required
+            = f.text_field :org_code, label: "Organization Code"
+          .required
+            = f.text_field :fund_code, label: "Fund code"
           = f.text_area :description, label: "Description", rows: 6
         %fieldset.actions.control-group.col-sm-offset-2
           .controls

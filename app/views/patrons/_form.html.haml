@@ -1,19 +1,26 @@
 %section.create.container
   .row
     .col-sm-8.col-sm-offset-1
+
       = bootstrap_form_for @patron do |f|
         = render 'shared/content_title', title: title
         %fieldset
-          = f.text_field :ar_code, label: "AR Code"
-          = f.text_field :name, label: "Name"
+          .required
+            = f.text_field :ar_code, label: "AR Code"
+          .required
+            = f.text_field :name, label: "Name"
           = f.text_field :email_address, label: "Email"
-          = f.text_field :address1, label: "Address 1"
+          .required
+            = f.text_field :address1, label: "Address 1"
           = f.text_field :address2, label: "Address 2"
           = f.text_field :address3, label: "Address 3"
           = f.text_field :address4, label: "Address 4"
-          = f.text_field :city, label: "City"
-          = f.text_field :state, label: "State"
-          = f.text_field :zip1, label: "Zip 1"
+          .required
+            = f.text_field :city, label: "City"
+          .required
+            = f.text_field :state, label: "State"
+          .required
+            = f.text_field :zip1, label: "Zip 1"
           = f.text_field :zip2, label: "Zip 2"
           - if @patron.new_record?
             = f.select :country_code, @country_list, {include_blank: 'Choose Country'}, { label: "Country" }
