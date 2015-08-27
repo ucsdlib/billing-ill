@@ -3,6 +3,7 @@
     .col-sm-8.col-sm-offset-1
       = bootstrap_form_for @invoice do |f|
         = render 'shared/content_title', title: "Create a New Invoice" 
+        = render 'shared/error_messages', obj: @invoice
         %fieldset
           = f.hidden_field :invoice_num, value: Invoice.count + 50001
           .required

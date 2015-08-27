@@ -3,6 +3,7 @@
     .col-sm-8.col-sm-offset-1
       = bootstrap_form_for @fund do |f|
         = render 'shared/content_title', title: title
+        = render 'shared/error_messages', obj: @fund
         %fieldset
           .required
             = f.text_field :index_code, label: "Index Code"
