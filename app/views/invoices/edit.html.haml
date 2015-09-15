@@ -3,15 +3,22 @@
     .col-sm-8.col-sm-offset-1
       = bootstrap_form_for @invoice do |f|
         = render 'shared/content_title', title: "Edit a Invoice" 
+        = render 'shared/error_messages', obj: @invoice
         %fieldset
           = f.hidden_field :invoice_num, value: @invoice.invoice_num
-          = f.select :invoice_type, options_for_select(["Electronic PhotoCopy", "Book Loan"], selected: @selected_type)
-          = f.text_field :number_prints, label: "Number of Prints"
-          = f.text_field :charge, label: "Charge"
-          = f.select :status, options_for_select(["active", "pending"], selected: @selected_status)
+          .required
+            = f.select :invoice_type, options_for_select(["Electronic PhotoCopy", "Book Loan"], selected: @selected_type)
+          .required
+            = f.text_field :number_prints, label: "Number of Prints"
+          .required
+            = f.text_field :charge, label: "Charge"
+          .required
+            = f.select :status, options_for_select(["active", "pending"], selected: @selected_status)
           = f.text_field :ill_number, label: "ILL Number"
-          = f.text_area :comments, label: "Comments", rows: 6
-          = f.select :patron_id, options_for_select(@patron_list, selected: @selected_patron), { label: "Patron Name" }
+          .required
+            = f.text_area :comments, label: "Comments", rows: 6
+          .required
+            = f.select :patron_id, options_for_select(@patron_list, selected: @selected_patron), { label: "Patron Name" }
         %fieldset.actions.control-group.col-sm-offset-2
           .controls
             %input(type="submit" value="Save" class="btn btn-primary")

@@ -213,41 +213,6 @@ describe RechargesController do
     end
   end
 
-  describe "GET ftp_file" do
-    it "sends an email to the recipient" do
-      get :ftp_file
-      ActionMailer::Base.deliveries.clear
-      @user = Fabricate(:user, email: "joe@example.com")
-      set_current_user(@user)
-      email_date = Time.now
-      file_name = "test_file"
-      record_count = 10
-      AppMailer.send_recharge_email(@user, email_date, file_name, record_count).deliver_now
-
-      expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
-    end
-
-    # it "updates the status to submitted" do
-    #   set_current_user
-      
-    #   recharge = Fabricate(:recharge, status: "pending")
-    #   get :ftp_file
-    #   expect(recharge.reload.status).to eq("submitted")
-    # end
-
-    # it "updates the submitted_at to current date" do
-    #   set_current_user
-     
-    #   recharge = Fabricate(:recharge, status: "pending")
-    #   get :ftp_file
-    #   expect(recharge.reload.submitted_at.strftime("%m%y")).to eq(Time.now.strftime("%m%y"))
-    # end
-
-    # it "redirects to the recharges index page" do
-    #     expect(response).to redirect_to recharges_path
-    #   end
-  end
-
   describe "GET create_output" do
     before(:each) do
       set_current_user
@@ -256,6 +221,48 @@ describe RechargesController do
     it "render the :plain content template" do
         get :create_output
         expect(response.body).to include("LIBRARY RECHARGES")
+    end
+  end
+
+  describe "GET ftp_file" do
+    before do
+      @user = Fabricate(:user, email: "joe@example.com")
+      set_current_user(@user)
+      expect(Recharge).to receive(:send_file)
+    end
+
+    it "sends an email to the recipient" do
+      get :ftp_file
+      ActionMailer::Base.deliveries.clear
+      email_date = Time.now
+      
+      AppMailer.send_recharge_email(@user, email_date).deliver_now
+
+      expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
+    end
+    
+    it "updates the status to submitted" do
+      fund = Fabricate(:fund)
+      recharge = Fabricate(:recharge, status: "pending", fund: fund)
+      get :ftp_file
+      expect(recharge.reload.status).to eq("submitted")
+    end
+
+    it "updates the submitted_at to current date" do
+      fund = Fabricate(:fund)
+      recharge = Fabricate(:recharge, status: "pending", fund: fund)
+      get :ftp_file
+      expect(recharge.reload.submitted_at.strftime("%m%y")).to eq(Time.now.strftime("%m%y"))
+    end
+
+    it "redirects to the recharges index page" do
+        get :ftp_file
+        expect(response).to redirect_to recharges_path
+    end
+
+    it "sets the notice" do
+      get :ftp_file
+      expect(flash[:notice]).not_to be_blank
     end
   end
 end

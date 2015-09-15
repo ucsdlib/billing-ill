@@ -1,1 +1,12 @@
-= render 'form', title: "Edit a Patron"
+%section.create.container
+  .row
+    .col-sm-8.col-sm-offset-1
+      = bootstrap_form_for @patron do |f|
+        = render 'shared/content_title', title: "Edit a Patron"
+        = render 'shared/error_messages', obj: @patron
+        = render 'form', f: f
+        = f.select :country_code, options_for_select(@country_list, selected: @selected_country), { label: "Country" }
+        %fieldset.actions.control-group.col-sm-offset-2
+          .controls
+            %input(type="submit" value="Save" class="btn btn-primary")
+            %input(type="reset" value="Cancel" class="btn btn-default")

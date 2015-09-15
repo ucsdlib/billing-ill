@@ -305,18 +305,29 @@ describe InvoicesController do
   end
 
   describe "GET ftp_file" do
+    before do
+      @user = Fabricate(:user, email: "joe@example.com")
+      set_current_user(@user)
+      expect(Invoice).to receive(:send_file)
+    end
+
     it "sends an email to the recipient" do
       get :ftp_file
       ActionMailer::Base.deliveries.clear
-      @user = Fabricate(:user, email: "joe@example.com")
-      set_current_user(@user)
       email_date = Time.now
-      file_name = {charge: "file1", entity: "file2", person:"file3" }
-      lfile_name = {charge: "lfile1", entity: "lfile2", person:"lfile3" }
-      record_count = {charge: 5, entity: 3, person: 4}
-      AppMailer.send_invoice_email(@user, email_date, file_name, lfile_name, record_count).deliver_now
+      AppMailer.send_invoice_email(@user, email_date).deliver_now
 
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
+    end
+
+    it "redirects to the invoice index page" do
+        get :ftp_file
+        expect(response).to redirect_to invoices_path
+    end
+
+    it "sets the notice" do
+      get :ftp_file
+      expect(flash[:notice]).not_to be_blank
     end
   end
 

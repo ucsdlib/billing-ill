@@ -103,3 +103,23 @@ end
       expect(Recharge.convert_charge(0.50)).to eq("000000000050")
     end
   end
+
+  describe "send_file" do
+    it "successfully sends file" do
+
+      session_mock = double("a new session")
+      connect_mock = double("sftp connection")
+      upload_mock = double("sftp upload")
+
+      expect(Rails.application.secrets).to receive(:sftp_folder).and_return("sftp_folder")
+      expect(Rails.application.secrets).to receive(:sftp_server_name).and_return("sftp_server_name")
+      expect(Rails.application.secrets).to receive(:sftp_user).and_return("sftp_user")
+      expect(Rails.application.secrets).to receive(:sftp_password).and_return("sftp_password")
+      expect(Net::SSH).to receive(:start).with("sftp_server_name", "sftp_user", :password=> "sftp_password").and_return(session_mock)
+      expect(Net::SFTP::Session).to receive(:new).with(session_mock).and_return(connect_mock)
+      expect(connect_mock).to receive(:connect!).and_return(upload_mock)
+      expect(upload_mock).to receive(:upload!)
+
+      Recharge.send_file
+    end 
+  end
