@@ -4,7 +4,9 @@ describe User do
 
   describe ".find_or_create_for_developer" do
     it "should create a User for first time user" do
-      user = User.find_or_create_for_developer
+      token = { 'info' => { 'email' => nil, 'name' => nil } }
+      token.stub(:uid => "1", :provider => "developer")
+      user = User.find_or_create_for_developer(token)
 
       user.should be_persisted
       user.provider.should == "developer"
@@ -13,9 +15,10 @@ describe User do
     end
 
     it "should reuse an existing User if the access token matches" do
-      user = User.find_or_create_for_developer
-      lambda { User.find_or_create_for_developer }.should_not change(User, :count) 
-    
+      token = { 'info' => { 'email' => nil, 'name' => nil } }
+      token.stub(:uid => "1", :provider => "developer")
+      user = User.find_or_create_for_developer(token)   
+      lambda { User.find_or_create_for_developer(token) }.should_not change(User, :count)
     end
   end
 

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   # dummy auth for developer environment
-  def self.find_or_create_for_developer
+  def self.find_or_create_for_developer(access_token)
      uid = 1
      email = "developer@ucsd.edu"
      provider = "developer"
@@ -40,15 +40,7 @@ class User < ActiveRecord::Base
     
     result = ""
 
-    ldap = Net::LDAP.new  :host => Rails.application.secrets.ldap_host, 
-                          :port => Rails.application.secrets.ldap_port, 
-                          :encryption => :simple_tls,
-                          :base => Rails.application.secrets.ldap_base, 
-                          :auth => {
-                            :method => :simple,
-                            :username => Rails.application.secrets.ldap_username, 
-                            :password => Rails.application.secrets.ldap_password 
-                      }
+    ldap = get_ldap_connection
 
     result_attrs = ["sAMAccountName"]
     search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
@@ -63,6 +55,18 @@ class User < ActiveRecord::Base
     get_ldap_response(ldap)
 
     return result
+  end
+
+  def self.get_ldap_connection
+    ldap = Net::LDAP.new  :host => Rails.application.secrets.ldap_host, 
+                          :port => Rails.application.secrets.ldap_port, 
+                          :encryption => :simple_tls,
+                          :base => Rails.application.secrets.ldap_base, 
+                          :auth => {
+                            :method => :simple,
+                            :username => Rails.application.secrets.ldap_username, 
+                            :password => Rails.application.secrets.ldap_password 
+                      }
   end
 
   def self.get_ldap_response(ldap)
