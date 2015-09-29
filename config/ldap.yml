@@ -1,0 +1,10 @@
+pontos:
+  host: Rails.application.secrets.ldap_host
+  port: Rails.application.secrets.ldap_port
+  username: Rails.application.secrets.ldap_username
+  password: Rails.application.secrets.ldap_password
+  group_base: OU=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU
+  base: OU=Users,OU=University Library,DC=AD,DC=UCSD,DC=EDU
+  uid: sAMAccountName
+
+  
