@@ -293,6 +293,7 @@ DEPENDENCIES
   launchy
   letter_opener
   money-rails
+  net-ldap
   net-sftp
   omniauth
   omniauth-shibboleth
