@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     lookup_group(uid) == uid ? true : false
   end
 
-  def self.lookup_group(uid)
+  def self.lookup_group(search_param)
     result = ""
 
     ldap = Hydra::LDAP.connection
