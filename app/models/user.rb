@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
  #    return result
  # end
 
- def groups_for_user(username, group_attribute)
+ def self.groups_for_user(username, group_attribute)
    dn = "CN=#{username},#{Hydra::LDAP.ldap_config[:base]}"
    filter=Net::LDAP::Filter.construct("(&(objectCategory=group)(member=#{dn}))")
    results = Hydra::LDAP.groups_for_user(filter,group_attribute) { |result|
