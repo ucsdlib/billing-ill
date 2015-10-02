@@ -38,12 +38,6 @@ class PatronsController < ApplicationController
     end
   end
 
-  def destroy
-    patron = Patron.find(params[:id])
-    patron.destroy 
-    redirect_to patrons_path
-  end
-
   private
 
   def patron_params
