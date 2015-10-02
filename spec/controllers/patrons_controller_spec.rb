@@ -160,21 +160,4 @@ describe PatronsController do
       end
     end
   end
-
-  describe "DELETE destroy" do
-    before(:each) do
-        set_current_user
-        @patron = Fabricate(:patron)
-        delete :destroy, id: @patron
-      end
-
-    it "redirects to the patron index page" do
-      expect(response).to redirect_to patrons_path
-    end
-
-    it "deletes the patron" do
-      expect(Patron.count).to eq(0)
-    end
-  end
-
 end
