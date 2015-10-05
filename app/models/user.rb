@@ -36,28 +36,28 @@ class User < ActiveRecord::Base
     lookup_group(uid) == uid ? true : false
   end
 
-  def self.lookup_group(search_param)
-    result = ""
+  # def self.lookup_group(search_param)
+  #   result = ""
 
-    ldap = Hydra::LDAP.connection
-    puts "ldap is: " + ldap.to_yaml
+  #   ldap = Hydra::LDAP.connection
+  #   puts "ldap is: " + ldap.to_yaml
 
-    result_attrs = ["sAMAccountName"]
-    search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
-    category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
-    member_filter = Net::LDAP::Filter.eq("memberof", "CN=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU")
-    s_c_filter = Net::LDAP::Filter.join(search_filter, category_filter)
-    composite_filter = Net::LDAP::Filter.join(s_c_filter, member_filter)
+  #   result_attrs = ["sAMAccountName"]
+  #   search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
+  #   category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
+  #   member_filter = Net::LDAP::Filter.eq("memberof", "CN=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU")
+  #   s_c_filter = Net::LDAP::Filter.join(search_filter, category_filter)
+  #   composite_filter = Net::LDAP::Filter.join(s_c_filter, member_filter)
 
-    puts "filter is: " + composite_filter.to_yaml
+  #   puts "filter is: " + composite_filter.to_yaml
 
-    ldap.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
-       result = item.sAMAccountName.first}
+  #   ldap.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
+  #      result = item.sAMAccountName.first}
 
-    get_ldap_response(ldap)
+  #   get_ldap_response(ldap)
 
-    return result
-  end
+  #   return result
+  # end
 
  
 
@@ -72,26 +72,26 @@ class User < ActiveRecord::Base
 
  # end
   
-  # def self.lookup_group(search_param)
+  def self.lookup_group(search_param)
     
-  #   result = ""
+    result = ""
 
-  #   ldap = get_ldap_connection
+    ldap = get_ldap_connection
 
-  #   result_attrs = ["sAMAccountName"]
-  #   search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
-  #   category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
-  #   member_filter = Net::LDAP::Filter.eq("memberof", "CN=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU")
-  #   s_c_filter = Net::LDAP::Filter.join(search_filter, category_filter)
-  #   composite_filter = Net::LDAP::Filter.join(s_c_filter, member_filter)
+    result_attrs = ["sAMAccountName"]
+    search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
+    category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
+    member_filter = Net::LDAP::Filter.eq("memberof", "CN=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU")
+    s_c_filter = Net::LDAP::Filter.join(search_filter, category_filter)
+    composite_filter = Net::LDAP::Filter.join(s_c_filter, member_filter)
 
-  #   ldap.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
-  #      result = item.sAMAccountName.first}
+    ldap.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
+       result = item.sAMAccountName.first}
 
-  #   get_ldap_response(ldap)
+    get_ldap_response(ldap)
 
-  #   return result
-  # end
+    return result
+  end
 
   def self.get_ldap_connection
     ldap = Net::LDAP.new  :host => Rails.application.secrets.ldap_host, 
