@@ -1,17 +1,25 @@
-pontos:
+defaults: &defaults
   host: <%= Rails.application.secrets[:ldap_host] %>
   port: <%= Rails.application.secrets[:ldap_port] %>
   username: <%= Rails.application.secrets[:ldap_username] %>
   password:  <%= Rails.application.secrets[:ldap_password] %>
   base: <%= Rails.application.secrets[:ldap_base] %>
-  group_base: CN=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU
+  group_base: <%= Rails.application.secrets[:ldap_group_base] %>
+
+pontos:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
 
 development:
-  host: xxx
-  port: xxx
-  username: xxxx
-  password: xxxx
-  base: xxxx
-  group_base: xxxx
+  <<: *defaults
+
+test:
+  <<: *defaults
+  
   
 

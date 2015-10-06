@@ -37,8 +37,7 @@ class User < ActiveRecord::Base
   
   def self.lookup_group(search_param)
     result = ""
-    ldap = get_ldap_connection
-
+    ldap = get_ldap_connection 
     result_attrs = ["sAMAccountName"]
     composite_filter = Net::LDAP::Filter.construct("(&(sAMAccountName=#{search_param})(objectcategory=user)(memberof=#{ldap_group_base}))")
     
@@ -46,11 +45,10 @@ class User < ActiveRecord::Base
        result = item.sAMAccountName.first}
     
     get_ldap_response(ldap)
-
-    return result
+    result
   end
 
-  def self.get_ldap_connection
+  def self.get_ldap_connection 
       @ldap_conn ||= Net::LDAP.new(ldap_connection_config)
   end
 
