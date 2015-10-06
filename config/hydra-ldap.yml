@@ -6,3 +6,12 @@ pontos:
   base: OU=University Library,DC=AD,DC=UCSD,DC=EDU
   group_base: OU=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=ED
   uid: sAMAccountName
+
+development:
+  host: ldap.ad.ucsd.edu
+  port: "636"
+  username: lib-LDAP@ad.ucsd.edu
+  password: Roow1pee
+  base: OU=University Library,DC=AD,DC=UCSD,DC=EDU
+  group_base: OU=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=ED
+  uid: sAMAccountName
