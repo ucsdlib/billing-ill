@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
     result_attrs = ["sAMAccountName"]
     search_filter = Net::LDAP::Filter.eq("sAMAccountName", search_param)
     category_filter = Net::LDAP::Filter.eq("objectcategory", "user")
-    member_filter = Net::LDAP::Filter.eq("memberof", "CN=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU")
+    member_filter = Net::LDAP::Filter.eq("memberof", ldap_group_base)
     s_c_filter = Net::LDAP::Filter.join(search_filter, category_filter)
     composite_filter = Net::LDAP::Filter.join(s_c_filter, member_filter)
 
@@ -117,6 +117,11 @@ class User < ActiveRecord::Base
     root = Rails.root || '.'
     env = Rails.env || 'test'
     @ldap_config ||= YAML::load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env]
+  end
+
+  def self.ldap_group_base
+    yml = ldap_config
+    return yml["group_base"]
   end
 
   # def self.get_ldap_connection

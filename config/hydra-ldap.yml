@@ -4,8 +4,7 @@ pontos:
   username: lib-LDAP@ad.ucsd.edu
   password: Roow1pee
   base: OU=University Library,DC=AD,DC=UCSD,DC=EDU
-  group_base: OU=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=ED
-  uid: sAMAccountName
+  group_base: CN=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=EDU
 
 development:
   host: xxxxxx
@@ -14,4 +13,4 @@ development:
   password: xxx
   base: OU=University Library,DC=AD,DC=UCSD,DC=EDU
   group_base: OU=ILL Billing,OU=Groups,OU=University Library,DC=AD,DC=UCSD,DC=ED
-  uid: sAMAccountName
+  
