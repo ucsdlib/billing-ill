@@ -93,43 +93,44 @@ class User < ActiveRecord::Base
     return result
   end
 
-  # def self.connection
-  #     @ldap_conn ||= Net::LDAP.new(ldap_connection_config)
-  # end
-
-  # def self.ldap_connection_config
-  #   return @ldap_connection_config if @ldap_connection_config
-  #   @ldap_connection_config = {}
-  #   yml = ldap_config
-  #   @ldap_connection_config[:host] = yml[:host]
-  #   @ldap_connection_config[:port] = yml[:port]
-  #   if yml[:username] && yml[:password]
-  #     @ldap_connection_config[:auth]={:method=>:simple}
-  #     @ldap_connection_config[:auth][:username] = yml[:username]
-  #     @ldap_connection_config[:auth][:password] = yml[:password]
-  #     @ldap_connection_config[:base] = yml[:base]
-  #   end
-  #   @ldap_connection_config
-  # end
-
-  # def self.ldap_config
-  #   root = Rails.root || '.'
-  #   env = Rails.env || 'test'
-  #   #@ldap_config ||= YAML::load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env]
-  #   @ldap_config = YAML.load_file("#{Rails.root}/config/hydra-ldap.yml")
-  # end
-
   def self.get_ldap_connection
-    ldap = Net::LDAP.new  :host => Rails.application.secrets.ldap_host, 
-                          :port => Rails.application.secrets.ldap_port, 
-                          :encryption => :simple_tls,
-                          :base => Rails.application.secrets.ldap_base, 
-                          :auth => {
-                            :method => :simple,
-                            :username => Rails.application.secrets.ldap_username, 
-                            :password => Rails.application.secrets.ldap_password 
-                      }
+      @ldap_conn ||= Net::LDAP.new(ldap_connection_config)
   end
+
+  def self.ldap_connection_config
+    return @ldap_connection_config if @ldap_connection_config
+    @ldap_connection_config = {}
+    yml = ldap_config
+    @ldap_connection_config[:host] = yml["host"]
+    @ldap_connection_config[:port] = yml["port"]
+    @ldap_connection_config[:encryption] = :simple_tls
+    if yml["username"] && yml["password"]
+      @ldap_connection_config[:auth]={:method=>:simple}
+      @ldap_connection_config[:auth][:username] = yml["username"]
+      @ldap_connection_config[:auth][:password] = yml["password"]
+      @ldap_connection_config[:base] = yml["base"]
+    end
+    @ldap_connection_config
+  end
+
+  def self.ldap_config
+    root = Rails.root || '.'
+    env = Rails.env || 'test'
+    @ldap_config ||= YAML::load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env]
+  end
+
+  # def self.get_ldap_connection
+
+  #   ldap = Net::LDAP.new  :host => Rails.application.secrets.ldap_host, 
+  #                         :port => Rails.application.secrets.ldap_port, 
+  #                         :encryption => :simple_tls,
+  #                         :base => Rails.application.secrets.ldap_base, 
+  #                         :auth => {
+  #                           :method => :simple,
+  #                           :username => Rails.application.secrets.ldap_username, 
+  #                           :password => Rails.application.secrets.ldap_password 
+  #                     }
+  # end
 
   def self.get_ldap_response(ldap)
     msg = "Response Code: #{ ldap.get_operation_result.code }, Message: #{ ldap.get_operation_result.message }"
