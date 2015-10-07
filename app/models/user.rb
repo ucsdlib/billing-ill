@@ -37,11 +37,12 @@ class User < ActiveRecord::Base
   
   def self.lookup_group(search_param)
     result = ""
-    ldap = get_ldap_connection 
+   # ldap = Hydra::LDAP.connection
+   # ldap = get_ldap_connection
     result_attrs = ["sAMAccountName"]
     composite_filter = Net::LDAP::Filter.construct("(&(sAMAccountName=#{search_param})(objectcategory=user)(memberof=#{ldap_group_base}))")
     
-    ldap.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
+    Hydra::LDAP.connection.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
        result = item.sAMAccountName.first}
     
     get_ldap_response(ldap)
@@ -56,7 +57,7 @@ class User < ActiveRecord::Base
     return @ldap_connection_config if @ldap_connection_config
     @ldap_connection_config = {}
     yml = ldap_config
-    @ldap_connection_config[:host] = yml["host"]
+    @ldap_connection_config[:host] = yml[:host]
     @ldap_connection_config[:port] = yml["port"]
     @ldap_connection_config[:encryption] = :simple_tls
     if yml["username"] && yml["password"]
@@ -71,7 +72,7 @@ class User < ActiveRecord::Base
   def self.ldap_config
     root = Rails.root || '.'
     env = Rails.env || 'test'
-    @ldap_config ||= YAML::load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env]
+    @ldap_config ||= YAML::load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env].with_indifferent_access
   end
 
   def self.ldap_group_base

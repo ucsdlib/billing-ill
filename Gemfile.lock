@@ -116,6 +116,9 @@ GEM
       haml (>= 4.0.0.rc.1)
       hpricot (~> 0.8.6)
       ruby_parser (~> 3.1.1)
+    hydra-ldap (0.1.0)
+      net-ldap
+      rails
     i18n (0.7.0)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
@@ -282,6 +285,7 @@ DEPENDENCIES
   fabrication
   faker
   haml-rails
+  hydra-ldap
   jbuilder
   jquery-rails (= 4.0.5)
   jquery-turbolinks
