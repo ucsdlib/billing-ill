@@ -37,12 +37,11 @@ class User < ActiveRecord::Base
   
   def self.lookup_group(search_param)
     result = ""
-   # ldap = Hydra::LDAP.connection
-   # ldap = get_ldap_connection
+    ldap = get_ldap_connection  #calling Hydra::LDAP.connection is not working, using local implementation instead.
     result_attrs = ["sAMAccountName"]
     composite_filter = Net::LDAP::Filter.construct("(&(sAMAccountName=#{search_param})(objectcategory=user)(memberof=#{ldap_group_base}))")
     
-    Hydra::LDAP.connection.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
+    ldap.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
        result = item.sAMAccountName.first}
     
     get_ldap_response(ldap)
