@@ -35,9 +35,6 @@
                     = invoice.patron_name
                   %td
                     = convert_date_mmddyy(invoice.created_at)
-                  %td
-                    = link_to invoice, method: :delete do
-                      %i.glyphicon.glyphicon-remove
                   - if invoice.status != "submitted"
                     %td
                       = link_to "edit", edit_invoice_path(invoice.id)
