@@ -33,6 +33,7 @@ gem 'money-rails'
 gem 'net-ldap'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '0.9.9'
+gem 'hydra-ldap'
 
 group :development do
   gem 'spring'
