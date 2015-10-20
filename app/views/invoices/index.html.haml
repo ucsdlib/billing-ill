@@ -35,8 +35,12 @@
                     = invoice.patron_name
                   %td
                     = convert_date_mmddyy(invoice.created_at)
+                  %td
+                    = link_to create_bill_invoice_path(invoice.id), method: :get do
+                      %i.glyphicon.glyphicon-download 
                   - if invoice.status != "submitted"
                     %td
-                      = link_to "edit", edit_invoice_path(invoice.id)
+                      = link_to edit_invoice_path(invoice.id) do
+                        %i.glyphicon.glyphicon-pencil 
           .pagination-wrapper
             = paginate @invoices if @invoices
