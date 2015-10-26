@@ -33,7 +33,8 @@
                   %td 
                     = convert_date_mmddyy(recharge.created_at)
                   %td
-                    = link_to "edit", edit_recharge_path(recharge.id)
+                    = link_to edit_recharge_path(recharge.id) do
+                      %i.glyphicon.glyphicon-pencil
           = paginate @current_batch_result if @current_batch_result
         %fieldset.actions.control-group.col-sm-offset-2
         .controls
