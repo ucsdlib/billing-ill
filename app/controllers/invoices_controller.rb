@@ -1,3 +1,4 @@
+# encoding: utf-8
 #---
 # @author hweng@ucsd.edu
 #---
@@ -36,7 +37,7 @@ class InvoicesController < ApplicationController
   def update
     
     if @invoice.update(invoice_params)
-      flash[:notice] = "Your invoice was updated"
+      flash[:notice] = 'Your invoice was updated'
       redirect_to new_invoice_path
     else
       render :edit
@@ -52,9 +53,9 @@ class InvoicesController < ApplicationController
   def search
     result_arr = []
     
-    if params[:search_option]== "patron_name"
+    if params[:search_option]== 'patron_name'
       result_arr = Invoice.search_by_patron_name(params[:search_term])
-    elsif params[:search_option]== "invoice_num"
+    elsif params[:search_option]== 'invoice_num'
       result_arr = Invoice.search_by_invoice_num(params[:search_term])
     else
       result_arr = Invoice.search_by_invoice_num(params[:search_term])
@@ -74,8 +75,8 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "invoice",
-               template: "invoices/create_bill.html.haml",
+        render pdf: 'invoice',
+               template: 'invoices/create_bill.html.haml',
                layout: 'pdf',
                show_as_html: params[:debug].present? # renders html version if you set debug=true in URL
                #:save_to_file => Rails.root.join('pdfs', 'invoice.pdf')
@@ -104,7 +105,7 @@ class InvoicesController < ApplicationController
     Invoice.send_file
     AppMailer.send_invoice_email(current_user, email_date).deliver_now
 
-    flash[:notice] = "Your CHARGE, ENTITY and PERSON files are uploaded to the campus server, and the email has been sent to ACT."
+    flash[:notice] = 'Your CHARGE, ENTITY and PERSON files are uploaded to the campus server, and the email has been sent to ACT.'
 
     redirect_to invoices_path
   end
@@ -112,7 +113,7 @@ class InvoicesController < ApplicationController
   def merge_records
      batch_update_status_field(Invoice)
 
-     flash[:notice] = "The current batch records have been merged."
+     flash[:notice] = 'The current batch records have been merged.'
      redirect_to invoices_path
   end
   
@@ -127,7 +128,7 @@ class InvoicesController < ApplicationController
   end
 
   def set_patron_list
-    @patron_list = Patron.order("name").map{|patron|[patron.name,patron.id]}
+    @patron_list = Patron.order('name').map{|patron|[patron.name,patron.id]}
   end
 
   def set_current_batch

@@ -1,3 +1,4 @@
+# encoding: utf-8
 #---
 # @author hweng@ucsd.edu
 #---
@@ -22,9 +23,9 @@ class User < ActiveRecord::Base
   # dummy auth for developer environment
   def self.find_or_create_for_developer(access_token)
      uid = 1
-     email = "developer@ucsd.edu"
-     provider = "developer"
-     name = "DEVELOPER"
+     email = 'developer@ucsd.edu'
+     provider = 'developer'
+     name = 'DEVELOPER'
     
     u = User.where(:uid => uid,:provider => provider).first || User.create(:uid => uid,:provider => provider, :email => email, :full_name => name)
   end
@@ -36,9 +37,9 @@ class User < ActiveRecord::Base
   end
   
   def self.lookup_group(search_param)
-    result = ""
+    result = ''
     ldap = get_ldap_connection  #calling Hydra::LDAP.connection is not working, using local implementation instead.
-    result_attrs = ["sAMAccountName"]
+    result_attrs = ['sAMAccountName']
     composite_filter = Net::LDAP::Filter.construct("(&(sAMAccountName=#{search_param})(objectcategory=user)(memberof=#{ldap_group_base}))")
     
     ldap.search(:filter => composite_filter, :attributes => result_attrs, :return_result => false) { |item| 
@@ -57,13 +58,13 @@ class User < ActiveRecord::Base
     @ldap_connection_config = {}
     yml = ldap_config
     @ldap_connection_config[:host] = yml[:host]
-    @ldap_connection_config[:port] = yml["port"]
+    @ldap_connection_config[:port] = yml['port']
     @ldap_connection_config[:encryption] = :simple_tls
-    if yml["username"] && yml["password"]
+    if yml['username'] && yml['password']
       @ldap_connection_config[:auth]={:method=>:simple}
-      @ldap_connection_config[:auth][:username] = yml["username"]
-      @ldap_connection_config[:auth][:password] = yml["password"]
-      @ldap_connection_config[:base] = yml["base"]
+      @ldap_connection_config[:auth][:username] = yml['username']
+      @ldap_connection_config[:auth][:password] = yml['password']
+      @ldap_connection_config[:base] = yml['base']
     end
     @ldap_connection_config
   end
@@ -76,7 +77,7 @@ class User < ActiveRecord::Base
 
   def self.ldap_group_base
     yml = ldap_config
-    return yml["group_base"]
+    return yml['group_base']
   end
 
   def self.get_ldap_response(ldap)

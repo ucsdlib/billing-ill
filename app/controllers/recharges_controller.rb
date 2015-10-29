@@ -1,3 +1,4 @@
+# encoding: utf-8
 #---
 # @author hweng@ucsd.edu
 #---
@@ -37,7 +38,7 @@ class RechargesController < ApplicationController
   def update
 
     if @recharge.update(recharge_params)
-      flash[:notice] = "Your recharge was updated"
+      flash[:notice] = 'Your recharge was updated'
       redirect_to new_recharge_path
     else
       render :edit
@@ -74,7 +75,7 @@ class RechargesController < ApplicationController
     AppMailer.send_recharge_email(current_user, email_date).deliver_now
     batch_update_status
     
-    flash[:notice] = "Your recharge file is uploaded to the campus server, and the email has been sent to ACT."
+    flash[:notice] = 'Your recharge file is uploaded to the campus server, and the email has been sent to ACT.'
 
     redirect_to recharges_path
   end
@@ -94,6 +95,6 @@ class RechargesController < ApplicationController
   end
 
   def set_index_list
-    @index_list = Fund.order("index_code").map{|fund|[fund.index_code,fund.id]}
+    @index_list = Fund.order('index_code').map{|fund|[fund.index_code,fund.id]}
   end
 end

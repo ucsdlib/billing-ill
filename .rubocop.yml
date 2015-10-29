@@ -1,0 +1,27 @@
+require: rubocop-rspec
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  RunRailsCops: true
+  DisplayCopNames: true
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'app/assets/**/*'
+    - 'config/**/*'
+    - 'doc/**/*'
+    - 'spec/**/*'
+    - 'test/**/*'
+
+Style/Encoding:
+  Enabled: true
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+

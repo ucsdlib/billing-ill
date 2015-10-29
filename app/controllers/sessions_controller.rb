@@ -1,3 +1,4 @@
+# encoding: utf-8
 #---
 # @author hweng@ucsd.edu
 #---
@@ -21,7 +22,7 @@ class SessionsController < ApplicationController
 
   def find_or_create_user(auth_type)
     find_or_create_method = "find_or_create_for_#{auth_type.downcase}".to_sym
-    auth = request.env["omniauth.auth"]
+    auth = request.env['omniauth.auth']
     user = User.send(find_or_create_method,auth)
     
     if auth_type == 'shibboleth' && !User.in_supergroup?(auth.uid) 

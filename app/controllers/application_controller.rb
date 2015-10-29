@@ -1,3 +1,4 @@
+# encoding: utf-8
 #---
 # @author hweng@ucsd.edu
 #---
@@ -17,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
   
   def convert_date_mmddyy(cdate)
-    cdate.strftime("%m/%d/%y")
+    cdate.strftime('%m/%d/%y')
   end
   
   def current_user
@@ -36,7 +37,7 @@ class ApplicationController < ActionController::Base
     begin
       batch_update_status_item(ref_model)
     rescue ActiveRecord::RecordInvalid
-      flash[:error] = "Invalid record"
+      flash[:error] = 'Invalid record'
     end
   end
 
@@ -46,7 +47,7 @@ class ApplicationController < ActionController::Base
     ActiveRecord::Base.transaction do
       result_arr.each do |ref_row|
         # add bang after update_attributes so that if it is not saved, it will raise error and roll back whole transaction.
-        ref_row.update_attributes!(status: "submitted", submitted_at: Time.now ) 
+        ref_row.update_attributes!(status: 'submitted', submitted_at: Time.now ) 
       end
     end
   end
