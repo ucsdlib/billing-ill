@@ -1,5 +1,5 @@
 require: rubocop-rspec
-inherit_from: .rubocop_todo.yml
+#inherit_from: .rubocop_todo.yml
 
 AllCops:
   RunRailsCops: true
@@ -24,4 +24,25 @@ Style/StringLiterals:
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
+    - 'app/**/*'
+
+Metrics/LineLength:
+  Max: 300
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/AbcSize:
+  Max: 17
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/AndOr:
+  Exclude:
+    - 'app/controllers/application_controller.rb'
+
+
+
+
 

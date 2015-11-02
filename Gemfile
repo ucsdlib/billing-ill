@@ -1,7 +1,6 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.2.4'
 gem 'sass-rails', '5.0.3'
 gem 'uglifier', '2.7.2'
@@ -20,7 +19,7 @@ gem 'capistrano', '~> 3.3.3'
 gem 'capistrano-rails', '~> 1.1.2'
 gem 'capistrano-rbenv', github: 'capistrano/rbenv'
 gem 'capistrano-bundler', '~> 1.1.3'
-#gem 'equivalent-xml', '~> 0.5.1'
+# gem 'equivalent-xml', '~> 0.5.1'
 
 gem 'pg'
 gem 'fabrication'
@@ -50,7 +49,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'rubocop', require: false
   gem 'rubocop-rspec'
- # gem 'rspec_junit_formatter', '~> 0.2.0'
+  # gem 'rspec_junit_formatter', '~> 0.2.0'
 end
 
 group :test do
@@ -65,8 +64,7 @@ group :staging do
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
-
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

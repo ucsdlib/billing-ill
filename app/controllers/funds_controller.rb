@@ -4,7 +4,7 @@
 #---
 
 class FundsController < ApplicationController
-  before_filter :require_user
+  before_action :require_user
   before_action :set_fund, only: [:edit, :update]
 
   def index
@@ -27,7 +27,6 @@ class FundsController < ApplicationController
   end
 
   def edit
-    
   end
 
   def update

@@ -6,11 +6,11 @@
 class Invoice < ActiveRecord::Base
   belongs_to :patron
 
-  monetize :charge_cents,  :numericality => {
-    :greater_than_or_equal_to => 0,
-    :less_than_or_equal_to => 1000000
+  monetize :charge_cents, numericality: {
+    greater_than_or_equal_to: 0,
+    less_than_or_equal_to: 1_000_000
   }
-  
+
   validates :invoice_num, presence: true, uniqueness: true
   validates :number_prints, presence: true
   validates :invoice_type, presence: true
@@ -30,14 +30,14 @@ class Invoice < ActiveRecord::Base
   delegate :zip1, to: :patron, prefix: :patron
   delegate :zip2, to: :patron, prefix: :patron
   delegate :country_code, to: :patron, prefix: :patron
-  #delegate :entity_pending_status, to: :patron, prefix: :patron
+  # delegate :entity_pending_status, to: :patron, prefix: :patron
 
   def self.search_by_patron_name(search_term)
     blank_term(search_term)
 
-    if Patron.where(name: search_term).first != nil
-      patron_id = Patron.where(name: search_term).first
-      result = where('patron_id = ? ', patron_id).order('created_at DESC') 
+    if Patron.find_by(name: search_term) != nil
+      patron_id = Patron.find_by(name: search_term)
+      result = where('patron_id = ? ', patron_id).order('created_at DESC')
     else
       result = []
     end
@@ -46,9 +46,9 @@ class Invoice < ActiveRecord::Base
   def self.search_by_invoice_num(search_term)
     blank_term(search_term)
 
-    if where('invoice_num = ?', search_term).first != nil
-      
-      result = where('invoice_num = ?', search_term) 
+    if find_by('invoice_num = ?', search_term) != nil
+
+      result = where('invoice_num = ?', search_term)
     else
       result = []
     end
@@ -70,35 +70,35 @@ class Invoice < ActiveRecord::Base
   # Handles mapping for PERSON ENTITY and CHARGE output files
   #
 
-  def self.get_person_output
+  def self.person_output
     h_column1_21 = 'PHDR' + ' ' * 1 + 'CLIBRARY.PERSON' + ' ' * 1
     h_column35_320 = ' ' * 1 + '000001' + ' ' * 279
 
-    person_content = "#{get_header_row(h_column1_21,h_column35_320)}#{get_person_detail_rows}#{get_trailer_row("PTRL", get_person_count)}"
+    person_content = "#{header_row(h_column1_21, h_column35_320)}#{person_detail_rows}#{trailer_row('PTRL', person_count)}"
   end
 
-  def self.get_entity_output
+  def self.entity_output
     h_column1_21 = 'EHDR' + ' ' * 1 + 'CLIBRARY.ENTITY' + ' ' * 1
     h_column35_320 = ' ' * 286
 
-    entity_content = "#{get_header_row(h_column1_21,h_column35_320)}#{get_entity_detail_rows}#{get_trailer_row("ETRL", get_entity_count)}"
+    entity_content = "#{header_row(h_column1_21, h_column35_320)}#{entity_detail_rows}#{trailer_row('ETRL', entity_count)}"
   end
 
-  def self.get_charge_output
+  def self.charge_output
     h_column1_21 = 'CHDR' + ' ' * 1 + 'CLIBRARY.CHARGE' + ' ' * 1
     h_column35_320 = ' ' * 1 + '000001' + ' ' * 279
 
-    charge_content = "#{get_header_row(h_column1_21,h_column35_320)}#{get_charge_detail_rows}#{get_charge_trailer_row}"
+    charge_content = "#{header_row(h_column1_21, h_column35_320)}#{charge_detail_rows}#{charge_trailer_row}"
   end
 
-  def self.get_header_row(h_column1_21,h_column35_320)
+  def self.header_row(h_column1_21, h_column35_320)
     transaction_date = Time.now.strftime('%m%d%y')
     h_column28 = ' ' * 1
 
     header_rows = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
   end
 
-  def self.get_trailer_row(col1,count)
+  def self.trailer_row(col1, count)
     t_column1_5 = col1 + ' ' * 1
     t_column12_320 = ' ' * 309
     record_count = convert_record_count(count + 2)
@@ -106,46 +106,46 @@ class Invoice < ActiveRecord::Base
     final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
   end
 
-  def self.get_charge_trailer_row
+  def self.charge_trailer_row
     t_column1_5 = 'CTRL' + ' ' * 1
     t_column12 = ' '
     t_column24_320 = ' ' * 297
     record_count = convert_record_count(pending_status_count + 2)
-    total_amount = convert_invoice_charge(get_total_charge)
+    total_amount = convert_invoice_charge(total_charge)
 
     final_rows = "#{t_column1_5}#{record_count}#{t_column12}#{total_amount}#{t_column24_320}"
   end
 
-  def self.get_charge_detail_rows
+  def self.charge_detail_rows
     result_arr = search_all_pending_status
-    
+
     d_column1 = 'A'
     d_column11_51 = ' ' * 35 + 'LIBLPS'
     d_column63_68 = ' ' * 6
     d_column79_320 = ' ' * 240
 
     charge_detail = ''
-    
-    result_arr.each_with_index do |invoice, index|
+
+    result_arr.each_with_index do |invoice, _index|
       charge_amount = convert_invoice_charge(invoice.charge)
       document_num = convert_invoice_num(invoice.invoice_num)
       account_id = process_person_id(invoice)
 
       charge_detail += "#{d_column1}#{account_id}#{d_column11_51}#{charge_amount}#{d_column63_68}#{document_num}#{d_column79_320}\n"
     end
-    return charge_detail
+    charge_detail
   end
-  
-  def self.get_person_detail_rows
+
+  def self.person_detail_rows
     result_arr = search_all_pending_status
     person_detail_rows = ''
 
     d_column1_10 = 'C' + ' ' * 9
     d_column20_23 = ' ' * 4
     d_column114_119 = ' ' * 6
-    
-    result_arr.each_with_index do |invoice, index|
-      if !is_entity?(invoice.patron_ar_code)
+
+    result_arr.each_with_index do |invoice, _index|
+      unless is_entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
@@ -154,39 +154,39 @@ class Invoice < ActiveRecord::Base
         person_detail_rows += process_address(invoice)
       end
     end
-    return person_detail_rows
+    person_detail_rows
   end
 
-  def self.get_entity_detail_rows
+  def self.entity_detail_rows
     result_arr = search_all_pending_status
 
-    d_column1 = 'C' 
-    d_column2_9 = 'PUBLPUBL' 
+    d_column1 = 'C'
+    d_column2_9 = 'PUBLPUBL'
     d_column10_18 = ' ' * 9
     d_column118_119 = ' ' * 2
 
     entity_detail = ''
 
-    result_arr.each_with_index do |invoice, index|
+    result_arr.each_with_index do |invoice, _index|
       if is_entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
-       
+
         entity_detail += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
         entity_detail += process_address(invoice)
       end
     end
-    return entity_detail
+    entity_detail
   end
 
   def self.convert_invoice_charge(amount)
-    s_amount = (10* amount).to_f.round.to_s  # 0.50 --> "50"
-    output_amount = '0' *(10 - s_amount.length) + s_amount + '{'
+    s_amount = (10 * amount).to_f.round.to_s # 0.50 --> "50"
+    output_amount = '0' * (10 - s_amount.length) + s_amount + '{'
   end
 
   def self.convert_invoice_num(invoice_num)
-    str = invoice_num.to_s.rjust(10, ' ') 
+    str = invoice_num.to_s.rjust(10, ' ')
   end
 
   def self.convert_record_count(input)
@@ -196,30 +196,30 @@ class Invoice < ActiveRecord::Base
   def self.process_person_id(invoice)
     person_id = invoice.patron_ar_code
   end
-  
+
   def self.process_name_key(invoice)
     input = invoice.patron_name
-    output = input + ' ' *(35 - input.length)
+    output = input + ' ' * (35 - input.length)
   end
 
   def self.process_full_name(invoice)
     input = invoice.patron_name
-    output = input + ' ' *(55 - input.length)
+    output = input + ' ' * (55 - input.length)
   end
 
   def self.process_address(invoice)
-      d_column291_320 = ' ' * 30
-      address1 = convert_address(invoice.patron_address1)
-      address2 = convert_address(invoice.patron_address2)
-      address3 = convert_address(invoice.patron_address3)
-      address4 = convert_address(invoice.patron_address4)
-      city = convert_city(invoice.patron_city)
-      state = invoice.patron_state
-      zip1 = invoice.patron_zip1
-      zip2 = convert_zip2(invoice.patron_zip2)
-      country_code = convert_country(invoice.patron_country_code)
+    d_column291_320 = ' ' * 30
+    address1 = convert_address(invoice.patron_address1)
+    address2 = convert_address(invoice.patron_address2)
+    address3 = convert_address(invoice.patron_address3)
+    address4 = convert_address(invoice.patron_address4)
+    city = convert_city(invoice.patron_city)
+    state = invoice.patron_state
+    zip1 = invoice.patron_zip1
+    zip2 = convert_zip2(invoice.patron_zip2)
+    country_code = convert_country(invoice.patron_country_code)
 
-      address_row = "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
+    address_row = "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
   end
 
   def self.convert_address(input)
@@ -235,46 +235,42 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.convert_city(input)
-    output = input + ' ' *(18 - input.length) 
+    output = input + ' ' * (18 - input.length)
   end
 
   def self.convert_format(num, input)
-    output = input.blank? ? (' ' * num) : (input + ' ' *(num - input.length))
+    output = input.blank? ? (' ' * num) : (input + ' ' * (num - input.length))
   end
 
   def self.is_entity?(input)
-    input[0,2] == 'AA' ? true : false
+    input[0, 2] == 'AA' ? true : false
   end
 
-  def self.get_entity_count
+  def self.entity_count
     result_arr = search_all_pending_status
     count = 0
 
     result_arr.each do |invoice|
-      if is_entity?(invoice.patron_ar_code)
-        count+=1
-      end
+      count += 1 if is_entity?(invoice.patron_ar_code)
     end
-    return count
+    count
   end
 
-  def self.get_person_count
+  def self.person_count
     result_arr = search_all_pending_status
     count = 0
 
     result_arr.each do |invoice|
-      if !is_entity?(invoice.patron_ar_code)
-        count+=1
-      end
+      count += 1 unless is_entity?(invoice.patron_ar_code)
     end
-    return count
+    count
   end
 
-  def self.get_total_charge
+  def self.total_charge
     result_arr = search_all_pending_status
     total_charge = 0
 
-    result_arr.each_with_index do |invoice, index|
+    result_arr.each_with_index do |invoice, _index|
       charge = invoice.charge
       total_charge += charge
     end
@@ -288,38 +284,38 @@ class Invoice < ActiveRecord::Base
   def self.get_path(file_name)
     path = 'tmp/ftp/' + file_name
   end
-  
-  def self.create_entity_file
-    file_name = Invoice.get_entity_file_name
-    path = get_path(file_name)
-    content = Invoice.get_entity_output
-    
-    write_file(path,content )
 
-    return file_name
+  def self.create_entity_file
+    file_name = Invoice.entity_file_name
+    path = get_path(file_name)
+    content = Invoice.entity_output
+
+    write_file(path, content)
+
+    file_name
   end
 
   def self.create_person_file
-    file_name = Invoice.get_person_file_name
+    file_name = Invoice.person_file_name
     path = get_path(file_name)
-    content = Invoice.get_person_output
+    content = Invoice.person_output
 
-    write_file(path,content )
+    write_file(path, content)
 
-    return file_name
+    file_name
   end
 
   def self.create_charge_file
-    file_name = Invoice.get_charge_file_name
+    file_name = Invoice.charge_file_name
     path = get_path(file_name)
-    content = Invoice.get_charge_output
+    content = Invoice.charge_output
 
-    write_file(path,content )
+    write_file(path, content)
 
-    return file_name
+    file_name
   end
 
-  def self.write_file(path,content )
+  def self.write_file(path, content)
     File.open(path, 'w') do |f|
       f.write(content)
     end
@@ -329,27 +325,27 @@ class Invoice < ActiveRecord::Base
   # Handles file name convention used in ftp and emails.
   #
 
-  def self.get_entity_lfile_name
+  def self.entity_lfile_name
     file_name = 'ENTITY.D' + convert_to_julian_date + '.TXT'
   end
 
-  def self.get_person_lfile_name
+  def self.person_lfile_name
     file_name = 'PERSON.D' + convert_to_julian_date + '.TXT'
   end
 
-  def self.get_charge_lfile_name
+  def self.charge_lfile_name
     file_name = 'CHARGE.D' + convert_to_julian_date + '.TXT'
   end
 
-  def self.get_entity_file_name
+  def self.entity_file_name
     file_name = 'SISP.ARD2501.LIBBUS.ENTITY.D' + convert_to_julian_date
   end
 
-  def self.get_person_file_name
+  def self.person_file_name
     file_name = 'SISP.ARD2501.LIBBUS.PERSON.D' + convert_to_julian_date
   end
 
-  def self.get_charge_file_name
+  def self.charge_file_name
     file_name = 'SISP.ARD2501.LIBBUS.CHARGE.D' + convert_to_julian_date
   end
 
@@ -373,8 +369,8 @@ class Invoice < ActiveRecord::Base
     password = Rails.application.secrets.sftp_password
 
     Rails.logger.info('Creating SFTP connection')
-    session=Net::SSH.start(server_name, user, :password=> password)
-    sftp=Net::SFTP::Session.new(session).connect!
+    session = Net::SSH.start(server_name, user, password: password)
+    sftp = Net::SFTP::Session.new(session).connect!
     Rails.logger.info('SFTP Connection created, uploading files.')
     sftp.upload!(local_charge_file_path, remote_charge_file_path)
     sftp.upload!(local_entity_file_path, remote_entity_file_path)

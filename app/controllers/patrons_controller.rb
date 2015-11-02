@@ -4,14 +4,14 @@
 #---
 
 class PatronsController < ApplicationController
-  before_filter :require_user
+  before_action :require_user
   before_action :set_patron, only: [:edit, :update]
   before_action :set_country_list, only: [:new, :create, :edit, :update]
-  
-   def index
+
+  def index
     @total_count = Patron.count
     @patrons = get_all_items(Patron)
-  end
+ end
 
   def new
     @patron = Patron.new
@@ -55,5 +55,4 @@ class PatronsController < ApplicationController
       @country_list << [country[:term], country[:id]]
     end
   end
-
 end
