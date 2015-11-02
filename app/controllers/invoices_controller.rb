@@ -11,7 +11,7 @@ class InvoicesController < ApplicationController
 
   def index
     @total_count = Invoice.count
-    @invoices = get_all_items(Invoice)
+    @invoices = all_items(Invoice)
   end
 
   def new
@@ -99,7 +99,7 @@ class InvoicesController < ApplicationController
   end
 
   def ftp_file
-    email_date = convert_date_mmddyy(Time.now)
+    email_date = convert_date_mmddyy(Time.zone.now)
 
     Invoice.send_file
     AppMailer.send_invoice_email(current_user, email_date).deliver_now

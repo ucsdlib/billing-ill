@@ -13,7 +13,7 @@ class RechargesController < ApplicationController
 
   def index
     @total_count = Recharge.count
-    @recharges = get_all_items(Recharge)
+    @recharges = all_items(Recharge)
   end
 
   def new
@@ -68,7 +68,7 @@ class RechargesController < ApplicationController
   end
 
   def ftp_file
-    email_date = convert_date_mmddyy(Time.now)
+    email_date = convert_date_mmddyy(Time.zone.now)
     Recharge.send_file
     AppMailer.send_recharge_email(current_user, email_date).deliver_now
     batch_update_status

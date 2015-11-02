@@ -9,7 +9,7 @@ class FundsController < ApplicationController
 
   def index
     @total_count = Fund.count
-    @funds = get_all_items(Fund)
+    @funds = all_items(Fund)
   end
 
   def new

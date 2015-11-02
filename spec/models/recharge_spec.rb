@@ -72,13 +72,13 @@ end
       fund = Fabricate(:fund, program_code: "400000", org_code: "414909", index_code: "ANSVAMCCCC", fund_code: "60200A")
       recharge = Fabricate(:recharge, status: "pending", charge: 3.50, fund: fund)
       
-      header_row = "LIBRARY101FRLBG5511LIBRARY RECHARGES"+ " " * 18 + Time.now.strftime("%Y%m%d")+"000000000700" + "N" + " " * 175
+      header_row = "LIBRARY101FRLBG5511LIBRARY RECHARGES"+ " " * 18 + Time.zone.now.strftime("%Y%m%d")+"000000000700" + "N" + " " * 175
       detail_rows = "LIBRARY101FRLBG5512" + "0001F510" + "000000000350"+"LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "DA"+"60200A414909"
       detail_rows += "636064" + "400000" + " " * 12 + "ANSVAMCCCC" + " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "00000000" + " " * 8
-      detail_rows += Time.now.strftime("%Y%m%d") + " " * 3 
+      detail_rows += Time.zone.now.strftime("%Y%m%d") + " " * 3 
       final_rows = "LIBRARY101FRLBG5512" + "0002F510" +"000000000350" + "LIBRARY-PHOTOCOPY SERVICE" + " " * 10 + "CA"
       final_rows += " " * 12 + "693900" + " " * 18 + "   LIBIL05" + " " * 32 + "000000" + " " * 17 + "000000" + " " * 10 + "00000000" + " " * 8
-      final_rows += Time.now.strftime("%Y%m%d") + " " * 2 + " "
+      final_rows += Time.zone.now.strftime("%Y%m%d") + " " * 2 + " "
       content = "#{header_row}\n#{detail_rows}\n#{final_rows}"
 
       expect(Recharge.process_output).to eq(content)
@@ -87,7 +87,7 @@ end
 
   describe "create_file" do
     it "returns file name" do
-      file_name = "FISP.JVDATA.D" + Recharge.convert_date_yymmdd(Time.now) + ".LIB.txt"
+      file_name = "FISP.JVDATA.D" + Recharge.convert_date_yymmdd(Time.zone.now) + ".LIB.txt"
       expect(Recharge.create_file).to eq(file_name)
     end
   end

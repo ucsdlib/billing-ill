@@ -72,7 +72,7 @@ class Recharge < ActiveRecord::Base
   def self.header
     h_column1_19 = 'LIBRARY1' + '01' + 'FRLBG551' + '1'
     h_column20_54 = 'LIBRARY RECHARGES' + ' ' * 18
-    transaction_date = convert_date_yyyymmdd(Time.now)
+    transaction_date = convert_date_yyyymmdd(Time.zone.now)
     document_amount = convert_charge(total_charge * 2)
     h_column75_250 = 'N' + ' ' * 175
 
@@ -90,7 +90,7 @@ class Recharge < ActiveRecord::Base
     d_column123_209 = ' ' * 32 + '000000' + ' ' * 17 + '000000' + ' ' * 10 + '0000' + '0000' + ' ' * 8
     d_column220 = ' '
     detail_rows = ''
-
+    
     result_arr.each_with_index do |recharge, index|
       sequence_num = convert_seq_num(index + 1)
       transaction_amount = convert_charge(recharge.charge)
@@ -98,7 +98,7 @@ class Recharge < ActiveRecord::Base
       org_code = recharge.fund_org_code
       program_code = recharge.fund_program_code
       index_code = convert_index_code(recharge.fund_index_code)
-      filler_var = convert_date_yyyymmdd(Time.now) + ' ' * 2
+      filler_var = convert_date_yyyymmdd(Time.zone.now) + ' ' * 2
 
       detail_rows += "#{d_column1_19}#{sequence_num}#{d_column24_27}#{transaction_amount}#{d_column40_76}#{fund_code}#{org_code}"
       detail_rows += "#{d_column89_94}#{program_code}#{d_column101_112}#{index_code}#{d_column123_209}#{filler_var}#{d_column220}\n"
@@ -116,15 +116,15 @@ class Recharge < ActiveRecord::Base
     f_column113_122 = ' ' * 3 + 'LIBIL05'
     f_column123_154 = ' ' * 32
     f_column155_209 = '000000' + ' ' * 17 + '000000' + ' ' * 10 + '0000' + '0000' + ' ' * 8
-    f_filler_var = convert_date_yyyymmdd(Time.now) + ' ' * 2
+    f_filler_var = convert_date_yyyymmdd(Time.zone.now) + ' ' * 2
     f_column220 = ' '
 
-    final_rows = "#{f_column1_19}#{f_sequence_num}#{f_column24_27}#{total_amount}#{f_column40_76}"
-    final_rows += "#{f_column77_112}#{f_column113_122}#{f_column123_154}#{f_column155_209}#{f_filler_var}#{f_column220}"
+    final_rows = "#{f_column1_19}#{f_sequence_num}#{f_column24_27}#{total_amount}#{f_column40_76}" + 
+                 "#{f_column77_112}#{f_column113_122}#{f_column123_154}#{f_column155_209}#{f_filler_var}#{f_column220}"
   end
 
   def self.create_file
-    file_name = 'FISP.JVDATA.D' + convert_date_yymmdd(Time.now) + '.LIB.txt'
+    file_name = 'FISP.JVDATA.D' + convert_date_yymmdd(Time.zone.now) + '.LIB.txt'
     path = 'tmp/ftp/' + file_name
     content = process_output
     # puts Dir.pwd
@@ -157,16 +157,16 @@ class Recharge < ActiveRecord::Base
   end
 
   def self.convert_seq_num(seq_num)
-    str = seq_num.to_s.rjust(4, '0') # 1 --> 0001, 10 --> 0010
+    seq_num.to_s.rjust(4, '0') # 1 --> 0001, 10 --> 0010
   end
 
   def self.convert_index_code(input)
-    str = input.to_s.rjust(10, ' ') # 1 --> 0001, 10 --> 0010
+    input.to_s.rjust(10, ' ') # 1 --> 0001, 10 --> 0010
   end
 
   def self.convert_charge(amount)
     s_amount = (100 * amount).to_f.round.to_s # 0.50 --> "50"
-    output_amount = '0' * (12 - s_amount.length) + s_amount
+    '0' * (12 - s_amount.length) + s_amount
   end
 
   def self.convert_date_yyyymmdd(cdate)

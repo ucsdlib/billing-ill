@@ -26,14 +26,19 @@ Style/Documentation:
     - 'spec/**/*'
     - 'app/**/*'
 
+Metrics/ClassLength:
+  Exclude:
+    - 'app/models/invoice.rb'
+    - 'app/models/recharge.rb'
+
 Metrics/LineLength:
-  Max: 300
+  Max: 200
 
 Metrics/MethodLength:
   Max: 30
 
 Metrics/AbcSize:
-  Max: 17
+  Max: 50
 
 Style/DoubleNegation:
   Enabled: false

@@ -37,9 +37,9 @@ class Invoice < ActiveRecord::Base
 
     if Patron.find_by(name: search_term) != nil
       patron_id = Patron.find_by(name: search_term)
-      result = where('patron_id = ? ', patron_id).order('created_at DESC')
+      where('patron_id = ? ', patron_id).order('created_at DESC')
     else
-      result = []
+      []
     end
   end
 
@@ -48,9 +48,9 @@ class Invoice < ActiveRecord::Base
 
     if find_by('invoice_num = ?', search_term) != nil
 
-      result = where('invoice_num = ?', search_term)
+      where('invoice_num = ?', search_term)
     else
-      result = []
+      []
     end
   end
 
@@ -59,7 +59,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.search_all_pending_status
-    result = where(status: 'pending').order('created_at DESC')
+    where(status: 'pending').order('created_at DESC')
   end
 
   def self.pending_status_count
@@ -74,28 +74,28 @@ class Invoice < ActiveRecord::Base
     h_column1_21 = 'PHDR' + ' ' * 1 + 'CLIBRARY.PERSON' + ' ' * 1
     h_column35_320 = ' ' * 1 + '000001' + ' ' * 279
 
-    person_content = "#{header_row(h_column1_21, h_column35_320)}#{person_detail_rows}#{trailer_row('PTRL', person_count)}"
+    "#{header_row(h_column1_21, h_column35_320)}#{person_detail_rows}#{trailer_row('PTRL', person_count)}"
   end
 
   def self.entity_output
     h_column1_21 = 'EHDR' + ' ' * 1 + 'CLIBRARY.ENTITY' + ' ' * 1
     h_column35_320 = ' ' * 286
 
-    entity_content = "#{header_row(h_column1_21, h_column35_320)}#{entity_detail_rows}#{trailer_row('ETRL', entity_count)}"
+    "#{header_row(h_column1_21, h_column35_320)}#{entity_detail_rows}#{trailer_row('ETRL', entity_count)}"
   end
 
   def self.charge_output
     h_column1_21 = 'CHDR' + ' ' * 1 + 'CLIBRARY.CHARGE' + ' ' * 1
     h_column35_320 = ' ' * 1 + '000001' + ' ' * 279
 
-    charge_content = "#{header_row(h_column1_21, h_column35_320)}#{charge_detail_rows}#{charge_trailer_row}"
+    "#{header_row(h_column1_21, h_column35_320)}#{charge_detail_rows}#{charge_trailer_row}"
   end
 
   def self.header_row(h_column1_21, h_column35_320)
-    transaction_date = Time.now.strftime('%m%d%y')
+    transaction_date = Time.zone.now.strftime('%m%d%y')
     h_column28 = ' ' * 1
 
-    header_rows = "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
+    "#{h_column1_21}#{transaction_date}#{h_column28}#{transaction_date}#{h_column35_320}\n"
   end
 
   def self.trailer_row(col1, count)
@@ -103,7 +103,7 @@ class Invoice < ActiveRecord::Base
     t_column12_320 = ' ' * 309
     record_count = convert_record_count(count + 2)
 
-    final_rows = "#{t_column1_5}#{record_count}#{t_column12_320}"
+    "#{t_column1_5}#{record_count}#{t_column12_320}"
   end
 
   def self.charge_trailer_row
@@ -113,7 +113,7 @@ class Invoice < ActiveRecord::Base
     record_count = convert_record_count(pending_status_count + 2)
     total_amount = convert_invoice_charge(total_charge)
 
-    final_rows = "#{t_column1_5}#{record_count}#{t_column12}#{total_amount}#{t_column24_320}"
+    "#{t_column1_5}#{record_count}#{t_column12}#{total_amount}#{t_column24_320}"
   end
 
   def self.charge_detail_rows
@@ -182,29 +182,29 @@ class Invoice < ActiveRecord::Base
 
   def self.convert_invoice_charge(amount)
     s_amount = (10 * amount).to_f.round.to_s # 0.50 --> "50"
-    output_amount = '0' * (10 - s_amount.length) + s_amount + '{'
+    '0' * (10 - s_amount.length) + s_amount + '{'
   end
 
   def self.convert_invoice_num(invoice_num)
-    str = invoice_num.to_s.rjust(10, ' ')
+    invoice_num.to_s.rjust(10, ' ')
   end
 
   def self.convert_record_count(input)
-    output = input.to_s.rjust(6, '0')
+    input.to_s.rjust(6, '0')
   end
 
   def self.process_person_id(invoice)
-    person_id = invoice.patron_ar_code
+    invoice.patron_ar_code
   end
 
   def self.process_name_key(invoice)
     input = invoice.patron_name
-    output = input + ' ' * (35 - input.length)
+    input + ' ' * (35 - input.length)
   end
 
   def self.process_full_name(invoice)
     input = invoice.patron_name
-    output = input + ' ' * (55 - input.length)
+    input + ' ' * (55 - input.length)
   end
 
   def self.process_address(invoice)
@@ -219,27 +219,27 @@ class Invoice < ActiveRecord::Base
     zip2 = convert_zip2(invoice.patron_zip2)
     country_code = convert_country(invoice.patron_country_code)
 
-    address_row = "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
+    "#{address1}#{address2}#{address3}#{address4}#{city}#{state}#{zip1}#{zip2}#{country_code}#{d_column291_320}\n"
   end
 
   def self.convert_address(input)
-    output = convert_format(35, input)
+    convert_format(35, input)
   end
 
   def self.convert_zip2(input)
-    output = convert_format(4, input)
+    convert_format(4, input)
   end
 
   def self.convert_country(input)
-    output = convert_format(2, input)
+    convert_format(2, input)
   end
 
   def self.convert_city(input)
-    output = input + ' ' * (18 - input.length)
+    input + ' ' * (18 - input.length)
   end
 
   def self.convert_format(num, input)
-    output = input.blank? ? (' ' * num) : (input + ' ' * (num - input.length))
+    input.blank? ? (' ' * num) : (input + ' ' * (num - input.length))
   end
 
   def self.is_entity?(input)
@@ -282,7 +282,7 @@ class Invoice < ActiveRecord::Base
   #
 
   def self.get_path(file_name)
-    path = 'tmp/ftp/' + file_name
+    'tmp/ftp/' + file_name
   end
 
   def self.create_entity_file
@@ -326,31 +326,31 @@ class Invoice < ActiveRecord::Base
   #
 
   def self.entity_lfile_name
-    file_name = 'ENTITY.D' + convert_to_julian_date + '.TXT'
+    'ENTITY.D' + convert_to_julian_date + '.TXT'
   end
 
   def self.person_lfile_name
-    file_name = 'PERSON.D' + convert_to_julian_date + '.TXT'
+    'PERSON.D' + convert_to_julian_date + '.TXT'
   end
 
   def self.charge_lfile_name
-    file_name = 'CHARGE.D' + convert_to_julian_date + '.TXT'
+    'CHARGE.D' + convert_to_julian_date + '.TXT'
   end
 
   def self.entity_file_name
-    file_name = 'SISP.ARD2501.LIBBUS.ENTITY.D' + convert_to_julian_date
+    'SISP.ARD2501.LIBBUS.ENTITY.D' + convert_to_julian_date
   end
 
   def self.person_file_name
-    file_name = 'SISP.ARD2501.LIBBUS.PERSON.D' + convert_to_julian_date
+    'SISP.ARD2501.LIBBUS.PERSON.D' + convert_to_julian_date
   end
 
   def self.charge_file_name
-    file_name = 'SISP.ARD2501.LIBBUS.CHARGE.D' + convert_to_julian_date
+    'SISP.ARD2501.LIBBUS.CHARGE.D' + convert_to_julian_date
   end
 
   def self.convert_to_julian_date
-    output = Date.today.strftime('%y') + Date.today.yday.to_s
+    Date.today.strftime('%y') + Date.today.yday.to_s
   end
 
   def self.send_file
