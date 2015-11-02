@@ -26,6 +26,9 @@ Style/Documentation:
     - 'spec/**/*'
     - 'app/**/*'
 
+Style/Next:
+  Enabled: false
+
 Metrics/ClassLength:
   Max: 150
   Exclude:
@@ -43,12 +46,8 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Max: 50
 
-Style/DoubleNegation:
-  Enabled: false
 
-Style/AndOr:
-  Exclude:
-    - 'app/controllers/application_controller.rb'
+
 
 
 

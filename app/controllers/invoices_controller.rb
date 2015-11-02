@@ -54,8 +54,6 @@ class InvoicesController < ApplicationController
 
     if params[:search_option] == 'patron_name'
       result_arr = Invoice.search_by_patron_name(params[:search_term])
-    elsif params[:search_option] == 'invoice_num'
-      result_arr = Invoice.search_by_invoice_num(params[:search_term])
     else
       result_arr = Invoice.search_by_invoice_num(params[:search_term])
     end

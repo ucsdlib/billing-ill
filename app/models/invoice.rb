@@ -145,7 +145,7 @@ class Invoice < ActiveRecord::Base
     d_column114_119 = ' ' * 6
 
     result_arr.each_with_index do |invoice, _index|
-      unless is_entity?(invoice.patron_ar_code)
+      unless entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
@@ -168,7 +168,7 @@ class Invoice < ActiveRecord::Base
     entity_detail = ''
 
     result_arr.each_with_index do |invoice, _index|
-      if is_entity?(invoice.patron_ar_code)
+      if entity?(invoice.patron_ar_code)
         person_id = process_person_id(invoice)
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
@@ -242,7 +242,7 @@ class Invoice < ActiveRecord::Base
     input.blank? ? (' ' * num) : (input + ' ' * (num - input.length))
   end
 
-  def self.is_entity?(input)
+  def self.entity?(input)
     input[0, 2] == 'AA' ? true : false
   end
 
@@ -251,7 +251,7 @@ class Invoice < ActiveRecord::Base
     count = 0
 
     result_arr.each do |invoice|
-      count += 1 if is_entity?(invoice.patron_ar_code)
+      count += 1 if entity?(invoice.patron_ar_code)
     end
     count
   end
@@ -261,7 +261,7 @@ class Invoice < ActiveRecord::Base
     count = 0
 
     result_arr.each do |invoice|
-      count += 1 unless is_entity?(invoice.patron_ar_code)
+      count += 1 unless entity?(invoice.patron_ar_code)
     end
     count
   end
