@@ -25,7 +25,7 @@ class Recharge < ActiveRecord::Base
   def self.search_by_index_code(search_term)
     return [] if search_term.blank?
 
-    if Fund.find_by(index_code: search_term) != nil
+    if !Fund.find_by(index_code: search_term).nil?
       fund_id = Fund.find_by(index_code: search_term)
       where('fund_id = ? ', fund_id).order('created_at DESC')
     else
@@ -90,7 +90,7 @@ class Recharge < ActiveRecord::Base
     d_column123_209 = ' ' * 32 + '000000' + ' ' * 17 + '000000' + ' ' * 10 + '0000' + '0000' + ' ' * 8
     d_column220 = ' '
     detail_rows = ''
-    
+
     result_arr.each_with_index do |recharge, index|
       sequence_num = convert_seq_num(index + 1)
       transaction_amount = convert_charge(recharge.charge)
@@ -119,8 +119,7 @@ class Recharge < ActiveRecord::Base
     f_filler_var = convert_date_yyyymmdd(Time.zone.now) + ' ' * 2
     f_column220 = ' '
 
-    final_rows = "#{f_column1_19}#{f_sequence_num}#{f_column24_27}#{total_amount}#{f_column40_76}" + 
-                 "#{f_column77_112}#{f_column113_122}#{f_column123_154}#{f_column155_209}#{f_filler_var}#{f_column220}"
+    "#{f_column1_19}#{f_sequence_num}#{f_column24_27}#{total_amount}#{f_column40_76}#{f_column77_112}#{f_column113_122}#{f_column123_154}#{f_column155_209}#{f_filler_var}#{f_column220}"
   end
 
   def self.create_file

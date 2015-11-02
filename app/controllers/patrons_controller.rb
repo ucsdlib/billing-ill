@@ -11,7 +11,7 @@ class PatronsController < ApplicationController
   def index
     @total_count = Patron.count
     @patrons = all_items(Patron)
- end
+  end
 
   def new
     @patron = Patron.new

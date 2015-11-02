@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
       provider = access_token.provider
       name = access_token['info']['name']
 
-    rescue Exception => e
+    rescue StandardError => e
       logger.warn "shibboleth: #{e}"
     end
 

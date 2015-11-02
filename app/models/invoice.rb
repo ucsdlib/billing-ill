@@ -35,7 +35,7 @@ class Invoice < ActiveRecord::Base
   def self.search_by_patron_name(search_term)
     blank_term(search_term)
 
-    if Patron.find_by(name: search_term) != nil
+    if !Patron.find_by(name: search_term).nil?
       patron_id = Patron.find_by(name: search_term)
       where('patron_id = ? ', patron_id).order('created_at DESC')
     else
@@ -46,7 +46,7 @@ class Invoice < ActiveRecord::Base
   def self.search_by_invoice_num(search_term)
     blank_term(search_term)
 
-    if find_by('invoice_num = ?', search_term) != nil
+    if !find_by('invoice_num = ?', search_term).nil?
 
       where('invoice_num = ?', search_term)
     else
@@ -350,7 +350,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.convert_to_julian_date
-    Date.today.strftime('%y') + Date.today.yday.to_s
+    Time.zone.today.strftime('%y') + Time.zone.today.yday.to_s
   end
 
   def self.send_file
