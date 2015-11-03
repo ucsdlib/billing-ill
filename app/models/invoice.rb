@@ -74,7 +74,7 @@ class Invoice < ActiveRecord::Base
     h_column1_21 = 'PHDR' + ' ' * 1 + 'CLIBRARY.PERSON' + ' ' * 1
     h_column35_320 = ' ' * 1 + '000001' + ' ' * 279
 
-    output = "#{header_row(h_column1_21, h_column35_320)}#{person_detail_rows}#{trailer_row('PTRL', person_count)}"
+    "#{header_row(h_column1_21, h_column35_320)}#{person_detail_rows}#{trailer_row('PTRL', person_count)}"
   end
 
   def self.entity_output
