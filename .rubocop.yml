@@ -1,0 +1,54 @@
+require: rubocop-rspec
+
+AllCops:
+  RunRailsCops: true
+  DisplayCopNames: true
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'app/assets/**/*'
+    - 'config/**/*'
+    - 'doc/**/*'
+    - 'spec/**/*'
+    - 'test/**/*'
+
+Style/Encoding:
+  Enabled: true
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+    - 'app/**/*'
+
+Style/Next:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 150
+  Exclude:
+    - 'app/models/invoice.rb'
+    - 'app/models/recharge.rb'
+
+Metrics/LineLength:
+  Max: 200
+  Exclude:
+    - 'app/controllers/sessions_controller.rb'
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/AbcSize:
+  Max: 50
+
+
+
+
+
+
+
+

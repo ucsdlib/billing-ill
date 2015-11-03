@@ -24,7 +24,7 @@ end
 end
 
 5.times do
-  Recharge.create(charge: "100.00", number_copies: "2", status: "submitted", notes: "recharge notes.", submitted_at: Time.now, fund_id: 3)
+  Recharge.create(charge: "100.00", number_copies: "2", status: "submitted", notes: "recharge notes.", submitted_at: Time.zone.now, fund_id: 3)
 end
 
 Patron.create(email_address: "doe@xxx.com", name: "Joe Doe", ar_code: "a23456789", address1: "12345 abc street", city: "sun city",  state: "CA", zip1: "12345")

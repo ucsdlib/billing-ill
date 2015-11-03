@@ -314,7 +314,7 @@ describe InvoicesController do
     it "sends an email to the recipient" do
       get :ftp_file
       ActionMailer::Base.deliveries.clear
-      email_date = Time.now
+      email_date = Time.zone.now
       AppMailer.send_invoice_email(@user, email_date).deliver_now
 
       expect(ActionMailer::Base.deliveries.last.from).to eq(['joe@example.com'])
@@ -350,7 +350,7 @@ describe InvoicesController do
     it "updates the submitted_at to current date" do
       invoice = Fabricate(:invoice, status: "pending")
       get :merge_records
-      expect(invoice.reload.submitted_at.strftime("%m%y")).to eq(Time.now.strftime("%m%y"))
+      expect(invoice.reload.submitted_at.strftime("%m%y")).to eq(Time.zone.now.strftime("%m%y"))
     end
   end
 end

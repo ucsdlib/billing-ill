@@ -1,3 +1,4 @@
+# encoding: utf-8
 #---
 # @author hweng@ucsd.edu
 #---
@@ -7,25 +8,25 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?, :convert_date_mmddyy
-  
-  def get_all_items(ref_model)
+
+  def all_items(ref_model)
     result_arr = ref_model.order(:created_at)
-    result = result_arr.page(params[:page]) if !result_arr.blank?
+    result_arr.page(params[:page]) unless result_arr.blank?
   end
 
-  def get_country_list
+  def country_list
   end
-  
+
   def convert_date_mmddyy(cdate)
-    cdate.strftime("%m/%d/%y")
+    cdate.strftime('%m/%d/%y')
   end
-  
+
   def current_user
     @current_user ||= User.find_by uid: session[:user_id] if session[:user_id]
   end
 
   def logged_in?
-    !!current_user 
+    !current_user.nil?
   end
 
   def require_user
@@ -33,11 +34,9 @@ class ApplicationController < ActionController::Base
   end
 
   def batch_update_status_field(ref_model)
-    begin
-      batch_update_status_item(ref_model)
-    rescue ActiveRecord::RecordInvalid
-      flash[:error] = "Invalid record"
-    end
+    batch_update_status_item(ref_model)
+  rescue ActiveRecord::RecordInvalid
+    flash[:error] = 'Invalid record'
   end
 
   def batch_update_status_item(ref_model)
@@ -46,7 +45,7 @@ class ApplicationController < ActionController::Base
     ActiveRecord::Base.transaction do
       result_arr.each do |ref_row|
         # add bang after update_attributes so that if it is not saved, it will raise error and roll back whole transaction.
-        ref_row.update_attributes!(status: "submitted", submitted_at: Time.now ) 
+        ref_row.update_attributes!(status: 'submitted', submitted_at: Time.zone.now)
       end
     end
   end
