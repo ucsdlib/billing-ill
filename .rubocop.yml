@@ -35,12 +35,16 @@ Metrics/ClassLength:
     - 'app/models/recharge.rb'
 
 Metrics/LineLength:
-  Max: 200
+  Max: 155
   Exclude:
     - 'app/controllers/sessions_controller.rb'
+    - 'app/models/recharge.rb'
 
 Metrics/MethodLength:
-  Max: 30
+  Max: 15
+  Exclude:
+    - 'app/models/invoice.rb'
+    - 'app/models/recharge.rb'
 
 Metrics/AbcSize:
   Max: 50

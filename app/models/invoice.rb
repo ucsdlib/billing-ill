@@ -159,12 +159,9 @@ class Invoice < ActiveRecord::Base
 
   def self.entity_detail_rows
     result_arr = search_all_pending_status
-
-    d_column1 = 'C'
-    d_column2_9 = 'PUBLPUBL'
+    d_column1_9 = 'CPUBLPUBL'
     d_column10_18 = ' ' * 9
     d_column118_119 = ' ' * 2
-
     entity_detail = ''
 
     result_arr.each_with_index do |invoice, _index|
@@ -173,7 +170,7 @@ class Invoice < ActiveRecord::Base
         name_key = process_name_key(invoice)
         full_name = process_full_name(invoice)
 
-        entity_detail += "#{d_column1}#{d_column2_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
+        entity_detail += "#{d_column1_9}#{d_column10_18}#{person_id}#{name_key}#{full_name}#{d_column118_119}"
         entity_detail += process_address(invoice)
       end
     end
