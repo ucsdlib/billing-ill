@@ -2,49 +2,49 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
-gem 'sass-rails', '5.0.3'
+gem 'sass-rails', '5.0.4'
 gem 'uglifier', '2.7.2'
 gem 'coffee-rails'
 gem 'jquery-rails', '4.0.5'
 gem 'jquery-turbolinks'
 gem 'turbolinks'
-gem 'jbuilder'
+gem 'jbuilder', '~> 2.3.2'
 
-gem 'bootstrap-sass', '~> 3.2.0'
-gem 'autoprefixer-rails'
-gem 'haml-rails'
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'autoprefixer-rails', '~>6.1.0'
+gem 'haml-rails', '~> 0.9.0'
 
 # Deploy with Capistrano
-gem 'capistrano', '~> 3.3.3'
-gem 'capistrano-rails', '~> 1.1.2'
+gem 'capistrano', '~> 3.4.0'
+gem 'capistrano-rails', '~> 1.1.5'
 gem 'capistrano-rbenv', github: 'capistrano/rbenv'
-gem 'capistrano-bundler', '~> 1.1.3'
+gem 'capistrano-bundler', '~> 1.1.4'
 # gem 'equivalent-xml', '~> 0.5.1'
 
-gem 'pg'
-gem 'fabrication'
-gem 'faker'
-gem 'bootstrap_form'
+gem 'pg', '~> 0.18.3'
+gem 'fabrication', '~> 2.14.1'
+gem 'faker', '~> 1.5.0'
+gem 'bootstrap_form', '~> 2.3.0'
 gem 'kaminari'
 gem 'omniauth'
-gem 'omniauth-shibboleth'
+gem 'omniauth-shibboleth', '~> 1.2.1'
 gem 'net-sftp'
-gem 'money-rails'
-gem 'net-ldap'
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '0.9.9'
+gem 'money-rails', '~> 1.4.1'
+gem 'net-ldap', '~> 0.12.0'
+gem 'wicked_pdf', '~> 1.0.0'
+gem 'wkhtmltopdf-binary', '~>0.9.9'
 gem 'hydra-ldap'
 
 group :development do
-  gem 'spring'
-  gem 'letter_opener'
+  gem 'spring', '~> 1.4.1'
+  gem 'letter_opener', '~> 1.4.1'
 end
 
 group :development, :test do
-  gem 'sqlite3'
-  gem 'rspec-rails', '3.1'
-  gem 'pry'
-  gem 'capybara'
+  gem 'sqlite3', '~> 1.3.11'
+  gem 'rspec-rails', '~> 3.3.3'
+  gem 'pry', '~> 0.10.3'
+  gem 'capybara', '~> 2.5.0'
   gem 'launchy'
   gem 'simplecov'
   gem 'rubocop', require: false
@@ -53,8 +53,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner', '1.2.0'
-  gem 'shoulda-matchers', require: false, github: 'thoughtbot/shoulda-matchers', branch: 'master'
+  gem 'database_cleaner', '~> 1.5.1'
+  gem 'shoulda-matchers', '2.8.0.rc2', require: false
   gem 'codeclimate-test-reporter', require: nil
 end
 
