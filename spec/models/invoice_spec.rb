@@ -77,53 +77,53 @@ end
     end
   end
 
-  describe "get_charge_file_name" do
+  describe "charge_file_name" do
     it "returns required charge file name convention" do
       file_name = "SISP.ARD2501.LIBBUS.CHARGE.D" + Invoice.convert_to_julian_date
-      expect(Invoice.get_charge_file_name).to eq(file_name)
+      expect(Invoice.charge_file_name).to eq(file_name)
     end
   end
 
-  describe "get_entity_file_name" do
+  describe "entity_file_name" do
     it "returns required entity file name convention" do
       file_name = "SISP.ARD2501.LIBBUS.ENTITY.D" + Invoice.convert_to_julian_date
-      expect(Invoice.get_entity_file_name).to eq(file_name)
+      expect(Invoice.entity_file_name).to eq(file_name)
     end
   end
 
-  describe "get_person_file_name" do
+  describe "person_file_name" do
     it "returns required person file name convention" do
       file_name = "SISP.ARD2501.LIBBUS.PERSON.D" + Invoice.convert_to_julian_date
-      expect(Invoice.get_person_file_name).to eq(file_name)
+      expect(Invoice.person_file_name).to eq(file_name)
     end
   end
 
-  describe "get_charge_lfile_name" do
+  describe "charge_lfile_name" do
     it "returns required local charge file name convention" do
       file_name = "CHARGE.D" + Invoice.convert_to_julian_date + ".TXT"
-      expect(Invoice.get_charge_lfile_name).to eq(file_name)
+      expect(Invoice.charge_lfile_name).to eq(file_name)
     end
   end
 
-  describe "get_entity_lfile_name" do
+  describe "entity_lfile_name" do
     it "returns required local entity file name convention" do
       file_name = "ENTITY.D" + Invoice.convert_to_julian_date + ".TXT"
-      expect(Invoice.get_entity_lfile_name).to eq(file_name)
+      expect(Invoice.entity_lfile_name).to eq(file_name)
     end
   end
 
-  describe "get_person_lfile_name" do
+  describe "person_lfile_name" do
     it "returns required local person file name convention" do
       file_name = "PERSON.D" + Invoice.convert_to_julian_date + ".TXT"
-      expect(Invoice.get_person_lfile_name).to eq(file_name)
+      expect(Invoice.person_lfile_name).to eq(file_name)
     end
   end
 
-  describe "get_charge_output" do
+  describe "charge_output" do
     it "gets charge output" do
       patron = Fabricate(:patron, ar_code: "A23456789")
       invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
-      t_date = Time.now.strftime("%m%d%y")
+      t_date = Time.zone.now.strftime("%m%d%y")
 
       header_row = "CHDR CLIBRARY.CHARGE " + t_date + " " + t_date + " 000001" + " " * 279
       detail_rows = "A" + patron.ar_code + " " * 35 + "LIBLPS" + "0000000040{" + " " * 6
@@ -132,15 +132,15 @@ end
       
       content = "#{header_row}\n#{detail_rows}\n#{final_rows}"
 
-      expect(Invoice.get_charge_output).to eq(content)
+      expect(Invoice.charge_output).to eq(content)
     end
   end
 
-  describe "get_person_output" do
+  describe "person_output" do
     it "gets person output" do
       patron = Fabricate(:patron, ar_code: "A23456789", name: "john", address1: "ABC Street", city:"Dream", state: "CA", zip1: "12345" )
       invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
-      t_date = Time.now.strftime("%m%d%y")
+      t_date = Time.zone.now.strftime("%m%d%y")
       address = "ABC Street" + " " * 25 +  " " * 105 + "Dream" + " " * 13 + "CA" + "12345" + " " * 4 + " " * 2 + " " * 30
 
       header_row = "PHDR CLIBRARY.PERSON "+ t_date + " " + t_date + " 000001" + " " * 279
@@ -150,15 +150,15 @@ end
       
       content = "#{header_row}\n#{detail_rows}\n#{final_rows}"
 
-      expect(Invoice.get_person_output).to eq(content)
+      expect(Invoice.person_output).to eq(content)
     end
   end
 
-  describe "get_entity_output" do
+  describe "entity_output" do
     it "gets entity output" do
       patron = Fabricate(:patron, ar_code: "AA3456789", name: "Excl", address1: "ABC Street", city:"Dream", state: "CA", zip1: "12345" )
       invoice = Fabricate(:invoice, status: "pending", charge: 4.00, invoice_num: "50001", patron: patron)
-      t_date = Time.now.strftime("%m%d%y")
+      t_date = Time.zone.now.strftime("%m%d%y")
       address = "ABC Street" + " " * 25 +  " " * 105 + "Dream" + " " * 13 + "CA" + "12345" + " " * 4 + " " * 2 + " " * 30
 
       header_row = "EHDR CLIBRARY.ENTITY " + t_date + " " + t_date + " " * 286
@@ -168,7 +168,7 @@ end
       
       content = "#{header_row}\n#{detail_rows}\n#{final_rows}"
 
-      expect(Invoice.get_entity_output).to eq(content)
+      expect(Invoice.entity_output).to eq(content)
     end
   end
 

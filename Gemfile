@@ -1,5 +1,5 @@
+# encoding: utf-8
 source 'https://rubygems.org'
-
 
 gem 'rails', '4.2.4'
 gem 'sass-rails', '5.0.3'
@@ -17,9 +17,9 @@ gem 'haml-rails'
 # Deploy with Capistrano
 gem 'capistrano', '~> 3.3.3'
 gem 'capistrano-rails', '~> 1.1.2'
-gem 'capistrano-rbenv', github: "capistrano/rbenv"
+gem 'capistrano-rbenv', github: 'capistrano/rbenv'
 gem 'capistrano-bundler', '~> 1.1.3'
-#gem 'equivalent-xml', '~> 0.5.1'
+# gem 'equivalent-xml', '~> 0.5.1'
 
 gem 'pg'
 gem 'fabrication'
@@ -37,7 +37,7 @@ gem 'hydra-ldap'
 
 group :development do
   gem 'spring'
-  gem "letter_opener"
+  gem 'letter_opener'
 end
 
 group :development, :test do
@@ -47,13 +47,15 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov'
- # gem 'rspec_junit_formatter', '~> 0.2.0'
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec'
+  # gem 'rspec_junit_formatter', '~> 0.2.0'
 end
 
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers', require: false, github: 'thoughtbot/shoulda-matchers', branch: 'master'
-  gem "codeclimate-test-reporter", require: nil
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :staging do
@@ -62,8 +64,7 @@ group :staging do
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
-
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -1,13 +1,14 @@
-#---
+# encoding: utf-8
+#
 # @author hweng@ucsd.edu
-#---
+#
 
 class Patron < ActiveRecord::Base
   has_many :invoices
 
-  #validates :email_address, presence: true
+  # validates :email_address, presence: true
   validates :name, presence: true, length: { maximum: 35 }
-  validates :ar_code, presence: true, uniqueness: true, format: { :with => /\AA[A\d]\d{7}\z/ }, length: { is: 9 }
+  validates :ar_code, presence: true, uniqueness: true, format: { with: /\AA[A\d]\d{7}\z/ }, length: { is: 9 }
   validates :address1, presence: true, length: { maximum: 35 }
   validates :address2, length: { maximum: 35 }
   validates :address3, length: { maximum: 35 }

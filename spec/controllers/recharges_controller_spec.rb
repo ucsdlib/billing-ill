@@ -234,7 +234,7 @@ describe RechargesController do
     it "sends an email to the recipient" do
       get :ftp_file
       ActionMailer::Base.deliveries.clear
-      email_date = Time.now
+      email_date = Time.zone.now
       
       AppMailer.send_recharge_email(@user, email_date).deliver_now
 
@@ -252,7 +252,7 @@ describe RechargesController do
       fund = Fabricate(:fund)
       recharge = Fabricate(:recharge, status: "pending", fund: fund)
       get :ftp_file
-      expect(recharge.reload.submitted_at.strftime("%m%y")).to eq(Time.now.strftime("%m%y"))
+      expect(recharge.reload.submitted_at.strftime("%m%y")).to eq(Time.zone.now.strftime("%m%y"))
     end
 
     it "redirects to the recharges index page" do
