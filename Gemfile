@@ -1,7 +1,7 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 gem 'sass-rails', '5.0.4'
 gem 'uglifier', '2.7.2'
 gem 'coffee-rails'
@@ -10,8 +10,8 @@ gem 'jquery-turbolinks'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.3.2'
 
-gem 'bootstrap-sass', '~> 3.3.5'
-gem 'autoprefixer-rails', '~>6.1.0'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'autoprefixer-rails', '~>6.1.1'
 gem 'haml-rails', '~> 0.9.0'
 
 # Deploy with Capistrano
@@ -21,19 +21,20 @@ gem 'capistrano-rbenv', github: 'capistrano/rbenv'
 gem 'capistrano-bundler', '~> 1.1.4'
 # gem 'equivalent-xml', '~> 0.5.1'
 
-gem 'pg', '~> 0.18.3'
+gem 'pg', '~> 0.18.4'
 gem 'fabrication', '~> 2.14.1'
-gem 'faker', '~> 1.5.0'
+gem 'faker', '~> 1.6.1'
 gem 'bootstrap_form', '~> 2.3.0'
 gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-shibboleth', '~> 1.2.1'
 gem 'net-sftp'
 gem 'money-rails', '~> 1.4.1'
-gem 'net-ldap', '~> 0.12.0'
-gem 'wicked_pdf', '~> 1.0.0'
+gem 'net-ldap', '~> 0.12.1'
+gem 'wicked_pdf', '~> 1.0.1'
 gem 'wkhtmltopdf-binary', '~>0.9.9'
 gem 'hydra-ldap'
+gem 'nokogiri', '1.6.7.rc4'
 
 group :development do
   gem 'spring', '~> 1.4.1'
