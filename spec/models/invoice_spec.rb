@@ -174,21 +174,21 @@ end
 
   describe "create_entity_file" do
      it "returns entity file name" do
-      file_name = "SISP.ARD2501.LIBBUS.ENTITY.D" + Invoice.convert_to_julian_date
+      file_name = 'ENTITY.D' + Invoice.convert_to_julian_date + '.TXT'
       expect(Invoice.create_entity_file).to eq(file_name)
     end
   end
 
   describe "create_person_file" do
      it "returns person file name" do
-      file_name = "SISP.ARD2501.LIBBUS.PERSON.D" + Invoice.convert_to_julian_date
+      file_name = 'PERSON.D' + Invoice.convert_to_julian_date + '.TXT'
       expect(Invoice.create_person_file).to eq(file_name)
     end
   end
 
   describe "create_charge_file" do
      it "returns charge file name" do
-      file_name = "SISP.ARD2501.LIBBUS.CHARGE.D" + Invoice.convert_to_julian_date
+      file_name = 'CHARGE.D' + Invoice.convert_to_julian_date + '.TXT'
       expect(Invoice.create_charge_file).to eq(file_name)
     end
   end
