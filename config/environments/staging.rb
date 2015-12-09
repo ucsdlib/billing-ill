@@ -58,4 +58,6 @@ Rails.application.configure do
 
   config.shibboleth = true
 
+  config.emails_recipients = '' 
+
 end

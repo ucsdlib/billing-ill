@@ -44,4 +44,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.shibboleth = true
+
+  config.emails_recipients = '' 
 end
