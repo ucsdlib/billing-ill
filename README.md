@@ -66,6 +66,7 @@ http://localhost:3000
 
 ```
 $ bundle exec rake
+$ rubocop
 ```
 
 
