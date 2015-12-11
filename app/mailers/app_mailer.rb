@@ -9,7 +9,7 @@ class AppMailer < ActionMailer::Base
     @email_date = email_date
     @file_name = Recharge.create_file
     @record_count = Recharge.search_all_pending_status.size + 2
-    
+
     send_mail_to(user.email, 'ILL Billing Recharge File')
   end
 
@@ -31,7 +31,6 @@ class AppMailer < ActionMailer::Base
 
   def send_mail_to(mail_address, subject)
     recipients = "#{Rails.configuration.emails_recipients}#{mail_address}"
-    
     mail to: recipients, from: mail_address, subject: subject
   end
 end
