@@ -123,7 +123,7 @@ class Recharge < ActiveRecord::Base
   end
 
   def self.create_file
-    file_name = 'FISP.JVDATA.D' + convert_date_yymmdd(Time.zone.now) + '.LIB.txt'
+    file_name = 'FISP.JVDATA.D' + convert_date_yymmdd(Time.zone.now) + '.LIB'
     path = 'tmp/ftp/' + file_name
     content = process_output
     # puts Dir.pwd

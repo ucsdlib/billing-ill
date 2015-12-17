@@ -283,7 +283,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.create_entity_file
-    file_name = Invoice.entity_file_name
+    file_name = Invoice.entity_lfile_name
     path = get_path(file_name)
     content = Invoice.entity_output
 
@@ -293,7 +293,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.create_person_file
-    file_name = Invoice.person_file_name
+    file_name = Invoice.person_lfile_name
     path = get_path(file_name)
     content = Invoice.person_output
 
@@ -303,7 +303,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.create_charge_file
-    file_name = Invoice.charge_file_name
+    file_name = Invoice.charge_lfile_name
     path = get_path(file_name)
     content = Invoice.charge_output
 
