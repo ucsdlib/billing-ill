@@ -30,10 +30,7 @@ class AppMailer < ActionMailer::Base
   end
 
   def send_mail_to(mail_address, subject)
-    if Rails.env.production?
-      mail to: 'act-prodcontrol@ucsd.edu', from: mail_address, subject: subject
-    else
-      mail to: mail_address, from: mail_address, subject: subject
-    end
+    recipients = "#{Rails.configuration.emails_recipients}#{mail_address}"
+    mail to: recipients, from: mail_address, subject: subject
   end
 end

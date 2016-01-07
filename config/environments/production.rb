@@ -87,4 +87,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.shibboleth = true
+
+  config.emails_recipients = 'act-prodcontrol@ucsd.edu,' 
 end
