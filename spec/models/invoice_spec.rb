@@ -72,7 +72,7 @@ end
 
   describe "convert_to_julian_date" do
     it "returns a julian day format for today's date" do
-      j_today = Date.today.strftime("%y") + Date.today.yday.to_s
+      j_today = Time.zone.today.strftime('%y') + Time.zone.today.yday.to_s
       expect(Invoice.convert_to_julian_date).to eq(j_today)
     end
   end
@@ -161,7 +161,7 @@ end
       t_date = Time.zone.now.strftime("%m%d%y")
       address = "ABC Street" + " " * 25 +  " " * 105 + "Dream" + " " * 13 + "CA" + "12345" + " " * 4 + " " * 2 + " " * 30
 
-      header_row = "EHDR CLIBRARY.ENTITY " + t_date + " " + t_date + " " * 286
+      header_row = "EHDR CLIBRARY.ENTITY " + t_date + " " + t_date + " 000001" + " " * 279
       detail_rows = "C" + "PUBLPUBL" + " " * 9 + patron.ar_code + "Excl" + " " * 31 + "Excl" + " " * 51 + " " * 2
       detail_rows += address
       final_rows = "ETRL " + "000003" + " " * 309
