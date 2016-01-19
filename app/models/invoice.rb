@@ -79,7 +79,7 @@ class Invoice < ActiveRecord::Base
 
   def self.entity_output
     h_column1_21 = 'EHDR' + ' ' * 1 + 'CLIBRARY.ENTITY' + ' ' * 1
-    h_column35_320 = ' ' * 286
+    h_column35_320 = ' ' * 1 + '000001' + ' ' * 279
 
     "#{header_row(h_column1_21, h_column35_320)}#{entity_detail_rows}#{trailer_row('ETRL', entity_count)}"
   end
