@@ -50,13 +50,8 @@ class InvoicesController < ApplicationController
   end
 
   def search
-    result_arr = []
-
-    if params[:search_option] == 'patron_name'
-      result_arr = Invoice.search_by_patron_name(params[:search_term])
-    else
-      result_arr = Invoice.search_by_invoice_num(params[:search_term])
-    end
+    result_arr = Invoice.search_by_invoice_num(params[:search_term])
+    result_arr = Invoice.search_by_patron_name(params[:search_term]) if params[:search_option] == 'patron_name'
 
     @search_result = result_arr.page(params[:page]) unless result_arr.blank?
     @search_count = result_arr.count
