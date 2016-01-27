@@ -1,7 +1,7 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.1'
 gem 'sass-rails', '5.0.4'
 gem 'uglifier', '2.7.2'
 gem 'coffee-rails', '4.1.1'
@@ -11,7 +11,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.4.0'
 
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'autoprefixer-rails', '~>6.1.1'
+gem 'autoprefixer-rails', '~>6.3.1'
 gem 'haml-rails', '~> 0.9.0'
 
 # Deploy with Capistrano
@@ -29,23 +29,23 @@ gem 'kaminari'
 gem 'omniauth', '1.3.1'
 gem 'omniauth-shibboleth', '~> 1.2.1'
 gem 'net-sftp'
-gem 'money-rails', '~> 1.4.1'
+gem 'money-rails', '~> 1.4.1' # 1.6.0 break tests
 gem 'net-ldap', '~> 0.13.0'
-gem 'wicked_pdf', '~> 1.0.1'
+gem 'wicked_pdf', '~> 1.0.4'
 gem 'wkhtmltopdf-binary', '~>0.9.9'
 gem 'hydra-ldap'
 gem 'nokogiri', '1.6.7.2'
 
 group :development do
-  gem 'spring', '~> 1.4.1'
+  gem 'spring', '~> 1.6.2'
   gem 'letter_opener', '~> 1.4.1'
 end
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.11'
-  gem 'rspec-rails', '~> 3.3.3'
+  gem 'rspec-rails', '~> 3.4.1'
   gem 'pry', '~> 0.10.3'
-  gem 'capybara', '~> 2.5.0'
+  gem 'capybara', '~> 2.6.1'
   gem 'launchy'
   gem 'simplecov'
   gem 'rubocop', require: false
@@ -61,7 +61,7 @@ end
 
 group :staging do
   gem 'activerecord-postgresql-adapter'
-  gem 'rake', '~> 10.4.0'
+  gem 'rake', '~> 10.5.0'
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.
