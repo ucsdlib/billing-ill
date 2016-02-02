@@ -1,7 +1,6 @@
 require: rubocop-rspec
 
 AllCops:
-  RunRailsCops: true
   DisplayCopNames: true
   Exclude:
     - 'vendor/**/*'
@@ -12,6 +11,9 @@ AllCops:
     - 'doc/**/*'
     - 'spec/**/*'
     - 'test/**/*'
+
+Rails:
+    Enabled: true
 
 Style/Encoding:
   Enabled: true
