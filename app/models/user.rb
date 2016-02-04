@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
     yml = ldap_config
     @ldap_connection_config[:host] = yml[:host]
     @ldap_connection_config[:port] = yml['port']
-    @ldap_connection_config[:encryption] = :simple_tls
+    @ldap_connection_config[:encryption] = { method: :simple_tls },
     if yml['username'] && yml['password']
       @ldap_connection_config[:auth] = { method: :simple }
       @ldap_connection_config[:auth][:username] = yml['username']
