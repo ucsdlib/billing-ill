@@ -347,7 +347,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def self.convert_to_julian_date
-    Time.zone.today.strftime('%y') + Time.zone.today.yday.to_s
+    Time.zone.today.strftime('%y') + Time.zone.today.yday.to_s.rjust(3, '0')
   end
 
   def self.send_file
