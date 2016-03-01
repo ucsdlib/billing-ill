@@ -1,7 +1,7 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.2.5.2'
 gem 'sass-rails', '5.0.4'
 gem 'uglifier', '2.7.2'
 gem 'coffee-rails', '4.1.1'
