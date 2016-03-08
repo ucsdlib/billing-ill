@@ -72,7 +72,7 @@ end
 
   describe "convert_to_julian_date" do
     it "returns a julian day format for today's date" do
-      j_today = Time.zone.today.strftime('%y') + Time.zone.today.yday.to_s
+      j_today = Time.zone.today.strftime('%y') + Time.zone.today.yday.to_s.rjust(3, '0')
       expect(Invoice.convert_to_julian_date).to eq(j_today)
     end
   end
