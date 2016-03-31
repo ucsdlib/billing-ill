@@ -87,7 +87,7 @@ end
 
   describe "create_file" do
     it "returns file name" do
-      file_name = "FISP.JVDATA.D" + Recharge.convert_date_yymmdd(Time.zone.now) + ".LIB"
+      file_name = "FISP.JVDATA.D" + Recharge.convert_date_yymm(Time.zone.now) + "01.LIB"
       expect(Recharge.create_file).to eq(file_name)
     end
   end
