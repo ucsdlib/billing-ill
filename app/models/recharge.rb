@@ -123,7 +123,7 @@ class Recharge < ActiveRecord::Base
   end
 
   def self.create_file
-    file_name = 'FISP.JVDATA.D' + convert_date_yymmdd(Time.zone.now) + '.LIB'
+    file_name = 'FISP.JVDATA.D' + convert_date_yymm(Time.zone.now) + '01.LIB'
     path = 'tmp/ftp/' + file_name
     content = process_output
     # puts Dir.pwd
@@ -151,8 +151,8 @@ class Recharge < ActiveRecord::Base
     Rails.logger.info('File uploaded, Connection terminated.')
   end
 
-  def self.convert_date_yymmdd(cdate)
-    cdate.strftime('%y%m%d')
+  def self.convert_date_yymm(cdate)
+    cdate.strftime('%y%m')
   end
 
   def self.convert_seq_num(seq_num)
