@@ -1,10 +1,10 @@
 defaults: &defaults
-  host: <%= Rails.application.secrets[:ldap_host] %>
-  port: <%= Rails.application.secrets[:ldap_port] %>
-  username: <%= Rails.application.secrets[:ldap_username] %>
-  password:  <%= Rails.application.secrets[:ldap_password] %>
-  base: <%= Rails.application.secrets[:ldap_base] %>
-  group_base: <%= Rails.application.secrets[:ldap_group_base] %>
+  ldap_host: <%= ENV.fetch('APPS_BILLINGILL_LDAP_HOST') %>
+  ldap_port: <%= ENV.fetch('APPS_BILLINGILL_LDAP_PORT') %>
+  ldap_base: <%= ENV.fetch('APPS_BILLINGILL_LDAP_BASE') %>
+  ldap_username: <%= ENV.fetch('APPS_BILLINGILL_LDAP_USER') %>
+  ldap_password: <%= ENV.fetch('APPS_BILLINGILL_LDAP_PASS') %>
+  ldap_group: <%= ENV.fetch('APPS_BILLINGILL_LDAP_GROUP') %>
 
 pontos:
   <<: *defaults
