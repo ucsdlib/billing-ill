@@ -19,8 +19,4 @@
 /tmp/letter_opener
 
 
-#config/secrets.yml
-#config/database.yml
-
-
 .coveralls.yml
