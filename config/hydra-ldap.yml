@@ -1,10 +1,10 @@
 defaults: &defaults
-  ldap_host: <%= ENV.fetch('APPS_BILLINGILL_LDAP_HOST') %>
-  ldap_port: <%= ENV.fetch('APPS_BILLINGILL_LDAP_PORT') %>
-  ldap_base: <%= ENV.fetch('APPS_BILLINGILL_LDAP_BASE') %>
-  ldap_username: <%= ENV.fetch('APPS_BILLINGILL_LDAP_USER') %>
-  ldap_password: <%= ENV.fetch('APPS_BILLINGILL_LDAP_PASS') %>
-  ldap_group: <%= ENV.fetch('APPS_BILLINGILL_LDAP_GROUP') %>
+  ldap_host: <%= ENV.fetch('APPS_IB_LDAP_HOST') %>
+  ldap_port: <%= ENV.fetch('APPS_IB_LDAP_PORT') %>
+  ldap_base: <%= ENV.fetch('APPS_IB_LDAP_BASE') %>
+  ldap_username: <%= ENV.fetch('APPS_IB_LDAP_USER') %>
+  ldap_password: <%= ENV.fetch('APPS_IB_LDAP_PASS') %>
+  ldap_group: <%= ENV.fetch('APPS_IB_LDAP_GROUP') %>
 
 pontos:
   <<: *defaults

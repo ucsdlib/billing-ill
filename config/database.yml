@@ -25,23 +25,23 @@ test:
 production: &production
   <<: *default
   adapter: postgresql
-  database: <%= ENV.fetch('APPS_BILLINGILL_PROD_DB') %>
-  host: <%= ENV.fetch('APPS_BILLINGILL_PROD_DB_HOST') %>
-  username: <%= ENV.fetch('APPS_BILLINGILL_PROD_DB_USER') %>
-  password: <%= ENV.fetch('APPS_BILLINGILL_PROD_DB_PASS') %>
+  database: <%= ENV.fetch('APPS_IB_PROD_DB') %>
+  host: <%= ENV.fetch('APPS_IB_PROD_DB_HOST') %>
+  username: <%= ENV.fetch('APPS_IB_PROD_DB_USER') %>
+  password: <%= ENV.fetch('APPS_IB_PROD_DB_PASS') %>
 
 staging:
   <<: *default
   adapter: postgresql
-  database: <%= ENV.fetch('APPS_BILLINGILL_STAGING_DB') %>
-  host: <%= ENV.fetch('APPS_BILLINGILL_STAGING_DB_HOST') %>
-  username: <%= ENV.fetch('APPS_BILLINGILL_STAGING_DB_USER') %>
-  password: <%= ENV.fetch('APPS_BILLINGILL_STAGING_DB_PASS') %>
+  database: <%= ENV.fetch('APPS_IB_STAGING_DB') %>
+  host: <%= ENV.fetch('APPS_IB_STAGING_DB_HOST') %>
+  username: <%= ENV.fetch('APPS_IB_STAGING_DB_USER') %>
+  password: <%= ENV.fetch('APPS_IB_STAGING_DB_PASS') %>
 
 pontos:
   <<: *default
   adapter: postgresql
-  database: <%= ENV.fetch('APPS_BILLINGILL_PONTOS_DB') %>
-  host: <%= ENV.fetch('APPS_BILLINGILL_PONTOS_DB_HOST') %>
-  username: <%= ENV.fetch('APPS_BILLINGILL_PONTOS_DB_USER') %>
-  password: <%= ENV.fetch('APPS_BILLINGILL_PONTOS_DB_PASS') %>
+  database: <%= ENV.fetch('APPS_IB_PONTOS_DB') %>
+  host: <%= ENV.fetch('APPS_IB_PONTOS_DB_HOST') %>
+  username: <%= ENV.fetch('APPS_IB_PONTOS_DB_USER') %>
+  password: <%= ENV.fetch('APPS_IB_PONTOS_DB_PASS') %>
