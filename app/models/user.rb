@@ -59,7 +59,6 @@ class User < ActiveRecord::Base
     @ldap_connection_config[:host] = yml[:host]
     @ldap_connection_config[:port] = yml['port']
     @ldap_connection_config[:encryption] = { method: :simple_tls }
-    binding.pry
     if yml['username'] && yml['password']
       @ldap_connection_config[:auth] = { method: :simple }
       @ldap_connection_config[:auth][:username] = yml['username']
@@ -73,7 +72,6 @@ class User < ActiveRecord::Base
     root = Rails.root || '.'
     env = Rails.env || 'test'
     @ldap_config ||= YAML.load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env].with_indifferent_access
-    binding.pry
   end
 
   def self.ldap_group_base
