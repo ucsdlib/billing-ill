@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def shibboleth
+    binding.pry
     find_or_create_user('shibboleth')
   end
 
