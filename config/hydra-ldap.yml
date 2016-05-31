@@ -1,10 +1,10 @@
 defaults: &defaults
-  host: <%= Rails.application.secrets[:ldap_host] %>
-  port: <%= Rails.application.secrets[:ldap_port] %>
-  username: <%= Rails.application.secrets[:ldap_username] %>
-  password:  <%= Rails.application.secrets[:ldap_password] %>
-  base: <%= Rails.application.secrets[:ldap_base] %>
-  group_base: <%= Rails.application.secrets[:ldap_group_base] %>
+  host: <%= ENV.fetch('APPS_IB_LDAP_HOST') %>
+  port: <%= ENV.fetch('APPS_IB_LDAP_PORT') %>
+  base: <%= ENV.fetch('APPS_IB_LDAP_BASE') %>
+  username: <%= ENV.fetch('APPS_IB_LDAP_USER') %>
+  password: <%= ENV.fetch('APPS_IB_LDAP_PASS') %>
+  group: <%= ENV.fetch('APPS_IB_LDAP_GROUP') %>
 
 pontos:
   <<: *defaults

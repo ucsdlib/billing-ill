@@ -1,0 +1,21 @@
+machine:
+  ruby:
+    version:
+      2.2.3        
+  environment:
+    CIRCLE_ENV: test
+
+dependencies:
+  pre:
+    - gem install bundler --pre
+
+  override:
+    - bundle install
+
+database:
+  override:
+    - bundle exec rake db:migrate RAILS_ENV=test
+
+test:
+  post:
+    - bundle exec rake

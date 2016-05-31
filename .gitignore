@@ -11,16 +11,12 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
-# Ignore all logfiles and tempfiles.
+# Ignore logfiles and tempfiles.
 /log/*.log
-# /tmp
+
 /tmp/cache
 /tmp/pids
 /tmp/letter_opener
-
-
-config/secrets.yml
-config/database.yml
 
 
 .coveralls.yml
