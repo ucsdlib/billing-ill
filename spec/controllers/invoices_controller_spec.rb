@@ -169,12 +169,12 @@ describe InvoicesController do
         delete :destroy, id: @invoice
       end
 
-    it "redirects to the invoice index page" do
-      expect(response).to redirect_to invoices_path
-    end
-
     it "deletes the invoice" do
       expect(Invoice.count).to eq(0)
+    end
+    
+    it "redirects to the invoice index page" do
+      expect(response).to redirect_to invoices_path
     end
   end
 
