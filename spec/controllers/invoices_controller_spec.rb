@@ -176,6 +176,10 @@ describe InvoicesController do
     it "redirects to the invoice index page" do
       expect(response).to redirect_to invoices_path
     end
+    
+    it "redirects to the invoice index page" do
+      expect(response).to redirect_to invoices_path
+    end
   end
 
   describe "GET search" do
