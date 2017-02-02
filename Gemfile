@@ -35,6 +35,7 @@ gem 'wicked_pdf', '~> 1.0.6'
 gem 'wkhtmltopdf-binary', '~>0.12.3'
 gem 'hydra-ldap'
 gem 'nokogiri', '1.6.8'
+gem 'coveralls', require: false
 
 group :development do
   gem 'spring', '~> 1.6.2'
@@ -56,7 +57,7 @@ end
 group :test do
   gem 'database_cleaner', '~> 1.5.1'
   gem 'shoulda-matchers', '2.8.0.rc2', require: false
-  gem 'codeclimate-test-reporter', require: nil
+#  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :staging do
