@@ -56,8 +56,8 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 1.5.1'
-  gem 'shoulda-matchers', '2.8.0.rc2', require: false
   gem 'codeclimate-test-reporter', require: nil
+  gem 'shoulda-matchers', '2.8.0.rc2', require: false
 end
 
 group :staging do
