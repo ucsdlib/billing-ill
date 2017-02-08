@@ -1,6 +1,5 @@
 # ILL Billing System
-
-[![Code Climate](https://codeclimate.com/repos/559aaef8e30ba06bfd0001d9/badges/c7609d3879a4d9b01db0/gpa.svg)](https://codeclimate.com/repos/559aaef8e30ba06bfd0001d9/feed) [![Test Coverage](https://codeclimate.com/repos/559aaef8e30ba06bfd0001d9/badges/c7609d3879a4d9b01db0/coverage.svg)](https://codeclimate.com/repos/559aaef8e30ba06bfd0001d9/coverage) [![Dependency Status](https://gemnasium.com/ucsdlib/billing-ill.svg)](https://gemnasium.com/ucsdlib/billing-ill)
+[![Coverage Status](https://coveralls.io/repos/github/ucsdlib/billing-ill/badge.svg?t=iGS59G)](https://coveralls.io/github/ucsdlib/billing-ill)
 
 ILL Billing System is a Ruby on Rails web application which is created for processing and invoicing the Receivables, UCSD Recharges, UC Recharges, and Payables from the Interlibrary Loan Services in [UC San Diego Library](http://libraries.ucsd.edu/ "UC San Diego Library")
 
