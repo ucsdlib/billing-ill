@@ -36,7 +36,6 @@ gem 'wkhtmltopdf-binary', '~>0.12.3'
 gem 'hydra-ldap'
 gem 'nokogiri', '1.6.8'
 gem 'coveralls', require: false
-gem 'rainbow','2.2.1'
 
 group :development do
   gem 'spring', '~> 1.6.2'

@@ -8,6 +8,7 @@ machine:
 dependencies:
   pre:
     - gem install bundler --pre
+    - gem install rainbow -v '2.2.1'
 
   override:
     - bundle install
