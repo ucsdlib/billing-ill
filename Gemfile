@@ -1,7 +1,7 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.1'
 gem 'sass-rails', '5.0.6'
 gem 'uglifier', '3.0.2'
 gem 'coffee-rails', '4.1.1'
@@ -36,7 +36,6 @@ gem 'wkhtmltopdf-binary', '~>0.12.3'
 gem 'hydra-ldap'
 gem 'nokogiri', '1.6.8'
 gem 'coveralls', require: false
-gem 'json', '1.8.5'
 
 group :development do
   gem 'spring', '~> 1.6.2'
@@ -45,7 +44,7 @@ end
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.11'
-  gem 'rspec-rails', '~> 3.4.1'
+  gem 'rspec-rails', '~> 3.5.2'
   gem 'pry', '~> 0.10.3'
   gem 'capybara', '~> 2.6.1'
   gem 'launchy'
@@ -58,6 +57,7 @@ end
 group :test do
   gem 'database_cleaner', '~> 1.5.1'
   gem 'shoulda-matchers', '2.8.0.rc2', require: false
+  gem 'rails-controller-testing'
 end
 
 group :staging do
