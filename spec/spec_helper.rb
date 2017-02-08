@@ -3,9 +3,6 @@
 require 'coveralls'
 Coveralls.wear!('rails')
 
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
-
 require 'rspec/matchers'
 #require 'equivalent-xml'
 
