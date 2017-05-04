@@ -26,8 +26,7 @@ class FundsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @fund.update(fund_params)

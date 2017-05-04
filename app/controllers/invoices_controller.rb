@@ -53,15 +53,13 @@ class InvoicesController < ApplicationController
     result_arr = Invoice.search_by_invoice_num(params[:search_term])
     result_arr = Invoice.search_by_patron_name(params[:search_term]) if params[:search_option] == 'patron_name'
 
-    @search_result = result_arr.page(params[:page]) unless result_arr.blank?
+    @search_result = result_arr.page(params[:page]) if result_arr.present?
     @search_count = result_arr.count
   end
 
-  def create_report
-  end
+  def create_report; end
 
-  def process_batch
-  end
+  def process_batch; end
 
   def create_bill
     respond_to do |format|
@@ -126,6 +124,6 @@ class InvoicesController < ApplicationController
   def set_current_batch
     @current_batch_count = Invoice.pending_status_count
     result_arr = Invoice.search_all_pending_status
-    @current_batch_result = result_arr.page(params[:page]) unless result_arr.blank?
+    @current_batch_result = result_arr.page(params[:page]) if result_arr.present?
   end
 end

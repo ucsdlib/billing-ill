@@ -47,8 +47,7 @@ class Recharge < ActiveRecord::Base
     search_all_pending_status.count
   end
 
-  def self.page_count
-  end
+  def self.page_count; end
 
   ##
   # Handles mapping for RECHARGE output file

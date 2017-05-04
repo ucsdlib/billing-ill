@@ -11,11 +11,10 @@ class ApplicationController < ActionController::Base
 
   def all_items(ref_model)
     result_arr = ref_model.order(:created_at)
-    result_arr.page(params[:page]) unless result_arr.blank?
+    result_arr.page(params[:page]) if result_arr.present?
   end
 
-  def country_list
-  end
+  def country_list; end
 
   def convert_date_mmddyy(cdate)
     cdate.strftime('%m/%d/%y')
