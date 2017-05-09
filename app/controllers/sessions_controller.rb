@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
     user = User.send(find_or_create_method, auth)
 
     if auth_type == 'shibboleth' && !User.in_supergroup?(auth.uid)
-      render file: "#{Rails.root}/public/403", formats: [:html], status: 403, layout: false
+      render file: Rails.root.join('public', '403'), formats: [:html], status: 403, layout: false
     else
       create_user_session(user) if user
       redirect_to root_url, notice: "You have successfully authenticated from #{auth_type} account!"
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
 
   def destroy
     destroy_user_session
-    flash[:alert] = ('You have been logged out of this application. To logout of all Single Sign-On applications, close your browser or <a href="/Shibboleth.sso/Logout?return=https://a4.ucsd.edu/tritON/logout?target=' + root_url + '">terminate your Shibboleth session</a>.').html_safe if Rails.configuration.shibboleth
+    flash[:alert] = safe_join(['You have been logged out of this application. To logout of all Single Sign-On applications, close your browser or <a href="/Shibboleth.sso/Logout?return=https://a4.ucsd.edu/tritON/logout?target='.html_safe, '">terminate your Shibboleth session</a>.'.html_safe], root_url) if Rails.configuration.shibboleth
 
     redirect_to root_url
   end

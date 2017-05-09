@@ -30,6 +30,18 @@ Style/Documentation:
 Style/Next:
   Enabled: false
 
+Style/VariableNumber:
+  Enabled: false
+
+Style/Encoding:
+  Enabled: false
+
+Style/EmptyLineAfterMagicComment:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
 Metrics/ClassLength:
   Max: 150
   Exclude:

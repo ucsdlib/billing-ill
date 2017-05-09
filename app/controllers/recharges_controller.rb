@@ -52,14 +52,14 @@ class RechargesController < ApplicationController
 
   def search
     result_arr = Recharge.search_by_index_code(params[:search_term])
-    @search_result = result_arr.page(params[:page]) unless result_arr.blank?
+    @search_result = result_arr.page(params[:page]) if result_arr.present?
     @search_count = result_arr.count
   end
 
   def process_batch
     @current_batch_count = Recharge.pending_status_count
     result_arr = Recharge.search_all_pending_status
-    @current_batch_result = result_arr.page(params[:page]) unless result_arr.blank?
+    @current_batch_result = result_arr.page(params[:page]) if result_arr.present?
   end
 
   def create_output

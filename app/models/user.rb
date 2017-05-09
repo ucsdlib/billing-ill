@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
       email = access_token['info']['email'] || "#{uid}@ucsd.edu"
       provider = access_token.provider
       name = access_token['info']['name']
-
     rescue StandardError => e
       logger.warn "shibboleth: #{e}"
     end
@@ -71,7 +70,7 @@ class User < ActiveRecord::Base
   def self.ldap_config
     root = Rails.root || '.'
     env = Rails.env || 'test'
-    @ldap_config ||= YAML.load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env].with_indifferent_access
+    @ldap_config ||= YAML.safe_load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env].with_indifferent_access
   end
 
   def self.ldap_group_base
@@ -82,6 +81,6 @@ class User < ActiveRecord::Base
   def self.ldap_response(ldap)
     msg = "Response Code: #{ldap.get_operation_result.code}, Message: #{ldap.get_operation_result.message}"
 
-    fail msg unless ldap.get_operation_result.code == 0
+    raise msg unless ldap.get_operation_result.code.zero?
   end
 end
