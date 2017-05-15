@@ -168,7 +168,7 @@ GEM
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
-    nokogiri (1.7.1)
+    nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
     omniauth (1.6.1)
       hashie (>= 3.4.6, < 3.6.0)
@@ -322,7 +322,7 @@ DEPENDENCIES
   money-rails (~> 1.4.1)
   net-ldap (~> 0.16.0)
   net-sftp
-  nokogiri (= 1.7.1)
+  nokogiri (= 1.7.2)
   omniauth (= 1.6.1)
   omniauth-shibboleth (~> 1.2.1)
   pg (~> 0.20.0)
