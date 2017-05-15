@@ -14,6 +14,7 @@
 # Ignore logfiles and tempfiles.
 /log/*.log
 
+/tmp
 /tmp/cache
 /tmp/pids
 /tmp/letter_opener
