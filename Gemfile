@@ -4,12 +4,11 @@ source 'https://rubygems.org'
 gem 'autoprefixer-rails', '~>6.7.7.2'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bootstrap_form', '~> 2.7.0'
-gem 'coffee-rails', '4.2.1'
-# Deploy with Capistrano
 gem 'capistrano', '~> 3.8.1'
 gem 'capistrano-bundler', '~> 1.2.0'
 gem 'capistrano-rails', '~> 1.2.3'
 gem 'capistrano-rbenv', '~> 2.1.1'
+gem 'coffee-rails', '4.2.1'
 gem 'coveralls', '~> 0.8.21', require: false
 gem 'fabrication', '~> 2.16.1'
 gem 'faker', '~> 1.7.3'

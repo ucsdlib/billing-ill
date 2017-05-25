@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   def self.ldap_config
     root = Rails.root || '.'
     env = Rails.env || 'test'
-    @ldap_config ||= YAML.safe_load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env].with_indifferent_access
+    @ldap_config ||= YAML.load(ERB.new(IO.read(File.join(root, 'config', 'hydra-ldap.yml'))).result)[env].with_indifferent_access
   end
 
   def self.ldap_group_base

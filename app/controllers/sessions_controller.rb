@@ -35,7 +35,8 @@ class SessionsController < ApplicationController
 
   def destroy
     destroy_user_session
-    flash[:alert] = safe_join(['You have been logged out of this application. To logout of all Single Sign-On applications, close your browser or <a href="/Shibboleth.sso/Logout?return=https://a4.ucsd.edu/tritON/logout?target='.html_safe, '">terminate your Shibboleth session</a>.'.html_safe], root_url) if Rails.configuration.shibboleth
+
+    flash[:alert] = ('You have been logged out of this application. To logout of all Single Sign-On applications, close your browser or <a href="/Shibboleth.sso/Logout?return=https://a4.ucsd.edu/tritON/logout?target=' + root_url + '">terminate your Shibboleth session</a>.').html_safe if Rails.configuration.shibboleth
 
     redirect_to root_url
   end

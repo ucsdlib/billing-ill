@@ -42,6 +42,12 @@ Style/EmptyLineAfterMagicComment:
 Style/SymbolArray:
   Enabled: false
 
+Security/YAMLLoad:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
 Metrics/ClassLength:
   Max: 150
   Exclude:
