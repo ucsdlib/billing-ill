@@ -15,9 +15,6 @@ AllCops:
 Rails:
     Enabled: true
 
-Style/Encoding:
-  Enabled: true
-
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
@@ -31,9 +28,6 @@ Style/Next:
   Enabled: false
 
 Style/VariableNumber:
-  Enabled: false
-
-Style/Encoding:
   Enabled: false
 
 Style/EmptyLineAfterMagicComment:
