@@ -27,10 +27,13 @@ Style/Documentation:
 Style/Next:
   Enabled: false
 
+Rails/ApplicationRecord:
+  Enabled: false
+
 Style/VariableNumber:
   Enabled: false
 
-Style/EmptyLineAfterMagicComment:
+Layout/EmptyLineAfterMagicComment:
   Enabled: false
 
 Style/SymbolArray:
