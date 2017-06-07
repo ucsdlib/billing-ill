@@ -8,20 +8,21 @@ gem 'capistrano', '~> 3.8.1'
 gem 'capistrano-bundler', '~> 1.2.0'
 gem 'capistrano-rails', '~> 1.2.3'
 gem 'capistrano-rbenv', '~> 2.1.1'
-gem 'coffee-rails', '4.2.1'
+gem 'coffee-rails', '4.2.2'
 gem 'coveralls', '~> 0.8.21', require: false
 gem 'fabrication', '~> 2.16.1'
 gem 'faker', '~> 1.7.3'
 gem 'haml-rails', '~> 1.0.0'
 gem 'hydra-ldap'
-gem 'jbuilder', '~> 2.6.3'
+gem 'jbuilder', '~> 2.7.0'
 gem 'jquery-rails', '4.3.1'
 gem 'jquery-turbolinks'
 gem 'kaminari', '1.0.1'
+gem 'mail', '2.7.0.rc1'
 gem 'money-rails', '~> 1.4.1' # 1.6.0 break tests
 gem 'net-ldap', '~> 0.16.0'
 gem 'net-sftp'
-gem 'nokogiri', '1.7.2'
+gem 'nokogiri', '1.8.0'
 gem 'omniauth', '1.6.1'
 gem 'omniauth-shibboleth', '~> 1.2.1'
 gem 'pg', '~> 0.20.0'
@@ -37,7 +38,7 @@ gem 'wkhtmltopdf-binary', '~>0.12.3.1'
 
 group :development do
   gem 'letter_opener', '~> 1.4.1'
-  gem 'spring', '~> 2.0.1'
+  gem 'spring', '~> 2.0.2'
 end
 
 group :development, :test do
@@ -45,7 +46,7 @@ group :development, :test do
   gem 'launchy'
   gem 'pry', '~> 0.10.4'
   gem 'rspec-rails', '~> 3.5.2'
-  gem 'rubocop', '~> 0.48.1', require: false
+  gem 'rubocop', '~> 0.49.1', require: false
   gem 'rubocop-rspec', '~> 1.15.1'
   gem 'simplecov', '~> 0.14.1'
   gem 'sqlite3', '~> 1.3.13'
