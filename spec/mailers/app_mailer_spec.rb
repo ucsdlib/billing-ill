@@ -53,7 +53,7 @@ describe AppMailer do
     let(:email) {AppMailer.send_invoice_email(@user, @email_date)}
     
     it 'renders the subject' do
-      expect(email.subject).to eql("ILL Billing Invoice File")
+      expect(email.subject).to eql("ARDP2501 ILL Billing Invoice File")
     end
     
     it 'renders the receiver email' do
