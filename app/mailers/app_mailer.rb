@@ -26,7 +26,7 @@ class AppMailer < ActionMailer::Base
     @lentity_file = Invoice.entity_lfile_name
     @lperson_file = Invoice.person_lfile_name
 
-    send_mail_to(user.email, 'ARDP2501 ILL Billing Invoice File')
+    send_mail_to(user.email, 'ARD2501 ILL Billing Invoice File')
   end
 
   def send_mail_to(mail_address, subject)
