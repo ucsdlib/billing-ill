@@ -22,7 +22,7 @@ gem 'mail', '2.7.0.rc1'
 gem 'money-rails', '~> 1.4.1' # 1.6.0 break tests
 gem 'net-ldap', '~> 0.16.0'
 gem 'net-sftp'
-gem 'nokogiri', '1.8.0'
+gem 'nokogiri', '1.8.1'
 gem 'omniauth', '1.6.1'
 gem 'omniauth-shibboleth', '~> 1.2.1'
 gem 'pg', '~> 0.20.0'
