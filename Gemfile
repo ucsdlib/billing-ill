@@ -47,7 +47,7 @@ group :development, :test do
   gem 'pry', '~> 0.10.4'
   gem 'rspec-rails', '~> 3.7.2'
   gem 'rubocop', '~> 0.49.1', require: false
-  gem 'rubocop-rspec', '~> 1.15.1'
+  gem 'rubocop-rspec', '~> 1.16.0'
   gem 'simplecov', '~> 0.14.1'
   gem 'sqlite3', '~> 1.3.13'
 end
