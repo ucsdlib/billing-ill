@@ -27,7 +27,7 @@ gem 'omniauth', '1.6.1'
 gem 'omniauth-shibboleth', '~> 1.2.1'
 gem 'pg', '~> 0.20.0'
 # rails 5.1 requires money-rails upgrades which broken tests
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.1.4'
 gem 'sass-rails', '5.0.6'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.2', group: :doc
