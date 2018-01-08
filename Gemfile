@@ -32,7 +32,7 @@ gem 'sass-rails', '5.0.6'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.2', group: :doc
 gem 'turbolinks', '5.0.1'
-gem 'uglifier', '3.2.0'
+gem 'uglifier', '4.1.3'
 gem 'wicked_pdf', '~> 1.1.0'
 gem 'wkhtmltopdf-binary', '~>0.12.3.1'
 
