@@ -23,7 +23,7 @@ gem 'money-rails', '~> 1.4.1' # 1.6.0 break tests
 gem 'net-ldap', '~> 0.16.1'
 gem 'net-sftp'
 gem 'nokogiri', '1.8.1'
-gem 'omniauth', '1.6.1'
+gem 'omniauth', '1.8.1'
 gem 'omniauth-shibboleth', '~> 1.3.0'
 gem 'pg', '~> 0.20.0'
 # rails 5.1 requires money-rails upgrades which broken tests
