@@ -44,7 +44,7 @@ end
 group :development, :test do
   gem 'capybara', '~> 2.17.0'
   gem 'launchy'
-  gem 'pry', '~> 0.10.4'
+  gem 'pry', '~> 0.11.3'
   gem 'rspec-rails', '~> 3.7.2'
   gem 'rubocop', '~> 0.49.1', require: false
   gem 'rubocop-rspec', '~> 1.16.0'
