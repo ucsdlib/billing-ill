@@ -30,7 +30,7 @@ gem 'pg', '~> 1.0.0'
 gem 'rails', '4.2.7.1'
 gem 'sass-rails', '5.0.7'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.2', group: :doc
+gem 'sdoc', '~> 1.0.0', group: :doc
 gem 'turbolinks', '5.1.0'
 gem 'uglifier', '4.1.5'
 gem 'wicked_pdf', '~> 1.1.0'
