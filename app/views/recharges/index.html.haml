@@ -8,19 +8,22 @@
         %table.table
           %thead
             %tr
-              %th(width="15%") Recharge ID
-              %th(width="15%") Charge
-              %th(width="15%") Status
-              %th(width="15%") Number of Copies
-              %th(width="15%") Fund_ID
-              %th(width="15%") Creation Date
-              %th(width="15%") Link
+              %th{ width: "15%" } Recharge ID
+              %th{ width: "15%" } Document Number
+              %th{ width: "15%" } Charge
+              %th{ width: "15%" } Status
+              %th{ width: "15%" } Number of Copies
+              %th{ width: "15%" } Fund_ID
+              %th{ width: "15%" } Creation Date
+              %th{ width: "15%" } Link
           %tbody
             - if @recharges
               - @recharges.each do |recharge|
                 %tr
                   %td
                     = recharge.id
+                  %td
+                    = recharge.document_num
                   %td
                     $
                     = recharge.charge
