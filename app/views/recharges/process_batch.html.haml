@@ -4,23 +4,27 @@
       %article
         %header
           %h2 
-            There is #{@current_batch_count} recharge for current batch
+            There is #{@current_batch_count} recharge for current batch. 
+            Please make sure all document numbers you input are the same in the batch.
         %table.table
           %thead
             %tr
-              %th(width="15%") Recharge ID
-              %th(width="15%") Charge
-              %th(width="15%") Status
-              %th(width="15%") Number of Copies
-              %th(width="15%") Fund_ID
-              %th(width="15%") Creation Date
-              %th(width="15%") Link
+              %th{ width: "15%" } Recharge ID
+              %th{ width: "15%" } Document Number
+              %th{ width: "15%" } Charge
+              %th{ width: "15%" } Status
+              %th{ width: "15%" } Number of Copies
+              %th{ width: "15%" } Fund_ID
+              %th{ width: "15%" } Creation Date
+              %th{ width: "15%" } Link
           %tbody
             - if @current_batch_result
               - @current_batch_result.each do |recharge|
                 %tr
                   %td 
                     = recharge.id
+                  %td
+                    = recharge.document_num
                   %td 
                     $
                     = recharge.charge
