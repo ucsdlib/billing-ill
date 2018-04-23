@@ -6,6 +6,8 @@
         = render 'shared/error_messages', obj: @recharge
         %fieldset
           .required
+            = f.text_field :document_num, label: "Document Number(1 ~ 999)"
+          .required
             = f.select :fund_id, @index_list, {include_blank: 'Choose Index ID'}, { label: "Index ID" }
           .required
             = f.text_field :number_copies, label: "Number of Copies"

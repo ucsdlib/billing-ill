@@ -16,6 +16,7 @@ class Recharge < ActiveRecord::Base
   validates :number_copies, presence: true
   validates :status, presence: true
   validates :fund_id, presence: true
+  validates :document_num, presence: true
 
   delegate :org_code, to: :fund, prefix: :fund
   delegate :index_code, to: :fund, prefix: :fund
@@ -69,7 +70,7 @@ class Recharge < ActiveRecord::Base
   end
 
   def self.header
-    h_column1_19 = 'LIBRARY1' + '01' + 'FRLBG551' + '1'
+    h_column1_19 = 'LIBRARY1' + '01' + document_column + '1'
     h_column20_54 = 'LIBRARY RECHARGES' + ' ' * 18
     transaction_date = convert_date_yyyymmdd(Time.zone.now)
     document_amount = convert_charge(total_charge * 2)
@@ -81,7 +82,7 @@ class Recharge < ActiveRecord::Base
   def self.detail
     result_arr = search_all_pending_status
 
-    d_column1_19 = 'LIBRARY1' + '01' + 'FRLBG551' + '2'
+    d_column1_19 = 'LIBRARY1' + '01' + document_column + '2'
     d_column24_27 = 'F510'
     d_column40_76 = 'LIBRARY-PHOTOCOPY SERVICE' + ' ' * 10 + 'D' + 'A'
     d_column89_94 = '636064'
@@ -106,7 +107,7 @@ class Recharge < ActiveRecord::Base
   end
 
   def self.trailer
-    f_column1_19 = 'LIBRARY1' + '01' + 'FRLBG551' + '2'
+    f_column1_19 = 'LIBRARY1' + '01' + document_column + '2'
     f_sequence_num = convert_seq_num(pending_status_count + 1)
     f_column24_27 = 'F510'
     total_amount = convert_charge(total_charge)
@@ -119,6 +120,16 @@ class Recharge < ActiveRecord::Base
     f_column220 = ' '
 
     "#{f_column1_19}#{f_sequence_num}#{f_column24_27}#{total_amount}#{f_column40_76}#{f_column77_112}#{f_column113_122}#{f_column123_154}#{f_column155_209}#{f_filler_var}#{f_column220}"
+  end
+
+  def self.document_column
+    result_arr = search_all_pending_status
+    document_num = ''
+    result_arr.each do |recharge|
+      document_num = recharge.document_num
+    end
+
+    'FRLBG' + convert_doc_num(document_num)
   end
 
   def self.create_file
@@ -152,6 +163,10 @@ class Recharge < ActiveRecord::Base
 
   def self.convert_date_yymm(cdate)
     cdate.strftime('%y%m')
+  end
+
+  def self.convert_doc_num(doc_num)
+    doc_num.to_s.rjust(3, '0') # 1 --> 001, 10 --> 010
   end
 
   def self.convert_seq_num(seq_num)
