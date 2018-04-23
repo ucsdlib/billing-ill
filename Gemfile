@@ -53,7 +53,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner', '~> 1.6.2'
+  gem 'database_cleaner', '~> 1.7.0'
   gem 'shoulda-matchers', '2.8.0.rc2', require: false
 end
 
