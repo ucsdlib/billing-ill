@@ -32,6 +32,8 @@ class Invoice < ActiveRecord::Base
   delegate :country_code, to: :patron, prefix: :patron
   # delegate :entity_pending_status, to: :patron, prefix: :patron
 
+  START = 50_010
+
   def self.search_by_patron_name(search_term)
     blank_term(search_term)
 
