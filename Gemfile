@@ -34,7 +34,7 @@ gem 'sdoc', '~> 1.0.0', group: :doc
 gem 'turbolinks', '5.1.0'
 gem 'uglifier', '4.1.11'
 gem 'wicked_pdf', '~> 1.1.0'
-gem 'wkhtmltopdf-binary', '~>0.12.3.1'
+gem 'wkhtmltopdf-binary', '~>0.12.4'
 
 group :development do
   gem 'letter_opener', '~> 1.6.0'
