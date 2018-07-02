@@ -9,7 +9,7 @@ gem 'capistrano-bundler', '~> 1.3.0'
 gem 'capistrano-rails', '~> 1.3.1'
 gem 'capistrano-rbenv', '~> 2.1.3'
 gem 'coffee-rails', '4.2.2'
-gem 'coveralls', '~> 0.8.21', require: false
+gem 'coveralls', '~> 0.8.22', require: false
 gem 'fabrication', '~> 2.20.1'
 gem 'faker', '~> 1.8.7'
 gem 'haml-rails', '~> 1.0.0'
@@ -48,7 +48,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7.2'
   gem 'rubocop', '~> 0.49.1', require: false
   gem 'rubocop-rspec', '~> 1.16.0'
-  gem 'simplecov', '~> 0.14.1'
+  gem 'simplecov', '~> 0.16.1'
   gem 'sqlite3', '~> 1.3.13'
 end
 
