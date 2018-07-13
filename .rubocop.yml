@@ -39,6 +39,9 @@ Layout/EmptyLineAfterMagicComment:
 Style/SymbolArray:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Security/YAMLLoad:
   Enabled: false
 
