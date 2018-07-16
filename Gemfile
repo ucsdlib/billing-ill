@@ -11,7 +11,7 @@ gem 'capistrano-rbenv', '~> 2.1.3'
 gem 'coffee-rails', '4.2.2'
 gem 'coveralls', '~> 0.8.22', require: false
 gem 'fabrication', '~> 2.20.1'
-gem 'faker', '~> 1.8.7'
+gem 'faker', '~> 1.9.1'
 gem 'haml-rails', '~> 1.0.0'
 gem 'hydra-ldap'
 gem 'jbuilder', '~> 2.7.0'
