@@ -42,7 +42,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'capybara', '~> 3.7.0'
+  gem 'capybara', '~> 3.7.1'
   gem 'launchy'
   gem 'pry', '~> 0.11.3'
   gem 'rspec-rails', '~> 3.8.0'
