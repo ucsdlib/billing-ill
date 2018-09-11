@@ -7,7 +7,7 @@ gem 'bootstrap_form', '~> 2.7.0'
 gem 'capistrano', '~> 3.11.0'
 gem 'capistrano-bundler', '~> 1.3.0'
 gem 'capistrano-rails', '~> 1.4.0'
-gem 'capistrano-rbenv', '~> 2.1.3'
+gem 'capistrano-rbenv', '~> 2.1.4'
 gem 'coffee-rails', '4.2.2'
 gem 'coveralls', '~> 0.8.22', require: false
 gem 'fabrication', '~> 2.20.1'
