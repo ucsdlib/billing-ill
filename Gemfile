@@ -1,7 +1,7 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-gem 'autoprefixer-rails', '~>9.1.0'
+gem 'autoprefixer-rails', '~>9.2.0'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bootstrap_form', '~> 2.7.0'
 gem 'capistrano', '~> 3.11.0'
