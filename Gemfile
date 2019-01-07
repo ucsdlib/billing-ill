@@ -37,7 +37,7 @@ gem 'wicked_pdf', '~> 1.1.0'
 gem 'wkhtmltopdf-binary', '~>0.12.4'
 
 group :development do
-  gem 'letter_opener', '~> 1.6.0'
+  gem 'letter_opener', '~> 1.7.0'
   gem 'spring', '~> 2.0.2'
 end
 
