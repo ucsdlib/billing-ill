@@ -1,12 +1,12 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/hweng/git/billing-ill/app/helpers/application_helper.rb": [
+      "/Users/huawei/git/billing-ill/app/helpers/application_helper.rb": [
         null,
         1,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/funds_controller.rb": [
+      "/Users/huawei/git/billing-ill/app/controllers/funds_controller.rb": [
         null,
         null,
         null,
@@ -56,7 +56,7 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/application_controller.rb": [
+      "/Users/huawei/git/billing-ill/app/controllers/application_controller.rb": [
         null,
         null,
         null,
@@ -108,7 +108,7 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/invoices_controller.rb": [
+      "/Users/huawei/git/billing-ill/app/controllers/invoices_controller.rb": [
         null,
         null,
         null,
@@ -238,7 +238,7 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/patrons_controller.rb": [
+      "/Users/huawei/git/billing-ill/app/controllers/patrons_controller.rb": [
         null,
         null,
         null,
@@ -298,7 +298,7 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/recharges_controller.rb": [
+      "/Users/huawei/git/billing-ill/app/controllers/recharges_controller.rb": [
         null,
         null,
         null,
@@ -398,7 +398,7 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/mailers/app_mailer.rb": [
+      "/Users/huawei/git/billing-ill/app/mailers/app_mailer.rb": [
         null,
         null,
         null,
@@ -436,7 +436,7 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/models/fund.rb": [
+      "/Users/huawei/git/billing-ill/app/models/fund.rb": [
         null,
         null,
         null,
@@ -451,7 +451,7 @@
         1,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/models/invoice.rb": [
+      "/Users/huawei/git/billing-ill/app/models/invoice.rb": [
         null,
         null,
         null,
@@ -832,7 +832,7 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/models/patron.rb": [
+      "/Users/huawei/git/billing-ill/app/models/patron.rb": [
         null,
         null,
         null,
@@ -855,7 +855,7 @@
         1,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/models/recharge.rb": [
+      "/Users/huawei/git/billing-ill/app/models/recharge.rb": [
         null,
         null,
         null,
@@ -1045,7 +1045,7 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/models/user.rb": [
+      "/Users/huawei/git/billing-ill/app/models/user.rb": [
         null,
         null,
         null,
@@ -1133,91 +1133,91 @@
         null,
         null
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/pages_controller.rb": [
-        0,
+      "/Users/huawei/git/billing-ill/app/controllers/pages_controller.rb": [
+        null,
         0,
         0,
         0
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/sessions_controller.rb": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+      "/Users/huawei/git/billing-ill/app/controllers/users_controller.rb": [
+        null,
         0,
         0,
         0,
         0,
         0
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/ui_controller.rb": [
+      "/Users/huawei/git/billing-ill/app/controllers/sessions_controller.rb": [
+        null,
+        null,
+        null,
+        null,
+        null,
         0,
         0,
         0,
         0,
         0,
         0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
         0,
         0,
         0,
         0,
         0
       ],
-      "/Users/hweng/git/billing-ill/app/controllers/users_controller.rb": [
+      "/Users/huawei/git/billing-ill/app/controllers/ui_controller.rb": [
+        null,
         0,
         0,
         0,
         0,
+        0,
+        null,
+        0,
+        null,
         0,
         0
       ]
     },
-    "timestamp": 1528759463
+    "timestamp": 1547584716
   }
 }
