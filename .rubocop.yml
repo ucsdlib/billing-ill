@@ -59,6 +59,7 @@ Metrics/LineLength:
   Exclude:
     - 'app/controllers/sessions_controller.rb'
     - 'app/models/recharge.rb'
+    - 'app/views/invoices/create_bill.html.haml'
 
 Metrics/MethodLength:
   Max: 15
