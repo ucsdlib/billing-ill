@@ -1,7 +1,7 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-gem 'autoprefixer-rails', '~>9.1.0'
+gem 'autoprefixer-rails', '~>8.1.0'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bootstrap_form', '~> 2.7.0'
 gem 'capistrano', '~> 3.10.2'
@@ -32,7 +32,7 @@ gem 'sass-rails', '5.0.7'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 1.0.0', group: :doc
 gem 'turbolinks', '5.2.0'
-gem 'uglifier', '4.1.20'
+gem 'uglifier', '4.1.7'
 gem 'wicked_pdf', '~> 1.1.0'
 gem 'wkhtmltopdf-binary', '~>0.12.4'
 
