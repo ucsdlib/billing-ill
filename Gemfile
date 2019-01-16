@@ -2,11 +2,11 @@
 source 'https://rubygems.org'
 
 gem 'autoprefixer-rails', '~>9.1.0'
-gem 'bootstrap-sass', '~> 3.4.0'
+gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bootstrap_form', '~> 2.7.0'
-gem 'capistrano', '~> 3.11.0'
+gem 'capistrano', '~> 3.10.2'
 gem 'capistrano-bundler', '~> 1.5.0'
-gem 'capistrano-rails', '~> 1.4.0'
+gem 'capistrano-rails', '~> 1.3.1'
 gem 'capistrano-rbenv', '~> 2.1.4'
 gem 'coffee-rails', '4.2.2'
 gem 'coveralls', '~> 0.8.22', require: false
