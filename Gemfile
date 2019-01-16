@@ -25,7 +25,7 @@ gem 'net-sftp'
 gem 'nokogiri', '1.10.0'
 gem 'omniauth', '1.9.0'
 gem 'omniauth-shibboleth', '~> 1.3.0'
-gem 'pg', '1.1.3'
+gem 'pg', '0.20.0'
 # rails 5.1 requires money-rails upgrades which broken tests
 gem 'rails', '4.2.10'
 gem 'sass-rails', '5.0.7'
