@@ -1,8 +1,8 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-gem 'autoprefixer-rails', '~>8.1.0'
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'autoprefixer-rails', '~>8.1.0' # lock at 8.1.0
+gem 'bootstrap-sass', '~> 3.3.7' # lock at 3.3.7
 gem 'bootstrap_form', '~> 2.7.0'
 gem 'capistrano', '~> 3.10.2'
 gem 'capistrano-bundler', '~> 1.5.0'
@@ -25,14 +25,14 @@ gem 'net-sftp'
 gem 'nokogiri', '1.10.0'
 gem 'omniauth', '1.9.0'
 gem 'omniauth-shibboleth', '~> 1.3.0'
-gem 'pg', '0.20.0'
+gem 'pg', '0.20.0' # lock at 0.20.0
 # rails 5.1 requires money-rails upgrades which broken tests
 gem 'rails', '4.2.10'
 gem 'sass-rails', '5.0.7'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 1.0.0', group: :doc
 gem 'turbolinks', '5.2.0'
-gem 'uglifier', '4.1.7'
+gem 'uglifier', '4.1.7' # lock at 4.1.7
 gem 'wicked_pdf', '~> 1.1.0'
 gem 'wkhtmltopdf-binary', '~>0.12.4'
 
