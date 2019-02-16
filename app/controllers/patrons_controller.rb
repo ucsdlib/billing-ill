@@ -1,6 +1,6 @@
 # encoding: utf-8
 #---
-# @author hweng@ucsd.edu
+# @author hweng@ucsd.edu,
 #---
 
 class PatronsController < ApplicationController
