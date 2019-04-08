@@ -33,7 +33,7 @@ gem 'sass-rails', '5.0.7'
 gem 'sdoc', '~> 1.0.0', group: :doc
 gem 'turbolinks', '5.2.0'
 gem 'uglifier', '4.1.7' # lock at 4.1.7
-gem 'wicked_pdf', '~> 1.1.0'
+gem 'wicked_pdf', '~> 1.2.2'
 gem 'wkhtmltopdf-binary', '~>0.12.4'
 
 group :development do
