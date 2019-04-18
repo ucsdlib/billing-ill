@@ -1,10 +1,10 @@
 defaults: &defaults
-  host: <%= ENV.fetch('APPS_IB_LDAP_HOST') %>
-  port: <%= ENV.fetch('APPS_IB_LDAP_PORT') %>
-  base: <%= ENV.fetch('APPS_IB_LDAP_BASE') %>
-  username: <%= ENV.fetch('APPS_IB_LDAP_USER') %>
-  password: <%= ENV.fetch('APPS_IB_LDAP_PASS') %>
-  group: <%= ENV.fetch('APPS_IB_LDAP_GROUP') %>
+  host: <%= ENV['APPS_IB_LDAP_HOST'] %>
+  port: <%= ENV['APPS_IB_LDAP_PORT'] %>
+  base: <%= ENV['APPS_IB_LDAP_BASE'] %>
+  username: <%= ENV['APPS_IB_LDAP_USER'] %>
+  password: <%= ENV['APPS_IB_LDAP_PASS'] %>
+  group: <%= ENV['APPS_IB_LDAP_GROUP'] %>
 
 pontos:
   <<: *defaults
@@ -20,6 +20,6 @@ development:
 
 test:
   <<: *defaults
-  
-  
+
+
 
