@@ -9,7 +9,7 @@ gem 'capistrano-bundler', '~> 1.5.0'
 gem 'capistrano-rails', '~> 1.3.1'
 gem 'capistrano-rbenv', '~> 2.1.4'
 gem 'coffee-rails', '4.2.2'
-gem 'coveralls', '~> 0.8.22', require: false
+gem 'coveralls', '~> 0.8.23', require: false
 gem 'fabrication', '~> 2.20.1'
 gem 'faker', '~> 1.9.3'
 gem 'haml-rails', '~> 1.0.0'
