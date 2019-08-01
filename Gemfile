@@ -35,6 +35,7 @@ gem 'turbolinks', '5.2.0'
 gem 'uglifier', '4.1.7' # lock at 4.1.7
 gem 'wicked_pdf', '~> 1.4.0'
 gem 'wkhtmltopdf-binary', '~>0.12.4'
+gem 'honeycomb-beeline', '1.0.0'
 
 group :development do
   gem 'letter_opener', '~> 1.7.0'
