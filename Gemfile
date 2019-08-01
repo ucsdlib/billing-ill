@@ -13,6 +13,7 @@ gem 'coveralls', '~> 0.8.23', require: false
 gem 'fabrication', '~> 2.20.1'
 gem 'faker', '~> 1.9.3'
 gem 'haml-rails', '~> 1.0.0'
+gem 'honeycomb-beeline', '1.0.0'
 gem 'hydra-ldap'
 gem 'jbuilder', '~> 2.8.0'
 gem 'jquery-rails', '4.3.1'
@@ -35,7 +36,6 @@ gem 'turbolinks', '5.2.0'
 gem 'uglifier', '4.1.7' # lock at 4.1.7
 gem 'wicked_pdf', '~> 1.4.0'
 gem 'wkhtmltopdf-binary', '~>0.12.4'
-gem 'honeycomb-beeline', '1.0.0'
 
 group :development do
   gem 'letter_opener', '~> 1.7.0'
