@@ -55,7 +55,7 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 1.6.2'
-  gem 'shoulda-matchers', '2.8.0', require: false
+  gem 'shoulda-matchers', '4.1.2', require: false
 end
 
 group :staging do
