@@ -33,6 +33,6 @@ jobs:
           command: bundle exec rake db:create db:migrate
       - run:
           name: Run Test Suite
-          command: COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec
+          command: COVERALLS_REPO_TOKEN=5cbHp53Cc0a1LOi8uG47fckvREAzpF3x2 bundle exec rspec spec
 
   
