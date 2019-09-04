@@ -96,7 +96,7 @@
             .col-xs-2
               ILL Number
             .col-xs-1
-              Pages
+              Request(s)
             .col-xs-8
           / **************************TABLE OF CHARGES********************************
           .row
@@ -116,7 +116,6 @@
               = @invoice.number_prints 
               Requests total
               %br/
-              ILL# 
               = @invoice.comments
             .col-xs-2
               = @invoice.charge
@@ -124,14 +123,15 @@
           %hr.hr-margin
             .row
               .col-xs-2
-                **Final Counts:
+               
               .col-xs-2
-                Articles=
+                
               .col-xs-2
-                1
+                
               .col-xs-offset-2.col-xs-2
                 Total
               .col-xs-2
+                $ 
                 = @invoice.charge
 
 
