@@ -39,7 +39,7 @@ gem 'wkhtmltopdf-binary', '~>0.12.4'
 
 group :development do
   gem 'letter_opener', '~> 1.7.0'
-  gem 'spring', '~> 2.0.2'
+  gem 'spring', '~> 2.1.0'
 end
 
 group :development, :test do
