@@ -95,7 +95,7 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     fabrication (2.20.1)
-    faker (1.9.3)
+    faker (2.1.0)
       i18n (>= 0.7)
     ffi (1.9.25)
     globalid (0.4.2)
@@ -340,7 +340,7 @@ DEPENDENCIES
   coveralls (~> 0.8.23)
   database_cleaner (~> 1.6.2)
   fabrication (~> 2.20.1)
-  faker (~> 1.9.3)
+  faker (~> 2.1.0)
   haml-rails (~> 1.0.0)
   honeycomb-beeline (= 1.0.0)
   hydra-ldap
