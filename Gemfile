@@ -50,7 +50,7 @@ group :development, :test do
   gem 'rubocop', '~> 0.49.1', require: false
   gem 'rubocop-rspec', '~> 1.16.0'
   gem 'simplecov', '~> 0.16.1'
-  gem 'sqlite3', '~> 1.3.13'
+  gem 'sqlite3', '~> 1.4.2'
 end
 
 group :test do
