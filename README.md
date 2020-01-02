@@ -69,4 +69,6 @@ $ bundle exec rake
 $ rubocop
 ```
 
+## Docs
 
+[ILL Billing Documentation](https://github.com/ucsdlib/docs/tree/master/billing-ill)
