@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'autoprefixer-rails', '~>8.1.0' # lock at 8.1.0
 gem 'bootstrap-sass', '~> 3.3.7' # lock at 3.3.7
 gem 'bootstrap_form', '~> 2.7.0'
-gem 'capistrano', '~> 3.10.2'
+gem 'capistrano', '~> 3.11.2'
 gem 'capistrano-bundler', '~> 1.5.0'
 gem 'capistrano-rails', '~> 1.4.0'
 gem 'capistrano-rbenv', '~> 2.1.4'
