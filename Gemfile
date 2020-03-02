@@ -4,10 +4,6 @@ source 'https://rubygems.org'
 gem 'autoprefixer-rails', '~>8.1.0' # lock at 8.1.0
 gem 'bootstrap-sass', '~> 3.3.7' # lock at 3.3.7
 gem 'bootstrap_form', '~> 2.7.0'
-gem 'capistrano', '~> 3.10.2'
-gem 'capistrano-bundler', '~> 1.5.0'
-gem 'capistrano-rails', '~> 1.4.0'
-gem 'capistrano-rbenv', '~> 2.1.4'
 gem 'coffee-rails', '4.2.2'
 gem 'coveralls', '~> 0.8.23', require: false
 gem 'fabrication', '~> 2.20.1'
@@ -36,6 +32,13 @@ gem 'turbolinks', '5.2.1'
 gem 'uglifier', '4.1.7' # lock at 4.1.7
 gem 'wicked_pdf', '~> 1.4.0'
 gem 'wkhtmltopdf-binary', '~>0.12.4'
+
+group :deploy do
+  gem 'capistrano', '~> 3.10.2'
+  gem 'capistrano-bundler', '~> 1.5.0'
+  gem 'capistrano-rails', '~> 1.4.0'
+  gem 'capistrano-rbenv', '~> 2.1.4'
+end
 
 group :development do
   gem 'letter_opener', '~> 1.7.0'
