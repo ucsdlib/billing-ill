@@ -2,7 +2,7 @@
 source 'https://rubygems.org'
 
 gem 'autoprefixer-rails', '~>8.1.0' # lock at 8.1.0
-gem 'bootstrap-sass', '~> 3.3.7' # lock at 3.3.7
+gem 'bootstrap-sass', '~> 3.4.1' # lock at 3.3.7
 gem 'bootstrap_form', '~> 2.7.0'
 gem 'coffee-rails', '4.2.2'
 gem 'coveralls', '~> 0.8.23', require: false
