@@ -56,7 +56,7 @@ $ bundle exec rake db:migrate
 $ rails s
 ```
 
-## ILL Billing will be available at 
+## ILL Billing will be available at
 
 ```
 http://localhost:3000
@@ -70,5 +70,5 @@ $ rubocop
 ```
 
 ## Docs
-
-[ILL Billing Documentation](https://github.com/ucsdlib/docs/tree/master/billing-ill)
+Various reference documents for this application can be found in the `doc`
+folder in this repository.
