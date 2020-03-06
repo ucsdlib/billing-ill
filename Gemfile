@@ -17,7 +17,7 @@ gem 'jquery-turbolinks'
 gem 'kaminari', '1.1.1'
 gem 'mail', '2.7.1'
 gem 'money-rails', '~> 1.4.1' # 1.6.0 break tests
-gem 'net-ldap', '~> 0.16.1'
+gem 'net-ldap', '~> 0.16.2'
 gem 'net-sftp'
 gem 'nokogiri', '1.10.8'
 gem 'omniauth', '1.9.0'
