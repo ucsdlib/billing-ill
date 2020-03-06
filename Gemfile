@@ -19,7 +19,7 @@ gem 'mail', '2.7.1'
 gem 'money-rails', '~> 1.4.1' # 1.6.0 break tests
 gem 'net-ldap', '~> 0.16.1'
 gem 'net-sftp'
-gem 'nokogiri', '1.10.4'
+gem 'nokogiri', '1.10.8'
 gem 'omniauth', '1.9.0'
 gem 'omniauth-shibboleth', '~> 1.3.0'
 gem 'pg', '0.20.0' # lock at 0.20.0
