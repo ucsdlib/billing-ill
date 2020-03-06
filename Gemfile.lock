@@ -311,7 +311,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
-    uglifier (4.1.7)
+    uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
@@ -371,7 +371,7 @@ DEPENDENCIES
   spring (~> 2.0.2)
   sqlite3 (~> 1.3.13)
   turbolinks (= 5.2.1)
-  uglifier (= 4.1.7)
+  uglifier (= 4.2.0)
   wicked_pdf (~> 1.4.0)
   wkhtmltopdf-binary (~> 0.12.4)
 
