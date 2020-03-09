@@ -9,7 +9,7 @@ gem 'coveralls', '~> 0.8.23', require: false
 gem 'fabrication', '~> 2.20.1'
 gem 'faker', '~> 1.9.3'
 gem 'haml-rails', '~> 1.0.0'
-gem 'honeycomb-beeline', '1.0.0'
+gem 'honeycomb-beeline', '1.3.0'
 gem 'hydra-ldap'
 gem 'jbuilder', '~> 2.8.0'
 gem 'jquery-rails', '4.3.5'
